@@ -1,0 +1,46 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "tasks": [
+        
+        {
+            "label": "Compile Assembly",
+            "type": "shell",
+            "command": "${workspaceRoot}\\project\\bin\\sjasmplus ${file} --zxnext=cspect --msg=all --fullpath --lst",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "presentation": {
+                "reveal": "always",
+            },
+            "problemMatcher": [
+                "$errmatcher-sjasmplus"
+            ]
+        },
+        {
+            "label": "Update SDCard",
+            "type": "shell",
+            "command": "${workspaceRoot}\\project\\bin\\hdfmonkey put ${workspaceRoot}\\sdcard\\cspect-next-2gb.img game.nex",
+            "presentation": {
+                "reveal": "always",
+            },
+            "problemMatcher": [
+                "$errmatcher-sjasmplus"
+            ]
+        },
+        {
+            "label": "Launch CSpect",
+            "type": "shell",
+            //"command": "D:\\Emulators\\CSpect\\CSpect.exe -w4 -r -s28 -tv -esc -brk -basickeys -zxnext -nextrom -60 -map=${workspaceRoot}\\game.map -mmc=${workspaceRoot}\\sdcard\\cspect-next-2gb.img game.nex",
+            "command": "${workspaceRoot}\\project\\bin\\CSpect.exe -w4 -r -s28 -tv -esc -brk -basickeys -zxnext -nextrom -60 -map=${workspaceRoot}\\game.map -mmc=${workspaceRoot}\\sdcard\\cspect-next-2gb.img game.nex",
+            "dependsOrder": "sequence",
+            "dependsOn": [
+                "Compile Assembly",
+                "Update SDCard"
+            ],
+            "problemMatcher": []
+        }
+    ]
+}

@@ -1,0 +1,197 @@
+# file opened: c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\.vscode\tasks.json
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\.vscode\tasks.json(1): error: Invalid labelname: {
+ 1    0000              {
+ 2    0000                  // See https://go.microsoft.com/fwlink/?LinkId=733558
+ 3    0000                  // for the documentation about the tasks.json format
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\.vscode\tasks.json(4): error: Unrecognized instruction: "version"
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\.vscode\tasks.json(4): error: Unexpected: "version"
+ 4    0000                  "version"
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\.vscode\tasks.json(4): error: Unrecognized instruction: "2.0.0",
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\.vscode\tasks.json(4): error: Unexpected: "2.0.0",
+ 4    0000                "2.0.0",
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\.vscode\tasks.json(5): error: Unrecognized instruction: "tasks"
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\.vscode\tasks.json(5): error: Unexpected: "tasks"
+ 5    0000                  "tasks"
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\.vscode\tasks.json(5): error: Unrecognized instruction: [
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\.vscode\tasks.json(5): error: Unexpected: [
+ 5    0000                [
+ 6    0000
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\.vscode\tasks.json(7): error: Unrecognized instruction: {
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\.vscode\tasks.json(7): error: Unexpected: {
+ 7    0000                      {
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\.vscode\tasks.json(8): error: Unrecognized instruction: "label"
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\.vscode\tasks.json(8): error: Unexpected: "label"
+ 8    0000                          "label"
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\.vscode\tasks.json(8): error: Unrecognized instruction: "Compile Assembly",
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\.vscode\tasks.json(8): error: Unexpected: "Compile Assembly",
+ 8    0000                "Compile Assembly",
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\.vscode\tasks.json(9): error: Unrecognized instruction: "type"
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\.vscode\tasks.json(9): error: Unexpected: "type"
+ 9    0000                          "type"
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\.vscode\tasks.json(9): error: Unrecognized instruction: "shell",
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\.vscode\tasks.json(9): error: Unexpected: "shell",
+ 9    0000                "shell",
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\.vscode\tasks.json(10): error: Unrecognized instruction: "command"
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\.vscode\tasks.json(10): error: Unexpected: "command"
+10    0000                          "command"
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\.vscode\tasks.json(10): error: Unrecognized instruction: "${workspaceRoot}\\project\\bin\\sjasmplus ${file} --zxnext=cspect --msg=all --fullpath --lst",
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\.vscode\tasks.json(10): error: Unexpected: "${workspaceRoot}\\project\\bin\\sjasmplus ${file} --zxnext=cspect --msg=all --fullpath --lst",
+10    0000                "${workspaceRoot}\\project\\bin\\sjasmplus ${file} --zxnext=cspect --msg=all --fullpath --lst",
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\.vscode\tasks.json(11): error: Unrecognized instruction: "group"
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\.vscode\tasks.json(11): error: Unexpected: "group"
+11    0000                          "group"
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\.vscode\tasks.json(11): error: Unrecognized instruction: {
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\.vscode\tasks.json(11): error: Unexpected: {
+11    0000                {
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\.vscode\tasks.json(12): error: Unrecognized instruction: "kind"
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\.vscode\tasks.json(12): error: Unexpected: "kind"
+12    0000                              "kind"
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\.vscode\tasks.json(12): error: Unrecognized instruction: "build",
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\.vscode\tasks.json(12): error: Unexpected: "build",
+12    0000                "build",
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\.vscode\tasks.json(13): error: Unrecognized instruction: "isDefault"
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\.vscode\tasks.json(13): error: Unexpected: "isDefault"
+13    0000                              "isDefault"
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\.vscode\tasks.json(13): error: Unrecognized instruction: true
+13    0000                true
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\.vscode\tasks.json(14): error: Unrecognized instruction: },
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\.vscode\tasks.json(14): error: Unexpected: },
+14    0000                          },
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\.vscode\tasks.json(15): error: Unrecognized instruction: "presentation"
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\.vscode\tasks.json(15): error: Unexpected: "presentation"
+15    0000                          "presentation"
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\.vscode\tasks.json(15): error: Unrecognized instruction: {
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\.vscode\tasks.json(15): error: Unexpected: {
+15    0000                {
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\.vscode\tasks.json(16): error: Unrecognized instruction: "reveal"
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\.vscode\tasks.json(16): error: Unexpected: "reveal"
+16    0000                              "reveal"
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\.vscode\tasks.json(16): error: Unrecognized instruction: "always",
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\.vscode\tasks.json(16): error: Unexpected: "always",
+16    0000                "always",
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\.vscode\tasks.json(17): error: Unrecognized instruction: },
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\.vscode\tasks.json(17): error: Unexpected: },
+17    0000                          },
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\.vscode\tasks.json(18): error: Unrecognized instruction: "problemMatcher"
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\.vscode\tasks.json(18): error: Unexpected: "problemMatcher"
+18    0000                          "problemMatcher"
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\.vscode\tasks.json(18): error: Unrecognized instruction: [
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\.vscode\tasks.json(18): error: Unexpected: [
+18    0000                [
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\.vscode\tasks.json(19): error: Unrecognized instruction: "$errmatcher-sjasmplus"
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\.vscode\tasks.json(19): error: Unexpected: "$errmatcher-sjasmplus"
+19    0000                              "$errmatcher-sjasmplus"
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\.vscode\tasks.json(20): error: Unrecognized instruction: ]
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\.vscode\tasks.json(20): error: Unexpected: ]
+20    0000                          ]
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\.vscode\tasks.json(21): error: Unrecognized instruction: },
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\.vscode\tasks.json(21): error: Unexpected: },
+21    0000                      },
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\.vscode\tasks.json(22): error: Unrecognized instruction: {
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\.vscode\tasks.json(22): error: Unexpected: {
+22    0000                      {
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\.vscode\tasks.json(23): error: Unrecognized instruction: "label"
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\.vscode\tasks.json(23): error: Unexpected: "label"
+23    0000                          "label"
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\.vscode\tasks.json(23): error: Unrecognized instruction: "Update SDCard",
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\.vscode\tasks.json(23): error: Unexpected: "Update SDCard",
+23    0000                "Update SDCard",
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\.vscode\tasks.json(24): error: Unrecognized instruction: "type"
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\.vscode\tasks.json(24): error: Unexpected: "type"
+24    0000                          "type"
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\.vscode\tasks.json(24): error: Unrecognized instruction: "shell",
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\.vscode\tasks.json(24): error: Unexpected: "shell",
+24    0000                "shell",
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\.vscode\tasks.json(25): error: Unrecognized instruction: "command"
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\.vscode\tasks.json(25): error: Unexpected: "command"
+25    0000                          "command"
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\.vscode\tasks.json(25): error: Unrecognized instruction: "${workspaceRoot}\\project\\bin\\hdfmonkey put ${workspaceRoot}\\sdcard\\cspect-next-2gb.img game.nex",
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\.vscode\tasks.json(25): error: Unexpected: "${workspaceRoot}\\project\\bin\\hdfmonkey put ${workspaceRoot}\\sdcard\\cspect-next-2gb.img game.nex",
+25    0000                "${workspaceRoot}\\project\\bin\\hdfmonkey put ${workspaceRoot}\\sdcard\\cspect-next-2gb.img game.nex",
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\.vscode\tasks.json(26): error: Unrecognized instruction: "presentation"
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\.vscode\tasks.json(26): error: Unexpected: "presentation"
+26    0000                          "presentation"
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\.vscode\tasks.json(26): error: Unrecognized instruction: {
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\.vscode\tasks.json(26): error: Unexpected: {
+26    0000                {
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\.vscode\tasks.json(27): error: Unrecognized instruction: "reveal"
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\.vscode\tasks.json(27): error: Unexpected: "reveal"
+27    0000                              "reveal"
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\.vscode\tasks.json(27): error: Unrecognized instruction: "always",
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\.vscode\tasks.json(27): error: Unexpected: "always",
+27    0000                "always",
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\.vscode\tasks.json(28): error: Unrecognized instruction: },
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\.vscode\tasks.json(28): error: Unexpected: },
+28    0000                          },
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\.vscode\tasks.json(29): error: Unrecognized instruction: "problemMatcher"
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\.vscode\tasks.json(29): error: Unexpected: "problemMatcher"
+29    0000                          "problemMatcher"
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\.vscode\tasks.json(29): error: Unrecognized instruction: [
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\.vscode\tasks.json(29): error: Unexpected: [
+29    0000                [
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\.vscode\tasks.json(30): error: Unrecognized instruction: "$errmatcher-sjasmplus"
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\.vscode\tasks.json(30): error: Unexpected: "$errmatcher-sjasmplus"
+30    0000                              "$errmatcher-sjasmplus"
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\.vscode\tasks.json(31): error: Unrecognized instruction: ]
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\.vscode\tasks.json(31): error: Unexpected: ]
+31    0000                          ]
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\.vscode\tasks.json(32): error: Unrecognized instruction: },
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\.vscode\tasks.json(32): error: Unexpected: },
+32    0000                      },
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\.vscode\tasks.json(33): error: Unrecognized instruction: {
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\.vscode\tasks.json(33): error: Unexpected: {
+33    0000                      {
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\.vscode\tasks.json(34): error: Unrecognized instruction: "label"
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\.vscode\tasks.json(34): error: Unexpected: "label"
+34    0000                          "label"
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\.vscode\tasks.json(34): error: Unrecognized instruction: "Launch CSpect",
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\.vscode\tasks.json(34): error: Unexpected: "Launch CSpect",
+34    0000                "Launch CSpect",
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\.vscode\tasks.json(35): error: Unrecognized instruction: "type"
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\.vscode\tasks.json(35): error: Unexpected: "type"
+35    0000                          "type"
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\.vscode\tasks.json(35): error: Unrecognized instruction: "shell",
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\.vscode\tasks.json(35): error: Unexpected: "shell",
+35    0000                "shell",
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\.vscode\tasks.json(36): error: Unrecognized instruction: "command"
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\.vscode\tasks.json(36): error: Unexpected: "command"
+36    0000                          "command"
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\.vscode\tasks.json(36): error: Unrecognized instruction: "${workspaceRoot}\\project\\bin\\CSpect.exe -w4 -r -s28 -tv -esc -brk -basickeys -zxnext -nextrom -60 -map=${workspaceRoot}\\game.map -mmc=${workspaceRoot}\\sdcard\\cspect-next-2gb.img game.nex",
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\.vscode\tasks.json(36): error: Unexpected: "${workspaceRoot}\\project\\bin\\CSpect.exe -w4 -r -s28 -tv -esc -brk -basickeys -zxnext -nextrom -60 -map=${workspaceRoot}\\game.map -mmc=${workspaceRoot}\\sdcard\\cspect-next-2gb.img game.nex",
+36    0000                "${workspaceRoot}\\project\\bin\\CSpect.exe -w4 -r -s28 -tv -esc -brk -basickeys -zxnext -nextrom -60 -map=${workspaceRoot}\\game.map -mmc=${workspaceRoot}\\sdcard\\cspect-next-2gb.img game.nex",
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\.vscode\tasks.json(37): error: Unrecognized instruction: "dependsOrder"
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\.vscode\tasks.json(37): error: Unexpected: "dependsOrder"
+37    0000                          "dependsOrder"
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\.vscode\tasks.json(37): error: Unrecognized instruction: "sequence",
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\.vscode\tasks.json(37): error: Unexpected: "sequence",
+37    0000                "sequence",
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\.vscode\tasks.json(38): error: Unrecognized instruction: "dependsOn"
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\.vscode\tasks.json(38): error: Unexpected: "dependsOn"
+38    0000                          "dependsOn"
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\.vscode\tasks.json(38): error: Unrecognized instruction: [
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\.vscode\tasks.json(38): error: Unexpected: [
+38    0000                [
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\.vscode\tasks.json(39): error: Unrecognized instruction: "Compile Assembly",
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\.vscode\tasks.json(39): error: Unexpected: "Compile Assembly",
+39    0000                              "Compile Assembly",
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\.vscode\tasks.json(40): error: Unrecognized instruction: "Update SDCard"
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\.vscode\tasks.json(40): error: Unexpected: "Update SDCard"
+40    0000                              "Update SDCard"
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\.vscode\tasks.json(41): error: Unrecognized instruction: ],
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\.vscode\tasks.json(41): error: Unexpected: ],
+41    0000                          ],
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\.vscode\tasks.json(42): error: Unrecognized instruction: "problemMatcher"
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\.vscode\tasks.json(42): error: Unexpected: "problemMatcher"
+42    0000                          "problemMatcher"
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\.vscode\tasks.json(42): error: Unrecognized instruction: []
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\.vscode\tasks.json(42): error: Unexpected: []
+42    0000                []
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\.vscode\tasks.json(43): error: Unrecognized instruction: }
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\.vscode\tasks.json(43): error: Unexpected: }
+43    0000                      }
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\.vscode\tasks.json(44): error: Unrecognized instruction: ]
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\.vscode\tasks.json(44): error: Unexpected: ]
+44    0000                  ]
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\.vscode\tasks.json(45): error: Invalid labelname: }
+45    0000              }
+# file closed: c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\.vscode\tasks.json

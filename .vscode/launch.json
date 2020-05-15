@@ -1,0 +1,33 @@
+{
+    "configurations": [
+        {
+            "type": "dezog",
+            "request": "launch",
+            "name": "DeZog",
+            "remoteType": "cspect",
+            "listFiles": [
+                {
+                    "path": "${workspaceRoot}\\project\\src\\game.lst",
+                    "asm": "sjasmplus",
+                    "mainFile": "${workspaceRoot}\\project\\src\\game.asm"
+                },
+            ],
+            "startAutomatically": false,
+            "history": {
+                "reverseDebugInstructionCount": 10000
+            },
+            "commandsAfterLaunch": [
+                //"-sprites",
+                //"-patterns"
+            ],
+            "disassemblerArgs": {
+                "esxdosRst": true
+            },
+            "rootFolder": "${workspaceFolder}",
+            "topOfStack": "stack_top",
+            "load": "game.nex",
+            "smallValuesMaximum": 513,
+            "tmpDir": ".tmp"
+        }
+    ]
+}
