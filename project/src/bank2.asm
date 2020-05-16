@@ -3620,14 +3620,14 @@ bank2_call_9CC5
     ld   hl,l_e20d
     ld   (ix+$03),l
     ld   (ix+$04),h
-    ld   hl,bank2_data_9F16
+    ld   hl,bank2_data_9F16        ;BYTE $04,$08,$0C,$10,$14,$18
+    ld   c,$1C                     ;this is gfx for left hand 'HELP!!'
+    ld   b,$06                     ;6 16x16 sprites
+    ld   e,$01                     ;sprites 1,33,65,97,2,34
+    call call_14C0            
+    ld   b,$34                     ;lefthand sweat mark!
     ld   c,$1C
-    ld   b,$06
-    ld   e,$01
-    call call_14C0
-    ld   b,$34
-    ld   c,$1C
-    ld   a,$43
+    ld   a,$43                     ;sprite 67
     call call_147D
     ld   ix,l_f541
     ld   (ix+$07),$04
@@ -3635,14 +3635,14 @@ bank2_call_9CC5
     ld   hl,l_e249
     ld   (ix+$03),l
     ld   (ix+$04),h
-    ld   hl,bank2_data_9F1C
-    ld   c,$1C
-    ld   b,$06
-    ld   e,$05
+    ld   hl,bank2_data_9F1C        ;BYTE $1C,$20,$24,$28,$2C,$30
+    ld   c,$1C                     ;this is gfx for right hand 'HELP!!'
+    ld   b,$06                     ;6 16x16 sprites
+    ld   e,$05                     ;sprites 5,37,69,101,6,38
     call call_14C0
-    ld   b,$38
+    ld   b,$38                     ;righthand sweat mark!
     ld   c,$1C
-    ld   a,$47
+    ld   a,$47                     ;sprite 71
     call call_147D
     ld   hl,l_f536
     ld   (hl),$01
@@ -3658,6 +3658,7 @@ bank2_call_9D35
      and  a
      ret  z
      ret  m
+     ;break               ;big monsters holding hostages
      ld   ix,l_f537
      ld   b,$02
 bank2_call_9D41
@@ -3675,17 +3676,17 @@ bank2_call_9D41
      ld   a,(hl)
      add  a,a
      add  a,a
-     ld   hl,bank2_data_9F06
-     call adda2hl;$0D89
+     ld   hl,bank2_data_9F06       ;BYTE $6C,$70,$84,$88,$74,$78,$8C,$90
+     call adda2hl;$0D89            ;alternating captive bubble gfx
      ld   c,$0F
-     ld   b,$04
-     ld   e,$00
+     ld   b,$04                    ;4 16x16 sprites
+     ld   e,$00                    ;sprites 0, 32, 64, 96
      call call_14C0
-     ld   hl,bank2_data_9EF6
+     ld   hl,bank2_data_9EF6       ;BYTE $00,$00,$01,$01,$02,$02,$03,$03
      ld   a,(l_e5f5)
      cp   $03
      jr   c,bank2_call_9D80
-     ld   hl,bank2_data_9EFE
+     ld   hl,bank2_data_9EFE       ;BYTE $00,$00,$01,$01,$00,$00,$01,$01
 bank2_call_9D80
      ld   a,(ix+$05)
      call adda2hl;0D89
@@ -3695,8 +3696,8 @@ bank2_call_9D80
      push af
      ld   a,(l_e5f5)
      ld   hl,bank2_data_9F22
-     call call_0DA7
-     ex   de,hl
+     call call_0DA7 ;double a, add to HL and load contents of HL into DE
+     ex   de,hl     ;hl now has start of big enemy gfx data
      pop  af
      call adda2hl;$0D89
      ld   c,$1C
@@ -3708,7 +3709,7 @@ bank2_call_9DA3
      ld   b,$04
      ld   d,$02
      ld   e,$02
-     call call_14C2
+     call call_14C2      ;update the big enemy of level 16
 bank2_call_9DAC
      ld   a,(ix+$05)
      ld   hl,bank2_data_9EEE
@@ -3854,19 +3855,30 @@ bank2_data_9F0E
     BYTE $04,$08,$1C,$20,$0C,$10,$24,$28
 
 bank2_data_9F16    
-    BYTE $04,$08,$0C,$10,$14,$18
+    BYTE $04,$08,$0C,$10,$14,$18        ;lefthand 'HELP!!'
     
 bank2_data_9F1C
-    BYTE $1C,$20,$24,$28,$2C,$30
+    BYTE $1C,$20,$24,$28,$2C,$30        ;righthand 'HELP!!'
     
 bank2_data_9F22
-    BYTE $2E,$9F
-    BYTE $3E,$9F,$4E,$9F,$5E,$9F,$66,$9F,$6E,$9F,$3C,$40,$44,$48,$4C,$50
-    BYTE $54,$58,$5C,$60,$64,$68,$6C,$70,$74,$78,$7C,$80,$84,$88,$8C,$90
-    BYTE $94,$98,$9C,$A0,$A4,$A8,$AC,$B0,$B4,$B8,$BC,$C0,$C4,$C8,$CC,$D0
-    BYTE $D4,$D8,$DC,$E0,$E4,$E8,$EC,$F0,$F4,$F8,$04,$08,$0C,$10,$14,$18
-    BYTE $1C,$20,$24,$28,$2C,$30,$34,$38,$3C,$40,$44,$48,$4C,$50,$54,$58
-    BYTE $5C,$60
+    BYTE LOW bank2_data_9F2E, HIGH bank2_data_9F2E
+    BYTE LOW bank2_data_9F3E, HIGH bank2_data_9F3E
+    BYTE LOW bank2_data_9F4E, HIGH bank2_data_9F4E
+    BYTE LOW bank2_data_9F5E, HIGH bank2_data_9F5E
+    BYTE LOW bank2_data_9F66, HIGH bank2_data_9F66
+    BYTE LOW bank2_data_9F6E, HIGH bank2_data_9F6E
+bank2_data_9F2E
+    BYTE $3C,$40,$44,$48,$4C,$50,$54,$58,$5C,$60,$64,$68,$6C,$70,$74,$78
+bank2_data_9F3E
+    BYTE $7C,$80,$84,$88,$8C,$90,$94,$98,$9C,$A0,$A4,$A8,$AC,$B0,$B4,$B8
+bank2_data_9F4E
+    BYTE $BC,$C0,$C4,$C8,$CC,$D0,$D4,$D8,$DC,$E0,$E4,$E8,$EC,$F0,$F4,$F8
+bank2_data_9F5E
+    BYTE $04,$08,$0C,$10,$14,$18,$1C,$20
+bank2_data_9F66
+    BYTE $24,$28,$2C,$30,$34,$38,$3C,$40
+bank2_data_9F6E
+    BYTE $44,$48,$4C,$50,$54,$58,$5C,$60
 
 
 bank2_call_9F76

@@ -1,7 +1,5 @@
     DEVICE ZXSPECTRUMNEXT
 
-;   TEST GITHUB
-
 ;    INCLUDE "nextcodes.asm"			;macros to add Next Extended Opcodes
 ;    INCLUDE "game_public.asm"       ;public E000 space
  
@@ -1685,6 +1683,9 @@ call_1DB5
     ld   (l_e5de),a
     ld   (l_e5dd),a
     ld   (l_e358),a
+
+    ;ld a,14                ;temp to set start level number
+    ;ld   (l_e64b),a
 	
 	;ld a,$3f				;temp to test extend code
 	;ld   (l_e742),a

@@ -960,6 +960,7 @@ intro_call_377F
     call call_0DA7
     ex   de,hl
     jp   (hl)
+intro_call_378A
     call intro_call_3811
     ld   (hl),$48
     inc  hl
@@ -977,23 +978,28 @@ intro_call_377F
 	jr   intro_call_37D1
 ;    push de
 ;37AC: DD E3         ex   (sp),ix
-;37AE: 21 04 E6      ld   hl,$E604
-;37B1: 34            inc  (hl)
-;37B2: 18 1D         jr   $37D1
-;37B4: 21 05 E6      ld   hl,$E605
-;37B7: 34            inc  (hl)
-;37B8: 18 17         jr   $37D1
-;37BA: 21 06 E6      ld   hl,$E606
-;37BD: 34            inc  (hl)
-;37BE: 18 11         jr   $37D1
-;37C0: 21 07 E6      ld   hl,$E607
-;37C3: 34            inc  (hl)
-;37C4: 18 0B         jr   $37D1
-;37C6: 21 08 E6      ld   hl,$E608
-;37C9: 34            inc  (hl)
-;37CA: 0E 2D         ld   c,$2D
-;37CC: CD 50 13      call $1350
-;37CF: 18 00         jr   $37D1
+intro_call_37AE
+    ld   hl,l_e604
+    inc  (hl)
+    jr   intro_call_37D1
+intro_call_37B4
+    ld   hl,l_e605
+    inc  (hl)
+    jr   intro_call_37D1
+intro_call_37BA
+    ld   hl,l_e606
+    inc  (hl)
+    jr   intro_call_37D1
+intro_call_37C0
+    ld   hl,l_e607
+    inc  (hl)
+    jr   intro_call_37D1
+intro_call_37C6
+    ld   hl,l_e608
+    inc  (hl)
+    ld   c,$2D
+    call call_1350
+    jr   intro_call_37D1
 intro_call_37D1
     call call_349F
     call intro_call_38BD
@@ -1008,9 +1014,20 @@ intro_data_37DF
 	;defb $53,$45,$58,$54,$41,$4B,$53,$54,$52,$4B,$54,$54,$2E,$2E,$2E,$49
 	;defb $2E,$46,$4D,$54,$4A,$4E,$53,$4F,$4B,$49,$4D,$59,$53,$48
 intro_data_37FD
-	defb $8A,$37
-	defb $AE,$37,$B4,$37,$BA,$37,$C0,$37,$C6,$37,$C6,$37,$C6,$37,$C6,$37
-	defb $C6,$37
+    defb LOW intro_call_378A,HIGH intro_call_378A
+    defb LOW intro_call_37AE,HIGH intro_call_37AE
+    defb LOW intro_call_37B4,HIGH intro_call_37B4
+    defb LOW intro_call_37BA,HIGH intro_call_378A
+    defb LOW intro_call_37C0,HIGH intro_call_37C0
+    defb LOW intro_call_37C6,HIGH intro_call_37C6
+    defb LOW intro_call_37C6,HIGH intro_call_37C6
+    defb LOW intro_call_37C6,HIGH intro_call_37C6
+    defb LOW intro_call_37C6,HIGH intro_call_37C6
+    defb LOW intro_call_37C6,HIGH intro_call_37C6
+
+	;defb $8A,$37
+	;defb $AE,$37,$B4,$37,$BA,$37,$C0,$37,$C6,$37,$C6,$37,$C6,$37,$C6,$37
+	;defb $C6,$37
 intro_call_3811
     ld   a,(l_e677)
     ld   b,$07

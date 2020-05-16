@@ -682,7 +682,7 @@ bank3_data_BE7F
 	BYTE $09,$0b,$0c,$0d,$0e,$0f,$10,$11,$12,$13			;TAITO bottom half
 
 bank3_data_BEBB
-	BYTE 26,"BETA 3 TAITO AMERICA CORP."
+	BYTE 26,"BETA 4 TAITO AMERICA CORP."
 
 bank3_data_BF06
     BYTE 30,"LICENSED TO ROMSTAR FOR U.S.A."
