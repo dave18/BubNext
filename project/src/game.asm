@@ -120,7 +120,7 @@ FLOORTILE  EQU 7
 
     call setinterrupt
 
-    ld bc,$243b
+/*    ld bc,$243b
     ld a,05
     out (c),a    ;Select register #05  (peripheral 1)
     
@@ -130,7 +130,7 @@ FLOORTILE  EQU 7
     ;or 4        ;set to 60hz to match arcade
 	or %01000110	;set to 60hz to match arcade, and both kempston joysticks
     out (c),a
-    
+  */  
     ld bc,$243b
     ld a,06
     out (c),a    ;Select register #06  (peripheral 2)
