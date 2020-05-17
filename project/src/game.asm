@@ -6127,9 +6127,13 @@ call_580D
     ld   hl,l_e20d
     ld   bc,$0078
     call clearbytes;$0D50
-    ld   hl,$C000       ;TODO - screen loc
-    ld   bc,$0400
+    ;ld   hl,$C000       ;TODO - screen loc
+    ;ld   bc,$0400
   ;  call clearbytes;$0D50
+    ld hl,pattern_addr
+    ld   bc,$0014           ;clear first 20 sprites
+    call call_0D50
+  
     ld   hl,l_e73d
     ld   (hl),$00
     call call_5A34
@@ -6137,7 +6141,7 @@ call_580D
     ld   de,$0000
     ld   b,$1E
     call call_18A5
-    ld   de,data_5AEE
+    ld   de,data_5AEE   ;set the initial Y, X & gfx bank positions
     ld   hl,l_e20d
     ld   b,$1E
 call_583A
@@ -6155,45 +6159,45 @@ call_583A
     djnz call_583A
     ld   hl,l_e5d7
     bit  0,(hl)
-    jr   z,call_5882
-    ld   hl,data_5B2A
+    jr   z,call_5882    ;skip if no player 1
+    ld   hl,data_5B2A   ;'500 X'
     ld   bc,$031D
     ld   e,$00
     call call_14C0
-    ld   a,(l_e73a)
+    ld   a,(l_e73a)     ;P1 Vs score
     cp   $64
     jr   c,call_5863
     ld   a,$63
 call_5863
-    call call_1040
+    call call_1040      ;convert to BCD in B & C
     push bc
-    ld   a,b
+    ld   a,b            ;get 10s
     add  a,a
-    add  a,a
-    add  a,$04
-    ld   b,a
+    add  a,a            ;x4
+    add  a,$04          ;+4
+    ld   b,a            ;set gfx offset to correct number gfx
     ld   c,$1D
     ld   a,$60
     call call_147D
     pop  bc
-    ld   a,c
+    ld   a,c            ;get 1s
     add  a,a
-    add  a,a
-    add  a,$2C
-    ld   b,a
+    add  a,a            ;x4
+    add  a,$2C          ;+2c
+    ld   b,a            ;set gfx offset to correct number gfx
     ld   c,$1D
     ld   a,$01
     call call_147D
 call_5882
     ld   hl,l_e5d7
     bit  1,(hl)
-    jr   z,call_58BE
-    ld   hl,data_5B2A
+    jr   z,call_58BE    ;skip if no player 2
+    ld   hl,data_5B2A   ;'500 X'
     ld   bc,$0321
     ld   e,$01
     ld   d,$01
     call call_14C2
-    ld   a,(l_e73b)
+    ld   a,(l_e73b)     ;P2 Vs Score
     cp   $64
     jr   c,call_589F
     ld   a,$63
@@ -6207,7 +6211,7 @@ call_589F
     ld   b,a
     ld   c,$21
     ld   a,$02
-    call call_147D
+    call call_147D      ;P2 10s
     pop  bc
     ld   a,c
     add  a,a
@@ -6216,14 +6220,14 @@ call_589F
     ld   b,a
     ld   c,$21
     ld   a,$22
-    call call_147D
+    call call_147D      ;P2 1s
 call_58BE
     ld   hl,l_e738
     ld   (hl),$04
     ret
     
 call_58C4
-    ld   b,$0A
+    ld   b,$0A          ;this raises both player bonus sprites (5 per player)
     ld   hl,l_e20d
 call_58C9
     inc  (hl)
@@ -6233,7 +6237,7 @@ call_58C9
     inc  hl
     djnz call_58C9
     ld   a,(l_e20d)
-    cp   $70
+    cp   $70           ;check if bonus message has reached final position
     ret  nz
     ld   hl,l_e738
     ld   (hl),$08
@@ -6249,7 +6253,7 @@ call_58C9
 call_58F0
     ld   hl,l_e5d7
     bit  0,(hl)
-    jr   z,call_594A
+    jr   z,call_594A    ;skip if no player 1
     ld   hl,l_e5d6
     ld   (hl),$00
     ld   de,$5000
@@ -6261,24 +6265,24 @@ call_58F0
     jr   c,call_5923
     ld   de,$5000
     call call_2FB3
-    ld   hl,data_5B2D
-    ld   bc,$0A1D
-    ld   e,$02
-    ld   d,$02
+    ld   hl,data_5B2D   ;BYTE $68,$6C,$70,$74,$78,$7C,$80,$84,$88,$8C   'PERFECT 100000!!'
+    ld   bc,$0A1D       ;10 sprites
+    ld   e,$02          ;start at sprite 66
+    ld   d,$02          ;so sprites 66,98,03,35,67.. etc
     call call_14C2
     jr   call_594A
 call_5923
-    ld   hl,data_5B2D
+    ld   hl,data_5B2D   ;BYTE $68,$6C,$70,$74,$78,$7C,$80,$84,$88,$8C   'PERFECT 100000!!'
     ld   bc,$0A1D
     ld   e,$02
     ld   d,$02
     call call_14C2
-    ld   hl,data_5B37
+    ld   hl,data_5B37   ;BYTE $8C,$90 '+5'
     ld   bc,$021E
     ld   d,$03
     ld   e,$03
     call call_14C2
-    ld   hl,data_5B39
+    ld   hl,data_5B39   ;BYTE $EC,$F0,$F4 '0000!!'
     ld   bc,$031F
     ld   d,$01
     ld   e,$04
@@ -6286,7 +6290,7 @@ call_5923
 call_594A
     ld   hl,l_e5d7
     bit  1,(hl)
-    ret  z
+    ret  z          ;return if no player 2
 ;5950: 3A 02 00      ld   a,($0002)
 ;5953: FE 5E         cp   $5E
 ;5955: 28 02         jr   z,$5959
@@ -6302,21 +6306,21 @@ call_594A
     jr   c,call_597E
     ld   de,$5000
     call call_2FB3
-    ld   hl,data_5B2D
+    ld   hl,data_5B2D   ;BYTE $68,$6C,$70,$74,$78,$7C,$80,$84,$88,$8C   'PERFECT 100000!!'
     ld   bc,$0A21
     ld   e,$05
     jp   call_14C0
 call_597E
-    ld   hl,data_5B2D
+    ld   hl,data_5B2D   ;BYTE $68,$6C,$70,$74,$78,$7C,$80,$84,$88,$8C   'PERFECT 100000!!'
     ld   bc,$0A21
     ld   e,$05
     call call_14C0
-    ld   hl,data_5B37
+    ld   hl,data_5B37   ;BYTE $8C,$90 '+5'
     ld   bc,$0222
     ld   d,$01
     ld   e,$06
     call call_14C2
-    ld   hl,data_5B39
+    ld   hl,data_5B39   ;BYTE $EC,$F0,$F4 '0000!!'
     ld   bc,$0323
     ld   d,$03
     ld   e,$06
@@ -6463,16 +6467,16 @@ call_5A85
     inc  (hl)
     bit  4,(hl)
     ret  z
-    ld   hl,(l_e73a)
+    ld   hl,(l_e73a)            ;p1 score in l, p2 score in h
     ld   a,l
     cp   h
-    ret  z
-    jr   c,call_5AB2
+    ret  z                      ;return if both scores are equal
+    jr   c,call_5AB2            ;c = a < n, so branch if p1 score is lower than p2 score
     ld   hl,$7712;$D048       ;screen loc - P1 10s position
     ld   e,$70;1D
     ld   a,$60;A6				  ;blanking gfx
     call call_5AC9
-    ld   hl,$76c0;$D088       ;screen loc - P1 1s position
+    ld   hl,$7714;$D088       ;screen loc - P1 1s position
     ld   e,$70;1D
     ld   a,$60;A6				  ;blanking gfx
     call call_5AC9
@@ -6527,15 +6531,15 @@ data_5AEE
     BYTE $00,$38,$00,$48,$00,$58,$00,$68,$F0,$90,$F0,$A0,$F0,$B0,$F0,$C0
     BYTE $F0,$D0,$00,$90,$00,$A0,$00,$B0,$00,$C0,$00,$D0
 data_5B2A    
-    BYTE $AC,$94,$98
+    BYTE $AC,$94,$98    ;'500 X'
 data_5B2D    
-    BYTE $68
-data_5B2E
-    BYTE $6C,$70,$74,$78,$7C,$80,$84,$88,$8C
+    BYTE $68,$6C,$70,$74,$78,$7C,$80,$84,$88,$8C    ;'PERFECT 100000!!'
+;data_5B2E
+;    BYTE $6C,$70,$74,$78,$7C,$80,$84,$88,$8C
 data_5B37    
-    BYTE $8C,$90
+    BYTE $8C,$90    ;'+5'
 data_5B39
-    BYTE $EC,$F0,$F4
+    BYTE $EC,$F0,$F4    ;'0000!!'
 
 ;	BYTE "call_53BC"
 call_5B3C

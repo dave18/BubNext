@@ -2321,6 +2321,7 @@ bank2_call_93A8               ;routine to place VS pick ups
      push iy
      ld   b,$0D
 bank2_call_93AD
+ ;    break
      ld   a,(iy+$00)          ;check all 4 squares are free
      or   (iy+$01)
      or   (iy+$02);$40)
@@ -2810,6 +2811,7 @@ bank2_call_971A
      ;break
      ld   b,$0D
 bank2_call_971F
+    ; break
      ld   a,(iy+$00)          ;check if 4 blank squares
      or   (iy+$01)
      or   (iy+$02);$40)
@@ -3005,7 +3007,7 @@ bank2_call_9873
      call call_16C5
      inc  hl
      ld   a,(hl)
-     cp   $1D
+     cp   $71;$1D                  ;changed
      jr   nz,bank2_call_9890
      dec  hl
      ld   a,(l_f530)
@@ -3145,7 +3147,7 @@ bank2_call_9963
      ;break
      ld   b,$0D
 bank2_call_9968
-     ld   a,$34                    ;musica; notes
+     ld   a,$34                    ;musical notes
      cp   (iy+$00)
      jr   nz,bank2_call_998F
      ld   a,$71;1D
@@ -3236,6 +3238,7 @@ bank2_call_9A16
      ;break
      ld   b,$0D
 bank2_call_9A1B               ;check all 4 squares are free
+    ; break
      ld   a,(iy+$00)
      or   (iy+$01)
      or   (iy+$02);$40)
@@ -3376,7 +3379,7 @@ bank2_call_9B13
      call call_16C5
      inc  hl
      ld   a,(hl)
-     cp   $1D
+     cp   $71;1D                   ;changed
      jr   nz,bank2_call_9B2B
      dec  hl
      ld   a,$30
