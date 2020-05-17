@@ -1520,6 +1520,8 @@ joyresult2    BYTE   0
 ;7 = N/A		- active low - Should always be 1
 slave_getinput    
     ld a,(control_status)
+    cp 8
+    jp z,change_options
     cp 2
     jp nc,control_redefine
     cp 1
@@ -1790,8 +1792,10 @@ no_p2_start
     ld bc,$EFFE         ;6 to 7
     in a,(c)            ;read val
     and $1f
-    bit 0,a
-    call z,configure_controls
+    bit 2,a
+    jp z,configure_controls
+    bit 1,a
+    jp z,configure_options
     ret
 
 /*
@@ -2010,7 +2014,7 @@ change_input_end
     ld a,1
     ld (control_timer),a
 change_input_end_2
-    ld bc,$EFFE         ;1 to 5
+    ld bc,$EFFE         ;6 to 0
     in a,(c)            ;read val
     and $1f
     bit 0,a             ;exit control changes
@@ -2330,8 +2334,300 @@ control_config_data_11
 control_config_data_12
     BYTE $14,"PLAYER 2 SELECT KEYS"
 
-/*control_config_data_13
-    BYTE $2,"? "*/
+configure_options
+    ld   hl,option_data_1
+    ld   de,$0848
+    ld   c,$40    
+    call Slave_Write_Layer2_Text
+
+    ld   hl,option_data_2
+    ld   de,$2818
+    ld   c,$20    
+    call Slave_Write_Layer2_Text
+
+    ld   hl,option_data_3
+    ld   de,$4008
+    ;ld   bc,$0500
+    ld   bc,$0400
+configure_options_loop_1
+    push bc
+    push hl
+    push de
+    call Slave_Write_Layer2_Text
+    pop hl
+    ld bc,$1000
+    add hl,bc
+    ex de,hl
+    pop hl
+    ld bc,$0010
+    add hl,bc
+    pop bc
+    djnz configure_options_loop_1
+
+    ld   hl,option_data_4
+    ld   de,$9840
+    ld   c,$40    
+    call Slave_Write_Layer2_Text
+
+    call get_dip_values
+
+    call options_show_values
+
+    nextreg $14,$e0			   ;change layer 2 mask
+    ld a,8
+    ld (control_status),a
+    ld a,1
+    ld (control_timer),a
+    ret
+
+options_show_values
+    ld a,(option_difficulty)
+    ld b,$0A
+    call call_0DB1  ;a * b into HL	;80 bytes per row
+    ld de,option_data_5
+    add hl,de
+    ld   de,$4088
+    ld   c,$50    
+	call Slave_Write_Layer2_Text
+
+    ld a,(option_bonus)
+    ld b,$0e
+    call call_0DB1  ;a * b into HL	;80 bytes per row
+    ld de,option_data_6
+    add hl,de
+    ld   de,$5088
+    ld   c,$50    
+	call Slave_Write_Layer2_Text
+
+    ld a,(option_lives)
+    ld b,$02
+    call call_0DB1  ;a * b into HL	;80 bytes per row
+    ld de,option_data_7
+    add hl,de
+    ld   de,$6088
+    ld   c,$50    
+	call Slave_Write_Layer2_Text
+
+    /*ld a,(option_speed)
+    ld b,$0a
+    call call_0DB1  ;a * b into HL	;80 bytes per row
+    ld de,option_data_8
+    add hl,de
+    ld   de,$7088
+    ld   c,$50    
+	call Slave_Write_Layer2_Text
+*/
+    ld bc,$243b
+    ld a,05
+    out (c),a    ;Select register #05  (peripheral 1)
+    ld bc,$253b
+    in a,(c)
+	and $04		;check which refresh rate is currently used
+    jr z,option_50hz
+    ld hl,option_data_10    
+    ld   de,$7088
+    ld   c,$50    
+	call Slave_Write_Layer2_Text
+    ret
+option_50hz
+    ld hl,option_data_9
+    ld   de,$7088
+    ld   c,$50    
+	call Slave_Write_Layer2_Text
+    ret
+
+    
+
+change_options
+    ;break
+    ld a,(control_timer)
+    cp 0
+    jr z,change_options_1
+    inc a
+    and $0f
+    ld (control_timer),a
+    ret 
+change_options_1
+    ld bc,$F7FE         ;1 to 5
+    in a,(c)            ;read val
+    and $1f
+    cp $1f
+    jr z,options_input_end_2
+    bit 0,a
+    jr nz,no_change_diff
+    ld a,(option_difficulty)
+    inc a
+    cp 4
+    jr c,no_diff_overflow
+    ld a,0
+no_diff_overflow
+    ld (option_difficulty),a
+    jr options_input_end
+no_change_diff
+    bit 1,a
+    jr nz,no_change_bonus
+    ld a,(option_bonus)
+    inc a
+    cp 4
+    jr c,no_bonus_overflow
+    ld a,0
+no_bonus_overflow
+    ld (option_bonus),a
+    jr options_input_end
+no_change_bonus
+    bit 2,a
+    jr nz,no_change_lives
+    ld a,(option_lives)
+    inc a
+    cp 4
+    jr c,no_lives_overflow
+    ld a,0
+no_lives_overflow
+    ld (option_lives),a
+    jr options_input_end
+no_change_lives
+/*    bit 3,a
+    jr nz,no_change_speed
+    ld a,(option_speed)
+    inc a
+    cp 4
+    jr c,no_speed_overflow
+    ld a,0
+no_speed_overflow
+    ld (option_speed),a
+    jr options_input_end
+no_change_speed*/
+    bit 3,a
+    jr nz,options_input_end
+    ld bc,$243b
+    ld a,05
+    out (c),a    ;Select register #05  (peripheral 1)
+    ld bc,$253b
+    in a,(c)
+    xor 4
+    out (c),a
+options_input_end
+    ld a,1
+    ld (control_timer),a
+options_input_end_2
+    ld bc,$EFFE         ;6 to 0
+    in a,(c)            ;read val
+    and $1f
+    bit 0,a             ;exit control changes
+    jr z,change_options_exit
+    call options_show_values
+    ret
+
+change_options_exit
+    ld a,0
+    ld (control_status),a
+    call slave_layer2_clear_screen
+    nextreg $14,$00			   ;change layer 2 mask
+    call set_dip_values
+    ret
+
+get_dip_values
+    ld a,(l_ff01)
+    and $03
+    ld (option_difficulty),a
+    ld a,(l_ff01)
+    and $0c
+    srl a
+    srl a
+    ld (option_bonus),a
+    ld a,(l_ff01)
+    and $30
+    srl a
+    srl a
+    srl a
+    srl a
+    ld (option_lives),a
+    ld a,(l_ff01)
+    and $c0
+    rlca
+    rlca
+    ld (option_speed),a
+    ret
+
+set_dip_values
+    ;break
+    ;ld a,(option_speed)
+    ;rrca        ;move to top 2 bits
+    ;rrca
+    ;ld b,a
+    ld a,(option_lives)
+    sla a
+    sla a
+    sla a
+    sla a
+    ;or b
+    ld b,a
+    ld a,(option_bonus)
+    sla a
+    sla a
+    or b
+    ld b,a
+    ld a,(option_difficulty)
+    or b
+    or %01000000
+    ld (l_ff01),a
+    ret
+
+
+option_difficulty
+    BYTE $00
+option_bonus
+    BYTE $00
+option_lives
+    BYTE $00
+option_speed
+    BYTE $00
+
+option_data_1
+    BYTE $0e,"SELECT OPTIONS"
+
+option_data_2
+    BYTE $19,"USE NUMBER KEYS TO CHANGE"
+
+option_data_3
+    BYTE $0f,"1. DIFFICULTY  "
+    BYTE $0f,"2. BONUS LIFE  "
+    BYTE $0f,"3. NUMBER LIVES"
+    BYTE $0f,"4. REFRESH RATE"
+    ;BYTE $0f,"5. REFRESH RATE"
+
+option_data_4
+    BYTE $0f,"PRESS 0 TO EXIT"
+
+option_data_5
+    BYTE $09,"VERY HARD"
+    BYTE $09,"HARD     "
+    BYTE $09,"EASY     "
+    BYTE $09,"NORMAL   "
+    
+option_data_6
+    BYTE $0d,"50K 250K 500K"
+    BYTE $0d,"40K 200K 500K"
+    BYTE $0d,"20K 80K 300K "
+    BYTE $0d,"30K 100K 400K"
+    
+option_data_7
+    BYTE $01,"2"
+    BYTE $01,"1"
+    BYTE $01,"5"
+    BYTE $01,"3"
+
+/*option_data_8
+    BYTE $09,"NORMAL   "
+    BYTE $09,"MEDIUM   "
+    BYTE $09,"HIGH     "
+    BYTE $09,"VERY HIGH"
+*/
+option_data_9
+    BYTE $04,"50HZ"
+
+option_data_10
+    BYTE $04,"60HZ"
 
 Slave_Write_Layer2_Num
 	call call_1028

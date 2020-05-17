@@ -382,7 +382,7 @@ l_fe83  BYTE $FF
 
 ;DIP Switches
 l_ff00  BYTE %11111110  ;11 Coin B, 11 Coin A, 1 Demo Sounds, 110, Game, English, No Flip Screen
-l_ff01  BYTE %01111111  ;0 - ROM IC Sizes, 1 - Off, 11 - 3 lives, 11 - Bonus 30K,100K,400K, 11 - Normal Difficulty
+l_ff01  BYTE %00111111  ;00 - Normal Monster Speed, 11 - 3 lives, 11 - Bonus 30K,100K,400K, 11 - Normal Difficulty
 ;Inputs
 l_ff02  BYTE %11110011
 l_ff03  BYTE %11111111
@@ -2268,8 +2268,8 @@ call_22BD
 
     
 call_22C6    
-    ld   a,(l_fc21)         ;bank control?
-    and  $03
+    ld   a,(l_fc21)         ;dip switch b mirror
+    and  $03                ;difficulty
     ld   hl,data_22D6
     call adda2hl
     ld   a,(hl)
@@ -3065,10 +3065,10 @@ call_315F
     ret
 
 call_3170    
-    ld   a,(l_fc21)
+    ld   a,(l_fc21) ;Dip switch b
     rrca
     rrca
-    and  $03
+    and  $03        ;bonus life setting
     ld   b,$18
     call call_0DB1
     ld   de,data_3181
@@ -3176,7 +3176,7 @@ call_32C5
     ld   (l_e64a),a
     ret
 call_32CC
-    ld   a,(l_fc21)
+    ld   a,(l_fc21)         ;dip switch b - lives setting
     call div16
     and  $03
     ld   hl,data_32DC
@@ -6131,7 +6131,7 @@ call_580D
     ;ld   bc,$0400
   ;  call clearbytes;$0D50
     ld hl,pattern_addr
-    ld   bc,$0014           ;clear first 20 sprites
+    ld   bc,$001E           ;clear first 30 sprites
     call call_0D50
   
     ld   hl,l_e73d

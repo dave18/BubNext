@@ -2321,7 +2321,7 @@ bank2_call_93A8               ;routine to place VS pick ups
      push iy
      ld   b,$0D
 bank2_call_93AD
- ;    break
+     ;break
      ld   a,(iy+$00)          ;check all 4 squares are free
      or   (iy+$01)
      or   (iy+$02);$40)
@@ -2811,7 +2811,7 @@ bank2_call_971A
      ;break
      ld   b,$0D
 bank2_call_971F
-    ; break
+     ;break
      ld   a,(iy+$00)          ;check if 4 blank squares
      or   (iy+$01)
      or   (iy+$02);$40)
@@ -3238,7 +3238,7 @@ bank2_call_9A16
      ;break
      ld   b,$0D
 bank2_call_9A1B               ;check all 4 squares are free
-    ; break
+     ;break
      ld   a,(iy+$00)
      or   (iy+$01)
      or   (iy+$02);$40)
@@ -5684,7 +5684,7 @@ bank2_call_AC80    ;TODO - possible screen values?
     ld   a,(l_e64b)
     cp   $63
     ret  nz
-    break
+    ;break
     ld   ix,l_f611
     ld   hl,$CE98
     ld   (ix+$03),l

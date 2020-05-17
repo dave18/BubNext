@@ -91,7 +91,7 @@ bank3_call_9611
     
 bank3_call_96E0
     ld   a,(l_ff01)
-    or   $C0
+    or   $C0    
     ld   (l_fc21),a
     ld   a,(l_ff01)
     rlca
