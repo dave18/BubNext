@@ -1174,9 +1174,9 @@ call_19E8
      ;ld   a,(iy-$51);$41)
      ;cp   h
      ;jr   z,call_1A09
-     ld   a,(iy-$52)
-	 cp   l;$AB
-     jr   nc,call_1A09
+     ;ld   a,(iy-$52)
+	 ;cp   l;$AB
+     ;jr   nc,call_1A09
 	 ld   (iy+$00),$F1			;needs to be changed to F1 equivalent
      ld   (iy+$01),c
      jr   call_1A6D
@@ -2869,7 +2869,7 @@ call_2F96
 data_2FA2
     BYTE $09,"GAME OVER"
 data_2FAC
-	BYTE $00,$04,$15,$23,$18,$1B,$31		;level order for DEMO MODE
+	BYTE $00,$04,$15,$23,$18,$1B,$31		;level order for DEMO MODE    
 
 call_2FB3
     ld   a,(l_e5d3)
@@ -6129,10 +6129,44 @@ call_580D
     call clearbytes;$0D50
     ;ld   hl,$C000       ;TODO - screen loc
     ;ld   bc,$0400
-  ;  call clearbytes;$0D50
+    ;call clearbytes;$0D50
     ld hl,pattern_addr
-    ld   bc,$001E           ;clear first 30 sprites
+    ld   bc,$0100           ;clear both P1 and P2 bonus sprites
     call call_0D50
+    ld hl,pattern_bank
+    ld   bc,$0080           ;clear both P1 and P2 bonus sprites
+scum
+    ld   (hl),$02
+    inc  hl
+    dec  bc
+    ld   a,c
+    or   b
+    jr   nz,scum
+    /*ld hl,pattern_addr
+    ld   bc,$0020           ;clear both P1 and P2 bonus sprites
+    call call_0D50
+    ld hl,pattern_addr+64
+    ld   bc,$0020         
+    call call_0D50
+    ld hl,pattern_addr+128
+    ld   bc,$0020         
+    call call_0D50
+    ld hl,pattern_addr+192
+    ld   bc,$0020         
+    call call_0D50
+
+    ld hl,pattern_bank
+    ld   bc,$0010           ;clear both P1 and P2 bonus sprites
+    call call_0D50
+    ld hl,pattern_bank+32
+    ld   bc,$0010         
+    call call_0D50
+    ld hl,pattern_bank+64
+    ld   bc,$0010         
+    call call_0D50
+    ld hl,pattern_bank+96
+    ld   bc,$0010         
+    call call_0D50*/
   
     ld   hl,l_e73d
     ld   (hl),$00
