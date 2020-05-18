@@ -1143,7 +1143,7 @@ intro_call_38CA
     djnz intro_call_38CA
     ret
 intro_data_38D4
-	defb "ABCDEFGHIJKLMNOPQRSTUVWXYZ  ."
+	defb "ABCDEFGHIJKLMNOPQRSTUVWXYZ ."
 	;defb $41,$42,$43,$44,$45,$46,$47,$48,$49,$4A,$4B,$4C,$4D,$4E,$4F,$50
 	;defb $51,$52,$53,$54,$55,$56,$57,$58,$59,$5A,$20,$2E
 
