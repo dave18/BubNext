@@ -2521,6 +2521,7 @@ no_change_speed*/
     in a,(c)
     xor 4
     out (c),a
+    jr options_input_end
 options_no_freq
     bit 4,a
     jr nz,options_input_end
