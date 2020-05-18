@@ -137,6 +137,7 @@ FLOORTILE  EQU 7
     
     ld bc,$253b
     in a,(c)
+    and $f7
     or 128+1        ;Enable Turbo Mode
     out (c),a
 	
@@ -1530,7 +1531,6 @@ call_1BA3_1
     ret
 data_1BAE
     BYTE $F0,$70,$F6,$70,$F7,$50,$F8,$00,$FA,$00,$FF,$00    ;palette cycle data
-	BYTE "CRIKEY"
 call_1BBA
     ld   hl,l_e5d0
     ld   (hl),$00
@@ -7060,22 +7060,26 @@ call_7C8E
     inc  hl
     ld   (hl),$13
     ld   a,(ix+$09)
-    ld   hl,bank0_data_80C9
+    ;break
+    ld   hl,bank0_data_80C9 ;address table for enemy death patterns
     call call_0DA7
     bit  4,(ix+$00)
     jr   z,call_7CA5
-    ld   de,bank0_data_808D
+    ;break
+    ld   de,bank0_data_808D ;death from invincible dragon calla this but is replace by 7cb0
     jr   call_7CB0
 call_7CA5
     bit  6,(ix+$00)
     jr   z,call_7CB0
-    ld   de,bank0_data_80B6
+    ;break
+    ld   de,bank0_data_80B6     ;death by big lightning, fireballxxaaaa
     jr   call_7CB0
 call_7CB0
     ld   a,(l_f518)
     and  a
     jr   z,call_7CB9
-    ld   de,bank0_data_8064
+    ;break
+    ld   de,bank0_data_8064     ;death from invincible dragon
 call_7CB9
     ld   (ix+$10),e
     ld   (ix+$11),d
@@ -7460,7 +7464,7 @@ call_7FE7
     inc  (hl)
     ret
 call_7FF8
-    dec  (hl)
+    dec  (hl)       ;dying enemy falls
     ld   a,(hl)
     and  $07
     ret  z

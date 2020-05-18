@@ -2347,8 +2347,8 @@ configure_options
 
     ld   hl,option_data_3
     ld   de,$4008
-    ;ld   bc,$0500
-    ld   bc,$0400
+    ld   bc,$0500
+    ;ld   bc,$0400
 configure_options_loop_1
     push bc
     push hl
@@ -2418,6 +2418,20 @@ options_show_values
 	call Slave_Write_Layer2_Text
 */
     ld bc,$243b
+    ld a,09
+    out (c),a    ;Select register #09  (peripheral 4)
+    ld bc,$253b
+    in a,(c)
+    and $03
+    ld b,$05
+    call call_0DB1  ;a * b into HL	;80 bytes per row
+    ld de,option_data_11
+    add hl,de
+    ld   de,$8088
+    ld   c,$50    
+	call Slave_Write_Layer2_Text
+
+    ld bc,$243b
     ld a,05
     out (c),a    ;Select register #05  (peripheral 1)
     ld bc,$253b
@@ -2428,6 +2442,7 @@ options_show_values
     ld   de,$7088
     ld   c,$50    
 	call Slave_Write_Layer2_Text
+
     ret
 option_50hz
     ld hl,option_data_9
@@ -2498,13 +2513,29 @@ no_speed_overflow
     jr options_input_end
 no_change_speed*/
     bit 3,a
-    jr nz,options_input_end
+    jr nz,options_no_freq
     ld bc,$243b
     ld a,05
     out (c),a    ;Select register #05  (peripheral 1)
     ld bc,$253b
     in a,(c)
     xor 4
+    out (c),a
+options_no_freq
+    bit 4,a
+    jr nz,options_input_end
+    ld bc,$243b
+    ld a,09
+    out (c),a    ;Select register #09  (peripheral 4)
+    ld bc,$253b
+    in a,(c)
+    ld d,a
+    and $FC
+    ld e,a
+    ld a,d
+    inc a
+    and $03
+    or e
     out (c),a
 options_input_end
     ld a,1
@@ -2594,7 +2625,7 @@ option_data_3
     BYTE $0f,"2. BONUS LIFE  "
     BYTE $0f,"3. NUMBER LIVES"
     BYTE $0f,"4. REFRESH RATE"
-    ;BYTE $0f,"5. REFRESH RATE"
+    BYTE $0f,"5. SCANLINES   "
 
 option_data_4
     BYTE $0f,"PRESS 0 TO EXIT"
@@ -2628,6 +2659,13 @@ option_data_9
 
 option_data_10
     BYTE $04,"60HZ"
+
+option_data_11
+    BYTE $04,"NONE"
+    BYTE $04,"75% "
+    BYTE $04,"50% "
+    BYTE $04,"25% "
+
 
 Slave_Write_Layer2_Num
 	call call_1028

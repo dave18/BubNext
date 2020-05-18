@@ -26,22 +26,22 @@ bank0_data_8032
     BYTE $B8,$88,$B8,$88,$00
 
 
-bank0_data_8064
+bank0_data_8064    ;special enemy death pattern for ???
     BYTE $02,$01,$03,$02,$05,$02,$08,$06,$0B,$02,$10,$05,$13,$01,$18,$08
     BYTE $1B,$01,$1E,$01,$1F,$01,$02,$01,$03,$02,$05,$02,$08,$06,$0B,$02
     BYTE $0D,$02,$0E,$01,$0F,$02,$10,$01,$99
 
     
-bank0_data_808D    
+bank0_data_808D     ;special enemy death pattern for ???
     BYTE $02,$01,$03,$03,$05,$03,$08,$0B,$0B,$03,$10,$07,$13,$01,$18,$0D
     BYTE $1B,$01,$1E,$01,$1F,$01,$02,$01,$03,$03,$05,$03,$08,$0B,$0B,$03
     BYTE $0D,$02,$0E,$01,$0F,$02,$10,$01,$99
     
-bank0_data_80B6    
+bank0_data_80B6    ;special enemy death pattern for ???
     BYTE $02,$03,$03,$07,$05,$07,$08
     BYTE $17,$0B,$07,$0D,$07,$0E,$03,$0F,$07,$10,$04,$99
 
-bank0_data_80C9
+bank0_data_80C9                     ;enemy death spin/fall patterns
 	BYTE LOW bank0_data_80D7,HIGH bank0_data_80D7
 	BYTE LOW bank0_data_80EA,HIGH bank0_data_80EA
 	BYTE LOW bank0_data_80FD,HIGH bank0_data_80FD

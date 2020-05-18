@@ -167,7 +167,7 @@ bank2_call_8400
 bank2_call_8404
     ld   b,$03
     ld   hl,bank2_data_8463
-bank2_call_8409;83E8_4
+bank2_call_8409 ;83E8_4
     ld   e,(hl)
     inc  hl
     ld   d,(hl)
@@ -184,22 +184,22 @@ bank2_call_8409;83E8_4
     cp   $1E
     jr   c,bank2_call_8427
     ld   a,$1D
-bank2_call_8427;83E8_6
+bank2_call_8427 ;83E8_6
     ld   c,a
     ld   a,$31
     sub  c
     jr   bank2_call_8447
-bank2_call_842D;83E8_5
+bank2_call_842D ;83E8_5
     ld   a,(l_f456)
     cp   $28
     jr   c,bank2_call_8436
     ld   a,$27
-bank2_call_8436;83E8_7
+bank2_call_8436 ;83E8_7
     ld   c,a
     ld   a,$3B
     sub  c
     jr   bank2_call_8447
-bank2_call_843C;83E8_3
+bank2_call_843C ;83E8_3
      xor  a
      ld   (de),a
      inc  hl
@@ -207,7 +207,7 @@ bank2_call_843C;83E8_3
      and  $0F
      call adda2hl
      ld   a,(hl)
-bank2_call_8447;83E8_9
+bank2_call_8447 ;83E8_9
      ld   (l_f44c),a
      ld   hl,l_f44e
      ld   bc,$0009
@@ -217,7 +217,7 @@ bank2_call_8447;83E8_9
      and  a
      jr   z,bank2_call_845F
      ld   hl,$00F0
-bank2_call_845F;83E8_8
+bank2_call_845F ;83E8_8
      ld   (l_f450),hl
      ret
 bank2_data_8463
@@ -422,7 +422,7 @@ bank2_call_85DD
      cp   (hl)
      ret
 errorpushaf
-    jr errorpushaf
+     jr errorpushaf
      push af
 bank2_call_85EB
     ld   hl,l_f45f
@@ -443,10 +443,10 @@ bank2_call_85EB
     add  a,$09
     ld   (l_f45e),a
     jr   bank2_call_8657
-bank2_call_8611;85EB_2
+bank2_call_8611 ;85EB_2
     ld   b,$36
     ld   hl,bank2_data_B4F2
-bank2_call_8616;85EB_5
+bank2_call_8616 ;85EB_5
     ld   e,(hl)
     inc  hl
     ld   d,(hl)
@@ -470,11 +470,11 @@ bank2_call_8616;85EB_5
     inc  hl
     dec  b
     jr   nz,bank2_call_8616
-bank2_call_8637;85EB_1
+bank2_call_8637 ;85EB_1
     ld   hl,l_f45f
     set  3,(hl)
     ret
-bank2_call_863D;85EB_4
+bank2_call_863D ;85EB_4
     ld   a,(hl)
     ld   (l_f463),a
     ld   a,b
@@ -489,13 +489,13 @@ bank2_call_863D;85EB_4
     ld   hl,l_f513
     ld   (hl),$FF
     jr   bank2_call_8637
-bank2_call_8657;85EB_3
+bank2_call_8657 ;85EB_3
     ld   hl,$02D0
     ld   a,(l_f44d)
     and  a
     jr   z,bank2_call_8663
     ld   hl,$00F0
-bank2_call_8663;85EB_6
+bank2_call_8663 ;85EB_6
     ld   (l_f461),hl
     ret
 
@@ -735,11 +735,11 @@ bank2_data_8AFF
     ;BYTE $B1,$8A,$B7,$8A,$C2,$8A,$CD,$8A,$D8,$8A,$ED,$8A
 
 bank2_call_87B1
-    call bank2_call_85AE
-    ld   hl,l_e5eb
-    inc  (hl)
-    ld   (ix+$31),$80
-   ret
+     call bank2_call_85AE
+     ld   hl,l_e5eb
+     inc  (hl)
+     ld   (ix+$31),$80
+     ret
 bank2_call_87BD
     call bank2_call_8B6B
     ld   hl,l_e5e9
@@ -1613,6 +1613,7 @@ bank2_call_8E8E
      call call_147D
      jr   bank2_call_8EA6
 bank2_call_8E93
+     ;break
      ld   de,$0405
      call frametimer;15CA
      add  a,a
@@ -5147,14 +5148,15 @@ bank2_call_A867
      ld   a,(l_ed3d)
      and  a
      jp   z,bank2_call_AA19
-     ld   de,$0405
-     call frametimer;15CA
+     ld   de,$0405                 ;necklace picked up
+     ;break
+     call frametimer;15CA          ;returns A = (ix+$05)
      add  a,a
-     add  a,a
-     add  a,$D4
+     add  a,a                      ; * 4
+     add  a,$D4                    ;add to base sprite $ED4
      ld   b,a
      ld   c,$1E
-     ld   a,$06
+     ld   a,$06                    ;use sprite num 6
      call call_147D
      ld   a,(ix+$08)
      cp   $1B
@@ -5168,31 +5170,31 @@ bank2_call_A895
      ld   b,$03
 bank2_call_A897
      push bc
-     call loadhl2;$1537
-     ld   a,(ix+$02)
-     sub  $03
+     call loadhl2;$1537  ;copy X,Y pos from base E20D sprite struct to IX data
+     ld   a,(ix+$02)     ;bouncing ball X Pos
+     sub  $03            ;3 pixels to the left
      ld   h,a
-     ld   a,(ix+$01)
-     add  a,$02
-     call call_174C
+     ld   a,(ix+$01)     ;bouncing ball Y Pos
+     add  a,$02          ;2 pixels up
+     call call_174C      ;check map data at this location
      jp   z,bank2_call_A9C8
-     ld   a,(ix+$02)
-     sub  $03
+     ld   a,(ix+$02)     ;bouncing ball X Pos
+     sub  $03            ;3 pixels to the left
      ld   h,a
-     ld   a,(ix+$01)
-     call call_174C
+     ld   a,(ix+$01)     ;bouncing ball Y Pos
+     call call_174C      ;check map data at this location
      jp   z,bank2_call_A9C8
-     ld   h,(ix+$02)
-     ld   a,(ix+$01)
-     add  a,$03
-     call call_174C
+     ld   h,(ix+$02)     ;bouncing ball X Pos
+     ld   a,(ix+$01)     ;bouncing ball Y Pos
+     add  a,$03          ;3 pixels up
+     call call_174C      ;check map data at this location
      jp   z,bank2_call_A9D1
-     ld   a,(ix+$02)
-     sub  $02
+     ld   a,(ix+$02)     ;bouncing ball X Pos
+     sub  $02            ;2 pixels to the left
      ld   h,a
-     ld   a,(ix+$01)
-     add  a,$03
-     call call_174C
+     ld   a,(ix+$01)     ;bouncing ball Y Pos
+     add  a,$03          ;3 pixels up
+     call call_174C      ;check map data at this location
      jp   z,bank2_call_A9D1
      call bank2_call_AA22
      pop  bc
@@ -5350,18 +5352,18 @@ bank2_call_AA19
      ld   (hl),$00
      ret
 bank2_call_AA22
-     ld   a,(ix+$08)
-     call call_109C
-     ld   a,(ix+$07)
-     inc  (ix+$07)
-     call adda2de;$0D84
-     ld   a,(de)
-     cp   $88
+     ld   a,(ix+$08)          ;get movement pattern
+     call call_109C           ;load DE with pattern address
+     ld   a,(ix+$07)          ;get offset within pattern
+     inc  (ix+$07)            ;increase it
+     call adda2de;$0D84       ;add to pattern base
+     ld   a,(de)              ;get pattern data
+     cp   $88                 ;end of pattern marker?
      jp   nz,bank2_call_AA3E
-     ld   (ix+$07),$00
-     jp   bank2_call_AA22
-     call loadhlfromspritestruct;call_$1529
+     ld   (ix+$07),$00        ;is so, reset pattern offset
+     jp   bank2_call_AA22     ;and go back and process pattern data
 bank2_call_AA3E
+     call loadhlfromspritestruct;call_$1529
      bit  0,a
      jp   z,bank2_call_AA50
      bit  3,a
@@ -6952,3 +6954,6 @@ bank2_data_BB40
     BYTE $3A,$68,$F6,$77,$C3,$9E,$BB,$F5,$CD,$31,$04,$79,$21,$00,$F8,$77
     BYTE $CD,$27,$04,$F1,$C9,$10,$20,$40,$80,$FF,$07,$10,$08,$10,$09,$10
 */
+
+ENDBANK2
+     BYTE "END OF BANK2"
