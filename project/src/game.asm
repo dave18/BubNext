@@ -1684,14 +1684,15 @@ call_1DB5
     ld   (l_e5dd),a
     ld   (l_e358),a
 
-    ;ld a,14                ;temp to set start level number
-    ;ld   (l_e64b),a
+    ld a,99                ;temp to set start level number
+    ld   (l_e64b),a
 	
 	;ld a,$3f				;temp to test extend code
 	;ld   (l_e742),a
 	
 	;ld a,$1f				;temp to test extend code
 	;ld   (l_e743),a
+    
 	
     ld   a,(l_e5d8)
     and  a
@@ -6135,13 +6136,13 @@ call_580D
     call call_0D50
     ld hl,pattern_bank
     ld   bc,$0080           ;clear both P1 and P2 bonus sprites
-scum
+flag_all_update
     ld   (hl),$02
     inc  hl
     dec  bc
     ld   a,c
     or   b
-    jr   nz,scum
+    jr   nz,flag_all_update
     /*ld hl,pattern_addr
     ld   bc,$0020           ;clear both P1 and P2 bonus sprites
     call call_0D50
@@ -6609,6 +6610,27 @@ call_5B6E
     ld   a,(l_e64b)
     cp   $63
     call nz,call_62FB
+
+    ;we need to copy some new tiles, expecially for level 100!
+	nextreg $6F,$00				;tile definition start address = 0
+	;nextreg  $6F,$5B				;tile definition start address = 91
+
+	ld	a,gfxbank21
+	call call_026C_DI	;page in gfx bank 21
+	ld de,$5400
+	ld hl,$CBC0		;offset
+	ld bc,$0800		;64 tiles * 32 bytes
+	ldir
+	call call_029B_DI  ;restore bank
+
+    ld	a,gfxbank20
+	call call_026C_DI	;page in gfx bank 21
+	ld de,$6000
+	ld hl,$D200		;offset
+	ld bc,$0A00		;80 tiles * 32 bytes
+	ldir
+	call call_029B_DI  ;restore bank
+
     ld   hl,l_f66f
     ld   bc,$0007
     call clearbytes;$0D50
@@ -6706,7 +6728,44 @@ call_5C15
     ret
 
 
-    
+call_67B3                   ;level 100 boss!
+    ld   a,(l_ed3d)
+    and  a
+    jr   nz,call_67EA
+    ld   hl,l_eb36
+    bit  5,(hl)
+    jr   nz,call_67C7
+    ld   hl,l_eb46
+    bit  5,(hl)
+    jr   z,call_67CA
+call_67C7
+    call bank0_call_B8D3
+call_67CA
+    ld   a,(l_e5d7)
+    cp   $03
+    jr   nz,call_67EA
+    ld   a,(l_f446)
+    cp   $20
+    jr   nz,call_67EA
+    ld   hl,l_eb43
+    bit  0,(hl)
+    jr   nz,call_67E7
+    call bank0_call_B3AF        ;reprint the starfield?
+    ld   hl,l_eb43
+    set  0,(hl)
+call_67E7
+    ld   a,introbank;$01      ;switch bank
+    call call_026C
+    call intro_call_B732
+    call call_029B     ;restore bank
+call_67EA
+    ld   a,introbank;$01      ;switch bank
+    call call_026C
+    ld   ix,l_eb36
+    ld   b,$02
+	call intro_call_67F0
+	call call_029B     ;restore bank
+    ret
 
 
 call_6EEF

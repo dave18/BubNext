@@ -4883,9 +4883,7 @@ call_6755
     ld   b,$08
     jp   call_18A5
 
-call_67B3
-    jr call_67B3
-    BYTE "call_67B3"
+
 
 call_6D8B
     call call_634A

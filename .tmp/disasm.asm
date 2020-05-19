@@ -1,108 +1,110 @@
-L33CC:       equ  33CCh
-L3F33:       equ  3F33h
-LFFFF:       equ  FFFFh
+             org 0000h
 
 
-             org 7019h
-
-
-7019 L7019:
-7019 CC 33 3F     CALL Z,L3F33 
-701C F3           DI          
-701D CC CC 33     CALL Z,L33CC 
-7020 F3           DI          
-7021 33           INC  SP     
-7022 3C           INC  A      
-7023 C3 FF FF     JP   LFFFF  
-
-
-7026 3C           defb 3Ch    
-7027 C3           defb C3h    
-7028 F3           defb F3h    
-7029 33           defb 33h    
-702A 3C           defb 3Ch    
-702B C3           defb C3h    
-702C F3           defb F3h    
-702D CC           defb CCh    
-702E CC           defb CCh    
-702F 33           defb 33h    
-7030 F3           defb F3h    
-7031 33           defb 33h    
-7032 33           defb 33h    
-7033 3F           defb 3Fh    
-7034 FF           defb FFh    
-7035 FF           defb FFh    
-7036 FF           defb FFh    
-7037 FF           defb FFh    
-7038 FF           defb FFh    
-7039 FF           defb FFh    
-703A FF           defb FFh    
-703B FF           defb FFh    
-703C FF           defb FFh    
-703D FF           defb FFh    
-703E FF           defb FFh    
-703F FF           defb FFh    
-7040 FF           defb FFh    
-7041 FF           defb FFh    
-7042 FF           defb FFh    
-7043 FF           defb FFh    
-7044 FF           defb FFh    
-7045 FF           defb FFh    
-7046 FF           defb FFh    
-7047 FF           defb FFh    
-7048 FF           defb FFh    
-7049 FF           defb FFh    
-704A FF           defb FFh    
-704B FF           defb FFh    
-704C FF           defb FFh    
-704D 33           defb 33h    
-704E 33           defb 33h    
-704F 33           defb 33h    
-7050 F3           defb F3h    
-7051 3C           defb 3Ch    
-7052 CC           defb CCh    
-7053 C3           defb C3h    
-7054 F3           defb F3h    
-7055 CC           defb CCh    
-7056 33           defb 33h    
-7057 33           defb 33h    
-7058 F3           defb F3h    
-7059 CC           defb CCh    
-705A 33           defb 33h    
-705B 3F           defb 3Fh    
-705C F3           defb F3h    
-705D CC           defb CCh    
-705E CC           defb CCh    
-705F 33           defb 33h    
-7060 F3           defb F3h    
-7061 CC           defb CCh    
-7062 33           defb 33h    
-7063 C3           defb C3h    
-7064 F3           defb F3h    
-7065 CC           defb CCh    
-7066 33           defb 33h    
-7067 C3           defb C3h    
-7068 F3           defb F3h    
-7069 CC           defb CCh    
-706A 33           defb 33h    
-706B C3           defb C3h    
-706C F3           defb F3h    
-706D 3C           defb 3Ch    
-706E CC           defb CCh    
-706F 33           defb 33h    
-7070 FF           defb FFh    
-7071 33           defb 33h    
-7072 33           defb 33h    
-7073 3F           defb 3Fh    
-7074 FF           defb FFh    
-7075 FF           defb FFh    
-7076 FF           defb FFh    
-7077 FF           defb FFh    
-7078 FF           defb FFh    
-7079 FF           defb FFh    
-707A FF           defb FFh    
-707B FF           defb FFh    
-707C FF           defb FFh    
+0000 L0000:
+0000 00           NOP         
+0001 00           NOP         
+0002 00           NOP         
+0003 00           NOP         
+0004 00           NOP         
+0005 00           NOP         
+0006 00           NOP         
+0007 00           NOP         
+0008 00           NOP         
+0009 00           NOP         
+000A 00           NOP         
+000B 00           NOP         
+000C 00           NOP         
+000D 00           NOP         
+000E 00           NOP         
+000F 00           NOP         
+0010 00           NOP         
+0011 00           NOP         
+0012 00           NOP         
+0013 00           NOP         
+0014 00           NOP         
+0015 00           NOP         
+0016 00           NOP         
+0017 00           NOP         
+0018 00           NOP         
+0019 00           NOP         
+001A 00           NOP         
+001B 00           NOP         
+001C 00           NOP         
+001D 00           NOP         
+001E 00           NOP         
+001F 00           NOP         
+0020 00           NOP         
+0021 00           NOP         
+0022 00           NOP         
+0023 00           NOP         
+0024 00           NOP         
+0025 00           NOP         
+0026 00           NOP         
+0027 00           NOP         
+0028 00           NOP         
+0029 00           NOP         
+002A 00           NOP         
+002B 00           NOP         
+002C 00           NOP         
+002D 00           NOP         
+002E 00           NOP         
+002F 00           NOP         
+0030 00           NOP         
+0031 00           NOP         
+0032 00           NOP         
+0033 00           NOP         
+0034 00           NOP         
+0035 00           NOP         
+0036 00           NOP         
+0037 00           NOP         
+0038 00           NOP         
+0039 00           NOP         
+003A 00           NOP         
+003B 00           NOP         
+003C 00           NOP         
+003D 00           NOP         
+003E 00           NOP         
+003F 00           NOP         
+0040 00           NOP         
+0041 00           NOP         
+0042 00           NOP         
+0043 00           NOP         
+0044 00           NOP         
+0045 00           NOP         
+0046 00           NOP         
+0047 00           NOP         
+0048 00           NOP         
+0049 00           NOP         
+004A 00           NOP         
+004B 00           NOP         
+004C 00           NOP         
+004D 00           NOP         
+004E 00           NOP         
+004F 00           NOP         
+0050 00           NOP         
+0051 00           NOP         
+0052 00           NOP         
+0053 00           NOP         
+0054 00           NOP         
+0055 00           NOP         
+0056 00           NOP         
+0057 00           NOP         
+0058 00           NOP         
+0059 00           NOP         
+005A 00           NOP         
+005B 00           NOP         
+005C 00           NOP         
+005D 00           NOP         
+005E 00           NOP         
+005F 00           NOP         
+0060 00           NOP         
+0061 00           NOP         
+0062 00           NOP         
+0063 00           NOP         
+0064 00           NOP         
+0065 00           NOP         
+0066 00           NOP         
 
 
              org 8180h

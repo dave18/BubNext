@@ -6177,10 +6177,38 @@ bank0_data_B662
 ;end of duplicated code
 
 
-    
-    
+bank0_call_B8D3
+    nextreg $43,%10100000        ; (R/W) 0x43 (67) => Palette Control - Sprites
+    nextreg $40,$9D                  ; (R/W) 0x40 (64) => Palette Index
+    ld   hl,l_f35c
+    inc  (hl)
+    ld   a,(hl)
+    cp   $02
+    ret  nz
+    ld   (hl),$00
+    inc  hl
+    inc  (hl)
+    ld   a,(hl)
+    cp   $06
+    jr   nz,bank0_call_B8E6
+    xor  a
+    ld   (hl),a
+bank0_call_B8E6
+    ld   hl,bank0_data_B8F1
+    call call_0DA7
+    ;ld   ($F93A),de     ;TODO palette
+    call call_0B30_update_entry
+    ret
+bank0_data_B8F1
+    BYTE $F0,$70,$F6,$70,$F7,$50,$F8,$00
+    BYTE $FA,$00,$FF,$00
 bank0_call_B8FD
     ret
+    nop
+    nop
+    nop
+    nop
+    nop
     
     
     

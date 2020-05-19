@@ -1240,7 +1240,591 @@ intro_call_6322
 */
 
 
+intro_call_67F0
+    push bc
 
+    ld a,$10            ;temp cheat
+    ld (l_e6be),a
+
+    ld   a,(ix+$00)     ;eb36
+    bit  0,a
+    jr   nz,intro_call_682C
+;    ld   hl,data_044D             ;protection
+;    ld   de,($0B2E)
+;    or   a
+;    sbc  hl,de
+;    jr   $6806
+;    push ix
+    ld   de,intro_data_6BF7
+    bit  0,(ix+$08)
+    jr   z,intro_call_6812
+    ld   de,intro_data_6BFF
+intro_call_6812
+    call call_1529
+    ld   b,$04
+intro_call_6817
+    ld   a,(de)
+    ld   (hl),a
+    inc  hl
+    inc  hl
+    inc  de
+    ld   a,(de)
+    ld   (hl),a
+    inc  hl
+    ld   (hl),$16
+    inc  hl
+    inc  de
+    djnz intro_call_6817
+    set  0,(ix+$00)
+    jp   intro_call_6BEC
+intro_call_682C
+    bit  6,(ix+$00)
+    jp   nz,intro_call_6BEC
+    bit  4,(ix+$00)
+    ;jp   intro_call_6AE3
+    jp   nz,intro_call_6AE3
+    bit  2,(ix+$00)
+    jp   nz,intro_call_6976
+    bit  1,(ix+$00)
+    jp   nz,intro_call_691E
+intro_call_6848
+    ld   de,$0502
+    call call_15CA
+    add  a,a
+    add  a,a
+    ld   hl,intro_data_6C13
+    bit  0,(ix+$08)
+    jr   z,intro_call_685C
+    ld   hl,intro_data_6C1B
+intro_call_685C
+    call call_0D89
+    ld   c,(ix+$09)
+    ld   b,$04
+    call call_14BD
+    bit  1,(ix+$00)
+    jp   nz,intro_call_6BEC
+intro_call_686E    
+    ld   a,(l_ed3d)
+    and  a
+    jp   nz,intro_call_68B7
+    ld   a,(ix+$0b)
+    cp   $54
+    jp   nz,intro_call_68B7
+    ld   a,(l_e5d7)
+    bit  0,(ix+$08)
+    jr   nz,intro_call_688C
+    bit  0,a
+    jr   z,intro_call_689A
+    jr   intro_call_6890
+intro_call_688C
+    bit  1,a
+    jr   z,intro_call_689A
+intro_call_6890
+    set  1,(ix+$00)
+    call call_1556
+    jp   intro_call_6BEC
+intro_call_689A
+    call call_1529
+    ld   b,$04
+    ld   de,intro_data_6C07
+intro_call_68A2
+    ld   a,(de)
+    cp   (hl)
+    jr   nz,intro_call_68AC
+    set  1,(ix+$00)
+    jr   intro_call_68AD
+intro_call_68AC
+    dec  (hl)
+intro_call_68AD
+    inc  hl
+    inc  hl
+    inc  hl
+    inc  hl
+    inc  de
+    djnz intro_call_68A2
+    jp   intro_call_6BEC
+intro_call_68B7
+    ld   de,intro_data_6D1D
+    bit  0,(ix+$08)
+    jr   z,intro_call_68C3
+    ld   de,intro_data_6CAF
+intro_call_68C3
+    ld   a,(ix+$0b)
+    inc  (ix+$0b)
+    call call_0D84
+    call call_1529
+    ld   a,(de)
+    cp   $88
+    jr   nz,intro_call_68DA
+    ld   (ix+$0b),$00
+    jr   intro_call_686E
+intro_call_68DA
+    and  $F0
+    or   a
+    jr   z,intro_call_68FB
+    bit  7,a
+    jr   nz,intro_call_68F0
+    push hl
+    ld   b,$04
+intro_call_68E6
+    inc  (hl)
+    inc  hl
+    inc  hl
+    inc  hl
+    inc  hl
+    djnz intro_call_68E6
+    pop  hl
+    jr   intro_call_68FB
+intro_call_68F0
+    push hl
+    ld   b,$04
+intro_call_68F3
+    dec  (hl)
+    inc  hl
+    inc  hl
+    inc  hl
+    inc  hl
+    djnz intro_call_68F3
+    pop  hl
+intro_call_68FB
+    ld   a,(de)
+    and  $0F
+    or   a
+    jp   z,intro_call_6BEC
+    bit  3,a
+    jr   nz,intro_call_6912
+    ld   b,$04
+intro_call_6908
+    inc  hl
+    inc  hl
+    inc  (hl)
+    inc  hl
+    inc  hl
+    djnz intro_call_6908
+    jp   intro_call_6BEC
+intro_call_6912
+    ld   b,$04
+intro_call_6914
+    inc  hl
+    inc  hl
+    dec  (hl)
+    inc  hl
+    inc  hl
+    djnz intro_call_6914
+    jp   intro_call_6BEC
+intro_call_691E
+    ld   a,(l_e5d7)
+    bit  0,(ix+$08)
+    jr   nz,intro_call_692E
+    bit  0,a
+    jp   z,intro_call_6848
+    jr   intro_call_6933
+intro_call_692E
+    bit  1,a
+    jp   z,intro_call_6848
+intro_call_6933
+    ld   de,$0A05
+    call call_15CA
+    jr   z,intro_call_6957
+    add  a,a
+    add  a,a
+    ld   hl,intro_data_6C23
+    bit  0,(ix+$08)
+    jr   z,intro_call_6949
+    ld   hl,intro_data_6C37
+intro_call_6949
+    call call_0D89
+    ld   c,(ix+$09)
+    ld   b,$04
+    call call_14BD
+    jp   intro_call_6BEC
+intro_call_6957
+    set  2,(ix+$00)
+    call call_1556
+    ld   b,$04
+    ld   l,(ix+$03)
+    ld   h,(ix+$04)
+intro_call_6966
+    ld   (hl),$00
+    inc  hl
+    inc  hl
+    ld   (hl),$00
+    inc  hl
+    inc  hl
+    djnz intro_call_6966
+    dec  hl
+    ld   (hl),$13
+    jp   intro_call_6BEC
+intro_call_6976
+    call intro_call_69BE
+    bit  3,(ix+$00)
+    jr   nz,intro_call_6994
+    call call_1529
+    ld   (hl),$A8
+    inc  hl
+    inc  hl
+    ld   (hl),$30
+    bit  0,(ix+$08)
+    jr   z,intro_call_6990
+    ld   (hl),$C0
+intro_call_6990
+    set  3,(ix+$00)
+intro_call_6994
+    call call_1529
+    ld   a,(hl)
+    cp   $19
+    jr   nc,intro_call_69A3
+    set  7,(ix+$00)
+    jp   intro_call_6BEC
+intro_call_69A3
+    dec  (hl)
+    ld   b,$C8
+    ld   a,(ix+$07)
+    ld   c,(ix+$09)
+    bit  0,(ix+$08)
+    jr   z,intro_call_69B8
+    call call_147D
+    jp   intro_call_6BEC
+intro_call_69B8
+    call call_149C
+    jp   intro_call_6BEC
+intro_call_69BE
+    ld   a,(ix+$0c)
+    or   a
+    jp   z,intro_call_6A88
+    ld   hl,l_e2c5
+    ld   de,l_e699
+    bit  0,(ix+$08)
+    jr   z,intro_call_69D7
+    ld   hl,l_e2b5
+    ld   de,l_e6cb
+intro_call_69D7
+    ld   a,(hl)
+    cp   $18
+    jr   z,intro_call_69DE
+    dec  (hl)
+    ret
+intro_call_69DE
+    bit  7,(ix+$00)
+    ret  z
+    inc  hl
+    inc  hl
+    ld   a,(hl)
+    bit  0,(ix+$08)
+    jr   nz,intro_call_69F4
+    cp   $40
+    jr   z,intro_call_6A41
+    jr   c,intro_call_69FF
+    jr   intro_call_69FA
+intro_call_69F4
+    cp   $B0
+    jr   z,intro_call_6A41
+    jr   c,intro_call_69FF
+intro_call_69FA
+    dec  (hl)
+    xor  a
+    ld   (de),a
+    jr   intro_call_6A03
+intro_call_69FF
+    inc  (hl)
+    ld   a,$01
+    ld   (de),a
+intro_call_6A03
+    inc  (ix+$0f)
+    ld   a,(ix+$0f)
+    cp   $05
+    jr   nz,intro_call_6A1F
+    ld   (ix+$0f),$00
+    inc  (ix+$0e)
+    ld   a,(ix+$0e)
+    cp   $04
+    jr   nz,intro_call_6A1F
+    ld   (ix+$0e),$00
+intro_call_6A1F
+    ld   a,(ix+$0e)
+    add  a,a
+    add  a,a
+    add  a,$44
+    ld   b,a
+    ld   c,(ix+$0c)
+    ld   a,$18
+    bit  0,(ix+$08)
+    jr   z,intro_call_6A34
+    ld   a,$19
+intro_call_6A34
+    ex   de,hl
+    bit  0,(hl)
+    jr   nz,intro_call_6A3D
+    call call_147D
+    ret
+intro_call_6A3D
+    call call_149C
+    ret
+intro_call_6A41
+    ld   a,(l_e5d7)
+    cp   $03
+    jr   z,intro_call_6A77
+    bit  0,(ix+$08)
+    jr   nz,intro_call_6A56
+    bit  0,a
+    jr   nz,intro_call_6A5E
+    call intro_call_6B80
+    ret
+intro_call_6A56
+    bit  1,a
+    jr   nz,intro_call_6A5E
+    call intro_call_6B80
+    ret
+intro_call_6A5E
+    set  6,(ix+$00)
+    ld   de,l_e699
+    xor  a
+    ld   (de),a
+    bit  0,(ix+$08)
+    jp   z,intro_call_6A03
+    ld   de,l_e6cb
+    ld   a,$01
+    ld   (de),a
+    jp   intro_call_6A03
+intro_call_6A77
+    ld   (hl),$00
+    dec  hl
+    dec  hl
+    ld   (hl),$00
+    xor  a
+    ld   (ix+$0c),a
+    ld   (ix+$0e),a
+    ld   (ix+$0f),a
+    ret
+intro_call_6A88
+    ld   l,(ix+$03)
+    ld   h,(ix+$04)
+    ld   a,$0C
+    call call_0D89
+    ld   (hl),$18
+    inc  hl
+    inc  hl
+    ld   (hl),$40
+    bit  0,(ix+$08)
+    jr   z,intro_call_6AA1
+    ld   (hl),$B0
+intro_call_6AA1
+    dec  hl
+    inc  (ix+$0f)
+    ld   a,(ix+$0f)
+    cp   $0F
+    jr   nz,intro_call_6ABA
+    ld   (ix+$0f),$00
+    inc  (ix+$0e)
+    ld   a,(ix+$0e)
+    cp   $03
+    jr   z,intro_call_6AC9
+intro_call_6ABA
+    ld   a,(ix+$0e)
+    add  a,a
+    add  a,a
+    add  a,$B0
+    ld   b,a
+    ld   c,$24
+    ld   a,(hl)
+    call call_147D
+    ret
+intro_call_6AC9
+    set  4,(ix+$00)
+    ld   (ix+$0b),$B4
+    ld   l,(ix+$03)
+    ld   h,(ix+$04)
+    ld   a,$0C
+    call call_0D89
+    ld   (hl),$00
+    inc  hl
+    inc  hl
+    ld   (hl),$00
+    ret
+intro_call_6AE3
+    bit  5,(ix+$00)
+    jr   nz,intro_call_6B47
+    dec  (ix+$0b)
+    jr   nz,intro_call_6B0D
+    set  5,(ix+$00)
+    call intro_call_6B80
+    call call_1556
+    bit  0,(ix+$08)
+    jp   nz,intro_call_6BEC
+    call intro_call_B878        ;set palette for big heart
+    call intro_call_B884        ;draw big heart
+    ld   c,$1C
+    call call_1350
+    jp   intro_call_6BEC
+intro_call_6B0D
+    ld   de,intro_data_6C0B
+    bit  0,(ix+$08)
+    jr   z,intro_call_6B19
+    ld   de,intro_data_6C0F
+intro_call_6B19
+    call call_1529
+    ld   b,$02
+intro_call_6B1E
+    ld   a,(de)
+    ld   (hl),a
+    inc  hl
+    inc  hl
+    inc  de
+    ld   a,(de)
+    ld   (hl),a
+    inc  hl
+    inc  hl
+    inc  de
+    djnz intro_call_6B1E
+    ld   b,$02
+    ld   c,(ix+$09)
+    bit  0,(ix+$08)
+    jr   z,intro_call_6B3E
+    ld   hl,intro_data_6C4B
+    call call_14BD
+    jp   intro_call_6BEC
+intro_call_6B3E
+    ld   hl,intro_data_6C55
+    call call_14E1
+    jp   intro_call_6BEC
+intro_call_6B47
+    ld   de,$0504
+    call call_15CA
+    jr   nz,intro_call_6B56
+    set  6,(ix+$00)
+    jp   intro_call_6BEC
+intro_call_6B56
+    ld   b,$02
+    ld   c,(ix+$09)
+    bit  0,(ix+$08)
+    jr   z,intro_call_6B6D
+    add  a,a
+    ld   hl,intro_data_6C4D
+    call call_0D89
+    call call_14BD
+    jr   intro_call_6B77
+intro_call_6B6D
+    add  a,a
+    ld   hl,intro_data_6C57
+    call call_0D89
+    call call_14E1
+intro_call_6B77
+    call intro_call_6B9F
+    call intro_call_6BC2
+    jp   intro_call_6BEC
+intro_call_6B80
+    call call_1529
+    ld   a,$08
+    call call_0D89
+    ld   (hl),$30
+    inc  hl
+    ld   a,(hl)
+    inc  hl
+    ld   (hl),$38
+    bit  0,(ix+$08)
+    jr   z,intro_call_6B97
+    ld   (hl),$B8
+intro_call_6B97
+    ld   b,$44
+    ld   c,$26
+    call call_147D
+    ret
+intro_call_6B9F
+    ld   a,(l_e5d7)
+    cp   $03
+    ret  nz
+    ld   hl,$7AbA;$D560
+    ld   de,intro_data_6C5F ;P1 'HAPPY END!!'
+    ld   bc,$040A
+    ex   af,af'
+	ld   a,$70	;gfx atrtibute
+	ex   af,af'
+	ld   a,$70
+    ;ld   a,$1C
+    call call_0EC6_Adjusted 
+    ld   hl,$7AE0;$DA20
+    ld   de,intro_data_6C5F ;P2 'HAPPY END!!'
+    ld   bc,$040A
+    ex   af,af'
+	ld   a,$70	;gfx atrtibute
+	ex   af,af'
+	ld   a,$70
+    ;ld   a,$1C
+    call call_0EC6_Adjusted
+    ret
+intro_call_6BC2
+    ld   a,(l_e5d7)
+    cp   $03
+    ret  nz
+    ld   a,(l_f2a3)
+    and  a
+    jr   nz,intro_call_6BDD     ;'1000000PTS!!' in Green
+    ld   hl,$7844;$D690
+    ld   de,intro_data_6C87
+    ld   bc,$0214
+    ex   af,af'
+	ld   a,$70	;gfx attribute
+	ex   af,af'
+	ld   a,$90
+    ;ld   a,$1C
+    call call_0EC6_Adjusted 
+    ret
+intro_call_6BDD
+    ld   hl,$7844;$D690
+    ld   de,intro_data_6C87     ;'1000000PTS!!' in Blue
+    ld   bc,$0214
+    ex   af,af'
+	ld   a,$80	;gfx attribute
+	ex   af,af'
+	ld   a,$90
+    ;ld   a,$20
+    call call_0EC6_Adjusted
+    ret
+intro_call_6BEC
+    pop  bc
+    ld   de,$0010
+    add  ix,de
+    dec  b
+    jp   nz,intro_call_67F0
+    ret
+intro_data_6BF7
+    BYTE $BA,$32,$BA,$42,$AA,$32,$AA,$42
+intro_data_6BFF
+    BYTE $BA,$AE,$BA,$BE,$AA,$AE,$AA,$BE
+intro_data_6C07
+    BYTE $28,$28,$18,$18
+intro_data_6C0B
+    BYTE $18,$30,$18,$40
+intro_data_6C0F
+    BYTE $18,$B0,$18,$C0
+intro_data_6C13
+    BYTE $6C,$70,$84,$88,$74,$78,$8C,$90
+intro_data_6C1B
+    BYTE $04,$08,$1C,$20,$0C,$10,$24,$28
+intro_data_6C23
+    BYTE $14,$18,$2C,$30,$34,$38,$4C,$50
+    BYTE $3C,$40,$54,$58,$44,$48,$5C,$60
+    BYTE $64,$68,$7C,$80
+intro_data_6C37
+    BYTE $94,$98,$AC,$B0,$9C,$A0,$B4,$B8
+    BYTE $3C,$40,$54,$58,$44,$48,$5C,$60
+    BYTE $64,$68,$7C,$80
+intro_data_6C4B
+    BYTE $C4,$C8
+intro_data_6C4D
+    BYTE $CC,$D0,$D4,$D8,$DC,$E0,$E4,$E8
+intro_data_6C55
+    BYTE $C8,$C4
+intro_data_6C57
+    BYTE $D0,$CC,$D8,$D4,$E0,$DC,$E8,$E4
+intro_data_6C5F         ;'1000000PTS!!'
+    BYTE $B8,$B9,$BC,$BD,$C0,$C1,$C4,$C5,$C8,$C9,$BA,$BB,$BE,$BF,$C2,$C3
+    BYTE $C6,$C7,$CA,$CB,$CC,$CD,$D0,$D1,$D4,$D5,$D8,$D9,$DC,$DD,$CE,$CF
+    BYTE $D2,$D3,$D6,$D7,$DA,$DB,$DE,$DF
+intro_data_6C87         ;'HAPPY END !!'
+    BYTE $90,$91,$94,$95,$98,$99,$9C,$9D,$A0,$A1,$A4,$A5,$A8,$A9,$AC,$AD
+    BYTE $B0,$B1,$B4,$B5,$92,$93,$96,$97,$9A,$9B,$9E,$9F,$A2,$A3,$A6,$A7
+    BYTE $AA,$AB,$AE,$AF,$B2,$B3,$B6,$B7
 intro_data_6CAF
 	defb $10,$00,$10,$00,$11,$00,$10,$00,$10,$00,$11,$00,$11,$00,$11,$00
 	defb $11,$00,$01,$00,$01,$00,$11,$00,$01,$00,$01,$01,$00,$01,$00,$F1
@@ -3184,7 +3768,10 @@ intro_data_B662
 	defb $2C,$28,$4D,$4E,$4F,$35,$46,$42,$05,$06,$50,$51,$52,$53,$54,$30
 	defb $0C,$0D,$30,$55,$56,$57,$58,$38,$14,$0E,$59,$5A,$5B,$5C,$5D,$3D
 	
-	
+intro_call_B732
+    ld   a,(l_e5d7)
+    cp   $03
+    ret  nz
 intro_call_B738				;error caused by this call
     ld   a,(l_f35b)
     bit  0,a
@@ -3357,6 +3944,65 @@ intro_data_B83C
 	defb $00,$20,$05,$90,$02,$50,$00,$30,$06,$A0,$02,$60,$00,$40,$07,$B0
 	defb $03,$70,$00,$50,$08,$C0,$03,$80,$00,$60,$09,$D0,$04,$90,$00,$70
 	defb $0A,$E0,$04,$A0,$00,$80,$0B,$F0,$05,$B0,$00,$90
+
+intro_call_B878
+    ;ld   hl,$F8E0       ;palette entry $70
+    ;ld   de,$F920       ;palette entry $90
+    ;ld   bc,$0020
+    
+    ;break
+    ld a,$70
+    ld l,$10
+intro_call_B878_loop
+    nextreg $43,%10110000
+    push af
+    nextreg $40,a
+    ld  bc,$243b
+    ld a,$41
+    out (c),a
+    ld  bc,$253b
+    in d,(c)
+    ld  bc,$243b
+    ld a,$44
+    out (c),a
+    ld  bc,$253b
+    in e,(c)
+    pop af
+    push af
+    add $20
+    nextreg $40,a
+    ld a,d
+    nextreg $44,a
+    ld a,e
+    nextreg $44,a
+    nextreg $43,%10100000
+    ld a,d
+    nextreg $44,a
+    ld a,e
+    nextreg $44,a
+    pop af
+    inc a
+    dec l
+    jr nz,intro_call_B878_loop
+    
+;    ldir
+    ret
+intro_call_B884                 ;BIG HEART
+    ld   hl,$7990;$D818
+    ld   de,intro_data_B893
+    ld   bc,$0808
+    ;ld   a,$26
+    ex af,af'
+	ld a,$90 	;gfx atrtibute
+	ex af,af'
+	ld a,$42
+    call call_0EC6_Adjusted      ;adjusted
+    ret
+intro_data_B893         ;Big Heart
+    BYTE $5E,$5F,$62,$63,$66,$67,$6A,$6B,$60,$61,$64,$65,$68,$69,$6C,$6D
+    BYTE $6E,$6F,$72,$73,$76,$77,$7A,$7B,$70,$71,$74,$75,$78,$79,$7C,$7D
+    BYTE $7E,$7F,$82,$83,$86,$87,$8A,$8B,$80,$81,$84,$85,$88,$89,$8C,$8D
+    BYTE $8E,$8F,$92,$93,$96,$97,$9A,$9B,$90,$91,$94,$95,$98,$99,$9C,$9D
 
 
 Write_Layer2_Num

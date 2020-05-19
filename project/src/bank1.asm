@@ -104,7 +104,18 @@ bank1_data_848C	;tile data to update logo to 'Super' Bubble Bobble
 	BYTE $DC,$DD,$DE,$DF,$E0,$E1,$E2,$E3,$E4,$E5,$E6,$E7,$E8,$E9,$EA,$EB
 	BYTE $EC,$ED
 
-
+bank1_data_8D42
+    BYTE $04,$08                ;Red, Start at Col 8
+bank1_data_8D44
+    BYTE $10,"CONGRATULATIONS!"
+bank1_data_8D55
+    BYTE $FF,$FF,$FF,$10,$05    ;3 x CRs, Yellow, Start at Col 5
+bank1_data_8D5A
+    BYTE $16,"NOW,YOU FOUND THE MOST"
+bank1_data_8D71
+    BYTE $FF,$FF,$10,$02        ;2 x CRs, Yellow, Start at Col 2
+bank1_data_8D75
+    BYTE $1D,"IMPORTANT MAGIC IN THE WORLD."
 
 bank1_data_95AA
     
