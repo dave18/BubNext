@@ -6906,19 +6906,38 @@ bank0_call_BEB8
 ;    sbc  hl,bc
 ;    jr   $BEC6
 ;    ex   (sp),ix
-bank0_call_BEC6
+bank0_call_BEC6             ;crumbling wall rountine
     ld   a,$02
     call call_0018
 bank0_call_BEC9
-    ld   a,(l_f445)
-    call call_0D8E
-    ld   a,(l_f446)
-    add  a,a
-    ld   hl,$7608;$CD00
-    call call_0D89
+    /*ld   a,(l_f445)         ;column?
+    call call_0D8E          ;A * 64 and into DE
+    ld   a,(l_f446)         ;row
+    add  a,a*/
+    ld   a,(l_f446)         ;row?
+    call call_0D8E          ;A * 64 and into DE
+    ld h,0
+    ld l,a
+    add hl,hl				;x2
+	add hl,hl				;x4
+	add hl,hl				;x8
+	add hl,hl				;x16
+	add hl,de				;total is now a x 80
+
+
+
+    ld   a,(l_f445)         ;column
+    add  a,a                ;* 2
+    ld   e,a
+    ld   d,0
     add  hl,de
+
+    ld   de,$7608-$50;$CD00
+    ;call call_0D89          ;add A to HL
+    add  hl,de
+
     push hl
-    ld   a,(l_f445)
+    ld   a,(l_f445)     ;column
     add  a,a
     add  a,a
     add  a,a
@@ -6956,22 +6975,40 @@ bank0_call_BF03
     cp   $08
     jr   nz,bank0_call_BEB8
     ld   (hl),$00
-    ld   a,(l_f445)
+    /*ld   a,(l_f445)
     call call_0D8E
     ld   a,(l_f446)
-    add  a,a
-    ld   hl,$7608;$CD00
-    call call_0D89
+    add  a,a*/
+
+    ld   a,(l_f446)         ;row?
+    call call_0D8E          ;A * 64 and into DE
+    ld h,0
+    ld l,a
+    add hl,hl				;x2
+	add hl,hl				;x4
+	add hl,hl				;x8
+	add hl,hl				;x16
+	add hl,de				;total is now a x 80
+
+    ld   a,(l_f445)         ;column
+    add  a,a                ;* 2
+    ld   e,a
+    ld   d,0
+    add  hl,de
+
+    ld   de,$7608-$50;$CD00
+    ;call call_0D89
     add  hl,de
     call call_03FD
     ld   hl,l_f446
     inc  (hl)
     ld   a,(hl)
-    cp   $20
+    cp   $1e; finish at row 30 for Next qq$20
     jp   nz,bank0_call_BEB8
     ret
-bank0_data_BF38
-	BYTE $C0,$3D,$C1,$3D,$C2,$3D,$C3,$3D,$C4,$3D,$C5,$3D,$C6,$3D,$00,$00
+bank0_data_BF38        ;Crumbling wall data
+	;BYTE $C0,$3D,$C1,$3D,$C2,$3D,$C3,$3D,$C4,$3D,$C5,$3D,$C6,$3D,$00,$00
+    BYTE $80,$F0,$7F,$F0,$7E,$F0,$7D,$F0,$7C,$F0,$7B,$F0,$7A,$F0,$00,$00
 
     
 bank0_call_BF48

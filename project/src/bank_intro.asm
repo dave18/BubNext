@@ -674,11 +674,11 @@ intro_call_3125			;print level 100
 	ld de,$0000
 	ld c,iyl
 	call Layer2_Write_Char
-	ld a,$8b
+	ld a,$8c
 	ld de,$0008
 	ld c,iyl
 	call Layer2_Write_Char
-	ld a,$8c
+	ld a,$8b
 	ld de,$0800
 	ld c,iyl
 	call Layer2_Write_Char
@@ -1243,8 +1243,8 @@ intro_call_6322
 intro_call_67F0
     push bc
 
-    ld a,$10            ;temp cheat
-    ld (l_e6be),a
+    ld a,$06            ;temp cheat
+    ld (l_e645),a
 
     ld   a,(ix+$00)     ;eb36
     bit  0,a

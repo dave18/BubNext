@@ -13352,11 +13352,11 @@
  674++C561 11 00 00     	ld de,$0000
  675++C564 FD 4D        	ld c,iyl
  676++C566 CD 16 E8     	call Layer2_Write_Char
- 677++C569 3E 8B        	ld a,$8b
+ 677++C569 3E 8C        	ld a,$8c
  678++C56B 11 08 00     	ld de,$0008
  679++C56E FD 4D        	ld c,iyl
  680++C570 CD 16 E8     	call Layer2_Write_Char
- 681++C573 3E 8C        	ld a,$8c
+ 681++C573 3E 8B        	ld a,$8b
  682++C575 11 00 08     	ld de,$0800
  683++C578 FD 4D        	ld c,iyl
  684++C57A CD 16 E8     	call Layer2_Write_Char
@@ -13933,8 +13933,8 @@
 1243++C91D              intro_call_67F0
 1244++C91D C5               push bc
 1245++C91E
-1246++C91E 3E 10            ld a,$10            ;temp cheat
-1247++C920 32 BE 2C         ld (l_e6be),a
+1246++C91E 3E 06            ld a,$06            ;temp cheat
+1247++C920 32 45 2C         ld (l_e645),a
 1248++C923
 1249++C923 DD 7E 00         ld   a,(ix+$00)     ;eb36
 1250++C926 CB 47            bit  0,a
@@ -27623,7 +27623,7 @@
 6060++F161              bank0_call_B3A3
 6061++F161 CD 16 01         call call_0020
 6062++F164 C5               push bc
-6063++F165 CD 42 FB         call bank0_call_BF61
+6063++F165 CD 54 FB         call bank0_call_BF61
 6064++F168 C1               pop  bc
 6065++F169 0B               dec  bc
 6066++F16A 79               ld   a,c
@@ -28632,188 +28632,225 @@
 6906++FAA5              ;    sbc  hl,bc
 6907++FAA5              ;    jr   $BEC6
 6908++FAA5              ;    ex   (sp),ix
-6909++FAA5              bank0_call_BEC6
+6909++FAA5              bank0_call_BEC6             ;crumbling wall rountine
 6910++FAA5 3E 02            ld   a,$02
 6911++FAA7 CD 10 01         call call_0018
 6912++FAAA              bank0_call_BEC9
-6913++FAAA 3A 45 3A         ld   a,(l_f445)
-6914++FAAD CD F4 0B         call call_0D8E
-6915++FAB0 3A 46 3A         ld   a,(l_f446)
-6916++FAB3 87               add  a,a
-6917++FAB4 21 08 76         ld   hl,$7608;$CD00
-6918++FAB7 CD EF 0B         call call_0D89
-6919++FABA 19               add  hl,de
-6920++FABB E5               push hl
-6921++FABC 3A 45 3A         ld   a,(l_f445)
-6922++FABF 87               add  a,a
-6923++FAC0 87               add  a,a
-6924++FAC1 87               add  a,a
-6925++FAC2 67               ld   h,a
-6926++FAC3 3A 46 3A         ld   a,(l_f446)
-6927++FAC6 87               add  a,a
-6928++FAC7 87               add  a,a
-6929++FAC8 87               add  a,a
-6930++FAC9 ED 44            neg
-6931++FACB 6F               ld   l,a
-6932++FACC CD B2 84         call call_174B
-6933++FACF E1               pop  hl
-6934++FAD0 20 12            jr   nz,bank0_call_BF03
-6935++FAD2 3A 47 3A         ld   a,(l_f447)
-6936++FAD5 87               add  a,a
-6937++FAD6 11 19 FB         ld   de,bank0_data_BF38
-6938++FAD9 CD EA 0B         call call_0D84
-6939++FADC 1A               ld   a,(de)
-6940++FADD 77               ld   (hl),a
-6941++FADE 23               inc  hl
-6942++FADF 13               inc  de
-6943++FAE0 1A               ld   a,(de)
-6944++FAE1 77               ld   (hl),a
-6945++FAE2 18 00            jr   bank0_call_BF03
-6946++FAE4              bank0_call_BF03
-6947++FAE4 21 45 3A         ld   hl,l_f445
-6948++FAE7 34               inc  (hl)
-6949++FAE8 7E               ld   a,(hl)
-6950++FAE9 FE 20            cp   $20
-6951++FAEB 20 BD            jr   nz,bank0_call_BEC9
-6952++FAED 36 00            ld   (hl),$00
-6953++FAEF 21 47 3A         ld   hl,l_f447
-6954++FAF2 34               inc  (hl)
-6955++FAF3 7E               ld   a,(hl)
-6956++FAF4 FE 08            cp   $08
-6957++FAF6 20 AD            jr   nz,bank0_call_BEB8
-6958++FAF8 36 00            ld   (hl),$00
-6959++FAFA 3A 45 3A         ld   a,(l_f445)
-6960++FAFD CD F4 0B         call call_0D8E
-6961++FB00 3A 46 3A         ld   a,(l_f446)
-6962++FB03 87               add  a,a
-6963++FB04 21 08 76         ld   hl,$7608;$CD00
-6964++FB07 CD EF 0B         call call_0D89
-6965++FB0A 19               add  hl,de
-6966++FB0B CD 27 03         call call_03FD
-6967++FB0E 21 46 3A         ld   hl,l_f446
-6968++FB11 34               inc  (hl)
-6969++FB12 7E               ld   a,(hl)
-6970++FB13 FE 20            cp   $20
-6971++FB15 C2 A5 FA         jp   nz,bank0_call_BEB8
-6972++FB18 C9               ret
-6973++FB19              bank0_data_BF38
-6974++FB19 C0 3D C1 3D  	BYTE $C0,$3D,$C1,$3D,$C2,$3D,$C3,$3D,$C4,$3D,$C5,$3D,$C6,$3D,$00,$00
-6974++FB1D C2 3D C3 3D
-6974++FB21 C4 3D C5 3D
-6974++FB25 C6 3D 00 00
-6975++FB29
-6976++FB29
-6977++FB29              bank0_call_BF48
-6978++FB29 3A D3 2B         ld   a,(l_e5d3)
-6979++FB2C A7               and  a
-6980++FB2D C0               ret  nz
-6981++FB2E 3A 4A 29         ld   a,(l_e34a)
-6982++FB31 A7               and  a
-6983++FB32 C0               ret  nz
-6984++FB33 3A 48 3A         ld   a,(l_f448)
-6985++FB36 CB 57            bit  2,a
-6986++FB38 C0               ret  nz
-6987++FB39 CB 4F            bit  1,a
-6988++FB3B 20 56            jr   nz,bank0_call_BFB5
-6989++FB3D CB 47            bit  0,a
-6990++FB3F 20 12            jr   nz,bank0_call_BF75
-6991++FB41 C9               ret
-6992++FB42              bank0_call_BF61
-6993++FB42 3A D8 2B         ld   a,(l_e5d8)
-6994++FB45 A7               and  a
-6995++FB46 C8               ret  z
-6996++FB47 3A 48 3A         ld   a,(l_f448)
-6997++FB4A CB 57            bit  2,a
-6998++FB4C C0               ret  nz
-6999++FB4D CB 4F            bit  1,a
-7000++FB4F 20 42            jr   nz,bank0_call_BFB5
-7001++FB51 3E 03            ld   a,$03
-7002++FB53                  ;ld   ($FA00),a         ;SOUND IO
-7003++FB53              bank0_call_BF75
-7004++FB53 21 D5 28         ld   hl,l_e2d5
-7005++FB56 11 04 00         ld   de,$0004
-7006++FB59 06 07            ld   b,$07
-7007++FB5B CD 0C 86         call call_18A5
-7008++FB5E 11 B8 FB         ld   de,bank0_data_BFE3
-7009++FB61 21 D5 28         ld   hl,l_e2d5
-7010++FB64 06 07            ld   b,$07
-7011++FB66              bank0_call_BF88
-7012++FB66 1A               ld   a,(de)
-7013++FB67 77               ld   (hl),a
-7014++FB68 13               inc  de
-7015++FB69 23               inc  hl
-7016++FB6A 23               inc  hl
-7017++FB6B 1A               ld   a,(de)
-7018++FB6C 77               ld   (hl),a
-7019++FB6D 23               inc  hl
-7020++FB6E 36 16            ld   (hl),$16
-7021++FB70 13               inc  de
-7022++FB71 23               inc  hl
-7023++FB72 10 F2            djnz bank0_call_BF88
-7024++FB74 21 CD FB         ld   hl,bank0_data_BFF8
-7025++FB77 3A 48 3A         ld   a,(l_f448)
-7026++FB7A CB 47            bit  0,a
-7027++FB7C 20 03            jr   nz,bank0_call_BFA3
-7028++FB7E 21 C6 FB         ld   hl,bank0_data_BFF1
-7029++FB81              bank0_call_BFA3
-7030++FB81 01 1D 07         ld   bc,$071D
-7031++FB84 1E 04            ld   e,$04
-7032++FB86 CD 92 12         call call_14C0
-7033++FB89 21 48 3A         ld   hl,l_f448
-7034++FB8C CB CE            set  1,(hl)
-7035++FB8E 0E 13            ld   c,$13
-7036++FB90 CD 6D 11         call call_1350
-7037++FB93              bank0_call_BFB5
-7038++FB93 06 07            ld   b,$07
-7039++FB95 21 D5 28         ld   hl,l_e2d5
-7040++FB98              bank0_call_BFBA
-7041++FB98 7E               ld   a,(hl)
-7042++FB99 A7               and  a
-7043++FB9A 28 04            jr   z,bank0_call_BFC2
-7044++FB9C 35               dec  (hl)
-7045++FB9D 35               dec  (hl)
-7046++FB9E 35               dec  (hl)
-7047++FB9F 35               dec  (hl)
-7048++FBA0              bank0_call_BFC2
-7049++FBA0 23               inc  hl
-7050++FBA1 23               inc  hl
-7051++FBA2 35               dec  (hl)
-7052++FBA3 35               dec  (hl)
-7053++FBA4 23               inc  hl
-7054++FBA5 23               inc  hl
-7055++FBA6 10 F0            djnz bank0_call_BFBA
-7056++FBA8 3A D5 28         ld   a,(l_e2d5)
-7057++FBAB A7               and  a
-7058++FBAC C0               ret  nz
-7059++FBAD 21 48 3A         ld   hl,l_f448
-7060++FBB0 CB D6            set  2,(hl)
-7061++FBB2 CB 7E            bit  7,(hl)
-7062++FBB4 C8               ret  z
-7063++FBB5 CB F6            set  6,(hl)
-7064++FBB7              ;    ld   hl,($0004)
-7065++FBB7              ;    ld   de,$00B9
-7066++FBB7              ;    or   a
-7067++FBB7              ;    sbc  hl,de
-7068++FBB7 C9               ret
-7069++FBB8
-7070++FBB8              bank0_data_BFE3
-7071++FBB8 FC C0 FC D0      BYTE $FC,$C0,$FC,$D0,$EC,$C0,$EC,$D0,$DC,$B0,$DC,$C0,$CC,$B0
-7071++FBBC EC C0 EC D0
-7071++FBC0 DC B0 DC C0
-7071++FBC4 CC B0
-7072++FBC6
-7073++FBC6              bank0_data_BFF1
-7074++FBC6 C4 CC C0 C8      BYTE $C4,$CC,$C0,$C8,$B8,$BC,$B4
-7074++FBCA B8 BC B4
-7075++FBCD              bank0_data_BFF8
-7076++FBCD E0 E8 DC E4      BYTE $E0,$E8,$DC,$E4,$D4,$D8,$D0,$FF
-7076++FBD1 D4 D8 D0 FF
-7077++FBD5
-7078++FBD5
+6913++FAAA ~                /*ld   a,(l_f445)         ;column?
+6914++FAAA ~                call call_0D8E          ;A * 64 and into DE
+6915++FAAA ~                ld   a,(l_f446)         ;row
+6916++FAAA ~                add  a,a*/
+6917++FAAA 3A 46 3A         ld   a,(l_f446)         ;row?
+6918++FAAD CD F4 0B         call call_0D8E          ;A * 64 and into DE
+6919++FAB0 26 00            ld h,0
+6920++FAB2 6F               ld l,a
+6921++FAB3 29               add hl,hl				;x2
+6922++FAB4 29           	add hl,hl				;x4
+6923++FAB5 29           	add hl,hl				;x8
+6924++FAB6 29           	add hl,hl				;x16
+6925++FAB7 19           	add hl,de				;total is now a x 80
+6926++FAB8
+6927++FAB8
+6928++FAB8
+6929++FAB8 3A 45 3A         ld   a,(l_f445)         ;column
+6930++FABB 87               add  a,a                ;* 2
+6931++FABC 5F               ld   e,a
+6932++FABD 16 00            ld   d,0
+6933++FABF 19               add  hl,de
+6934++FAC0
+6935++FAC0 11 B8 75         ld   de,$7608-$50;$CD00
+6936++FAC3                  ;call call_0D89          ;add A to HL
+6937++FAC3 19               add  hl,de
+6938++FAC4
+6939++FAC4 E5               push hl
+6940++FAC5 3A 45 3A         ld   a,(l_f445)     ;column
+6941++FAC8 87               add  a,a
+6942++FAC9 87               add  a,a
+6943++FACA 87               add  a,a
+6944++FACB 67               ld   h,a
+6945++FACC 3A 46 3A         ld   a,(l_f446)
+6946++FACF 87               add  a,a
+6947++FAD0 87               add  a,a
+6948++FAD1 87               add  a,a
+6949++FAD2 ED 44            neg
+6950++FAD4 6F               ld   l,a
+6951++FAD5 CD B2 84         call call_174B
+6952++FAD8 E1               pop  hl
+6953++FAD9 20 12            jr   nz,bank0_call_BF03
+6954++FADB 3A 47 3A         ld   a,(l_f447)
+6955++FADE 87               add  a,a
+6956++FADF 11 2B FB         ld   de,bank0_data_BF38
+6957++FAE2 CD EA 0B         call call_0D84
+6958++FAE5 1A               ld   a,(de)
+6959++FAE6 77               ld   (hl),a
+6960++FAE7 23               inc  hl
+6961++FAE8 13               inc  de
+6962++FAE9 1A               ld   a,(de)
+6963++FAEA 77               ld   (hl),a
+6964++FAEB 18 00            jr   bank0_call_BF03
+6965++FAED              bank0_call_BF03
+6966++FAED 21 45 3A         ld   hl,l_f445
+6967++FAF0 34               inc  (hl)
+6968++FAF1 7E               ld   a,(hl)
+6969++FAF2 FE 20            cp   $20
+6970++FAF4 20 B4            jr   nz,bank0_call_BEC9
+6971++FAF6 36 00            ld   (hl),$00
+6972++FAF8 21 47 3A         ld   hl,l_f447
+6973++FAFB 34               inc  (hl)
+6974++FAFC 7E               ld   a,(hl)
+6975++FAFD FE 08            cp   $08
+6976++FAFF 20 A4            jr   nz,bank0_call_BEB8
+6977++FB01 36 00            ld   (hl),$00
+6978++FB03 ~                /*ld   a,(l_f445)
+6979++FB03 ~                call call_0D8E
+6980++FB03 ~                ld   a,(l_f446)
+6981++FB03 ~                add  a,a*/
+6982++FB03
+6983++FB03 3A 46 3A         ld   a,(l_f446)         ;row?
+6984++FB06 CD F4 0B         call call_0D8E          ;A * 64 and into DE
+6985++FB09 26 00            ld h,0
+6986++FB0B 6F               ld l,a
+6987++FB0C 29               add hl,hl				;x2
+6988++FB0D 29           	add hl,hl				;x4
+6989++FB0E 29           	add hl,hl				;x8
+6990++FB0F 29           	add hl,hl				;x16
+6991++FB10 19           	add hl,de				;total is now a x 80
+6992++FB11
+6993++FB11 3A 45 3A         ld   a,(l_f445)         ;column
+6994++FB14 87               add  a,a                ;* 2
+6995++FB15 5F               ld   e,a
+6996++FB16 16 00            ld   d,0
+6997++FB18 19               add  hl,de
+6998++FB19
+6999++FB19 11 B8 75         ld   de,$7608-$50;$CD00
+7000++FB1C                  ;call call_0D89
+7001++FB1C 19               add  hl,de
+7002++FB1D CD 27 03         call call_03FD
+7003++FB20 21 46 3A         ld   hl,l_f446
+7004++FB23 34               inc  (hl)
+7005++FB24 7E               ld   a,(hl)
+7006++FB25 FE 20            cp   $20
+7007++FB27 C2 A5 FA         jp   nz,bank0_call_BEB8
+7008++FB2A C9               ret
+7009++FB2B              bank0_data_BF38        ;Crumbling wall data
+7010++FB2B              	;BYTE $C0,$3D,$C1,$3D,$C2,$3D,$C3,$3D,$C4,$3D,$C5,$3D,$C6,$3D,$00,$00
+7011++FB2B 80 F0 7F F0      BYTE $80,$F0,$7F,$F0,$7E,$F0,$7D,$F0,$7C,$F0,$7B,$F0,$7A,$F0,$00,$00
+7011++FB2F 7E F0 7D F0
+7011++FB33 7C F0 7B F0
+7011++FB37 7A F0 00 00
+7012++FB3B
+7013++FB3B
+7014++FB3B              bank0_call_BF48
+7015++FB3B 3A D3 2B         ld   a,(l_e5d3)
+7016++FB3E A7               and  a
+7017++FB3F C0               ret  nz
+7018++FB40 3A 4A 29         ld   a,(l_e34a)
+7019++FB43 A7               and  a
+7020++FB44 C0               ret  nz
+7021++FB45 3A 48 3A         ld   a,(l_f448)
+7022++FB48 CB 57            bit  2,a
+7023++FB4A C0               ret  nz
+7024++FB4B CB 4F            bit  1,a
+7025++FB4D 20 56            jr   nz,bank0_call_BFB5
+7026++FB4F CB 47            bit  0,a
+7027++FB51 20 12            jr   nz,bank0_call_BF75
+7028++FB53 C9               ret
+7029++FB54              bank0_call_BF61
+7030++FB54 3A D8 2B         ld   a,(l_e5d8)
+7031++FB57 A7               and  a
+7032++FB58 C8               ret  z
+7033++FB59 3A 48 3A         ld   a,(l_f448)
+7034++FB5C CB 57            bit  2,a
+7035++FB5E C0               ret  nz
+7036++FB5F CB 4F            bit  1,a
+7037++FB61 20 42            jr   nz,bank0_call_BFB5
+7038++FB63 3E 03            ld   a,$03
+7039++FB65                  ;ld   ($FA00),a         ;SOUND IO
+7040++FB65              bank0_call_BF75
+7041++FB65 21 D5 28         ld   hl,l_e2d5
+7042++FB68 11 04 00         ld   de,$0004
+7043++FB6B 06 07            ld   b,$07
+7044++FB6D CD 0C 86         call call_18A5
+7045++FB70 11 CA FB         ld   de,bank0_data_BFE3
+7046++FB73 21 D5 28         ld   hl,l_e2d5
+7047++FB76 06 07            ld   b,$07
+7048++FB78              bank0_call_BF88
+7049++FB78 1A               ld   a,(de)
+7050++FB79 77               ld   (hl),a
+7051++FB7A 13               inc  de
+7052++FB7B 23               inc  hl
+7053++FB7C 23               inc  hl
+7054++FB7D 1A               ld   a,(de)
+7055++FB7E 77               ld   (hl),a
+7056++FB7F 23               inc  hl
+7057++FB80 36 16            ld   (hl),$16
+7058++FB82 13               inc  de
+7059++FB83 23               inc  hl
+7060++FB84 10 F2            djnz bank0_call_BF88
+7061++FB86 21 DF FB         ld   hl,bank0_data_BFF8
+7062++FB89 3A 48 3A         ld   a,(l_f448)
+7063++FB8C CB 47            bit  0,a
+7064++FB8E 20 03            jr   nz,bank0_call_BFA3
+7065++FB90 21 D8 FB         ld   hl,bank0_data_BFF1
+7066++FB93              bank0_call_BFA3
+7067++FB93 01 1D 07         ld   bc,$071D
+7068++FB96 1E 04            ld   e,$04
+7069++FB98 CD 92 12         call call_14C0
+7070++FB9B 21 48 3A         ld   hl,l_f448
+7071++FB9E CB CE            set  1,(hl)
+7072++FBA0 0E 13            ld   c,$13
+7073++FBA2 CD 6D 11         call call_1350
+7074++FBA5              bank0_call_BFB5
+7075++FBA5 06 07            ld   b,$07
+7076++FBA7 21 D5 28         ld   hl,l_e2d5
+7077++FBAA              bank0_call_BFBA
+7078++FBAA 7E               ld   a,(hl)
+7079++FBAB A7               and  a
+7080++FBAC 28 04            jr   z,bank0_call_BFC2
+7081++FBAE 35               dec  (hl)
+7082++FBAF 35               dec  (hl)
+7083++FBB0 35               dec  (hl)
+7084++FBB1 35               dec  (hl)
+7085++FBB2              bank0_call_BFC2
+7086++FBB2 23               inc  hl
+7087++FBB3 23               inc  hl
+7088++FBB4 35               dec  (hl)
+7089++FBB5 35               dec  (hl)
+7090++FBB6 23               inc  hl
+7091++FBB7 23               inc  hl
+7092++FBB8 10 F0            djnz bank0_call_BFBA
+7093++FBBA 3A D5 28         ld   a,(l_e2d5)
+7094++FBBD A7               and  a
+7095++FBBE C0               ret  nz
+7096++FBBF 21 48 3A         ld   hl,l_f448
+7097++FBC2 CB D6            set  2,(hl)
+7098++FBC4 CB 7E            bit  7,(hl)
+7099++FBC6 C8               ret  z
+7100++FBC7 CB F6            set  6,(hl)
+7101++FBC9              ;    ld   hl,($0004)
+7102++FBC9              ;    ld   de,$00B9
+7103++FBC9              ;    or   a
+7104++FBC9              ;    sbc  hl,de
+7105++FBC9 C9               ret
+7106++FBCA
+7107++FBCA              bank0_data_BFE3
+7108++FBCA FC C0 FC D0      BYTE $FC,$C0,$FC,$D0,$EC,$C0,$EC,$D0,$DC,$B0,$DC,$C0,$CC,$B0
+7108++FBCE EC C0 EC D0
+7108++FBD2 DC B0 DC C0
+7108++FBD6 CC B0
+7109++FBD8
+7110++FBD8              bank0_data_BFF1
+7111++FBD8 C4 CC C0 C8      BYTE $C4,$CC,$C0,$C8,$B8,$BC,$B4
+7111++FBDC B8 BC B4
+7112++FBDF              bank0_data_BFF8
+7113++FBDF E0 E8 DC E4      BYTE $E0,$E8,$DC,$E4,$D4,$D8,$D0,$FF
+7113++FBE3 D4 D8 D0 FF
+7114++FBE7
+7115++FBE7
 # file closed: c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\bank0.asm
- 120+ FBD5
- 121+ FBD5                  MMU 6 7,bank1
- 122+ FBD5                  ORG 0xC000
+ 120+ FBE7
+ 121+ FBE7                  MMU 6 7,bank1
+ 122+ FBE7                  ORG 0xC000
  123+ C000                  INCLUDE "bank1.asm"
 # file opened: c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\bank1.asm
    1++C000
@@ -42491,7 +42528,7 @@
 3650  9BA9 CD B2 82         call call_029B
 3651  9BAC CD 00 AB         call call_4F5B
 3652  9BAF                 ; BYTE "CALL_4F5B"
-3653  9BAF CD 29 FB         call bank0_call_BF48
+3653  9BAF CD 3B FB         call bank0_call_BF48
 3654  9BB2 CD 1E 9D         call call_4012
 3655  9BB5 C3 65 9B         jp   call_3E5B
 3656  9BB8
