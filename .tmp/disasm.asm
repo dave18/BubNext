@@ -1,110 +1,105 @@
-             org 0000h
+L02BF:       equ  02BFh
+L5C78:       equ  5C78h
 
 
-0000 L0000:
-0000 00           NOP         
-0001 00           NOP         
-0002 00           NOP         
-0003 00           NOP         
-0004 00           NOP         
-0005 00           NOP         
-0006 00           NOP         
-0007 00           NOP         
-0008 00           NOP         
-0009 00           NOP         
-000A 00           NOP         
-000B 00           NOP         
-000C 00           NOP         
-000D 00           NOP         
-000E 00           NOP         
-000F 00           NOP         
-0010 00           NOP         
-0011 00           NOP         
-0012 00           NOP         
-0013 00           NOP         
-0014 00           NOP         
-0015 00           NOP         
-0016 00           NOP         
-0017 00           NOP         
-0018 00           NOP         
-0019 00           NOP         
-001A 00           NOP         
-001B 00           NOP         
-001C 00           NOP         
-001D 00           NOP         
-001E 00           NOP         
-001F 00           NOP         
-0020 00           NOP         
-0021 00           NOP         
-0022 00           NOP         
-0023 00           NOP         
-0024 00           NOP         
-0025 00           NOP         
-0026 00           NOP         
-0027 00           NOP         
-0028 00           NOP         
-0029 00           NOP         
-002A 00           NOP         
-002B 00           NOP         
-002C 00           NOP         
-002D 00           NOP         
-002E 00           NOP         
-002F 00           NOP         
-0030 00           NOP         
-0031 00           NOP         
-0032 00           NOP         
-0033 00           NOP         
-0034 00           NOP         
-0035 00           NOP         
-0036 00           NOP         
-0037 00           NOP         
-0038 00           NOP         
-0039 00           NOP         
-003A 00           NOP         
-003B 00           NOP         
-003C 00           NOP         
-003D 00           NOP         
-003E 00           NOP         
-003F 00           NOP         
-0040 00           NOP         
-0041 00           NOP         
-0042 00           NOP         
-0043 00           NOP         
-0044 00           NOP         
-0045 00           NOP         
-0046 00           NOP         
-0047 00           NOP         
-0048 00           NOP         
-0049 00           NOP         
-004A 00           NOP         
-004B 00           NOP         
-004C 00           NOP         
-004D 00           NOP         
-004E 00           NOP         
-004F 00           NOP         
-0050 00           NOP         
-0051 00           NOP         
-0052 00           NOP         
-0053 00           NOP         
-0054 00           NOP         
-0055 00           NOP         
-0056 00           NOP         
-0057 00           NOP         
-0058 00           NOP         
-0059 00           NOP         
-005A 00           NOP         
-005B 00           NOP         
-005C 00           NOP         
-005D 00           NOP         
-005E 00           NOP         
-005F 00           NOP         
-0060 00           NOP         
-0061 00           NOP         
-0062 00           NOP         
-0063 00           NOP         
-0064 00           NOP         
-0065 00           NOP         
-0066 00           NOP         
+             org 0038h
+
+
+0038 L0038:
+0038 F5           PUSH AF     
+0039 E5           PUSH HL     
+003A 2A 78 5C     LD   HL,(L5C78) 
+003D 23           INC  HL     
+003E 22 78 5C     LD   (L5C78),HL 
+0041 7C           LD   A,H    
+0042 B5           OR   L      
+0043 20 03        JR   NZ,L0048 
+0045 FD 34 40     INC  (IY+64) 
+0048 L0048:
+0048 C5           PUSH BC     
+0049 D5           PUSH DE     
+004A CD BF 02     CALL L02BF  
+004D D1           POP  DE     
+004E C1           POP  BC     
+004F E1           POP  HL     
+0050 F1           POP  AF     
+0051 FB           EI          
+0052 C9           RET         
+
+
+0053 E1           defb E1h    
+0054 6E           defb 6Eh    
+0055 FD           defb FDh    
+0056 75           defb 75h    
+0057 00           defb 00h    
+0058 ED           defb EDh    
+0059 7B           defb 7Bh    
+005A 3D           defb 3Dh    
+005B 5C           defb 5Ch    
+005C C3           defb C3h    
+005D C5           defb C5h    
+005E 16           defb 16h    
+005F FF           defb FFh    
+0060 FF           defb FFh    
+0061 FF           defb FFh    
+0062 FF           defb FFh    
+0063 FF           defb FFh    
+0064 FF           defb FFh    
+0065 FF           defb FFh    
+0066 F5           defb F5h    
+0067 E5           defb E5h    
+0068 2A           defb 2Ah    
+0069 B0           defb B0h    
+006A 5C           defb 5Ch    
+006B 7C           defb 7Ch    
+006C B5           defb B5h    
+006D 20           defb 20h    
+006E 01           defb 01h    
+006F E9           defb E9h    
+0070 E1           defb E1h    
+0071 F1           defb F1h    
+0072 ED           defb EDh    
+0073 45           defb 45h    
+0074 2A           defb 2Ah    
+0075 5D           defb 5Dh    
+0076 5C           defb 5Ch    
+0077 23           defb 23h    
+0078 22           defb 22h    
+0079 5D           defb 5Dh    
+007A 5C           defb 5Ch    
+007B 7E           defb 7Eh    
+007C C9           defb C9h    
+007D FE           defb FEh    
+007E 21           defb 21h    
+007F D0           defb D0h    
+0080 FE           defb FEh    
+0081 0D           defb 0Dh    
+0082 C8           defb C8h    
+0083 FE           defb FEh    
+0084 10           defb 10h    
+0085 D8           defb D8h    
+0086 FE           defb FEh    
+0087 18           defb 18h    
+0088 3F           defb 3Fh    
+0089 D8           defb D8h    
+008A 23           defb 23h    
+008B FE           defb FEh    
+008C 16           defb 16h    
+008D 38           defb 38h    
+008E 01           defb 01h    
+008F 23           defb 23h    
+0090 37           defb 37h    
+0091 22           defb 22h    
+0092 5D           defb 5Dh    
+0093 5C           defb 5Ch    
+0094 C9           defb C9h    
+0095 BF           defb BFh    
+0096 52           defb 52h    
+0097 4E           defb 4Eh    
+0098 C4           defb C4h    
+0099 49           defb 49h    
+009A 4E           defb 4Eh    
+009B 4B           defb 4Bh    
 
 
              org 8180h

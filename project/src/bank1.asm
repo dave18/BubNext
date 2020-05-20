@@ -105,18 +105,240 @@ bank1_data_848C	;tile data to update logo to 'Super' Bubble Bobble
 	BYTE $EC,$ED
 
 bank1_data_8D42
-    BYTE $04,$08                ;Red, Start at Col 8
-bank1_data_8D44
+    BYTE $10,$08                ;Red, Start at Col 8
     BYTE $10,"CONGRATULATIONS!"
-bank1_data_8D55
-    BYTE $FF,$FF,$FF,$10,$05    ;3 x CRs, Yellow, Start at Col 5
-bank1_data_8D5A
+    BYTE $FF,$FF,$FF,$40,$05    ;3 x CRs, Yellow, Start at Col 5
     BYTE $16,"NOW,YOU FOUND THE MOST"
-bank1_data_8D71
-    BYTE $FF,$FF,$10,$02        ;2 x CRs, Yellow, Start at Col 2
-bank1_data_8D75
+    BYTE $FF,$FF,$40,$02        ;2 x CRs, Yellow, Start at Col 2
     BYTE $1D,"IMPORTANT MAGIC IN THE WORLD."
+    BYTE $FF,$FF,$FF,$00,$03
+    BYTE $04,"IT'S"
+    BYTE $01,$08
+    BYTE $06,$22,"LOVE",$22     ;$22 = Quote Mark
+    BYTE $00,$0F
+    BYTE $01,"&"
+    BYTE $01,$11
+    BYTE $0C,$22,"FRIENDSHIP",$22
+    BYTE $00,$1D
+    BYTE $1,"!"
+    BYTE $FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF,$40,$0D
+    BYTE $01,$1D,$40,$0E,$05,"STAFF"    ;1D = Bullet Point
+    BYTE $FF,$FF,$FF,$01,$04
+    BYTE $01,$1D,$10,$05,$17,"GAME DESIGN & CHARCTERS"    ;1D = Bullet Point
+    BYTE $FF,$FF,$00,$0B
+    BYTE $0B,"MTJ/MITSUJI"
+    BYTE $FF,$FF,$FF,$01,$04
+    BYTE $01,$1D,$10,$05,$14,"SOFTWARE PROGRAMMERS"    ;1D = Bullet Point
+    BYTE $FF,$FF,$00,$0B
+    BYTE $0B,"ICH/FUJISUE"
+    BYTE $FF,$FF,$00,$0B
+    BYTE $0D,"NSO/NISHIYORI"
+    BYTE $FF,$FF,$FF,$01,$04
+    BYTE $01,$1D,$10,$05,$0D,"SOUND CREATOR"    ;1D = Bullet Point
+    BYTE $FF,$FF,$00,$0B
+    BYTE $0C,"KIM/KIMIJIMA"
+    BYTE $FF,$FF,$FF,$01,$04
+    BYTE $01,$1D,$10,$05,$0B,"INSTRUCTION"    ;1D = Bullet Point
+    BYTE $FF,$FF,$00,$0B
+    BYTE $0B,"YSH/YOSHIDA"
+    BYTE $FF,$FF,$FF,$01,$04
+    BYTE $01,$1D,$10,$05,$08,"HARDWARE"    ;1D = Bullet Point
+    BYTE $FF,$FF,$00,$0B
+    BYTE $0C,"KTU/FUJIMOTO"
+    BYTE $FF,$FF,$00,$0B
+    BYTE $0C,"SAK/SAKMOTO"
+    BYTE $01,$1D,$10,$05,$12,"AND SPECIAL THANKS"    ;1D = Bullet Point
+    BYTE $FF,$FF,$01,$05,$14,"TO ALL OTHER PEOPLE!"
+    BYTE $FF,$FF,$00,$0B
+    BYTE $0B,"TOP/SUEKADO"
+    BYTE $FF,$FF,$00,$0B
+    BYTE $08,"RYO/YUKI"
+    BYTE $FF,$FF,$00,$0B
+    BYTE $0C,"SKE/NAKAMURA"
+    BYTE $FF,$FF,$00,$0B
+    BYTE $09,"SAN/SANBE"
+    BYTE $FF,$FF,$00,$0B
+    BYTE $0C,"PAN/NAKAGAWA"
+    BYTE $FF,$FF,$00,$0B
+    BYTE $0B,"OTO/IMAMURA"
+    BYTE $FF,$FF,$FF,$01,$04
+    BYTE $01,$1D,$10,$05,$0A,"CHARACTERS"    ;1D = Bullet Point
+    BYTE $FF,$FF,$20,$0B
+    BYTE $07,"BUBBLUN"
+    BYTE $FF,$FF,$50,$0B
+    BYTE $07,"BOBBLUN"
+    BYTE $FF,$FF,$00,$0B
+    BYTE $08,"ZEN-CHAN"
+    BYTE $FF,$FF,$00,$0B
+    BYTE $06,"MONSTA"
+    BYTE $FF,$FF,$00,$0B
+    BYTE $0B,"SKEL-MONSTA"
+    BYTE $FF,$FF,$00,$0B
+    BYTE $06,"MIGHTA"
+    BYTE $FF,$FF,$00,$0B
+    BYTE $06,"PULPUL"
+    BYTE $FF,$FF,$00,$0B
+    BYTE $07,"BANEBOU"
+    BYTE $FF,$FF,$00,$0B
+    BYTE $07,"INVADER"
+    BYTE $FF,$FF,$00,$0B
+    BYTE $08,"HIDEGONS"
+    BYTE $FF,$FF,$00,$0B
+    BYTE $05,"DRUNK"
+    BYTE $FF,$FF,$00,$0B
+    BYTE $0B,"SUPER DRUNK"
+    BYTE $FF,$FF,$00,$0B
+    BYTE $06,"RASCAL"
+    BYTE $FF,$FF,$00,$0B
+    BYTE $05,"BOBBY"
+    BYTE $FF,$FF,$00,$0B
+    BYTE $05,"BETTY"
+    BYTE $FF,$FF,$00,$0B
+    BYTE $05,"BUBBY"
+    BYTE $FF,$FF,$00,$0B
+    BYTE $05,"PATTY"
+    BYTE $FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF,$10,$0A
+    BYTE $01,$1D,$10,$0B,$0B,"PRODUCED BY"    ;1D = Bullet Point
+    BYTE $FF,$FF,$01,$0B
+    BYTE $0A,$01,$02,$03,$04,$05,$06,$07,$08,$09,$0A        ;Top Half OF TAITO Logo
+    BYTE $FF,$01,$0C
+    BYTE $09,$0B,$0C,$0D,$0E,$0F,$10,$11,$12,$13            ;Bottom Half OF TAITO Logo
+    BYTE $FF,$FF,$00,$04
+    BYTE $18,"@ TAITO CORPORATION 1986"
+    BYTE $FF,$FF,$00,$06
+    BYTE $13,"ALL RIGHTS RESERVED"
+    BYTE $FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF,$00,$06
+    BYTE $13,"THANK YOU VERY MUCH"
+    BYTE $FF,$FF,$00,$07
+    BYTE $11,"FOR YOUR PLAYING!"
+    BYTE $FF
+bank1_data_90EA
+    BYTE $10,$08
+    BYTE $10,"CONGRATULATIONS!"
+    BYTE $FF,$FF,$FF,$40,$01
+    BYTE $0B,"BUT THIS IS"
+    byte $40,$0D
+    BYTE $12,"NOT A TRUE ENDING!"
+    BYTE $FF,$FF,$FF,$FF,$10,$02
+    BYTE $1C,"COME HERE WITH YOUR FRIENDS!"
+    BYTE $FF,$FF,$FF,$FF,$00,$04
+    BYTE $18,"YOU WILL BE IMPRESSED BY"
+    BYTE $FF,$FF,$00,$03
+    BYTE $1A,"THE TRUTH OF THIS STORY !!"
+    BYTE $FF,$FF,$FF,$FF,$FF,$00,$03
+    BYTE $11,"NEVER FORGET YOUR"
+    BYTE $01,$15
+    BYTE $08,"FRIEND !"
+    BYTE $FF,$FF,$FF,$FF,$FF,$FF,$00,$0A
+    BYTE $0C,"TRY AGAIN !!"
+    BYTE $FF
 
+bank1_data_91BF
+    BYTE $20,$08
+    BYTE $10,"CONGRATULATIONS!"
+    BYTE $FF,$FF,$FF,$00,$02
+    BYTE $1C,"YOU COULD HELP YOUR FATHER &"
+    BYTE $FF,$FF,$00,$02
+    BYTE $1B,"MOTHER! THEY WERE CONTROLED"
+    BYTE $FF,$FF,$00,$02
+    BYTE $1D,"BY SOMEONE. WHO IS HE? NO ONE"
+    BYTE $FF,$FF,$00,$02
+    BYTE $1C,"KNOWS OF IT! THE TRUTH IS IN"
+    BYTE $FF,$FF,$00,$02
+    BYTE $19,"THE DARKNESS FOREVER ...."
+    BYTE $FF,$FF,$01,$0C
+    BYTE $09,"THE END !"
+    BYTE $FF,$FF,$FF,$FF,$FF,$40,$0D
+    BYTE $01,$1D,$40,$0E,$05,"STAFF"    ;1D = Bullet Point
+    BYTE $FF,$FF,$FF,$01,$04
+    BYTE $01,$1D,$10,$05,$17,"GAME DESIGN & CHARCTERS"    ;1D = Bullet Point
+    BYTE $FF,$FF,$00,$0B
+    BYTE $0B,"MTJ/MITSUJI"
+    BYTE $FF,$FF,$FF,$01,$04
+    BYTE $01,$1D,$10,$05,$14,"SOFTWARE PROGRAMMERS"    ;1D = Bullet Point
+    BYTE $FF,$FF,$00,$0B
+    BYTE $0B,"ICH/FUJISUE"
+    BYTE $FF,$FF,$00,$0B
+    BYTE $0D,"NSO/NISHIYORI"
+    BYTE $FF,$FF,$FF,$01,$04
+    BYTE $01,$1D,$10,$05,$0D,"SOUND CREATOR"    ;1D = Bullet Point
+    BYTE $FF,$FF,$00,$0B
+    BYTE $0C,"KIM/KIMIJIMA"
+    BYTE $FF,$FF,$FF,$01,$04
+    BYTE $01,$1D,$10,$05,$0B,"INSTRUCTION"    ;1D = Bullet Point
+    BYTE $FF,$FF,$00,$0B
+    BYTE $0B,"YSH/YOSHIDA"
+    BYTE $FF,$FF,$FF,$01,$04
+    BYTE $01,$1D,$10,$05,$08,"HARDWARE"    ;1D = Bullet Point
+    BYTE $FF,$FF,$00,$0B
+    BYTE $0C,"KTU/FUJIMOTO"
+    BYTE $FF,$FF,$00,$0B
+    BYTE $0C,"SAK/SAKMOTO"
+    BYTE $01,$1D,$10,$05,$12,"AND SPECIAL THANKS"    ;1D = Bullet Point
+    BYTE $FF,$FF,$01,$05,$14,"TO ALL OTHER PEOPLE!"
+    BYTE $FF,$FF,$00,$0B
+    BYTE $0B,"TOP/SUEKADO"
+    BYTE $FF,$FF,$00,$0B
+    BYTE $08,"RYO/YUKI"
+    BYTE $FF,$FF,$00,$0B
+    BYTE $0C,"SKE/NAKAMURA"
+    BYTE $FF,$FF,$00,$0B
+    BYTE $09,"SAN/SANBE"
+    BYTE $FF,$FF,$00,$0B
+    BYTE $0C,"PAN/NAKAGAWA"
+    BYTE $FF,$FF,$00,$0B
+    BYTE $0B,"OTO/IMAMURA"
+    BYTE $FF,$FF,$FF,$01,$04
+    BYTE $01,$1D,$10,$05,$0A,"CHARACTERS"    ;1D = Bullet Point
+    BYTE $FF,$FF,$20,$0B
+    BYTE $07,"BUBBLUN"
+    BYTE $FF,$FF,$50,$0B
+    BYTE $07,"BOBBLUN"
+    BYTE $FF,$FF,$00,$0B
+    BYTE $08,"ZEN-CHAN"
+    BYTE $FF,$FF,$00,$0B
+    BYTE $06,"MONSTA"
+    BYTE $FF,$FF,$00,$0B
+    BYTE $0B,"SKEL-MONSTA"
+    BYTE $FF,$FF,$00,$0B
+    BYTE $06,"MIGHTA"
+    BYTE $FF,$FF,$00,$0B
+    BYTE $06,"PULPUL"
+    BYTE $FF,$FF,$00,$0B
+    BYTE $07,"BANEBOU"
+    BYTE $FF,$FF,$00,$0B
+    BYTE $07,"INVADER"
+    BYTE $FF,$FF,$00,$0B
+    BYTE $08,"HIDEGONS"
+    BYTE $FF,$FF,$00,$0B
+    BYTE $05,"DRUNK"
+    BYTE $FF,$FF,$00,$0B
+    BYTE $0B,"SUPER DRUNK"
+    BYTE $FF,$FF,$00,$0B
+    BYTE $06,"RASCAL"
+    BYTE $FF,$FF,$00,$0B
+    BYTE $05,"BOBBY"
+    BYTE $FF,$FF,$00,$0B
+    BYTE $05,"BETTY"
+    BYTE $FF,$FF,$00,$0B
+    BYTE $05,"BUBBY"
+    BYTE $FF,$FF,$00,$0B
+    BYTE $05,"PATTY"
+    BYTE $FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF,$10,$0A
+    BYTE $01,$1D,$10,$0B,$0B,"PRODUCED BY"    ;1D = Bullet Point
+    BYTE $FF,$FF,$01,$0B
+    BYTE $0A,$01,$02,$03,$04,$05,$06,$07,$08,$09,$0A        ;Top Half OF TAITO Logo
+    BYTE $FF,$01,$0C
+    BYTE $09,$0B,$0C,$0D,$0E,$0F,$10,$11,$12,$13            ;Bottom Half OF TAITO Logo
+    BYTE $FF,$FF,$00,$04
+    BYTE $18,"@ TAITO CORPORATION 1986"
+    BYTE $FF,$FF,$00,$06
+    BYTE $13,"ALL RIGHTS RESERVED"
+    BYTE $FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF,$00,$06
+    BYTE $13,"THANK YOU VERY MUCH"
+    BYTE $FF,$FF,$00,$07
+    BYTE $11,"FOR YOUR PLAYING!"
+    BYTE $FF
 bank1_data_95AA
     
 ;    BYTE $EA,$95,$3A,$96,$8A,$96,$EA,$95,$DA,$96,$2A,$97,$7A,$97,$EA,$95

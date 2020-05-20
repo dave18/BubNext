@@ -1000,329 +1000,12 @@ call_18E7
     
    ; BYTE "CALL_18EE"
 call_18EE
-    ld   a,(l_e5c4)     ;row number
-    cp   $20-$2
-    ret  nc;z
-    call call_1942  ;clear current row
-    call call_1958  ;draw one line of level data
-    call call_6065  ;ret
-    call call_199C  ;add shadows
-    call call_1A93  ;changes side panels
-	
-    ld   hl,l_e5c4	;get row number address
-    inc  (hl)		;increase row number
-    ld   a,(hl)		;get new row number into a
-    cp   $20-$2		;is it last row?
-    jr   nz,call_1922  ;if not skip past next code
-    ld   a,$1E-$2		;set A to row 30
-    ld   (l_e5c4),a ;store in row number
-    call call_1A99	;call side borders again for this row???
-    ld   a,$1F-$2		;set A to row 31
-    ld   (l_e5c4),a ;store in row number
-    call call_1A99	;call side borders again for this row???
-    ld   hl,l_e5c4		;row number
-    ld   (hl),$20		;set to 32
-
-    ret
-call_1922
-    ld   a,(l_e5c3)		;what is this checking???
-    and  a
-    jr   z,call_18EE	;loop to complete next row
-    ret
-call_1929
-	
-    ld   a,(l_e64b) ;level num
-    ;push af
-	;ld hl,$0085
-    ;pop  bc
-    ld   h,15*16;$3C
-	ld	 l,$85+$5
-    bit  0,a
-    jr   nz,call_193F
-    ld   h,14*16;$38
-	ld	 l,$85
-call_193F
-    ;or   h
-    ;ld   h,a
-    ret
-call_1942
-    ld   a,(l_e5c4)		;row number
-	ld b,$50
-	call call_0DB1  ;a * b into HL	;80 bytes per row
-    ;add  a,a
-    ;ld   hl,l_cd00
-	ld   de,$7608-$50;$76F8
-    ld   b,$20
-    ;call adda2hl;call_0D89
-	add  hl,de
-call_194B 
-    ld   (hl),$00
-    inc  hl
-    ld   (hl),$00
-    inc  hl
-    djnz call_194B
-    ld   a,(l_e5c4)
-    ret
-call_1958
-    ld   a,(l_e5c4)		;row number
-    push af
-    ld   b,$10			;each tile is represented by a nibble so we need to multiply by 16 (32 cols)
-    call call_0DB1			;a * b - row number * 16 into HL
-    ld   de,l_e398		;location that decoded level data is held
-    add  hl,de			;add on row number
-    pop  af				;retrieve row number
-	push hl				;save hl as need to trash it
-	ld   b,$50
-	call call_0DB1  	;a * b into HL	;80 bytes per row
-	ex	 de,hl			;move it into DE
-	pop  hl				;restore level offset
-    ld   iy,$7608-$50;$76F8		;base screen location
-    add  iy,de			;add row position to screen loc
-    ld   b,$10			;outer loop counter of 16
-call_1972    
-	push bc				;store as inner loop also needs to use bc counter
-    ld   b,$02			;inner loop counter of 2
-    ld   a,(hl)			;get byte (representing 2 tiles as each tile is a nibble)
-call_1976 
-   ld   c,a			;save a into c
-    and  $F0			;is the a value in the first nibble?
-    ld   a,c			;retrieve a from c
-    jr   nz,call_198D	;if first nibble not zero (ie isn't a platform) then skip next code to draw platform
-    ex   af,af'			;switch register set
-    exx
-    call call_1929			;calc gfx offset
-    inc  hl				;return address of 1st of the 5 level tiles (4 panel + 1 platform)
-    inc  hl				;so inc 4 times to use the platform tile
-    inc  hl
-    inc  hl
-    ld   (iy+$00),l		;and store the tile number
-    ld   (iy+$01),h		;plus the bank, colour and flip info
-    exx					;switch register set
-    ex   af,af'
-call_198D
-    call mul16			;multiply a by 16 to shift second nibble into 4 msbs
-    ;ld   de,$0040		;move to next
-    ;add  iy,de			;screen column
-	inc iy
-	inc iy				;move to next screen column
-    djnz call_1976			;and repeat for second nibble (now shifted into 4 msbs)
-    inc  hl				;move to next 2 tiles
-    pop  bc				;retrieve outer loop counter
-    djnz call_1972			;and loop until 0
+    ld a,introbank
+    call call_026C
+    call intro_call_18EE
+    call call_029B
     ret
 
-    BYTE "CALL_199C"
-
-call_199C
-
-    ld   a,(l_e5c4)		;row number
-	ld b,$50
-	call call_0DB1  ;a * b into HL	;80 bytes per row
-	ex de,hl
-    ld   iy,$7608-$50;$7f68
-    add  iy,de
-    call call_1929
-    inc  hl
-    inc  hl
-    inc  hl
-    inc  hl
-    ld   a,(l_e64b)
-    ld   c,15*16;$3C
-    bit  0,a
-    jr   nz,call_19BB
-    ld   c,14*16;$38
-call_19BB
-    ld   b,$20
-call_19BD
-    ld   a,(iy+$00)
-    or   (iy+$01)
-    jp   nz,call_1A6D
-    ld   a,(iy-$50);02)
-    cp   l
-    jr   nz,call_19E8
-    ;ld   a,(iy-$4f);01)
-    ;cp   h
-    ;jr   nz,call_19E8
-	ld   a,(iy-$50)
-	cp   l;$AB
-    jr   c,call_19E8
-    ld   a,(iy-$02);$40)
-    cp   l
-    jr   nz,call_19E8
-    ;ld   a,(iy-$01);$3f)
-    ;cp   h
-    ;jr   nz,call_19E8
-	ld   a,(iy-$02)
-	cp   l;$AB
-    jr   c,call_19E8
-    ld   (iy+$00),$F0		;needs to be changed to F0 equivalent
-    ld   (iy+$01),c
-    jp   call_1A6D
-call_19E8
-     ld   a,(iy-$02);$40)
-     cp   l
-     jr   nz,call_1A09
-     ;ld   a,(iy-$01);$3f)
-     ;cp   h
-     ;jr   nz,call_1A09
-	 ld   a,(iy-$02)
-	 cp   l;$AB
-     jr   c,call_1A09
-     ld   a,(iy-$52);$42)
-     cp   l
-     jr   z,call_1A09
-     ;ld   a,(iy-$51);$41)
-     ;cp   h
-     ;jr   z,call_1A09
-     ;ld   a,(iy-$52)
-	 ;cp   l;$AB
-     ;jr   nc,call_1A09
-	 ld   (iy+$00),$F1			;needs to be changed to F1 equivalent
-     ld   (iy+$01),c
-     jr   call_1A6D
-call_1A09
-     ld   a,(iy-$50);$02)
-     cp   l
-     jr   nz,call_1A2A
-     ;ld   a,(iy-$4f);$01)
-     ;cp   h
-     ;jr   nz,call_1A2A
-	 ld   a,(iy-$50)
-	 cp   l;$AB
-     jr   c,call_1A2A
-     ld   a,(iy-$52);$42)
-     cp   l
-     jr   nz,call_1A2A
-     ;ld   a,(iy-$51);$41)
-     ;cp   h
-     ;jr   nz,call_1A2A
-	 ld   a,(iy-$52)
-	 cp   l;$AB
-     jr   c,call_1A2A
-     ld   (iy+$00),$F2			;needs to be changed to F2 equivalent
-     ld   (iy+$01),c
-     jr   call_1A6D
-call_1A2A
-     ld   a,(iy-$52);$42)
-     cp   l
-     jr   nz,call_1A45
-     ;ld   a,(iy-$51);$41)
-     ;cp   h
-     ;jr   nz,call_1A45
-	 ;ld   a,(iy-$52)
-	 ;cp   l;$AB
-     ;jr   z,call_1A45
-     ;ld   a,(iy-$01);$3f)
-     ;cp   h
-	 ;jr   z,call_1A45
-	 ld   a,(iy-$02)
-	 cp   l;$AF
-     jr   z,call_1A45
-;	 cp   $AE
-;     jr   z,call_1A45
-;	 cp   $AC
-;     jr   z,call_1A45
-     ld   (iy+$00),$F3			;needs to be changed to F3 equivalent
-     ld   (iy+$01),c
-     jr   call_1A6D
-call_1A45
-      ld   a,(iy-$02);$40)
-      cp   l
-      jr   nz,call_1A5A
-      ;ld   a,(iy-$01);$3f)
-      ;cp   h
-      ;jr   nz,call_1A5A
-	  ld   a,(iy-$02)
-	  cp   l;$AB
-      jr   c,call_1A5A
-      ld   (iy+$00),$F4			;needs to be changed to F4 equivalent
-      ld   (iy+$01),c
-      jr   call_1A6D
-call_1A5A
-      ld   a,(iy-$50);$02)
-      cp   l
-      jr   nz,call_1A6D
-      ;ld   a,(iy-$4f);$01)
-      ;cp   h
-      ;jr   nz,call_1A6D
-	  ld   a,(iy-$50)
-	  cp   l;$AB
-      jr   c,call_1A6D
-      ld   (iy+$00),$F5			;needs to be changed to F5 equivalent
-      ld   (iy+$01),c
-call_1A6D
-      ld   de,$0002;$0040
-      add  iy,de
-      dec  b
-      jp   nz,call_19BD
-      ld   a,(l_e5c4)
-      and  a
-      ret  nz
-      ld   a,(l_e59b)
-      bit  7,a
-      jr   nz,call_1A87
-      ld   hl,$CF40
-      ;ld   (hl),$F4				;needs to be changed to F4 equivalent
-call_1A87
-      ld   a,(l_e59b)
-      bit  5,a
-      ret  nz
-;      ld   hl,$D1C0
-;      ld   (hl),$F4
-      ret
-	  
-;draw borders (ie the large tiles on each side)
-call_1A93
-      ld   a,(l_e5c4)		;row number
-      sub  $02
-      ret  c
-call_1A99
-      ld b,$50
-	  call call_0DB1  ;a * b into HL	;80 bytes per row
-	  ex de,hl
-      push de
-      ld   iy,$7608-$50;$7f68
-      call call_1AAA
-      pop  de
-      ld   iy,$7644-$50
-call_1AAA
-      add  iy,de
-      call call_1929
-      ex   de,hl
-      inc  de
-      inc  de
-      inc  de
-      inc  de				;de points to small tile?
-      ld   l,(iy+$00)		;get current tile bytes into HL
-      ld   h,(iy+$01)
-      and  a				;clear carry
-      sbc  hl,de			;check against standard level small tile
-      jr   z,call_1ACD		;if match jp to 1ACD (to draw big tile)
-      xor  a				;else zero a
-      ld   (iy+$00),a		;and draw 4 blank tiles
-      ld   (iy+$01),a
-      ld   (iy+$02),a;$40),a
-      ld   (iy+$03),a;$41),a
-      ret
-call_1ACD
-      dec  de				;change DE to point to first of the 4 big tiles
-      dec  de
-      dec  de
-      dec  de
-      ld   a,(l_e5c4)		;get row number
-      bit  0,a				;check odd/even row
-      jr   z,call_1ADA		;odd row skip to 1ADA
-      inc  de				;if even row change tile pointer to be bottom 2 big tiles
-      inc  de
-call_1ADA
-      ld   (iy+$00),e
-      ld   (iy+$01),d
-      inc  de
-      ld   (iy+$02),e
-      ld   (iy+$03),d
-      ld   a,(l_fc85)
-      bit  1,a
-      ret
 
     BYTE "INTRO ROUTINE"
 call_1AED
@@ -6046,9 +5729,229 @@ data_5627
     BYTE $17,"                       "
 	
 call_563F
-	jr call_563F		;TODO - insert code
-	BYTE "call_563F"
+    ld   hl,l_e5c4
+    ld	 (hl),$00
+    ld   hl,bank1_data_90EA
+    ld   a,(l_e5d7)
+    cp   $03
+    jr   nz,call_565A
+    ld   hl,bank1_data_8D42
+    ld   a,(l_e5db)
+    and  a
+    jr   z,call_565A
+    ld   hl,bank1_data_91BF
+call_565A
+    ld   (l_e734),hl
+call_565D
+    call  call_0020
+    ld   hl,l_e736
+    inc  (hl)
+    ld   a,(hl)
+    cp   $04
+    jr   nz,call_565D
+    ld   (hl),$00
+    call call_56AB
+    ld   a,(l_e2f5)
+    and  $07
+    jr   nz,call_565D
+    call call_5701
+    call call_5719
+    ld   e,$3B
+    ld   a,(l_e5d7)
+    cp   $03
+    jr   nz,call_568C
+    ld   e,$AC
+    ld   a,(l_e5db)
+    and  a
+    jr   z,call_568C
+    ld   e,$AC
+call_568C
+    ld   hl,l_e5c4
+    inc  (hl)
+    ld   a,(hl)
+    cp   e
+    jr   nz,call_565D
+    ld   hl,l_e5c4
+    ld   (hl),$00
+    ld   b,$10
+    ld   hl,l_e2f5
+call_569E
+    ld   (hl),$00
+    inc  hl
+    inc  hl
+    inc  hl
+    inc  hl
+    djnz call_569E
+    ld   a,$05
+    call call_0008
+    call call_0020
+    ret
+call_56AB
+;    ld   a,($0002) ;protection
+;    cp   $5E
+;    jr   z,$56B4
+;    push af
+;    push bc
+    ld   b,$10
+    ld   hl,l_e2f5
+call_56B9
+    inc  (hl)
+    inc  hl
+    inc  hl
+    inc  hl
+    inc  hl
+    djnz call_56B9
+    ld   b,$10
+    ld   hl,l_e20d
+call_56C5
+    ld   a,(hl)
+    and  a
+    jr   z,call_56CA
+    inc  (hl)
+call_56CA
+    inc  hl
+    inc  hl
+    inc  hl
+    inc  hl
+    djnz call_56C5
+    ld   hl,l_e2c5
+    ld   a,(hl)
+    and  a
+    jr   z,call_56D8
+    inc  (hl)
+call_56D8
+    ld   hl,l_e2b5
+    ld   a,(hl)
+    and  a
+    jr   z,call_56E0
+    inc  (hl)
+call_56E0
+    ld   b,$08
+    ld   hl,l_e255
+call_56E5
+    ld   a,(hl)
+    and  a
+    jr   z,call_56EA
+    inc  (hl)
+call_56EA
+    inc  hl
+    inc  hl
+    inc  hl
+    inc  hl
+    djnz call_56E5
+    ld   b,$10
+    ld   hl,l_e275
+call_56F5
+    ld   a,(hl)
+    and  a
+    jr   z,call_56FA
+    inc  (hl)
+call_56FA
+    inc  hl
+    inc  hl
+    inc  hl
+    inc  hl
+    djnz call_56F5
+    ret
+call_5701
+    ld   a,(l_e5c4)
+    //and  $1F
+    //add  a,a
 
+    call call_0D8E          ;A * 64 and into DE
+    ld h,0
+    ld l,a
+    add hl,hl				;x2
+	add hl,hl				;x4
+	add hl,hl				;x8
+	add hl,hl				;x16
+	add hl,de				;total is now a x 80
+
+    ld   de,$7608;$D500
+    add  hl,de
+
+    ld   b,$20
+call_570C
+;    call call_0D89     
+;    ld   (hl),$00
+;    inc  hl
+;    ld   (hl),$00
+;    ld   a,$3F
+;    djnz call_570C
+    ret
+call_5719
+    ld   e,$1A
+    ld   a,(l_e5d7)
+    cp   $03
+    jr   nz,call_572C
+    ld   e,$8B
+    ld   a,(l_e5db)
+    and  a
+    jr   z,call_572C
+    ld   e,$8B
+call_572C
+    ld   a,(l_e5c4)
+    cp   e
+    ret  nc
+    ld   a,bank1
+    call call_026C
+    ld   ix,(l_e734)
+call_573A
+    ;break
+    ld   a,(ix+$00)
+    inc  ix
+    cp   $FF
+    jr   z,call_576F
+    ld   c,a
+    /*ld   a,(ix+$00)     ;column
+    inc  ix
+    call call_0D8E      ;A * 64 and into DE (Column adjust)
+    ld   hl,$D500       ;TODO screen locs
+    add  hl,de
+    ld   a,(l_e5c4)     ;row
+    and  $1F
+    add  a,a
+    call call_0D89      ;add A to HL
+    */
+
+    ld   a,(l_ec54)         ;row?
+    and $1F
+    call call_0D8E          ;A * 64 and into DE
+    ld h,0
+    ld l,a
+    add hl,hl				;x2
+	add hl,hl				;x4
+	add hl,hl				;x8
+	add hl,hl				;x16
+	add hl,de				;total is now a x 80
+
+    ld   a,(ix+$00)         ;column
+    inc ix
+    add  a,a                ;* 2
+    ld   e,a
+    ld   d,0
+    add  hl,de
+
+    ld   de,$7608;$D500
+    add  hl,de
+
+    
+    ld   b,(ix+$00)
+    inc  ix
+call_575E
+    ld   a,(ix+$00)
+    ld   (hl),a
+    inc  hl
+    inc  ix
+    ld   (hl),c
+    ;ld   a,$3F
+    ;call call_0D89
+    inc hl
+    djnz call_575E
+    jr   call_573A
+call_576F
+    ld   (l_e734),ix
+    jp   call_029B
 call_5776
     ld   hl,l_e737
     ld   bc,$000B
@@ -6750,7 +6653,7 @@ call_67CA
     ld   hl,l_eb43
     bit  0,(hl)
     jr   nz,call_67E7
-    call bank0_call_B3AF        ;reprint the starfield?
+    ;call bank0_call_B3AF        ;reprint the starfield?
     ld   hl,l_eb43
     set  0,(hl)
 call_67E7
@@ -6759,7 +6662,7 @@ call_67E7
     call intro_call_B732
     call call_029B     ;restore bank
 call_67EA
-    ld   a,introbank;$01      ;switch bank
+    ld   a,introbank      ;switch bank
     call call_026C
     ld   ix,l_eb36
     ld   b,$02

@@ -5679,22 +5679,22 @@ bank2_call_AC7F
 
 
 
-bank2_call_AC80    ;TODO - possible screen values?
+bank2_call_AC80    ;Screen values for lightning jars
+    ;break
     ld   hl,l_f60f
     ld   bc,$000C
     call clearbytes
     ld   a,(l_e64b)
     cp   $63
     ret  nz
-    ;break
     ld   ix,l_f611
-    ld   hl,$CE98
+    ld   hl,$7984;$CE98
     ld   (ix+$03),l
     ld   (ix+$04),h
     ld   (ix+$01),$98
     ld   (ix+$02),$38
     ld   ix,l_f616
-    ld   hl,$D318
+    ld   hl,$79A8;$D318
     ld   (ix+$03),l
     ld   (ix+$04),h
     ld   (ix+$01),$98
@@ -5712,6 +5712,7 @@ bank2_call_ACBA
     cp   $01
     ret  z
     ld   ix,l_f611
+    ;break
     ld   b,$02
 bank2_call_ACD1
     push bc
@@ -5723,12 +5724,12 @@ bank2_call_ACD1
     call call_0AE3
     ld   e,(ix+$03)
     ld   d,(ix+$04)
-    ld   hl,bank2_call_AD6C
+    ld   hl,bank2_data_AD6C
     ld   bc,$0004
     ldir
     ld   e,(ix+$03)
     ld   d,(ix+$04)
-    ld   a,$40
+    ld   a,$50
     call adda2de;$0D84
     ld   hl,bank2_data_AD70
     ld   bc,$0004
@@ -5739,10 +5740,16 @@ bank2_call_ACD1
 ;    sbc  hl,bc
 ;    jr   z,$AD0E
 ;    push af
+    nextreg $43,%00110000          ;tilemap
+    nextreg $40,$E0                ;palette entry E0
     ld   hl,bank2_data_AD78
-   ; ld   de,l_f9c0         ;TODO - palette
-   ; ld   bc,$0020
+   ; ld   de,l_f9c0         ;TODO - palette at index E0
+    ;ld   bc,$0020
+    ld b,$10
+bank2_call_ACD1_Loop
+   call call_0B30_update_entry
    ; ldir
+   djnz bank2_call_ACD1_Loop
     set  0,(ix+$00)
     jr   bank2_call_AD61
 bank2_call_AD1F
@@ -5767,7 +5774,7 @@ bank2_call_AD3C
     ldir
     ld   e,(ix+$03)
     ld   d,(ix+$04)
-    ld   a,$40
+    ld   a,$50
     call adda2de;$0D84
     ld   hl,bank2_data_AD74
     ld   bc,$0004
@@ -5780,21 +5787,13 @@ bank2_call_AD61
     dec  b
     jp   nz,bank2_call_ACD1
     ret
-bank2_call_AD6C
-    and  $39
-    ret  pe
-    add  hl,sp
-    call  call_0020;rst  $20
-    add  hl,sp
-jphlstop5
-    jr jphlstop5
-    jp   (hl)
-    
-bank2_data_AD70
-    BYTE $E7,$39,$E9,$39
-bank2_data_AD74
+bank2_data_AD6C               ;Lightning Jar GFX
+    BYTE $76,$E0,$77,$E0
+bank2_data_AD70               ;Lightning Jar GFX
+    BYTE $78,$E0,$79,$E0
+bank2_data_AD74               ;Clear lightning Jar GFX
     BYTE $00,$00,$00,$00
-bank2_data_AD78
+bank2_data_AD78               ;Lightning Jar Palette
     BYTE $77,$00,$55,$00,$FF,$F0,$8B,$80,$8C,$00,$09,$00,$03,$00,$02,$00
     BYTE $04,$00,$07,$00,$08,$00,$0A,$00,$06,$00,$F3,$70,$05,$00,$00,$00
 

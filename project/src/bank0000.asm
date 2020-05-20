@@ -5290,6 +5290,11 @@ copyleveltiles
 	ld hl,$F4C0		;offset
 	ld bc,$480		;36 tiles * 32 bytes
 	ldir
+
+    ld de,$4EC0		;now copy the lightning jar
+	ld hl,$FCC0		;offset
+	ld bc,$80		;4 tiles * 32 bytes
+	ldir
 	
 	ld de,$5200
 	ld hl,$D200		;offset
