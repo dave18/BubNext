@@ -1454,7 +1454,7 @@ call_1E7C
     ld   bc,$0010
     call call_0D50
 call_1E8C
-    ld   hl,$7CE8;$D53A			;Screen loc - bottom left
+    ld   hl,$7F18;$D53A			;clear lives and credit
     call call_03FD
     call call_0300
     ld   a,$05
@@ -1474,8 +1474,8 @@ call_1EA1
     pop  bc
     djnz call_1EA1
 call_1EB4
-    call call_21CF
-    call bank0_call_B34F
+    call call_21CF          ;clears and redraws scores
+    call bank0_call_B34F    ;Crumble screen and scroll message
     call call_0B30
     ld   a,(l_e5d7)
     cp   $03
@@ -1489,6 +1489,7 @@ call_1EB4
 ;    pop  af
 ;    pop  hl
 call_1ED3
+    call copy_big_words_tiles
     ld   a,bank2
     call call_026C
     call bank2_call_B77A
@@ -5731,15 +5732,15 @@ data_5627
 call_563F
     ld   hl,l_e5c4
     ld	 (hl),$00
-    ld   hl,bank1_data_90EA
+    ld   hl,bank1_data_90EA     ;1 Player ending
     ld   a,(l_e5d7)
     cp   $03
     jr   nz,call_565A
-    ld   hl,bank1_data_8D42
+    ld   hl,bank1_data_8D42     ;2 Player ending
     ld   a,(l_e5db)
     and  a
     jr   z,call_565A
-    ld   hl,bank1_data_91BF
+    ld   hl,bank1_data_91BF     ;Real ending
 call_565A
     ld   (l_e734),hl
 call_565D
@@ -5750,21 +5751,22 @@ call_565D
     cp   $04
     jr   nz,call_565D
     ld   (hl),$00
-    call call_56AB
-    ld   a,(l_e2f5)
+    call call_56AB      ;scroll screen and raise sprites
+    ;ld   a,(l_e2f5)
+    ld   a,(l_e1cd)
     and  $07
-    jr   nz,call_565D
-    call call_5701
-    call call_5719
-    ld   e,$3B
+    jr   nz,call_565D   ;if not scrolled 8 pixels don't write new line
+    call call_5701      ;clear line
+    call call_5719      ;write message
+    ld   e,$3B      ;59 - number of scrolls lines in 1 player ending in
     ld   a,(l_e5d7)
     cp   $03
     jr   nz,call_568C
-    ld   e,$AC
+    ld   e,$AC      ;172 - number of scrolls lines in 2 player ending
     ld   a,(l_e5db)
     and  a
     jr   z,call_568C
-    ld   e,$AC
+    ld   e,$AC      ;172 - number of scrolls lines in real ending
 call_568C
     ld   hl,l_e5c4
     inc  (hl)
@@ -5774,7 +5776,8 @@ call_568C
     ld   hl,l_e5c4
     ld   (hl),$00
     ld   b,$10
-    ld   hl,l_e2f5
+    ;ld   hl,l_e2f5
+    ld   hl,l_e1cd
 call_569E
     ld   (hl),$00
     inc  hl
@@ -5792,17 +5795,18 @@ call_56AB
 ;    jr   z,$56B4
 ;    push af
 ;    push bc
-    ld   b,$10
-    ld   hl,l_e2f5
+    ;ld   b,$10
+    ;ld   hl,l_e2f5
+    ld   hl,l_e1cd
 call_56B9
     inc  (hl)
-    inc  hl
-    inc  hl
-    inc  hl
-    inc  hl
-    djnz call_56B9
+    ;inc  hl
+    ;inc  hl
+    ;inc  hl
+    ;inc  hl
+    ;djnz call_56B9
     ld   b,$10
-    ld   hl,l_e20d
+    ld   hl,l_e20d      ;raise sprites
 call_56C5
     ld   a,(hl)
     and  a
@@ -5855,7 +5859,7 @@ call_56FA
     ret
 call_5701
     ld   a,(l_e5c4)
-    //and  $1F
+    and  $1F
     //add  a,a
 
     call call_0D8E          ;A * 64 and into DE
@@ -5873,26 +5877,28 @@ call_5701
     ld   b,$20
 call_570C
 ;    call call_0D89     
-;    ld   (hl),$00
-;    inc  hl
-;    ld   (hl),$00
+    ld   (hl),$00
+    inc  hl
+    ld   (hl),$00
+    inc hl
 ;    ld   a,$3F
-;    djnz call_570C
+    djnz call_570C
     ret
 call_5719
-    ld   e,$1A
+    ld   e,$1A      ;rows in 1 player message (26)
     ld   a,(l_e5d7)
     cp   $03
     jr   nz,call_572C
-    ld   e,$8B
+    ld   e,$8B      ;rows in 2 player message (139)
     ld   a,(l_e5db)
     and  a
     jr   z,call_572C
-    ld   e,$8B
+    ld   e,$8B      ;rows in real ending message (139)
 call_572C
     ld   a,(l_e5c4)
     cp   e
-    ret  nc
+    ret  nc         ;return with writing if row is beyond last message line
+    ;break
     ld   a,bank1
     call call_026C
     ld   ix,(l_e734)
@@ -5914,7 +5920,7 @@ call_573A
     call call_0D89      ;add A to HL
     */
 
-    ld   a,(l_ec54)         ;row?
+    ld   a,(l_e5c4)         ;row?
     and $1F
     call call_0D8E          ;A * 64 and into DE
     ld h,0

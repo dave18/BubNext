@@ -2087,7 +2087,7 @@ intro_call_6BC2
     ex   af,af'
 	ld   a,$70	;gfx attribute
 	ex   af,af'
-	ld   a,$90
+	ld   a,$70;90
     ;ld   a,$1C
     call call_0EC6_Adjusted 
     ret
@@ -2098,7 +2098,7 @@ intro_call_6BDD
     ex   af,af'
 	ld   a,$80	;gfx attribute
 	ex   af,af'
-	ld   a,$90
+	ld   a,$70;90
     ;ld   a,$20
     call call_0EC6_Adjusted
     ret

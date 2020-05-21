@@ -1,7 +1,7 @@
 
 SHAREDHIGH EQU $26 ;5C ;E0
 
-    BLOCK 0x100,0 
+  ;  BLOCK 0x100,0 
 
 call_0008
     push hl
@@ -5403,4 +5403,14 @@ copy_intro_tiles
 	jp call_029B_DI  ;restore bank
 
     
-	
+copy_big_words_tiles
+    nextreg $6F,$00				;tile definition start address = 0
+	;nextreg  $6F,$5B				;tile definition start address = 91
+
+	ld	a,gfxbank19
+	call call_026C_DI	;page in gfx bank 0
+	ld de,$4b60
+	ld hl,$e700		;offset
+	ld bc,$CC0		;256 tiles * 32 bytes
+	ldir
+	jp call_029B_DI  ;restore bank

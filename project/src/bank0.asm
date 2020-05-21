@@ -6016,7 +6016,8 @@ bank0_data_B34B
 bank0_data_B34D    
     BYTE $02,$06
 bank0_call_B34F
-	call bank0_call_B391
+    ;break
+	;call bank0_call_B391    ;update starfield
     ld   hl,l_f448
     ld   (hl),$00
     call call_0330
@@ -6029,8 +6030,8 @@ bank0_call_B34F
 ;    push de
 ;    push bc
 bank0_call_B36D
-    call bank0_call_BEA9
-    call bank0_call_B39A
+    call bank0_call_BEA9        ;crumble level 100 walls
+    ;call bank0_call_B39A        ;update starfield
     ld   a,(l_e5d7)
     cp   $03
     jr   nz,bank0_call_B389
@@ -7008,7 +7009,8 @@ bank0_call_BF03
     ret
 bank0_data_BF38        ;Crumbling wall data
 	;BYTE $C0,$3D,$C1,$3D,$C2,$3D,$C3,$3D,$C4,$3D,$C5,$3D,$C6,$3D,$00,$00
-    BYTE $80,$F0,$7F,$F0,$7E,$F0,$7D,$F0,$7C,$F0,$7B,$F0,$7A,$F0,$00,$00
+    ;BYTE $80,$F0,$7F,$F0,$7E,$F0,$7D,$F0,$7C,$F0,$7B,$F0,$7A,$F0,$00,$00
+    BYTE $7A,$F0,$7B,$F0,$7C,$F0,$7D,$F0,$7E,$F0,$7F,$F0,$80,$F0,$00,$00
 
     
 bank0_call_BF48

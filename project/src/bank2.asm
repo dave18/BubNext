@@ -199,7 +199,7 @@ bank2_call_8436 ;83E8_7
     ld   a,$3B
     sub  c
     jr   bank2_call_8447
-bank2_call_843C ;83E8_3
+bank2_call_843C ;83E8_3       ;error
      xor  a
      ld   (de),a
      inc  hl
@@ -221,10 +221,16 @@ bank2_call_845F ;83E8_8
      ld   (l_f450),hl
      ret
 bank2_data_8463
-    BYTE $54,$F4,$00,$01,$02,$03,$04,$05,$06,$07,$08,$09,$00,$01,$02,$03
-    BYTE $04,$05,$53,$F4,$0A,$0B,$0C,$0D,$0E,$0F,$10,$11,$12,$13,$0A,$0B
-    BYTE $0C,$0D,$0E,$0F,$52,$F4,$01,$04,$07,$0A,$0D,$10,$13,$16,$19,$1C
-    BYTE $20,$23,$26,$29,$2C,$2F
+    BYTE LOW l_f454,HIGH l_f454;$54,$F4
+    BYTE $00,$01,$02,$03,$04,$05,$06,$07,$08,$09,$00,$01,$02,$03,$04,$05
+    BYTE LOW l_f453,HIGH l_f453;$53,$F4
+    BYTE $0A,$0B,$0C,$0D,$0E,$0F,$10,$11,$12,$13,$0A,$0B,$0C,$0D,$0E,$0F
+    BYTE LOW l_f452,HIGH l_f452;$52,$F4
+    BYTE $01,$04,$07,$0A,$0D,$10,$13,$16,$19,$1C,$20,$23,$26,$29,$2C,$2F
+;    BYTE $54,$F4,$00,$01,$02,$03,$04,$05,$06,$07,$08,$09,$00,$01,$02,$03
+;    BYTE $04,$05,$53,$F4,$0A,$0B,$0C,$0D,$0E,$0F,$10,$11,$12,$13,$0A,$0B
+;    BYTE $0C,$0D,$0E,$0F,$52,$F4,$01,$04,$07,$0A,$0D,$10,$13,$16,$19,$1C
+;    BYTE $20,$23,$26,$29,$2C,$2F
     
 bank2_call_8499
      ld   a,(l_e64b)
@@ -6622,47 +6628,56 @@ bank2_data_B77A
 bank2_data_B788
 	BYTE $02
 bank2_call_B77A
-    ;call call_03CB
-    ;call call_03D0
-    ;call call_031C
-    ;call call_0330
-    ;call call_02C8
+    call call_03CB       ;clear screen
+    call call_03D0       ;clear top layer
+    call call_031C
+    call call_0330
+    call call_02C8
 bank2_call_B789				;used for protection routine at $85c4
-    ld   hl,bank2_data_B9A4
+     nextreg $43,%00110000         ;tiles palette
+     nextreg $40,$F0
+     ld   hl,bank2_data_B9A4
     ;ld   de,l_f9e0			;TODO Palette
-    ld   bc,$0020
-    ldir					;TODO palette
-    ld   hl,$7988;$CDD6
+    ld   b,$10
+bank2_call_B789_Loop
+     call call_0B30_update_entry
+     djnz bank2_call_B789_Loop
+    ld   hl,$792E;$CDD6
     ld   de,bank2_data_B8BA
     ld   bc,$091A
-    ld   a,$3F
-    call call_0EC6
+    ;ld   a,$3F
+    ex af,af'
+    ld a,$F0	;gfx atrtibute
+     ex af,af'
+	ld  a,$23
+     ;break
+	call call_0EC6_Adjusted
     ld   hl,bank2_data_B7F0		;'BUT THIS WAS NOT A TRUE ENDING'
-    ld   de,$77A0;$D58A
+    ld   de,$774C;$D58A
     ld   c,$00
     call call_0E9A
     ld   hl,bank2_data_B80E
-    ld   de,$7840;$D58E
+    ld   de,$77EC;$D58E
     ld   c,$00
     call call_0E9A
     ld   hl,bank2_data_B82C
-    ld   de,$78E0;$D592
+    ld   de,$788C;$D592
     ld   c,$00
     call call_0E9A
     ld   hl,bank2_data_B84A
-    ld   de,$7CF0;$D5AA
+    ld   de,$7C4C;$D5AA
     ld   c,$00
     call call_0E9A
     ld   hl,bank2_data_B867
-    ld   de,$7D90;$D5AE
+    ld   de,$7CEC;$D5AE
     ld   c,$00
     call call_0E9A
     ld   hl,bank2_data_B883
-    ld   de,$7E30;$D5B2
+    ld   de,$7D8C;$D5B2
     ld   c,$00
     call call_0E9A
     ld   hl,bank2_data_B89F
-    ld   de,$7ED0;$D5B6
+    ld   de,$7E2C;$D5B6
     ld   c,$00
     call call_0E9A
     ret
