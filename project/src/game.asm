@@ -1455,6 +1455,7 @@ call_1E7C
     call call_0D50
 call_1E8C
     ld   hl,$7F18;$D53A			;clear lives and credit
+    ;nextreg $70,%00010000      ;set layer 2 to 320 x 256
     call call_03FD
     call call_0300
     ld   a,$05
@@ -5730,6 +5731,172 @@ data_5627
     BYTE $17,"                       "
 	
 call_563F
+    ld   a,0
+    ld  (intro_scroll_counter),a
+    ld   hl,l_e5c4
+    ld	 (hl),$00
+    ld   hl,intro_bank1_data_90EA     ;1 Player ending
+    ld   a,(l_e5d7)
+    cp   $03
+    jr   nz,call_565A
+    ld   hl,intro_bank1_data_8D42     ;2 Player ending
+    ld   a,(l_e5db)
+    and  a
+    jr   z,call_565A
+    ld   hl,intro_bank1_data_91BF     ;Real ending
+call_565A
+    ld   (l_e734),hl
+call_565D
+    call  call_0020
+    ld   hl,l_e736
+    inc  (hl)
+    ld   a,(hl)
+    cp   $04
+    jr   nz,call_565D
+    ld   (hl),$00
+    call call_56AB      ;scroll screen and raise sprites
+    ld   a,(l_e2f5)
+    ;ld   a,(l_e1cd)
+    and  $07
+    jr   nz,call_565D   ;if not scrolled 8 pixels don't write new line
+
+    ld a,introbank
+    call call_026C
+    ld   a,(intro_scroll_counter)
+    call intro_call_5701      ;clear line
+    ld   a,(intro_scroll_counter)
+    call intro_call_5719      ;write message
+    call call_029B
+
+    ld   e,$3B      ;59 - number of scrolls lines in 1 player ending in
+    ld   a,(l_e5d7)
+    cp   $03
+    jr   nz,call_568C
+    ld   e,$AC      ;172 - number of scrolls lines in 2 player ending
+    ld   a,(l_e5db)
+    and  a
+    jr   z,call_568C
+    ld   e,$AC      ;172 - number of scrolls lines in real ending
+call_568C
+    ld a,(intro_scroll_counter)
+    inc a
+    cp 24
+    jr nz,call_568C_1
+    ld a,0
+call_568C_1
+    ld   (intro_scroll_counter),a
+    ld   hl,l_e5c4
+    inc  (hl)
+    ld   a,(hl)
+    cp   e
+    jr   nz,call_565D
+    ld   hl,l_e5c4
+    ld   (hl),$00
+    ;ld   b,$10
+    ld   hl,l_e2f5
+    ld   (hl),$00
+    ;ld   hl,l_e1cd
+call_569E
+    ld a,0
+    ld   (intro_scroll_counter),a
+    ;ld   (hl),$00
+    ;inc  hl
+    ;inc  hl
+    ;inc  hl
+    ;inc  hl
+    ;djnz intro_call_569E
+    ld a,$05
+    call call_0008    
+    call call_0020
+    ret
+call_56AB
+;    ld   a,($0002) ;protection
+;    cp   $5E
+;    jr   z,$56B4
+;    push af
+;    push bc
+    ;ld   b,$10
+    ld   a,(l_e2f5)
+    ;ld   hl,l_e1cd
+call_56B9
+    inc  a
+    cp $c0;24
+    jr nz,call_56B9_1
+    ld a,0
+call_56B9_1
+    ld (l_e2f5),a
+    ;inc  hl
+    ;inc  hl
+    ;inc  hl
+    ;inc  hl
+    ;djnz call_56B9
+    ld   b,$10
+    ld   hl,l_e20d      ;raise sprites
+call_56C5
+    ld   a,(hl)
+    and  a
+    jr   z,call_56CA
+    inc  (hl)
+call_56CA
+    inc  hl
+    inc  hl
+    inc  hl
+    inc  hl
+    djnz call_56C5
+    ld   hl,l_e2c5
+    ld   a,(hl)
+    and  a
+    jr   z,call_56D8
+    inc  (hl)
+call_56D8
+    ld   hl,l_e2b5
+    ld   a,(hl)
+    and  a
+    jr   z,call_56E0
+    inc  (hl)
+call_56E0
+    ld   b,$08
+    ld   hl,l_e255
+call_56E5
+    ld   a,(hl)
+    and  a
+    jr   z,call_56EA
+    inc  (hl)
+call_56EA
+    inc  hl
+    inc  hl
+    inc  hl
+    inc  hl
+    djnz call_56E5
+    ld   b,$10
+    ld   hl,l_e275
+call_56F5
+    ld   a,(hl)
+    and  a
+    jr   z,call_56FA
+    inc  (hl)
+call_56FA
+    inc  hl
+    inc  hl
+    inc  hl
+    inc  hl
+    djnz call_56F5
+    ret
+
+intro_scroll_counter
+    BYTE $00
+
+    /*break
+    ld a,introbank
+    call call_026C
+    call intro_call_563F
+    break
+    call call_029B
+    ld   a,$05
+    call call_0008
+    call call_0020
+    ret*/
+/*
     ld   hl,l_e5c4
     ld	 (hl),$00
     ld   hl,bank1_data_90EA     ;1 Player ending
@@ -5908,7 +6075,7 @@ call_573A
     inc  ix
     cp   $FF
     jr   z,call_576F
-    ld   c,a
+    ld   c,a*/
     /*ld   a,(ix+$00)     ;column
     inc  ix
     call call_0D8E      ;A * 64 and into DE (Column adjust)
@@ -5919,7 +6086,7 @@ call_573A
     add  a,a
     call call_0D89      ;add A to HL
     */
-
+/*
     ld   a,(l_e5c4)         ;row?
     and $1F
     call call_0D8E          ;A * 64 and into DE
@@ -5958,11 +6125,11 @@ call_575E
 call_576F
     ld   (l_e734),ix
     jp   call_029B
+    */
 call_5776
     ld   hl,l_e737
     ld   bc,$000B
     jp   clearbytes
-
 call_577F
     ld   a,(l_e737)
     and  a
@@ -7686,8 +7853,11 @@ myinterrupt
 	ld a,(l_e1cc)
 	ld (int_membackup+1),a
 	
-	ld a,(l_e1cd)		;scroll pos
+	ld a,(l_e1cd)		;scroll pos tilemap
 	nextreg $31,a
+
+    ld a,(l_e2f5)       ;scroll pos Layer 2
+    nextreg $17,a
 	
    ; nextreg $43,%10110000
    ; nextreg $40,$0f

@@ -1,105 +1,133 @@
-L02BF:       equ  02BFh
-L5C78:       equ  5C78h
+L0073:       equ  0073h
+L3868:       equ  3868h
 
 
-             org 0038h
+             org 0000h
 
 
-0038 L0038:
-0038 F5           PUSH AF     
-0039 E5           PUSH HL     
-003A 2A 78 5C     LD   HL,(L5C78) 
-003D 23           INC  HL     
-003E 22 78 5C     LD   (L5C78),HL 
-0041 7C           LD   A,H    
-0042 B5           OR   L      
-0043 20 03        JR   NZ,L0048 
-0045 FD 34 40     INC  (IY+64) 
-0048 L0048:
-0048 C5           PUSH BC     
-0049 D5           PUSH DE     
-004A CD BF 02     CALL L02BF  
-004D D1           POP  DE     
-004E C1           POP  BC     
-004F E1           POP  HL     
-0050 F1           POP  AF     
-0051 FB           EI          
-0052 C9           RET         
+0000 L0000:
+0000 38 71        JR   C,L0073 
+0002 26 6F        LD   H,6Fh  
+0004 36 00        LD   (HL),00h 
+0006 E1           POP  HL     
+0007 C9           RET         
 
 
-0053 E1           defb E1h    
-0054 6E           defb 6Eh    
-0055 FD           defb FDh    
-0056 75           defb 75h    
-0057 00           defb 00h    
-0058 ED           defb EDh    
-0059 7B           defb 7Bh    
-005A 3D           defb 3Dh    
-005B 5C           defb 5Ch    
-005C C3           defb C3h    
-005D C5           defb C5h    
-005E 16           defb 16h    
-005F FF           defb FFh    
-0060 FF           defb FFh    
-0061 FF           defb FFh    
-0062 FF           defb FFh    
-0063 FF           defb FFh    
-0064 FF           defb FFh    
-0065 FF           defb FFh    
-0066 F5           defb F5h    
-0067 E5           defb E5h    
-0068 2A           defb 2Ah    
-0069 B0           defb B0h    
-006A 5C           defb 5Ch    
-006B 7C           defb 7Ch    
-006C B5           defb B5h    
-006D 20           defb 20h    
-006E 01           defb 01h    
-006F E9           defb E9h    
-0070 E1           defb E1h    
-0071 F1           defb F1h    
-0072 ED           defb EDh    
-0073 45           defb 45h    
-0074 2A           defb 2Ah    
-0075 5D           defb 5Dh    
-0076 5C           defb 5Ch    
-0077 23           defb 23h    
-0078 22           defb 22h    
-0079 5D           defb 5Dh    
-007A 5C           defb 5Ch    
-007B 7E           defb 7Eh    
-007C C9           defb C9h    
-007D FE           defb FEh    
-007E 21           defb 21h    
-007F D0           defb D0h    
-0080 FE           defb FEh    
-0081 0D           defb 0Dh    
-0082 C8           defb C8h    
-0083 FE           defb FEh    
-0084 10           defb 10h    
-0085 D8           defb D8h    
-0086 FE           defb FEh    
-0087 18           defb 18h    
-0088 3F           defb 3Fh    
-0089 D8           defb D8h    
-008A 23           defb 23h    
-008B FE           defb FEh    
-008C 16           defb 16h    
-008D 38           defb 38h    
-008E 01           defb 01h    
-008F 23           defb 23h    
-0090 37           defb 37h    
-0091 22           defb 22h    
-0092 5D           defb 5Dh    
-0093 5C           defb 5Ch    
-0094 C9           defb C9h    
-0095 BF           defb BFh    
-0096 52           defb 52h    
-0097 4E           defb 4Eh    
-0098 C4           defb C4h    
-0099 49           defb 49h    
-009A 4E           defb 4Eh    
-009B 4B           defb 4Bh    
+0008 E5           defb E5h    
+0009 26           defb 26h    
+000A 26           defb 26h    
+000B 6F           defb 6Fh    
+000C 36           defb 36h    
+000D 01           defb 01h    
+000E E1           defb E1h    
+000F C9           defb C9h    
+0010 C5           defb C5h    
+0011 D5           defb D5h    
+0012 E5           defb E5h    
+0013 C3           defb C3h    
+
+
+             org 387Ah
+
+
+387A L387A:
+387A 00           NOP         
+387B 00           NOP         
+387C 00           NOP         
+387D 00           NOP         
+387E 00           NOP         
+387F 00           NOP         
+3880 00           NOP         
+3881 00           NOP         
+3882 00           NOP         
+3883 00           NOP         
+3884 00           NOP         
+3885 00           NOP         
+3886 00           NOP         
+3887 00           NOP         
+3888 00           NOP         
+3889 00           NOP         
+388A 00           NOP         
+388B 00           NOP         
+388C 00           NOP         
+388D 00           NOP         
+388E 00           NOP         
+388F 00           NOP         
+3890 00           NOP         
+3891 00           NOP         
+3892 00           NOP         
+3893 00           NOP         
+3894 00           NOP         
+3895 00           NOP         
+3896 20 D0        JR   NZ,L3868 
+3898 3C           INC  A      
+3899 8D           ADC  A,L    
+389A 28 01        JR   Z,L389D 
+389C 04           INC  B      
+389D L389D:
+389D 00           NOP         
+389E 00           NOP         
+389F 00           NOP         
+38A0 00           NOP         
+38A1 54           LD   D,H    
+38A2 0B           DEC  BC     
+38A3 00           NOP         
+38A4 02           LD   (BC),A 
+38A5 01 02 04     LD   BC,0402h 
+38A8 00           NOP         
+38A9 00           NOP         
+38AA 00           NOP         
+38AB 00           NOP         
+38AC 00           NOP         
+38AD 00           NOP         
+38AE 00           NOP         
+38AF 00           NOP         
+38B0 00           NOP         
+38B1 00           NOP         
+38B2 00           NOP         
+38B3 00           NOP         
+38B4 00           NOP         
+38B5 00           NOP         
+38B6 00           NOP         
+38B7 00           NOP         
+38B8 00           NOP         
+38B9 00           NOP         
+38BA 00           NOP         
+38BB 00           NOP         
+38BC 00           NOP         
+38BD 00           NOP         
+38BE 00           NOP         
+38BF 00           NOP         
+38C0 00           NOP         
+38C1 00           NOP         
+38C2 00           NOP         
+38C3 00           NOP         
+38C4 00           NOP         
+38C5 00           NOP         
+38C6 00           NOP         
+38C7 00           NOP         
+38C8 00           NOP         
+38C9 00           NOP         
+38CA 00           NOP         
+38CB 00           NOP         
+38CC 00           NOP         
+38CD 00           NOP         
+38CE 00           NOP         
+38CF 00           NOP         
+38D0 00           NOP         
+38D1 00           NOP         
+38D2 00           NOP         
+38D3 00           NOP         
+38D4 00           NOP         
+38D5 00           NOP         
+38D6 00           NOP         
+38D7 00           NOP         
+38D8 00           NOP         
+38D9 00           NOP         
+38DA 00           NOP         
+38DB 00           NOP         
+38DC 00           NOP         
+38DD 00           NOP         
 
 
              org 8180h

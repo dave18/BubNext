@@ -1470,6 +1470,504 @@ intro_data_38D4
 	;defb $51,$52,$53,$54,$55,$56,$57,$58,$59,$5A,$20,$2E
 
 
+/*intro_call_563F
+    ld   a,0
+    ld  (intro_scroll_counter),a
+    ld   hl,l_e5c4
+    ld	 (hl),$00
+    ld   hl,intro_bank1_data_90EA     ;1 Player ending
+    ld   a,(l_e5d7)
+    cp   $03
+    jr   nz,intro_call_565A
+    ld   hl,intro_bank1_data_8D42     ;2 Player ending
+    ld   a,(l_e5db)
+    and  a
+    jr   z,intro_call_565A
+    ld   hl,intro_bank1_data_91BF     ;Real ending
+intro_call_565A
+    ld   (l_e734),hl
+intro_call_565D
+    call  call_0020
+    ld   hl,l_e736
+    inc  (hl)
+    ld   a,(hl)
+    cp   $04
+    jr   nz,intro_call_565D
+    ld   (hl),$00
+    call intro_call_56AB      ;scroll screen and raise sprites
+    ld   a,(l_e2f5)
+    ;ld   a,(l_e1cd)
+    and  $07
+    jr   nz,intro_call_565D   ;if not scrolled 8 pixels don't write new line
+    call intro_call_5701      ;clear line
+    call intro_call_5719      ;write message
+    ld   e,$3B      ;59 - number of scrolls lines in 1 player ending in
+    ld   a,(l_e5d7)
+    cp   $03
+    jr   nz,intro_call_568C
+    ld   e,$AC      ;172 - number of scrolls lines in 2 player ending
+    ld   a,(l_e5db)
+    and  a
+    jr   z,intro_call_568C
+    ld   e,$AC      ;172 - number of scrolls lines in real ending
+intro_call_568C
+    ld a,(intro_scroll_counter)
+    inc a
+    cp 24
+    jr nz,intro_call_568C_1
+    ld a,0
+intro_call_568C_1
+    ld   (intro_scroll_counter),a
+    ld   hl,l_e5c4
+    inc  (hl)
+    ld   a,(hl)
+    cp   e
+    jr   nz,intro_call_565D
+    ld   hl,l_e5c4
+    ld   (hl),$00
+    ;ld   b,$10
+    ld   hl,l_e2f5
+    ld   (hl),$00
+    ;ld   hl,l_e1cd
+intro_call_569E
+    ld a,0
+    ld   (intro_scroll_counter),a
+    ;ld   (hl),$00
+    ;inc  hl
+    ;inc  hl
+    ;inc  hl
+    ;inc  hl
+    ;djnz intro_call_569E
+    
+    ret
+intro_call_56AB
+;    ld   a,($0002) ;protection
+;    cp   $5E
+;    jr   z,$56B4
+;    push af
+;    push bc
+    ;ld   b,$10
+    ld   a,(l_e2f5)
+    ;ld   hl,l_e1cd
+intro_call_56B9
+    inc  a
+    cp $c0;24
+    jr nz,intro_call_56B9_1
+    ld a,0
+intro_call_56B9_1
+    ld (l_e2f5),a
+    ;inc  hl
+    ;inc  hl
+    ;inc  hl
+    ;inc  hl
+    ;djnz call_56B9
+    ld   b,$10
+    ld   hl,l_e20d      ;raise sprites
+intro_call_56C5
+    ld   a,(hl)
+    and  a
+    jr   z,intro_call_56CA
+    inc  (hl)
+intro_call_56CA
+    inc  hl
+    inc  hl
+    inc  hl
+    inc  hl
+    djnz intro_call_56C5
+    ld   hl,l_e2c5
+    ld   a,(hl)
+    and  a
+    jr   z,intro_call_56D8
+    inc  (hl)
+intro_call_56D8
+    ld   hl,l_e2b5
+    ld   a,(hl)
+    and  a
+    jr   z,intro_call_56E0
+    inc  (hl)
+intro_call_56E0
+    ld   b,$08
+    ld   hl,l_e255
+intro_call_56E5
+    ld   a,(hl)
+    and  a
+    jr   z,intro_call_56EA
+    inc  (hl)
+intro_call_56EA
+    inc  hl
+    inc  hl
+    inc  hl
+    inc  hl
+    djnz intro_call_56E5
+    ld   b,$10
+    ld   hl,l_e275
+intro_call_56F5
+    ld   a,(hl)
+    and  a
+    jr   z,intro_call_56FA
+    inc  (hl)
+intro_call_56FA
+    inc  hl
+    inc  hl
+    inc  hl
+    inc  hl
+    djnz intro_call_56F5
+    ret*/
+intro_call_5701
+    //ld   a,(intro_scroll_counter)
+    //and  $1F
+    ;break
+    //add  a,a
+
+    //ld   a,(intro_scroll_counter)         ;row?
+    ;and $1F
+    
+    add a,a				;x2
+	add a,a				;x4
+	add a,a				;x8
+	ld d,a
+
+    ld e,0
+    
+    ld b,$20
+    ;ld b,(ix+$00)       ;length
+    ;add  a,a                ;* 2
+    ;ld   e,a
+    ;ld   d,0
+    ;add  hl,de
+
+    ;ld   de,$7608;$D500
+    ;add  hl,de
+    
+    ;ld   b,(ix+$00)
+    call Clear_Layer2_Text
+    ret
+intro_call_5719
+    ld (scroll_temp),a
+    ld   e,$1E      ;rows in 1 player message (30)
+    ld   a,(l_e5d7)
+    cp   $03
+    jr   nz,intro_call_572C
+    ld   e,$8B      ;rows in 2 player message (139)
+    ld   a,(l_e5db)
+    and  a
+    jr   z,intro_call_572C
+    ld   e,$8B      ;rows in real ending message (139)
+intro_call_572C
+    ld   a,(l_e5c4)
+    cp   e
+    ret  nc         ;return with writing if row is beyond last message line
+    ;break
+    ;ld   a,bank1
+    ;call call_026C
+    ld   hl,(l_e734)
+intro_call_573A
+    ;break
+    ld   a,(hl)
+    inc  hl
+    cp   $FF
+    jr   z,intro_call_576F
+    ld   c,a
+    /*ld   a,(ix+$00)     ;column
+    inc  ix
+    call call_0D8E      ;A * 64 and into DE (Column adjust)
+    ld   hl,$D500       ;TODO screen locs
+    add  hl,de
+    ld   a,(l_e5c4)     ;row
+    and  $1F
+    add  a,a
+    call call_0D89      ;add A to HL
+    */
+    ;break
+
+    ld   a,(scroll_temp)         ;row?
+    ;and $1F
+    
+    add a,a				;x2
+	add a,a				;x4
+	add a,a				;x8
+	ld d,a
+
+    ld  a,(hl)         ;column
+    add a,a ;x2
+    add a,a ;x4
+    add a,a ;x8
+    ld e,a
+    
+    inc hl              ;points to length
+    ;ld b,(ix+$00)       ;length
+    ;add  a,a                ;* 2
+    ;ld   e,a
+    ;ld   d,0
+    ;add  hl,de
+
+    ;ld   de,$7608;$D500
+    ;add  hl,de
+    
+    ;ld   b,(ix+$00)
+    call Write_Layer2_Text
+    
+;    inc  ix
+;intro_call_575E
+;    ld   a,(ix+$00)
+;    ld   (hl),a
+;    inc  hl
+;    inc  ix
+;    ld   (hl),c
+    ;ld   a,$3F
+    ;call call_0D89
+;    inc hl
+ ;   djnz intro_call_575E
+    jr   intro_call_573A
+intro_call_576F
+    ld   (l_e734),hl
+    ;jp   call_029B
+    ret
+scroll_temp
+    BYTE $00
+intro_bank1_data_8D42
+    BYTE $10,$08                ;Red, Start at Col 8
+    BYTE $10,"CONGRATULATIONS!"
+    BYTE $FF,$FF,$FF,$40,$05    ;3 x CRs, Yellow, Start at Col 5    1,2,3
+    BYTE $16,"NOW,YOU FOUND THE MOST"
+    BYTE $FF,$FF,$40,$02        ;2 x CRs, Yellow, Start at Col 2    ;4,5
+    BYTE $1D,"IMPORTANT MAGIC IN THE WORLD."
+    BYTE $FF,$FF,$FF,$00,$03    ;6,7,8
+    BYTE $04,"IT'S"
+    BYTE $10,$08
+    BYTE $06,$22,"LOVE",$22     ;$22 = Quote Mark
+    BYTE $00,$0F
+    BYTE $01,"&"
+    BYTE $10,$11
+    BYTE $0C,$22,"FRIENDSHIP",$22
+    BYTE $00,$1D
+    BYTE $1,"!"
+    BYTE $FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF,$40,$0D    ;9,10,11,12,13,14,15,16,17,18.19
+    BYTE $01,$1D,$40,$0E,$05,"STAFF"    ;1D = Bullet Point
+    BYTE $FF,$FF,$FF,$10,$04    ;20,21,22
+    BYTE $01,$1D,$10,$05,$17,"GAME DESIGN & CHARCTERS"    ;1D = Bullet Point
+    BYTE $FF,$FF,$00,$0B    ;23,24
+    BYTE $0B,"MTJ/MITSUJI"
+    BYTE $FF,$FF,$FF,$10,$04    ;25,26,27
+    BYTE $01,$1D,$10,$05,$14,"SOFTWARE PROGRAMMERS"    ;1D = Bullet Point
+    BYTE $FF,$FF,$00,$0B    ;28,29
+    BYTE $0B,"ICH/FUJISUE"
+    BYTE $FF,$FF,$00,$0B    ;30,31
+    BYTE $0D,"NSO/NISHIYORI"
+    BYTE $FF,$FF,$FF,$10,$04    ;32,33,34
+    BYTE $01,$1D,$10,$05,$0D,"SOUND CREATOR"    ;1D = Bullet Point
+    BYTE $FF,$FF,$00,$0B    ;35,36
+    BYTE $0C,"KIM/KIMIJIMA"
+    BYTE $FF,$FF,$FF,$10,$04 ;37,38,39
+    BYTE $01,$1D,$10,$05,$0B,"INSTRUCTION"    ;1D = Bullet Point
+    BYTE $FF,$FF,$00,$0B    ;40,41
+    BYTE $0B,"YSH/YOSHIDA"
+    BYTE $FF,$FF,$FF,$10,$04    ;42,43,44
+    BYTE $01,$1D,$10,$05,$08,"HARDWARE"    ;1D = Bullet Point
+    BYTE $FF,$FF,$00,$0B    ;45,46
+    BYTE $0C,"KTU/FUJIMOTO"
+    BYTE $FF,$FF,$00,$0B    ;47,48
+    BYTE $0B,"SAK/SAKMOTO"
+    BYTE $FF,$FF,$FF,$10,$04    ;49,50,51
+    BYTE $01,$1D,$10,$05,$12,"AND SPECIAL THANKS"    ;1D = Bullet Point
+    BYTE $FF,$FF,$10,$05,$14,"TO ALL OTHER PEOPLE!" ;52,53
+    BYTE $FF,$FF,$00,$0B    ;54,55
+    BYTE $0B,"TOP/SUEKADO"
+    BYTE $FF,$FF,$00,$0B    ;56,57
+    BYTE $08,"HED/UENO"
+    BYTE $FF,$FF,$00,$0B    ;58,59
+    BYTE $08,"RYO/YUKI"
+    BYTE $FF,$FF,$00,$0B    ;60,61
+    BYTE $0C,"SKE/NAKAMURA"
+    BYTE $FF,$FF,$00,$0B    ;62,63
+    BYTE $09,"SAN/SANBE"
+    BYTE $FF,$FF,$00,$0B    ;64,65
+    BYTE $0C,"PAN/NAKAGAWA"
+    BYTE $FF,$FF,$00,$0B    ;66,67
+    BYTE $0B,"OTO/IMAMURA"
+    BYTE $FF,$FF,$FF,$FF,$10,$04    ;68,69,70,71
+    BYTE $01,$1D,$10,$05,$0A,"CHARACTERS"    ;1D = Bullet Point
+    BYTE $FF,$FF,$20,$0B    ;72,73
+    BYTE $07,"BUBBLUN"
+    BYTE $FF,$FF,$50,$0B    ;74,75
+    BYTE $07,"BOBBLUN"
+    BYTE $FF,$FF,$00,$0B    ;76,77
+    BYTE $08,"ZEN-CHAN"
+    BYTE $FF,$FF,$00,$0B    ;78,79
+    BYTE $06,"MONSTA"  
+    BYTE $FF,$FF,$00,$0B    ;80,81
+    BYTE $0B,"SKEL-MONSTA"
+    BYTE $FF,$FF,$00,$0B    ;82,83
+    BYTE $06,"MIGHTA"
+    BYTE $FF,$FF,$00,$0B    ;84,85
+    BYTE $06,"PULPUL"
+    BYTE $FF,$FF,$00,$0B    ;86,87
+    BYTE $07,"BANEBOU"
+    BYTE $FF,$FF,$00,$0B    ;88,89
+    BYTE $07,"INVADER"
+    BYTE $FF,$FF,$00,$0B    ;90,91
+    BYTE $08,"HIDEGONS"
+    BYTE $FF,$FF,$00,$0B    ;92,93
+    BYTE $05,"DRUNK"
+    BYTE $FF,$FF,$00,$0B    ;94,95
+    BYTE $0B,"SUPER DRUNK"
+    BYTE $FF,$FF,$00,$0B    ;96,97
+    BYTE $06,"RASCAL"  
+    BYTE $FF,$FF,$00,$0B    ;98,99
+    BYTE $05,"BOBBY"
+    BYTE $FF,$FF,$00,$0B    ;100,101
+    BYTE $05,"BETTY"
+    BYTE $FF,$FF,$00,$0B    ;102,103
+    BYTE $05,"BUBBY"
+    BYTE $FF,$FF,$00,$0B    ;104,105
+    BYTE $05,"PATTY"
+    BYTE $FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF,$10,$0A    ;106,107,108,109,110,111,112,113,114
+    BYTE $01,$1D,$10,$0B,$0B,"PRODUCED BY"    ;1D = Bullet Point
+    BYTE $FF,$FF,$10,$0B    ;115,116
+    BYTE $0A,$01,$02,$03,$04,$05,$06,$07,$08,$09,$0A        ;Top Half OF TAITO Logo
+    BYTE $FF,$10,$0C    ;117
+    BYTE $09,$0B,$0C,$0D,$0E,$0F,$10,$11,$12,$13            ;Bottom Half OF TAITO Logo
+    BYTE $FF,$FF,$00,$04    ;118,119
+    BYTE $18,"@ TAITO CORPORATION 1986"
+    BYTE $FF,$FF,$00,$06    ;120,121
+    BYTE $13,"ALL RIGHTS RESERVED"
+    BYTE $FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF,$00,$06    ;122-136
+    BYTE $13,"THANK YOU VERY MUCH"
+    BYTE $FF,$FF,$00,$07    ;137,138
+    BYTE $11,"FOR YOUR PLAYING!"
+    BYTE $FF    ;139
+intro_bank1_data_90EA
+    BYTE $FF,$FF,$FF,$FF
+    BYTE $10,$08
+    BYTE $10,"CONGRATULATIONS!"                 
+    BYTE $FF,$FF,$FF,$40,$01                    ;1,2,3
+    BYTE $0B,"BUT THIS IS"                      
+    byte $40,$0D
+    BYTE $12,"NOT A TRUE ENDING!"               
+    BYTE $FF,$FF,$FF,$FF,$10,$02                ;4,5,6,7
+    BYTE $1C,"COME HERE WITH YOUR FRIENDS!"     
+    BYTE $FF,$FF,$FF,$FF,$00,$04                ;8,9,10,11
+    BYTE $18,"YOU WILL BE IMPRESSED BY"         
+    BYTE $FF,$FF,$00,$03                        ;12,13
+    BYTE $1A,"THE TRUTH OF THIS STORY !!"       
+    BYTE $FF,$FF,$FF,$FF,$FF,$00,$03            ;14,15,16,17,18
+    BYTE $11,"NEVER FORGET YOUR"                
+    BYTE $10,$15
+    BYTE $08,"FRIEND !"                         
+    BYTE $FF,$FF,$FF,$FF,$FF,$FF,$FF,$00,$0A    ;19,20,21,22,23,24,25
+    BYTE $0C,"TRY AGAIN !!"                     
+    BYTE $FF                                    ;26
+
+intro_bank1_data_91BF
+    BYTE $20,$08
+    BYTE $10,"CONGRATULATIONS!"
+    BYTE $FF,$FF,$FF,$00,$02
+    BYTE $1C,"YOU COULD HELP YOUR FATHER &"
+    BYTE $FF,$FF,$00,$02
+    BYTE $1B,"MOTHER! THEY WERE CONTROLED"
+    BYTE $FF,$FF,$00,$02
+    BYTE $1D,"BY SOMEONE. WHO IS HE? NO ONE"
+    BYTE $FF,$FF,$00,$02
+    BYTE $1C,"KNOWS OF IT! THE TRUTH IS IN"
+    BYTE $FF,$FF,$00,$02
+    BYTE $19,"THE DARKNESS FOREVER ...."
+    BYTE $FF,$FF,$10,$0C
+    BYTE $09,"THE END !"
+    BYTE $FF,$FF,$FF,$FF,$FF,$40,$0D
+    BYTE $01,$1D,$40,$0E,$05,"STAFF"    ;1D = Bullet Point
+    BYTE $FF,$FF,$FF,$10,$04
+    BYTE $01,$1D,$10,$05,$17,"GAME DESIGN & CHARCTERS"    ;1D = Bullet Point
+    BYTE $FF,$FF,$00,$0B
+    BYTE $0B,"MTJ/MITSUJI"
+    BYTE $FF,$FF,$FF,$10,$04
+    BYTE $01,$1D,$10,$05,$14,"SOFTWARE PROGRAMMERS"    ;1D = Bullet Point
+    BYTE $FF,$FF,$00,$0B
+    BYTE $0B,"ICH/FUJISUE"
+    BYTE $FF,$FF,$00,$0B
+    BYTE $0D,"NSO/NISHIYORI"
+    BYTE $FF,$FF,$FF,$10,$04
+    BYTE $01,$1D,$10,$05,$0D,"SOUND CREATOR"    ;1D = Bullet Point
+    BYTE $FF,$FF,$00,$0B
+    BYTE $0C,"KIM/KIMIJIMA"
+    BYTE $FF,$FF,$FF,$10,$04
+    BYTE $01,$1D,$10,$05,$0B,"INSTRUCTION"    ;1D = Bullet Point
+    BYTE $FF,$FF,$00,$0B
+    BYTE $0B,"YSH/YOSHIDA"
+    BYTE $FF,$FF,$FF,$10,$04
+    BYTE $01,$1D,$10,$05,$08,"HARDWARE"    ;1D = Bullet Point
+    BYTE $FF,$FF,$00,$0B
+    BYTE $0C,"KTU/FUJIMOTO"
+    BYTE $FF,$FF,$00,$0B
+    BYTE $0B,"SAK/SAKMOTO"
+    BYTE $FF,$FF,$FF,$10,$04
+    BYTE $01,$1D,$10,$05,$12,"AND SPECIAL THANKS"    ;1D = Bullet Point
+    BYTE $FF,$FF,$10,$05,$14,"TO ALL OTHER PEOPLE!"
+    BYTE $FF,$FF,$00,$0B
+    BYTE $0B,"TOP/SUEKADO"
+    BYTE $FF,$FF,$00,$0B
+    BYTE $08,"HED/UENO"
+    BYTE $FF,$FF,$00,$0B
+    BYTE $08,"RYO/YUKI"
+    BYTE $FF,$FF,$00,$0B
+    BYTE $0C,"SKE/NAKAMURA"
+    BYTE $FF,$FF,$00,$0B
+    BYTE $09,"SAN/SANBE"
+    BYTE $FF,$FF,$00,$0B
+    BYTE $0C,"PAN/NAKAGAWA"
+    BYTE $FF,$FF,$00,$0B
+    BYTE $0B,"OTO/IMAMURA"
+    BYTE $FF,$FF,$FF,$FF,$10,$04
+    BYTE $01,$1D,$10,$05,$0A,"CHARACTERS"    ;1D = Bullet Point
+    BYTE $FF,$FF,$20,$0B
+    BYTE $07,"BUBBLUN"
+    BYTE $FF,$FF,$50,$0B
+    BYTE $07,"BOBBLUN"
+    BYTE $FF,$FF,$00,$0B
+    BYTE $08,"ZEN-CHAN"
+    BYTE $FF,$FF,$00,$0B
+    BYTE $06,"MONSTA"
+    BYTE $FF,$FF,$00,$0B
+    BYTE $0B,"SKEL-MONSTA"
+    BYTE $FF,$FF,$00,$0B
+    BYTE $06,"MIGHTA"
+    BYTE $FF,$FF,$00,$0B
+    BYTE $06,"PULPUL"
+    BYTE $FF,$FF,$00,$0B
+    BYTE $07,"BANEBOU"
+    BYTE $FF,$FF,$00,$0B
+    BYTE $07,"INVADER"
+    BYTE $FF,$FF,$00,$0B
+    BYTE $08,"HIDEGONS"
+    BYTE $FF,$FF,$00,$0B
+    BYTE $05,"DRUNK"
+    BYTE $FF,$FF,$00,$0B
+    BYTE $0B,"SUPER DRUNK"
+    BYTE $FF,$FF,$00,$0B
+    BYTE $06,"RASCAL"
+    BYTE $FF,$FF,$00,$0B
+    BYTE $05,"BOBBY"
+    BYTE $FF,$FF,$00,$0B
+    BYTE $05,"BETTY"
+    BYTE $FF,$FF,$00,$0B
+    BYTE $05,"BUBBY"
+    BYTE $FF,$FF,$00,$0B
+    BYTE $05,"PATTY"
+    BYTE $FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF,$10,$0A
+    BYTE $01,$1D,$10,$0B,$0B,"PRODUCED BY"    ;1D = Bullet Point
+    BYTE $FF,$FF,$10,$0B
+    BYTE $0A,$01,$02,$03,$04,$05,$06,$07,$08,$09,$0A        ;Top Half OF TAITO Logo
+    BYTE $FF,$10,$0C
+    BYTE $09,$0B,$0C,$0D,$0E,$0F,$10,$11,$12,$13            ;Bottom Half OF TAITO Logo
+    BYTE $FF,$FF,$00,$04
+    BYTE $18,"@ TAITO CORPORATION 1986"
+    BYTE $FF,$FF,$00,$06
+    BYTE $13,"ALL RIGHTS RESERVED"
+    BYTE $FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF,$00,$06
+    BYTE $13,"THANK YOU VERY MUCH"
+    BYTE $FF,$FF,$00,$07
+    BYTE $11,"FOR YOUR PLAYING!"
+    BYTE $FF
+
 intro_call_62FB
     ld   iy,$D020;$79c8	
     ld   hl,l_e742
@@ -4390,6 +4888,55 @@ Write_Layer2_Num2
 	
 	ret
 
+
+Clear_Layer2_Text
+	di				;no interrupts while writing text!
+	
+	ld 	(oldstack),sp
+	ld sp,$FF00				;space at end of this bank
+	
+	push bc
+	
+	ld bc,$123B		;now we can safely page in Layer 2 for writes
+	ld a,d
+	and $C0			;get correct bank for Layer 2
+	or %00000011	;set write mode
+	out (c),a
+	
+	ld a,d
+	and $3f
+	ld d,a			;mask layer 2 address with 16k bank
+	
+	
+	pop bc
+	
+    ;hl points to text
+    ;de screen location
+    ;c=colour 
+;	ld de,$0000
+	;ld   b,(hl)		;get text length
+	;inc  hl
+Clear_Layer2_Text_Loop
+	
+	
+	ld   a,0
+    ;ld   (de),a
+    ;inc  hl
+	call Layer2_Clear_Char
+	
+	
+    ;inc  de
+    ;ld   a,c
+	;ld   (de),a
+	;inc  de
+    djnz Clear_Layer2_Text_Loop
+	
+	ld bc,$123B
+	ld a,%00000010
+	out (c),a
+	ld 	sp,(oldstack)
+	ei
+	ret
 	
 Write_Layer2_Text
 	di				;no interrupts while writing text!
@@ -4501,7 +5048,145 @@ Layer2_Write_Char_Loop
 	pop bc
 	pop hl
 	ret
+
+Layer2_Clear_Char			;write a letter to Layer 2
+	push hl
+    push bc
+	push de
+    ld b,8
+Layer2_Clear_Char_Loop2
+	push de
+	push bc
+
+	ld b,8
+Layer2_Clear_Char_Loop
+	ld (de),a
+	inc de
+	djnz Layer2_Clear_Char_Loop
+
+	pop bc
+	pop de
+	inc d
+	djnz Layer2_Clear_Char_Loop2
+	pop de
+	ld hl,$0008
+	add hl,de
+	ex de,hl
+    pop bc
+	pop hl
+	ret
+/*
+Write_Layer2_320_Text
+	di				;no interrupts while writing text!
 	
+	ld 	(oldstack),sp
+	ld sp,$FF00				;space at end of this bank
+	
+	push bc
+	
+	ld bc,$123B		;now we can safely page in Layer 2 for writes
+	ld a,d
+	and $C0			;get correct bank for Layer 2
+	or %00000011	;set write mode
+	out (c),a
+	
+	ld a,d
+	and $3f
+	ld d,a			;mask layer 2 address with 16k bank
+	
+	
+	pop bc
+	
+    ;hl points to text
+    ;de screen location
+    ;c=colour 
+;	ld de,$0000
+	ld   b,(hl)		;get text length
+	inc  hl
+Write_Layer2_320_Text_Loop
+	
+	
+	ld   a,(hl)
+    ;ld   (de),a
+    inc  hl
+	call Layer2_320_Write_Char
+	
+	
+    ;inc  de
+    ;ld   a,c
+	;ld   (de),a
+	;inc  de
+    djnz Write_Layer2_320_Text_Loop
+	
+	ld bc,$123B
+	ld a,%00000010
+	out (c),a
+	ld 	sp,(oldstack)
+	ei
+	ret
+
+Layer2_320_Write_Char			;write a letter to Layer 2
+	push hl
+	push bc
+	push bc
+	
+	
+	
+	ld b,$20				;32 bytes per tile in Tilemap Memory
+	call call_0DB1   		;a * b - returned in HL - HL has offset for letter
+	pop bc
+	push bc
+	ld a,c					;get bank value
+	and $07
+	rrca
+	rrca
+	rrca
+	add a,$40
+	ld b,a
+	ld c,0
+	;ld bc,$4000				;Start of tile gfx
+	add hl,bc
+	
+	
+	
+	
+	
+	pop bc
+	ld a,c
+	and $F0				;isolate colour info
+	ld c,a
+	ld b,8
+	push de
+Layer2_320_Write_Char_Loop2
+	push de
+	push bc
+	ld b,4
+Layer2_320_Write_Char_Loop
+	ld a,(hl)
+	and $F0
+	call call_0D62			;div 16
+	or c
+	ld (de),a
+	inc d;e
+	ld a,(hl)
+	and $0F
+	or c
+	ld (de),a
+	inc d;e
+	inc hl
+	djnz Layer2_320_Write_Char_Loop
+	pop bc
+	pop de
+	inc e;d
+	djnz Layer2_320_Write_Char_Loop2
+	pop de
+	ld hl,$0800
+	add hl,de
+	ex de,hl
+	pop bc
+	pop hl
+	ret
+*/	
 	
 extend_0EC6
 	di
