@@ -4593,6 +4593,7 @@ intro_data_B662
 	defb $0C,$0D,$30,$55,$56,$57,$58,$38,$14,$0E,$59,$5A,$5B,$5C,$5D,$3D
 	
 intro_call_B732
+    nextreg $43,%10110000      ;select tilemap palette
     ld   a,(l_e5d7)
     cp   $03
     ret  nz

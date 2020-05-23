@@ -6017,7 +6017,7 @@ bank0_data_B34D
     BYTE $02,$06
 bank0_call_B34F
     ;break
-	call bank0_call_B391    ;update starfield
+	call bank0_call_B391    ;clear some vars for the starfield
     ld   hl,l_f448
     ld   (hl),$00
     call call_0330
@@ -6031,7 +6031,9 @@ bank0_call_B34F
 ;    push bc
 bank0_call_B36D
     call bank0_call_BEA9        ;crumble level 100 walls
-    call bank0_call_B39A        ;update starfield
+    ret
+bank0_call_B370
+    call bank0_call_B39A        ;update starfield/shooting star
     ld   a,(l_e5d7)
     cp   $03
     jr   nz,bank0_call_B389
@@ -6061,7 +6063,7 @@ bank0_call_B39A
 bank0_call_B3A3
     call call_0020
     push bc
-    call bank0_call_BF61
+    call bank0_call_BF61            ;shooting star
     pop  bc
     dec  bc
     ld   a,c
@@ -6076,7 +6078,7 @@ bank0_call_B3B5
     call call_0431
     ;ld   hl,$F960
     ;ld   bc,$0020
-    ;call call_0D50  ;todo - palette
+    ;call call_0D50 
 	nextreg $43, %00110000        ; (R/W) 0x43 (67) => Palette Control - Tiles
     nextreg $40, $B0                  ; (R/W) 0x40 (64) => Palette Index
     ld   b,$10
@@ -6084,9 +6086,12 @@ bank0_call_B3B5_loop
 	nextreg $44,$00
 	nextreg $44,$00
 	djnz bank0_call_B3B5_loop
+	nextreg $40, $11                  ; (R/W) 0x40 (64) => Palette Index
+	nextreg $44,$00
+	nextreg $44,$00
     call call_02D6
     call call_0020
-    ld   hl,$7608;CD08
+    ld   hl,$76F8;CD08
     ld   de,bank0_data_B3F2
     ld   bc,$1A0C
     ;ld   a,$2D
@@ -6096,7 +6101,7 @@ bank0_call_B3B5_loop
 	ex af,af'
 	ld a,$5B
 	call call_0EC6_Adjusted
-    ld   hl,$7608+$18;$D008
+    ld   hl,$76F8+$18;$D008
     ld   de,bank0_data_B52A
     ld   bc,$1A0C
     ;ld   a,$2D
@@ -6106,7 +6111,7 @@ bank0_call_B3B5_loop
 	ex af,af'
 	ld a,$5B
 	call call_0EC6_Adjusted
-    ld   hl,$7608+$18+$18;$D308
+    ld   hl,$76F8+$18+$18;$D308
     ld   de,bank0_data_B662
     ld   bc,$1A08
     ;ld   a,$2E
@@ -6116,6 +6121,7 @@ bank0_call_B3B5_loop
 	ex af,af'
 	ld a,$5B
 	call call_0EC6_Adjusted
+	nextreg $43, %00110000        ; (R/W) 0x43 (67) => Palette Control - Tiles
     jp   call_0427
 bank0_data_B3F2
 	BYTE $00,$01,$02,$03,$04,$05,$06,$03,$04,$05,$06,$07,$08,$09,$0A,$0B
@@ -7013,6 +7019,8 @@ bank0_call_BF03
     ld   a,(hl)
     cp   $1e; finish at row 30 for Next qq$20
     jp   nz,bank0_call_BEB8
+    ld a,$20
+    ld (hl),a   ;set l_f446 to 20 as game expects 32 rows
     ret
 bank0_data_BF38        ;Crumbling wall data
 	;BYTE $C0,$3D,$C1,$3D,$C2,$3D,$C3,$3D,$C4,$3D,$C5,$3D,$C6,$3D,$00,$00

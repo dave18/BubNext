@@ -1463,7 +1463,7 @@ call_1E8C
     ld   hl,$7F18;$D53A			;clear lives and credit
     ;nextreg $70,%00010000      ;set layer 2 to 320 x 256
 
-    ;we need to copy some new tiles, expecially for level 100!
+    ;we need to copy some new tiles, especially for level 100!
 	nextreg $6F,$00				;tile definition start address = 0
 	;nextreg  $6F,$5B				;tile definition start address = 91
 
@@ -1503,7 +1503,10 @@ call_1EA1
     djnz call_1EA1
 call_1EB4
     call call_21CF          ;clears and redraws scores
-    call bank0_call_B34F    ;Crumble screen and scroll message
+    call bank0_call_B34F    ;Crumble screen
+    call copy_intro_tiles   ;get starfield tiles back into tilemap
+  ;  break
+    call bank0_call_B370         ;scroll message
     call call_0B30
     ld   a,(l_e5d7)
     cp   $03
@@ -6822,17 +6825,19 @@ call_67B3                   ;level 100 boss!
     bit  5,(hl)
     jr   z,call_67CA
 call_67C7
-    call bank0_call_B8D3
+    call bank0_call_B8D3    ;cycle heart palette
 call_67CA
+    ;break
     ld   a,(l_e5d7)
     cp   $03
     jr   nz,call_67EA
-    ld   a,(l_f446)
+    ld   a,(l_f446)     ;last row from crumbling wall routine
     cp   $20
     jr   nz,call_67EA
     ld   hl,l_eb43
     bit  0,(hl)
     jr   nz,call_67E7
+    ;break
     call bank0_call_B3AF        ;reprint the starfield?
     ld   hl,l_eb43
     set  0,(hl)
