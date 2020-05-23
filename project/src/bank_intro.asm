@@ -1648,11 +1648,11 @@ intro_call_5719
     ld   a,(l_e5d7)
     cp   $03
     jr   nz,intro_call_572C
-    ld   e,$8B      ;rows in 2 player message (139)
+    ld   e,$8B+$04      ;rows in 2 player message (139)
     ld   a,(l_e5db)
     and  a
     jr   z,intro_call_572C
-    ld   e,$8B      ;rows in real ending message (139)
+    ld   e,$8B+$04      ;rows in real ending message (139)
 intro_call_572C
     ld   a,(l_e5c4)
     cp   e
@@ -1726,6 +1726,7 @@ intro_call_576F
 scroll_temp
     BYTE $00
 intro_bank1_data_8D42
+    BYTE $FF,$FF,$FF,$FF
     BYTE $10,$08                ;Red, Start at Col 8
     BYTE $10,"CONGRATULATIONS!"
     BYTE $FF,$FF,$FF,$40,$05    ;3 x CRs, Yellow, Start at Col 5    1,2,3
@@ -1859,6 +1860,7 @@ intro_bank1_data_90EA
     BYTE $FF                                    ;26
 
 intro_bank1_data_91BF
+    BYTE $FF,$FF,$FF,$FF
     BYTE $20,$08
     BYTE $10,"CONGRATULATIONS!"
     BYTE $FF,$FF,$FF,$00,$02
@@ -2553,7 +2555,8 @@ intro_call_6B9F
     ld   a,(l_e5d7)
     cp   $03
     ret  nz
-    ld   hl,$7AbA;$D560
+    ;ld   hl,$7AbA;$D560
+    ld hl,$5808
     ld   de,intro_data_6C5F ;P1 'HAPPY END!!'
     ld   bc,$040A
     ex   af,af'
@@ -2561,8 +2564,9 @@ intro_call_6B9F
 	ex   af,af'
 	ld   a,$70
     ;ld   a,$1C
-    call call_0EC6_Adjusted 
-    ld   hl,$7AE0;$DA20
+    call call_Layer2_0EC6
+    ;ld   hl,$7AE0;$DA20
+    ld hl,$58A0
     ld   de,intro_data_6C5F ;P2 'HAPPY END!!'
     ld   bc,$040A
     ex   af,af'
@@ -2570,7 +2574,7 @@ intro_call_6B9F
 	ex   af,af'
 	ld   a,$70
     ;ld   a,$1C
-    call call_0EC6_Adjusted
+    call call_Layer2_0EC6
     ret
 intro_call_6BC2
     ld   a,(l_e5d7)
@@ -2579,7 +2583,7 @@ intro_call_6BC2
     ld   a,(l_f2a3)
     and  a
     jr   nz,intro_call_6BDD     ;'1000000PTS!!' in Green
-    ld   hl,$7844;$D690
+    ld   hl,$1830;$D690
     ld   de,intro_data_6C87
     ld   bc,$0214
     ex   af,af'
@@ -2587,10 +2591,10 @@ intro_call_6BC2
 	ex   af,af'
 	ld   a,$70;90
     ;ld   a,$1C
-    call call_0EC6_Adjusted 
+    call call_Layer2_0EC6
     ret
 intro_call_6BDD
-    ld   hl,$7844;$D690
+    ld   hl,$1830;$D690
     ld   de,intro_data_6C87     ;'1000000PTS!!' in Blue
     ld   bc,$0214
     ex   af,af'
@@ -2598,7 +2602,7 @@ intro_call_6BDD
 	ex   af,af'
 	ld   a,$70;90
     ;ld   a,$20
-    call call_0EC6_Adjusted
+    call call_Layer2_0EC6
     ret
 intro_call_6BEC
     pop  bc
@@ -4774,7 +4778,7 @@ intro_call_B878
     ld a,$70
     ld l,$10
 intro_call_B878_loop
-    nextreg $43,%10110000
+    nextreg $43,%10010000
     push af
     nextreg $40,a
     ld  bc,$243b
@@ -4808,15 +4812,26 @@ intro_call_B878_loop
 ;    ldir
     ret
 intro_call_B884                 ;BIG HEART
-    ld   hl,$7990;$D818
+    ld   hl,$3860;7990;$D818
     ld   de,intro_data_B893
-    ld   bc,$0808
+    ld   bc,$0108
     ;ld   a,$26
     ex af,af'
 	ld a,$90 	;gfx atrtibute
 	ex af,af'
 	ld a,$42
-    call call_0EC6_Adjusted      ;adjusted
+    call call_Layer2_0EC6
+    ;split as over 2 layer 2 pages
+    ld   hl,$4060;7990;$D818
+    ld   de,intro_data_B893+8
+    ld   bc,$0708
+    ;ld   a,$26
+    ex af,af'
+	ld a,$90 	;gfx atrtibute
+	ex af,af'
+	ld a,$42
+    call call_Layer2_0EC6
+
     ret
 intro_data_B893         ;Big Heart
     BYTE $5E,$5F,$62,$63,$66,$67,$6A,$6B,$60,$61,$64,$65,$68,$69,$6C,$6D
@@ -5244,7 +5259,77 @@ extendl2loop
 	
 	ei
 	ret
+
+call_Layer2_0EC6
+	di
+	ld 	(oldstack),sp
+	ld sp,$FF00				;space at end of this bank	
+	push af
+	push bc
+
+    ex de,hl
 	
+	ld bc,$123B		;now we can safely page in Layer 2 for writes
+	ld a,d
+	and $C0			;get correct bank for Layer 2
+	or %00000011	;set write mode
+	out (c),a
+	
+	ld a,d
+	and $3f
+	ld d,a			;mask layer 2 address with 16k bank
+	
+	pop bc
+    pop af
+    ;actual code here
+	
+call_Layer2_0EC6_loop2
+	push bc
+	push de;hl
+	ld b,c
+call_Layer2_0EC6_loop1
+	push af
+	add a,(hl)
+	;ld a,(hl)
+	;push af
+;	ld (de),a
+;	inc de
+	;pop af
+	jr nc,call_Layer2_0EC6_in_first_256
+	ex af,af'
+	inc a
+	;ld (de),a
+    ld c,a
+	dec a
+	jr call_Layer2_0EC6_in_second_256
+call_Layer2_0EC6_in_first_256
+	ex af,af'
+	;ld (de),a
+    ld c,a
+call_Layer2_0EC6_in_second_256
+	ex af,af'
+    ;break
+    call Layer2_Write_Char
+	;inc de
+	inc hl
+	pop af
+	djnz call_Layer2_0EC6_loop1
+	pop de;hl
+	ex de,hl
+	ld bc,$0800
+	add hl,bc
+	ex de,hl
+    ;inc d
+	pop bc
+	djnz call_Layer2_0EC6_loop2
+	ex de,hl
+
+    ld bc,$123B
+	ld a,%00000010
+	out (c),a
+	ld 	sp,(oldstack)
+    ret
+
 Layer2_Write_Char8000			;write a letter to Layer 2 from bank at address $8000
 	push hl
 	push bc

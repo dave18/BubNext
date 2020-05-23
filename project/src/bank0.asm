@@ -6017,7 +6017,7 @@ bank0_data_B34D
     BYTE $02,$06
 bank0_call_B34F
     ;break
-	;call bank0_call_B391    ;update starfield
+	call bank0_call_B391    ;update starfield
     ld   hl,l_f448
     ld   (hl),$00
     call call_0330
@@ -6031,7 +6031,7 @@ bank0_call_B34F
 ;    push bc
 bank0_call_B36D
     call bank0_call_BEA9        ;crumble level 100 walls
-    ;call bank0_call_B39A        ;update starfield
+    call bank0_call_B39A        ;update starfield
     ld   a,(l_e5d7)
     cp   $03
     jr   nz,bank0_call_B389
@@ -6178,9 +6178,7 @@ bank0_data_B662
 ;end of duplicated code
 
 
-bank0_call_B8D3
-    nextreg $43,%10100000        ; (R/W) 0x43 (67) => Palette Control - Sprites
-    nextreg $40,$9D                  ; (R/W) 0x40 (64) => Palette Index
+bank0_call_B8D3                 ;cycle heart palettes
     ld   hl,l_f35c
     inc  (hl)
     ld   a,(hl)
@@ -6196,8 +6194,17 @@ bank0_call_B8D3
     ld   (hl),a
 bank0_call_B8E6
     ld   hl,bank0_data_B8F1
-    call call_0DA7
+    ;call call_0DA7
+    add a,a
+    call call_0D89
     ;ld   ($F93A),de     ;TODO palette
+    push hl
+    nextreg $43,%10100000        ; (R/W) 0x43 (67) => Palette Control - Sprites
+    nextreg $40,$9D                  ; (R/W) 0x40 (64) => Palette Index
+    call call_0B30_update_entry
+    pop hl
+    nextreg $43,%10010000        ; (R/W) 0x43 (67) => Palette Control - Sprites
+    nextreg $40,$9D                  ; (R/W) 0x40 (64) => Palette Index
     call call_0B30_update_entry
     ret
 bank0_data_B8F1
@@ -7039,15 +7046,15 @@ bank0_call_BF61
     jr   nz,bank0_call_BFB5
     ld   a,$03
     ;ld   ($FA00),a         ;SOUND IO
-bank0_call_BF75
+bank0_call_BF75                 ;end screen shooting star
     ld   hl,l_e2d5
     ld   de,$0004
     ld   b,$07
-    call call_18A5
+    call call_18A5              ;set sprite gfx nums (byte 2)
     ld   de,bank0_data_BFE3
     ld   hl,l_e2d5
     ld   b,$07
-bank0_call_BF88
+bank0_call_BF88                 ;set starting coords
     ld   a,(de)
     ld   (hl),a
     inc  de
@@ -7069,6 +7076,10 @@ bank0_call_BFA3
     ld   bc,$071D
     ld   e,$04
     call call_14C0
+    ;break
+    ld a,0          ;3 lines are hack to stop erroneous graphic update
+    ld (l_e24e),a
+    ld (l_e252),a
     ld   hl,l_f448
     set  1,(hl)
     ld   c,$13

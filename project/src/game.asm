@@ -190,6 +190,12 @@ FLOORTILE  EQU 7
 	nextreg $19,143	;(this will be internally doubled as we have set sprites over border mode)
 	nextreg $19,0
 	nextreg $19,231
+
+    ;set layer 2 clipping
+    nextreg $18,0
+	nextreg $18,255	
+	nextreg $18,0
+	nextreg $18,183 ;hide bottom line for scrolling text purposes
 	
 
 	
@@ -1456,6 +1462,27 @@ call_1E7C
 call_1E8C
     ld   hl,$7F18;$D53A			;clear lives and credit
     ;nextreg $70,%00010000      ;set layer 2 to 320 x 256
+
+    ;we need to copy some new tiles, expecially for level 100!
+	nextreg $6F,$00				;tile definition start address = 0
+	;nextreg  $6F,$5B				;tile definition start address = 91
+
+	ld	a,gfxbank21
+	call call_026C_DI	;page in gfx bank 21
+	ld de,$5400
+	ld hl,$CBC0		;offset
+	ld bc,$0800		;64 tiles * 32 bytes
+	ldir
+	call call_029B_DI  ;restore bank
+
+    ld	a,gfxbank20
+	call call_026C_DI	;page in gfx bank 21
+	ld de,$6000
+	ld hl,$D200		;offset
+	ld bc,$0A00		;80 tiles * 32 bytes
+	ldir
+	call call_029B_DI  ;restore bank
+
     call call_03FD
     call call_0300
     ld   a,$05
@@ -6687,26 +6714,6 @@ call_5B6E
     cp   $63
     call nz,call_62FB
 
-    ;we need to copy some new tiles, expecially for level 100!
-	nextreg $6F,$00				;tile definition start address = 0
-	;nextreg  $6F,$5B				;tile definition start address = 91
-
-	ld	a,gfxbank21
-	call call_026C_DI	;page in gfx bank 21
-	ld de,$5400
-	ld hl,$CBC0		;offset
-	ld bc,$0800		;64 tiles * 32 bytes
-	ldir
-	call call_029B_DI  ;restore bank
-
-    ld	a,gfxbank20
-	call call_026C_DI	;page in gfx bank 21
-	ld de,$6000
-	ld hl,$D200		;offset
-	ld bc,$0A00		;80 tiles * 32 bytes
-	ldir
-	call call_029B_DI  ;restore bank
-
     ld   hl,l_f66f
     ld   bc,$0007
     call clearbytes;$0D50
@@ -6826,7 +6833,7 @@ call_67CA
     ld   hl,l_eb43
     bit  0,(hl)
     jr   nz,call_67E7
-    ;call bank0_call_B3AF        ;reprint the starfield?
+    call bank0_call_B3AF        ;reprint the starfield?
     ld   hl,l_eb43
     set  0,(hl)
 call_67E7
@@ -7986,7 +7993,7 @@ sprite_noflip_x_axis
 	
 	
 	;code to generate pattern number in Next format
-	ld a,e
+	;ld a,e          ;unneccesary
 	rrca				;move 6 msbs into bits 5 to 0 and get lsb into bit 7 (from bit 0)
 	ld d,a
 	ld bc,$303b			;and write to pattern select register
