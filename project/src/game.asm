@@ -1015,6 +1015,9 @@ call_18EE
 
     BYTE "INTRO ROUTINE"
 call_1AED
+    ld a,$ff        ;temp hack to show real ending
+    ld (l_e5db),a
+
     ld a,1
     ld (options_control),a
 	
@@ -1490,6 +1493,7 @@ call_1E8C
     ld   a,(l_e5d7)
     cp   $03
     jr   nz,call_1EB4
+
     ld   b,$64
 call_1EA1
     ld   a,$05
@@ -3338,7 +3342,9 @@ call_3DF0
 ;    sub  $3E
 ;    jr   $3E5B
 ;    push de
-call_3E5B					;9852 IN ASSEMBLED CODE
+
+    ;set of routines called by RST20 during normal gameplay
+call_3E5B					;9852 IN ASSEMBLED CODE 
     call  call_0020;$20
     call call_4D13
     ld   a,bank2;$02
@@ -5767,7 +5773,7 @@ call_563F
     ld	 (hl),$00
     ld   hl,intro_bank1_data_90EA     ;1 Player ending
     ld   a,(l_e5d7)
-    cp   $03
+    cp   $03                        ;check numbers of players
     jr   nz,call_565A
     ld   hl,intro_bank1_data_8D42     ;2 Player ending
     ld   a,(l_e5db)

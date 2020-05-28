@@ -5407,42 +5407,62 @@ bank0_call_AD24
     call call_14C0
     ret
 bank0_call_AD2B
+    
     bit  7,(ix+$12)
-    jp   z,bank0_call_ADF7
+    jp   z,bank0_call_ADF7  ;clouds
     bit  3,(ix+$12)
-    jr   nz,bank0_call_AD8B
-    ld   hl,l_e295
+    jr   nz,bank0_call_AD8B ;Parents already drawn
+
+    ;break
+    ld   hl,l_e275    ;clear old sprite data
+    ld b,$20
+    ld a,$00
+bank0_call_AD2B_1
+    ld (hl),a
+    inc hl
+    djnz bank0_call_AD2B_1
+
+    /*ld   hl,pattern_bank    ;clear old sprite data
+    ld b,$80
+    ld a,$00
+bank0_call_AD2B_2
+    ld (hl),a
+    inc hl
+    djnz bank0_call_AD2B_2
+*/
+    ld   hl,l_e295          ;draw parents
     ld   de,$000C
     ld   b,$04
-    call call_18A5
+    call call_18A5          ;set the gfx numbers for papa
     ld   hl,l_e295
-    ld   de,bank0_data_AF34
+    ld   de,bank0_data_AF34 ;y pos and x pos data for papa
     ld   b,$04
     ld   c,$18
-    call bank0_call_AEAD
+    call bank0_call_AEAD    ;set the y pos, x pos and gfx bank
     ld   e,$0C
     ld   b,$04
     ld   c,$0F
-    ld   hl,bank0_data_B02C
+    ld   hl,bank0_data_B02C ;papa gfx pattern data
     call call_14C0
     ld   hl,l_e2a5
     ld   de,$000D
     ld   b,$04
-    call call_18A5
+    call call_18A5          ;set the gfx numbers for apa
     ld   hl,l_e2a5
-    ld   de,bank0_data_AF2C
+    ld   de,bank0_data_AF2C ;y pos and x pos data for mama
     ld   b,$04
     ld   c,$18
-    call bank0_call_AEAD
+    call bank0_call_AEAD    ;set the y pos, x pos and gfx bank
     ld   e,$0D
     ld   b,$04
     ld   c,$0F
-    ld   hl,bank0_data_B028
+    ld   hl,bank0_data_B028 ;mama gfx pattern data
     call call_14C0
     set  3,(ix+$12)
     xor  a
     ld   (ix+$01),a
     ld   (ix+$02),a
+    ;break
 bank0_call_AD8B
     ld   hl,l_e295
     ld   a,(hl)
@@ -5530,6 +5550,7 @@ bank0_call_AE0A
     call call_14C0
     ret
 bank0_call_AE25
+    ;break
     set  7,(ix+$12)
     jp   bank0_call_AE53
 bank0_call_AE2C
@@ -5602,7 +5623,7 @@ bank0_call_AE9C
 
 
     
-bank0_call_AEAD
+bank0_call_AEAD         ;update clouds when dragon transitions into parents?
     ld   a,(de)
     ld   (hl),a
     inc  hl
@@ -5698,9 +5719,9 @@ bank0_data_B018
 bank0_data_B020    
     BYTE $D8,$D4,$E0,$DC,$E8,$E4,$F0,$EC
 bank0_data_B028    
-    BYTE $64,$68,$74,$78
+    BYTE $64,$68,$74,$78    ;mama sprite data
 bank0_data_B02C
-    BYTE $6C,$70,$7C,$80
+    BYTE $6C,$70,$7C,$80    ;papa sprite data
     
 bank0_data_B030    
     BYTE $B0,$B0,$B0,$B0,$00,$00,$00,$00,$00,$00,$00,$00

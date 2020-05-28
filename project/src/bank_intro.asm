@@ -1746,7 +1746,7 @@ intro_bank1_data_8D42
     BYTE $FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF,$40,$0D    ;9,10,11,12,13,14,15,16,17,18.19
     BYTE $01,$1D,$40,$0E,$05,"STAFF"    ;1D = Bullet Point
     BYTE $FF,$FF,$FF,$10,$04    ;20,21,22
-    BYTE $01,$1D,$10,$05,$17,"GAME DESIGN & CHARCTERS"    ;1D = Bullet Point
+    BYTE $01,$1D,$10,$05,$17,"GAME DESIGN & CHARACTER"    ;1D = Bullet Point
     BYTE $FF,$FF,$00,$0B    ;23,24
     BYTE $0B,"MTJ/MITSUJI"
     BYTE $FF,$FF,$FF,$10,$04    ;25,26,27
@@ -1861,7 +1861,7 @@ intro_bank1_data_90EA
 
 intro_bank1_data_91BF
     BYTE $FF,$FF,$FF,$FF
-    BYTE $20,$08
+    BYTE $10,$08
     BYTE $10,"CONGRATULATIONS!"
     BYTE $FF,$FF,$FF,$00,$02
     BYTE $1C,"YOU COULD HELP YOUR FATHER &"
@@ -1873,12 +1873,12 @@ intro_bank1_data_91BF
     BYTE $1C,"KNOWS OF IT! THE TRUTH IS IN"
     BYTE $FF,$FF,$00,$02
     BYTE $19,"THE DARKNESS FOREVER ...."
-    BYTE $FF,$FF,$10,$0C
+    BYTE $FF,$FF,$FF,$10,$0C
     BYTE $09,"THE END !"
     BYTE $FF,$FF,$FF,$FF,$FF,$40,$0D
     BYTE $01,$1D,$40,$0E,$05,"STAFF"    ;1D = Bullet Point
     BYTE $FF,$FF,$FF,$10,$04
-    BYTE $01,$1D,$10,$05,$17,"GAME DESIGN & CHARCTERS"    ;1D = Bullet Point
+    BYTE $01,$1D,$10,$05,$17,"GAME DESIGN & CHARACTER"    ;1D = Bullet Point
     BYTE $FF,$FF,$00,$0B
     BYTE $0B,"MTJ/MITSUJI"
     BYTE $FF,$FF,$FF,$10,$04
