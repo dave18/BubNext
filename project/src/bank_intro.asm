@@ -112,6 +112,14 @@ intro_call_1942
     ld   a,(l_e5c4)		;row number
 	ld b,$50
 	call call_0DB1  ;a * b into HL	;80 bytes per row
+
+/*    ld   a,(l_e64b) ;level num
+    bit  0,a
+    ld   a,15*16;$3C	    
+    jr   nz,intro_call_1942_1
+    ld   a,14*16;$38
+intro_call_1942_1*/
+
     ;add  a,a
     ;ld   hl,l_cd00
 	ld   de,$7608-$50;$76F8
@@ -121,6 +129,7 @@ intro_call_1942
 intro_call_194B 
     ld   (hl),$00
     inc  hl
+    //ld   (hl),a;$00
     ld   (hl),$00
     inc  hl
     djnz intro_call_194B
@@ -2065,8 +2074,8 @@ intro_call_6322
 intro_call_67F0
     push bc
 
-    ld a,$06            ;temp cheat
-    ld (l_e645),a
+    ;ld a,$06            ;temp cheat
+    ;ld (l_e645),a
 
     ld   a,(ix+$00)     ;eb36
     bit  0,a

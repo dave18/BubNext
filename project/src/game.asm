@@ -360,7 +360,7 @@ call_0171
     call call_0EE0
     ld   hl,l_fc1f
     set  0,(hl)
-    ;now sits in loop until interrupt goes to 044D
+    ;now sits in loop until interrupt goes to 044D (after 0AEE)
     ;IM2 routine - i=$0B, bus seems to pass $2E (value held at $FC00)
     ;$0B2E points to $044D
 
@@ -1015,10 +1015,10 @@ call_18EE
 
     BYTE "INTRO ROUTINE"
 call_1AED
-    ld a,$ff        ;temp hack to show real ending
-    ld (l_e5db),a
+    ;ld a,$ff        ;temp hack to show real ending
+    ;ld (l_e5db),a
 
-    ld a,1
+    ld a,1              ;flag to allow the options screen to be called
     ld (options_control),a
 	
 
@@ -1376,8 +1376,8 @@ call_1DB5
     ld   (l_e5dd),a
     ld   (l_e358),a
 
-    ld a,99                ;temp to set start level number
-    ld   (l_e64b),a
+    ;ld a,99                ;temp to set start level number
+    ;ld   (l_e64b),a
 	
 	;ld a,$3f				;temp to test extend code
 	;ld   (l_e742),a
@@ -1506,6 +1506,10 @@ call_1EA1
     pop  bc
     djnz call_1EA1
 call_1EB4
+    ld a,introbank
+    call call_026C
+    call intro_call_clear_level_num
+    call call_029B
     call call_21CF          ;clears and redraws scores
     call bank0_call_B34F    ;Crumble screen
     call copy_intro_tiles   ;get starfield tiles back into tilemap

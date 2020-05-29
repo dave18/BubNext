@@ -661,13 +661,13 @@ bank0_call_85F4
      ld   de,$000C
      ld   b,$0E
      ld   hl,l_e26d
-     call call_18A5
+     call call_18A5             ;set sprite numbers
      call bank0_call_89B9
      call bank0_call_8EFB
      call bank0_call_927D
      call bank0_call_9639
      call bank0_call_9893
-     call bank0_call_9DD2
+     call bank0_call_9DD2       ;set x pos y pos and patterns
      call bank0_call_A108
      call bank0_call_B0F0
      call bank0_call_A59D
@@ -4821,11 +4821,28 @@ bank0_call_A847
     ld   b,$10
     ld   c,$18
     call bank0_call_AEAD
+
+    ld hl,$8100
+    ld b,$80
+bank0_call_A847_1
+    ld a,(hl)
+    or $02
+    ld (hl),a
+    inc hl
+    djnz bank0_call_A847_1
+
     ld   hl,l_e28d
     ld   (ix+$03),l
     ld   (ix+$04),h
     ld   hl,bank0_data_A887
-;    ld   de,l_f920         ;TODO - Palette
+
+    nextreg $43,%00100000
+    nextreg $40,$90
+    ld b,$20
+bank0_call_A847_2
+    call call_0B30_update_entry
+    djnz bank0_call_A847_2
+;    ld   de,l_f920         
  ;   ld   bc,$0040
   ;  ldir
     ret
@@ -4859,16 +4876,38 @@ bank0_call_A8C7
     jr   z,bank0_call_A913
     bit  0,a
     jr   nz,bank0_call_A906
-    ld   hl,$70FB
-   ; ld   (l_f9de),hl      ;TODO - palette
-    ld   hl,$70FB
-   ; ld   (l_f9fe),hl      ;TODO - palette
+    ;ld   hl,$70FB
+    nextreg $43,%10110000
+    nextreg $40,$EF
+    nextreg $44,$F5
+    nextreg $44,$01
+    nextreg $40,$FF
+    nextreg $44,$F5
+    nextreg $44,$01
+    nextreg $40,$0F
+    nextreg $44,$F5
+    nextreg $44,$01
+    nextreg $4C,$00
+   ; ld   (l_f9de),hl 
+    ;ld   hl,$70FB
+   ; ld   (l_f9fe),hl 
     ret
 bank0_call_A906
-    ld   hl,$0000
-  ;  ld   ($F9DE),hl   ;TODO - palette
-    ld   hl,$0000
-  ;  ld   ($F9FE),hl  ;TODO - palette
+    nextreg $43,%10110000
+    nextreg $40,$EF
+    nextreg $44,$00
+    nextreg $44,$00
+    nextreg $40,$FF
+    nextreg $44,$00
+    nextreg $44,$00
+    nextreg $40,$0F
+    nextreg $44,$00
+    nextreg $44,$00
+    nextreg $4C,$0F
+  ;  ld   hl,$0000
+  ;  ld   ($F9DE),hl  
+  ;  ld   hl,$0000
+  ;  ld   ($F9FE),hl  
     ret
 bank0_call_A913
     call resetframetimer;$1556
@@ -5156,8 +5195,12 @@ bank0_call_AB27
     ld   de,$0505
     call bank0_call_AB42
     ld   hl,bank0_data_AB38
-    call call_0DA7
-    ;ld   (l_f998),de   ;TODO - Palette
+    ;call call_0DA7
+    call call_0D89      ;just add A to HL, don't store into DE as 0DA7 would
+    ;ld   (l_f998),de   ;Palette
+    nextreg $43,%10100000   ;colour cycle for super drunk captured bubble
+    nextreg $40,$CC
+    call call_0B30_update_entry
     ret
 bank0_data_AB38
     BYTE $FF,$F0,$FF,$F0,$F8,$80,$F6,$70,$F0,$00
@@ -6224,7 +6267,7 @@ bank0_call_B8E6
     ;call call_0DA7
     add a,a
     call call_0D89
-    ;ld   ($F93A),de     ;TODO palette
+    ;ld   ($F93A),de     ;palette
     push hl
     nextreg $43,%10100000        ; (R/W) 0x43 (67) => Palette Control - Sprites
     nextreg $40,$9D                  ; (R/W) 0x40 (64) => Palette Index
