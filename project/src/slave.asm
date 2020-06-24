@@ -2880,6 +2880,8 @@ slave_ay_music
     jr z,slave_ay_silence
     cp 2
     jr z,slave_ay_new_module
+    cp 3
+    jr z,slave_ay_new_module
     call MUSIC_PLAY
     ret
 slave_ay_silence
@@ -2887,6 +2889,8 @@ slave_ay_silence
     ret
 
 slave_ay_new_module
+    sub #2      ;make A either 0 or 1
+    ld (MUSIC_START+$0A),a      ;set looping
     ld a,1
     ld (music_playing),a
     ld hl,(music_module)
@@ -2898,3 +2902,9 @@ slave_ay_new_module
     incbin "../data/bb_0_1.bin"
     ORG MODULE1
     incbin "../data/bb_0_2.bin"
+MODULE2
+    incbin "../data/ext_0_2.bin"
+MODULE3
+    incbin "../data/bbm_0_2.bin"
+MODULE4
+    incbin "../data/gam_0_2.bin"

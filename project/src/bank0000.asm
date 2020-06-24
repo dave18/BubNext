@@ -5076,6 +5076,12 @@ call_6EF8
     and  $3F				;all 6 lower bits set?
     cp   $3F
     jr   nz,call_6F1B		;if not skip to P2 check
+
+    ld hl,MODULE2
+    ld (music_module),hl
+    ld a,3
+    ld (music_playing),a
+
     ld   hl,l_e742			;reset player 1 EXTEND bits
     ld   (hl),$00
     ld   hl,l_eb56			;and set EXTEND control var eb56 to 0
@@ -5087,6 +5093,12 @@ call_6F1B
     and  $3F				;all 6 lower bits set?
     cp   $3F
     ret  nz					;if not return from function
+
+    ld hl,MODULE2
+    ld (music_module),hl
+    ld a,3
+    ld (music_playing),a
+
     ld   hl,l_e743			;reset player 2 EXTEND bits
     ld   (hl),$00
     ld   hl,l_eb56			;and set EXTEND control var eb56 to 1

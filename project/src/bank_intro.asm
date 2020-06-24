@@ -2734,6 +2734,8 @@ intro_call_6FA3_0
 	
 intro_call_6FBF
 
+    ;call call_0431      ;toggle display off
+
 	;clear the EXTEND SPRITES
 	ld a,EXTEND_FIRST_SPRITE_P1
 	nextreg $34,a
@@ -2752,6 +2754,15 @@ intro_call_6FBF_2
 	djnz intro_call_6FBF_2
 	
 	call intro_call_clear_level_num
+    ;call layer2_update_palette_ret
+    nextreg $70,%00010000      ;set layer 2 to 320 x 256
+    nextreg $15,%01101011     ;Set priority - Sprite, ULA/Tiles, Layer 2 and show over borders
+
+    ;set L2 clip window to correct size for EXTEND screen
+    nextreg $18,16
+	nextreg $18,143	
+	nextreg $18,24
+	nextreg $18,231
 
     jp intro_call_7007
 	
@@ -2765,6 +2776,46 @@ intro_data_6FE3
 	defb $02,$03,$04,$05,$00,$01,$01,$02,$03,$04,$05,$00,$00,$01,$02,$03
 	defb $04,$05
 
+/*call_draw_extend_bubble
+	ex de,hl
+    ld hl,$0000
+call_draw_extend_bubble_loop2
+	push bc
+	push de;hl
+	ld b,c
+call_draw_extend_bubble_loop1
+	push af
+	;add a,(hl)
+    ld a,l
+	;ld a,(hl)
+	;push af
+	ld (de),a
+	inc de
+	;pop af
+	jr nc,call_0EC6_Adjusted_in_first_256
+	ex af,af'
+	inc a
+	ld (de),a
+	dec a
+	jr call_0EC6_Adjusted_in_second_256
+call_0EC6_Adjusted_in_first_256
+	ex af,af'
+	ld (de),a
+call_0EC6_Adjusted_in_second_256
+	ex af,af'
+	inc de
+	inc hl
+	pop af
+	djnz call_draw_extend_bubble_loop1
+	pop de;hl
+	ex de,hl
+	ld bc,80
+	add hl,bc
+	ex de,hl
+	pop bc
+	djnz call_draw_extend_bubble_loop2
+	ex de,hl
+    ret*/
 
 
 intro_call_7007			;we will put code in here to add extend tiles to layer 2
@@ -2776,12 +2827,131 @@ intro_call_7007			;we will put code in here to add extend tiles to layer 2
 ;    jr   $7015
 ;    push iy
 
+    call call_03CB		;clear screen
+
+    ld   hl,$1118       ;H=bank   L=row
+    ld   de,intro_bank1_data_849E
+    ld   bc,$1A04
+    ex af,af'
+	ld a,$00 	;gfx attribute
+	ex af,af'
+	ld a,$d0
+    call extend_0EC6		
+    ld   hl,$1218       ;H=bank   L=row
+    ld   de,intro_bank1_data_84E2
+    ld   bc,$1A04
+    ex af,af'
+	ld a,$00 	;gfx attribute
+	ex af,af'
+	ld a,$d0
+    call extend_0EC6
+    ld   hl,$1318       ;H=bank   L=row
+    ld   de,intro_bank1_data_8526
+    ld   bc,$1A04
+    ex af,af'
+	ld a,$00 	;gfx attribute
+	ex af,af'
+	ld a,$d0
+    call extend_0EC6
+    ld   hl,$1418       ;H=bank   L=row
+    ld   de,intro_bank1_data_856A
+    ld   bc,$1A04
+    ex af,af'
+	ld a,$00 	;gfx attribute
+	ex af,af'
+	ld a,$d0
+    call extend_0EC6
+    ld   hl,$1518       ;H=bank   L=row
+    ld   de,intro_bank1_data_85AE
+    ld   bc,$1A04
+    ex af,af'
+	ld a,$00 	;gfx attribute
+	ex af,af'
+	ld a,$d0
+    call extend_0EC6
+    ld   hl,$1618       ;H=bank   L=row
+    ld   de,intro_bank1_data_85F2
+    ld   bc,$1A04
+    ex af,af'
+	ld a,$00 	;gfx attribute
+	ex af,af'
+	ld a,$d0
+    call extend_0EC6
+    ld   hl,$1718       ;H=bank   L=row
+    ld   de,intro_bank1_data_8636
+    ld   bc,$1A04
+    ex af,af'
+	ld a,$00 	;gfx attribute
+	ex af,af'
+	ld a,$d0
+    call extend_0EC6
+    ld   hl,$1818       ;H=bank   L=row
+    ld   de,intro_bank1_data_867A
+    ld   bc,$1A04
+    ex af,af'
+	ld a,$00 	;gfx attribute
+	ex af,af'
+	ld a,$d0
+    call extend_0EC6
+    ;break
+
 	ld   a,gfxbank23
-	ld   hl,intro_bank1_data_8A54  
-	ld	 de,$0708		;d=number of  rows - e=x pos
-	ld	 bc,$1ed0		;b=number of columns - c=colour
+    call extend_get_tiles
 	
-	call extend_0EC6
+    ld   hl,$79CA;7A1A;CD08		;Top left corner of level area
+    ld   de,intro_bank1_data_8982;8A54
+    ld   bc,$0705
+	ex af,af'
+	ld a,$0d*16	;gfx atrtibute
+	ex af,af'
+	ld a,$b0
+    call call_0EC6_Adjusted
+
+    ld   hl,$79D4;7A24;CD08		;Top left corner of level area
+    ld   de,intro_bank1_data_89A5
+    ld   bc,$0705
+	ex af,af'
+	ld a,$0d*16	;gfx atrtibute
+	ex af,af'
+	ld a,$B0
+    call call_0EC6_Adjusted
+
+    ld   hl,$79DE;7A2E;CD08		;Top left corner of level area
+    ld   de,intro_bank1_data_89C8
+    ld   bc,$0705
+	ex af,af'
+	ld a,$0d*16	;gfx atrtibute
+	ex af,af'
+	ld a,$B0
+    call call_0EC6_Adjusted
+
+    ld   hl,$79E8;7A38;CD08		;Top left corner of level area
+    ld   de,intro_bank1_data_89EB
+    ld   bc,$0705
+	ex af,af'
+	ld a,$0d*16	;gfx atrtibute
+	ex af,af'
+	ld a,$B0
+    call call_0EC6_Adjusted
+
+    ld   hl,$79F2;7A42;CD08		;Top left corner of level area
+    ld   de,intro_bank1_data_8A0E
+    ld   bc,$0705
+	ex af,af'
+	ld a,$0d*16	;gfx atrtibute
+	ex af,af'
+	ld a,$B0
+    call call_0EC6_Adjusted
+
+    ld   hl,$79FC;7A4C;CD08		;Top left corner of level area
+    ld   de,intro_bank1_data_8A31
+    ld   bc,$0705
+	ex af,af'
+	ld a,$0d*16	;gfx atrtibute
+	ex af,af'
+	ld a,$B0
+    call call_0EC6_Adjusted
+
 	
 intro_call_7015			;EXTEND complete code
     ld   a,$03
@@ -2799,7 +2969,7 @@ intro_call_7015			;EXTEND complete code
 	
 	ld   hl,layer2_palette_70
     ;ld   de,$F8E0
-	nextreg $43, %00010000        ; (R/W) 0x43 (67) => Palette Control - Layer 2
+	nextreg $43, %00110000        ; (R/W) 0x43 (67) => Palette Control - Tilemap
     nextreg $40, $90                  ; (R/W) 0x40 (64) => Palette Index
     ld   b,$40
 intro_call_7015_loop
@@ -2811,7 +2981,8 @@ intro_call_7015_loop
     ld   (hl),$00
     ld   hl,l_eb5e
     ld   (hl),$00
-    call call_03CB    ;Clear screen
+ ;   call call_03CB    ;Clear screen
+
     call call_02D6	   ;Clear some variables
     call call_030E    ;
     ;ld   hl,$D500		;Top left corner of second screen (need to change to layer 2 code)
@@ -2828,14 +2999,18 @@ intro_call_7015_loop
     ;ld   a,bank1		    ;relocated into intro_bank
     ;call call_026C
 	;Draw the flower screen for EXTEND
-    ld   hl,$76F8;CD08		;Top left corner of level area
-    ld   de,intro_bank1_data_849E  
-    ld   bc,$1A0C
+/*    
+    ld   hl,intro_bank1_data_849E  
+    ld   de,$1A00		;d=number of  rows - e=x pos
+    ld   bc,$0C00		;b=number of columns - c=colour
 	ex af,af'
 	ld a,0*16	;gfx atrtibute
 	ex af,af'
 	ld a,$d0
-    call call_0EC6_Adjusted		
+    call extend_0EC6
+    
+    		
+    break
     ld   hl,$76F8+$18		;top row, 12 across of level area
     ld   de,intro_bank1_data_85D6  
     ld   bc,$1A0C
@@ -2843,7 +3018,7 @@ intro_call_7015_loop
 	ld a,0*16	;gfx atrtibute
 	ex af,af'
 	ld a,$d0
-    call call_0EC6_Adjusted		
+    ;call call_0EC6_Adjusted		
     ld   hl,$76F8+$18+$18		;top row, 24 across of level area
     ld   de,intro_bank1_data_870E  
     ld   bc,$1A08
@@ -2851,8 +3026,10 @@ intro_call_7015_loop
 	ld a,0*16	;gfx atrtibute
 	ex af,af'
 	ld a,$d0
-    call call_0EC6_Adjusted
+    ;call call_0EC6_Adjusted
 
+    ;break
+*/
     call intro_call_7969 
 ;    call call_029B	;we are back to bank 0 now
 intro_call_7098
@@ -2921,12 +3098,12 @@ intro_call_7101
 ;    call $026C
     call intro_call_7136
     call intro_call_7205
-    call intro_call_7293
-    call intro_call_7321
-    call intro_call_739D
-    call intro_call_7419
-    call intro_call_7495
-    call intro_call_7511
+    call intro_call_7293    ;Update first 'E'
+    call intro_call_7321    ;Update X
+    call intro_call_739D    ;Update T
+    call intro_call_7419    ;Update E
+    call intro_call_7495    ;Update N
+    call intro_call_7511    ;Update D
     call intro_call_759F
     call intro_call_77C6
 ;    call $029B
@@ -2970,6 +3147,10 @@ intro_call_716D
     ld   hl,l_eb6e
     ld   (hl),$00
     call intro_call_780B
+
+    ld   a,gfxbank24
+    call extend_get_tiles
+
     jp   intro_call_7196
 intro_call_7187
     dec  (hl)
@@ -3084,6 +3265,10 @@ intro_call_723C
     ld   hl,l_eb6e
     ld   (hl),$00
     call intro_call_780B
+
+    ld   a,gfxbank24
+    call extend_get_tiles
+
     jp   intro_call_7265
 intro_call_7256
     dec  (hl)
@@ -3135,10 +3320,10 @@ intro_call_72A7
     ld   a,(l_eb71)
     bit  0,a
     jp   nz,intro_call_72F3
-    ld   hl,l_eb63
-    ld   bc,l_eb64
+    ld   hl,l_eb63          ;EXTEND animation timer
+    ld   bc,l_eb64          ;EXTEND animation frame
     ld   de,$0F04
-    call intro_call_7900
+    call intro_call_7900    ;update EXTEND animation
     or   a
     jr   z,intro_call_72D5
     cp   $01
@@ -3146,40 +3331,25 @@ intro_call_72A7
     cp   $02
     jr   z,intro_call_72E4
 intro_call_72C6
-    ;ld   hl,$D55A
-    ;ld   de,intro_bank1_data_88B0
-    ;ld   bc,$0705
-    ;ld   a,$35
-	ld   a,gfxbank22+1
-	ld   hl,intro_bank1_data_88B0  
-	ld	 de,$0708
-	ld	 bc,$05d0		;b=number of columns - c=colour
-	call extend_0EC6
-;    call $0EC6
+    ;E Pos 1
+    ld   a,gfxbank22+1
+    ld   hl,$8000
+    ld   de,$5600
+    call extend_get_tiles_single_bubble
     ret
 intro_call_72D5
-    ;ld   hl,$D55A
-    ;ld   de,intro_bank1_data_87DE
-    ;ld   bc,$0705
-    ;ld   a,$34
-	ld   a,gfxbank22
-	ld   hl,intro_bank1_data_87DE  
-	ld	 de,$0708
-	ld	 bc,$05d0		;b=number of columns - c=colour
-	call extend_0EC6
-;    call $0EC6
+    ;E Pos 2
+    ld   a,gfxbank22
+    ld   hl,$8000
+    ld   de,$5600
+    call extend_get_tiles_single_bubble
     ret
 intro_call_72E4
-    ;ld   hl,$D55A
-    ;ld   de,intro_bank1_data_8982
-    ;ld   bc,$0705
-    ;ld   a,$36
-	ld   a,gfxbank23
-	ld   hl,intro_bank1_data_8982 
-	ld	 de,$0708
-	ld	 bc,$05d0		;b=number of columns - c=colour
-	call extend_0EC6
-;    call $0EC6
+    ;E Pos 3
+    ld   a,gfxbank23
+    ld   hl,$8000
+    ld   de,$5600
+    call extend_get_tiles_single_bubble
     ret
 intro_call_72F3
     ld   hl,l_eb61
@@ -3188,28 +3358,18 @@ intro_call_72F3
     call intro_call_7900
     cp   $01
     jr   z,intro_call_7312
-    ;ld   hl,$D55A
-    ;ld   de,intro_bank1_data_8B26
-    ;ld   bc,$0705
-    ;ld   a,$37
-	ld   a,gfxbank23+1
-	ld   hl,intro_bank1_data_8B26
-	ld	 de,$0708
-	ld	 bc,$05d0		;b=number of columns - c=colour
-	call extend_0EC6
-;    call $0EC6
+    ;E Popped with Stars
+    ld   a,gfxbank23+1
+    ld   hl,$8000
+    ld   de,$5600
+    call extend_get_tiles_single_bubble
     ret
 intro_call_7312
-    ;ld   hl,$D55A
-    ;ld   de,intro_bank1_data_8BF8
-    ;ld   bc,$0705
-    ;ld   a,$37
-	ld   a,gfxbank23+1
-	ld   hl,intro_bank1_data_8BF8
-	ld	 de,$0708
-	ld	 bc,$05d0		;b=number of columns - c=colour
-	call extend_0EC6
-;    call $0EC6
+    ;E Popped
+    ld   a,gfxbank24+1
+    ld   hl,$8000
+    ld   de,$5600
+    call extend_get_tiles_single_bubble
     ret
 intro_call_7321
     ld   a,(l_eb72)
@@ -3233,67 +3393,42 @@ intro_call_7335
     cp   $02
     jr   z,intro_call_7369
 intro_call_734B
-    ;ld   hl,$D69A
-    ;ld   de,intro_bank1_data_88D3
-    ;ld   bc,$0705
-    ;ld   a,$35
-	ld   a,gfxbank22+1
-	ld   hl,intro_bank1_data_88D3
-	ld	 de,$0730
-	ld	 bc,$05d0		;b=number of columns - c=colour
-	call extend_0EC6
-;    call $0EC6
+    ;X Pos 1
+    ld   a,gfxbank22+1
+    ld   hl,$8460
+    ld   de,$5A60
+    call extend_get_tiles_single_bubble
     ret
 intro_call_735A
-    ;ld   hl,$D69A
-    ;ld   de,intro_bank1_data_8801
-    ;ld   bc,$0705
-    ;ld   a,$34
-	ld   a,gfxbank22
-	ld   hl,intro_bank1_data_8801
-	ld	 de,$0730
-	ld	 bc,$05d0		;b=number of columns - c=colour
-	call extend_0EC6
-;    call $0EC6
+    ;X Pos 2
+    ld   a,gfxbank22
+    ld   hl,$8460
+    ld   de,$5A60
+    call extend_get_tiles_single_bubble
     ret
 intro_call_7369
-    ;ld   hl,$D69A
-    ;ld   de,intro_bank1_data_89A5
-    ;ld   bc,$0705
-    ;ld   a,$36
-	ld   a,gfxbank23
-	ld   hl,intro_bank1_data_89A5
-	ld	 de,$0730
-	ld	 bc,$05d0		;b=number of columns - c=colour
-	call extend_0EC6
-;    call $0EC6
+    ;X Pos 3
+    ld   a,gfxbank23
+    ld   hl,$8460
+    ld   de,$5A60
+    call extend_get_tiles_single_bubble
     ret
 intro_call_7378
     ld   a,(l_eb62)
     cp   $01
     jr   z,intro_call_738E
-    ;ld   hl,$D69A
-    ;ld   de,intro_bank1_data_8B49
-    ;ld   bc,$0705
-    ;ld   a,$37
-	ld   a,gfxbank23+1
-	ld   hl,intro_bank1_data_8B49
-	ld	 de,$0730
-	ld	 bc,$05d0		;b=number of columns - c=colour
-	call extend_0EC6
-;    call $0EC6
+    ;X Popped with Stars
+    ld   a,gfxbank23+1
+    ld   hl,$8460
+    ld   de,$5A60
+    call extend_get_tiles_single_bubble
     ret
 intro_call_738E
-    ;ld   hl,$D69A
-    ;ld   de,intro_bank1_data_8C1B
-    ;ld   bc,$0705
-    ;ld   a,$37
-	ld   a,gfxbank23+1
-	ld   hl,intro_bank1_data_8C1B
-	ld	 de,$0730
-	ld	 bc,$05d0		;b=number of columns - c=colour
-	call extend_0EC6
-;    call $0EC6
+    ;X Popped
+    ld   a,gfxbank24+1
+    ld   hl,$8460
+    ld   de,$5A60
+    call extend_get_tiles_single_bubble
     ret
 intro_call_739D
     ld   a,(l_eb72)
@@ -3317,67 +3452,42 @@ intro_call_73B1
     cp   $02
     jr   z,intro_call_73E5
 intro_call_73C7
-    ;ld   hl,$D7DA
-    ;ld   de,intro_bank1_data_88F6
-    ;ld   bc,$0705
-    ;ld   a,$35
-	ld   a,gfxbank22+1
-	ld   hl,intro_bank1_data_88F6
-	ld	 de,$0758
-	ld	 bc,$05d0		;b=number of columns - c=colour
-	call extend_0EC6
-;    call $0EC6
+    ;T Pos 1
+    ld   a,gfxbank22+1
+    ld   hl,$88C0
+    ld   de,$5EC0
+    call extend_get_tiles_single_bubble
     ret
 intro_call_73D6
-    ;ld   hl,$D7DA
-    ;ld   de,intro_bank1_data_8824
-    ;ld   bc,$0705
-    ;ld   a,$34
-	ld   a,gfxbank22
-	ld   hl,intro_bank1_data_8824
-	ld	 de,$0758
-	ld	 bc,$05d0		;b=number of columns - c=colour
-	call extend_0EC6
-;    call $0EC6
+    ;T Pos 2
+    ld   a,gfxbank22
+    ld   hl,$88C0
+    ld   de,$5EC0
+    call extend_get_tiles_single_bubble
     ret
 intro_call_73E5
-    ;ld   hl,$D7DA
-    ;ld   de,intro_bank1_data_89C8
-    ;ld   bc,$0705
-    ;ld   a,$36
-	ld   a,gfxbank23
-	ld   hl,intro_bank1_data_89C8
-	ld	 de,$0758
-	ld	 bc,$05d0		;b=number of columns - c=colour
-	call extend_0EC6
-;    call $0EC6
+    ;T Pos 3
+    ld   a,gfxbank23
+    ld   hl,$88C0
+    ld   de,$5EC0
+    call extend_get_tiles_single_bubble
     ret
 intro_call_73F4
     ld   a,(l_eb62)
     cp   $01
     jr   z,intro_call_740A
-    ;ld   hl,$D7DA
-    ;ld   de,intro_bank1_data_8B6C
-    ;ld   bc,$0705
-    ;ld   a,$37
-	ld   a,gfxbank23+1
-	ld   hl,intro_bank1_data_8B6C
-	ld	 de,$0758
-	ld	 bc,$05d0		;b=number of columns - c=colour
-	call extend_0EC6
-;    call $0EC6
+    ;T Popped with Stars
+    ld   a,gfxbank23+1
+    ld   hl,$88C0
+    ld   de,$5EC0
+    call extend_get_tiles_single_bubble
     ret
 intro_call_740A
-    ;ld   hl,$D7DA
-    ;ld   de,intro_bank1_data_8C3E
-    ;ld   bc,$0705
-    ;ld   a,$37
-	ld   a,gfxbank23+1
-	ld   hl,intro_bank1_data_8C3E
-	ld	 de,$0758
-	ld	 bc,$05d0		;b=number of columns - c=colour
-	call extend_0EC6
-;    call $0EC6
+    ;T Popped
+    ld   a,gfxbank24+1
+    ld   hl,$88C0
+    ld   de,$5EC0
+    call extend_get_tiles_single_bubble
     ret
 intro_call_7419
     ld   a,(l_eb72)
@@ -3401,67 +3511,42 @@ intro_call_742D
     cp   $02
     jr   z,intro_call_7461
 intro_call_7443
-    ;ld   hl,$D91A
-    ;ld   de,intro_bank1_data_8919
-    ;ld   bc,$0705
-    ;ld   a,$35
-	ld   a,gfxbank22+1
-	ld   hl,intro_bank1_data_8919
-	ld	 de,$0780
-	ld	 bc,$05d0		;b=number of columns - c=colour
-	call extend_0EC6
-;    call $0EC6
+    ;E(2) Pos 1
+    ld   a,gfxbank22+1
+    ld   hl,$8D20
+    ld   de,$6320
+    call extend_get_tiles_single_bubble
     ret
 intro_call_7452
-    ;ld   hl,$D91A
-    ;ld   de,intro_bank1_data_8847
-    ;ld   bc,$0705
-    ;ld   a,$34
-	ld   a,gfxbank22
-	ld   hl,intro_bank1_data_8847
-	ld	 de,$0780
-	ld	 bc,$05d0		;b=number of columns - c=colour
-	call extend_0EC6
-;    call $0EC6
+    ;E(2) Pos 2
+    ld   a,gfxbank22
+    ld   hl,$8D20
+    ld   de,$6320
+    call extend_get_tiles_single_bubble
     ret
 intro_call_7461
-    ;ld   hl,$D91A
-    ;ld   de,intro_bank1_data_89EB
-    ;ld   bc,$0705
-    ;ld   a,$36
-	ld   a,gfxbank23
-	ld   hl,intro_bank1_data_89EB
-	ld	 de,$0780
-	ld	 bc,$05d0		;b=number of columns - c=colour
-	call extend_0EC6
-;    call $0EC6
+    ;E(2) Pos 3
+    ld   a,gfxbank23
+    ld   hl,$8D20
+    ld   de,$6320
+    call extend_get_tiles_single_bubble
     ret
 intro_call_7470
     ld   a,(l_eb62)
     cp   $01
     jr   z,intro_call_7486
-    ;ld   hl,$D91A
-    ;ld   de,intro_bank1_data_8B8F
-    ;ld   bc,$0705
-    ;ld   a,$37
-	ld   a,gfxbank23+1
-	ld   hl,intro_bank1_data_8B8F
-	ld	 de,$0780
-	ld	 bc,$05d0		;b=number of columns - c=colour
-	call extend_0EC6
-;    call $0EC6
+    ;E(2) Popped with Stars
+    ld   a,gfxbank23+1
+    ld   hl,$8D20
+    ld   de,$6320
+    call extend_get_tiles_single_bubble
     ret
 intro_call_7486
-    ;ld   hl,$D91A
-    ;ld   de,intro_bank1_data_8C61
-    ;ld   bc,$0705
-    ;ld   a,$37
-	ld   a,gfxbank23+1
-	ld   hl,intro_bank1_data_8C61
-	ld	 de,$0780
-	ld	 bc,$05d0		;b=number of columns - c=colour
-	call extend_0EC6
-;    call $0EC6
+    ;E(2) Popped
+    ld   a,gfxbank24+1
+    ld   hl,$8D20
+    ld   de,$6320
+    call extend_get_tiles_single_bubble
     ret
 intro_call_7495
     ld   a,(l_eb72)
@@ -3485,67 +3570,42 @@ intro_call_74A9
     cp   $02
     jr   z,intro_call_74DD
 intro_call_74BF
-    ;ld   hl,$DA5A
-    ;ld   de,intro_bank1_data_893C
-    ;ld   bc,$0705
-    ;ld   a,$35
-	ld   a,gfxbank22+1
-	ld   hl,intro_bank1_data_893C
-	ld	 de,$07A8
-	ld	 bc,$05d0		;b=number of columns - c=colour
-	call extend_0EC6
-;    call $0EC6
+    ;N Pos 1
+    ld   a,gfxbank22+1
+    ld   hl,$9180
+    ld   de,$6780
+    call extend_get_tiles_single_bubble
     ret
 intro_call_74CE
-    ;ld   hl,$DA5A
-    ;ld   de,intro_bank1_data_886A
-    ;ld   bc,$0705
-    ;ld   a,$34
-	ld   a,gfxbank22
-	ld   hl,intro_bank1_data_886A
-	ld	 de,$07A8
-	ld	 bc,$05d0		;b=number of columns - c=colour
-	call extend_0EC6
-;    call $0EC6
+    ;N Pos 2
+    ld   a,gfxbank22
+    ld   hl,$9180
+    ld   de,$6780
+    call extend_get_tiles_single_bubble
     ret
 intro_call_74DD
-    ;ld   hl,$DA5A
-    ;ld   de,intro_bank1_data_8A0E
-    ;ld   bc,$0705
-    ;ld   a,$36
-	ld   a,gfxbank23
-	ld   hl,intro_bank1_data_8A0E
-	ld	 de,$07A8
-	ld	 bc,$05d0		;b=number of columns - c=colour
-	call extend_0EC6
-;    call $0EC6
+    ;N Pos 1
+    ld   a,gfxbank23
+    ld   hl,$9180
+    ld   de,$6780
+    call extend_get_tiles_single_bubble
     ret
 intro_call_74EC
     ld   a,(l_eb62)
     cp   $01
     jr   z,intro_call_7502
-    ;ld   hl,$DA5A
-    ;ld   de,intro_bank1_data_8BB2
-    ;ld   bc,$0705
-    ;ld   a,$37
-	ld   a,gfxbank23+1
-	ld   hl,intro_bank1_data_8BB2
-	ld	 de,$07A8
-	ld	 bc,$05d0		;b=number of columns - c=colour
-	call extend_0EC6
-;    call $0EC6
+    ;N Popped with Stars
+    ld   a,gfxbank23+1
+    ld   hl,$9180
+    ld   de,$6780
+    call extend_get_tiles_single_bubble
     ret
 intro_call_7502
-    ;ld   hl,$DA5A
-    ;ld   de,intro_bank1_data_8C84
-    ;ld   bc,$0705
-    ;ld   a,$37
-	ld   a,gfxbank23+1
-	ld   hl,intro_bank1_data_8C84
-	ld	 de,$07A8
-	ld	 bc,$05d0		;b=number of columns - c=colour
-	call extend_0EC6
-;    call $0EC6
+    ;N Popped
+    ld   a,gfxbank24+1
+    ld   hl,$9180
+    ld   de,$6780
+    call extend_get_tiles_single_bubble
     ret
 intro_call_7511
     ld   a,(l_eb72)
@@ -3565,6 +3625,7 @@ intro_call_7525
     ld   bc,l_eb64
     ld   de,$0F04
     call intro_call_7900
+    ;ld   a,(l_eb64)
     or   a
     jr   z,intro_call_7553
     cp   $01
@@ -3572,40 +3633,25 @@ intro_call_7525
     cp   $02
     jr   z,intro_call_7562
 intro_call_7544
-    ;ld   hl,$DB9A
-    ;ld   de,intro_bank1_data_895F
-    ;ld   bc,$0705
-    ;ld   a,$35
-	ld   a,gfxbank22+1
-	ld   hl,intro_bank1_data_895F
-	ld	 de,$07D0
-	ld	 bc,$05d0		;b=number of columns - c=colour
-	call extend_0EC6
-;    call $0EC6
+    ;D Pos 1
+    ld   a,gfxbank22+1
+    ld   hl,$95E0
+    ld   de,$6bE0
+    call extend_get_tiles_single_bubble
     ret
 intro_call_7553
-    ;ld   hl,$DB9A
-    ;ld   de,intro_bank1_data_888D
-    ;ld   bc,$0705
-    ;ld   a,$34
-	ld   a,gfxbank22
-	ld   hl,intro_bank1_data_888D
-	ld	 de,$07D0
-	ld	 bc,$05d0		;b=number of columns - c=colour
-	call extend_0EC6
-;    call $0EC6
+    ;D Pos 2
+    ld   a,gfxbank22
+    ld   hl,$95E0
+    ld   de,$6bE0
+    call extend_get_tiles_single_bubble
     ret
 intro_call_7562
-    ;ld   hl,$DB9A
-    ;ld   de,intro_bank1_data_8A31
-    ;ld   bc,$0705
-    ;ld   a,$36
-	ld   a,gfxbank23
-	ld   hl,intro_bank1_data_8A31
-	ld	 de,$07D0
-	ld	 bc,$05d0		;b=number of columns - c=colour
-	call extend_0EC6
-;    call $0EC6
+    ;D Pos 3
+    ld   a,gfxbank23
+    ld   hl,$95E0
+    ld   de,$6bE0
+    call extend_get_tiles_single_bubble
     ret
 intro_call_7571
     ld   hl,l_eb61
@@ -3614,28 +3660,18 @@ intro_call_7571
     call intro_call_7900
     cp   $01
     jr   z,intro_call_7590
-    ;ld   hl,$DB9A
-    ;ld   de,intro_bank1_data_8BD5
-    ;ld   bc,$0705
-    ;ld   a,$37
-	ld   a,gfxbank23+1
-	ld   hl,intro_bank1_data_8BD5
-	ld	 de,$07D0
-	ld	 bc,$05d0		;b=number of columns - c=colour
-	call extend_0EC6
-;    call $0EC6
+    ;D Popped with stars
+    ld   a,gfxbank23+1
+    ld   hl,$95E0
+    ld   de,$6bE0
+    call extend_get_tiles_single_bubble
     ret
 intro_call_7590
-    ;ld   hl,$DB9A
-    ;ld   de,intro_bank1_data_8CA7
-    ;ld   bc,$0705
-    ;ld   a,$37
-	ld   a,gfxbank23+1
-	ld   hl,intro_bank1_data_8CA7
-	ld	 de,$07D0
-	ld	 bc,$05d0		;b=number of columns - c=colour
-	call extend_0EC6
-;    call $0EC6
+    ;D Popped
+    ld   a,gfxbank24+1
+    ld   hl,$95E0
+    ld   de,$6bE0
+    call extend_get_tiles_single_bubble
     ret
 intro_call_759F
     ld   a,(l_eb72)
@@ -3952,110 +3988,86 @@ intro_call_77C6
     ld   a,(l_eb56)
     and  a
     jr   nz,intro_call_77EE
-    ;ld   hl,$D61A
-    ;ld   de,intro_bank1_data_8CCA
-    ;ld   bc,$040E
-    ;ld   a,$27
-	ld   a,gfxbank23+1
-	ld   hl,intro_bank1_data_8CCA
-	ld	 de,$0420
-	ld	 bc,$0E90		;b=number of columns - c=colour
-	call extend_0EC6
-;    call $0EC6
-    ;ld   hl,$D9DA
-    ;ld   de,intro_bank1_data_8D02
-    ;ld   bc,$0408
-    ;ld   a,$26
-	ld   a,gfxbank23
-	ld   hl,intro_bank1_data_8D02
-	ld	 de,$0498
-	ld	 bc,$0890		;b=number of columns - c=colour
-	call extend_0EC6
-;    call $0EC6
+    
+    ld   hl,$79D0;7A1A;CD08		;Top left corner of level area
+    ld   de,intro_bank1_data_8CCA;8A54
+    ld   bc,$040E
+	ex af,af'
+	ld a,$09*16	;gfx atrtibute
+	ex af,af'
+	ld a,$65
+    call call_0EC6_Adjusted
+
+    ld   hl,$79F0;7A1A;CD08		;Top left corner of level area
+    ld   de,intro_bank1_data_8D02;8A54
+    ld   bc,$0408
+	ex af,af'
+	ld a,$09*16	;gfx atrtibute
+	ex af,af'
+	ld a,$07
+    call call_0EC6_Adjusted
+
     ret
 intro_call_77EE
-    ;ld   hl,$D61A
-    ;ld   de,intro_bank1_data_8CCA
-    ;ld   bc,$040E
-    ;ld   a,$2B
-	ld   a,gfxbank23+1
-	ld   hl,intro_bank1_data_8CCA
-	ld	 de,$0420
-	ld	 bc,$0EA0		;b=number of columns - c=colour
-	call extend_0EC6
-;    call $0EC6
-    ;ld   hl,$D9DA
-    ;ld   de,intro_bank1_data_8D22
-    ;ld   bc,$0408
-    ;ld   a,$2A
-	ld   a,gfxbank23
-	ld   hl,intro_bank1_data_8D22
-	ld	 de,$0498
-	ld	 bc,$08A0		;b=number of columns - c=colour
-	call extend_0EC6
-;    call $0EC6
+    
+
+    ld   hl,$79D0;7A1A;CD08		;Top left corner of level area
+    ld   de,intro_bank1_data_8CCA;8A54
+    ld   bc,$040E
+	ex af,af'
+	ld a,$0A*16	;gfx atrtibute
+	ex af,af'
+	ld a,$65
+    call call_0EC6_Adjusted
+
+    ld   hl,$79F0;7A1A;CD08		;Top left corner of level area
+    ld   de,intro_bank1_data_8D22;8A54
+    ld   bc,$0408
+	ex af,af'
+	ld a,$0A*16	;gfx atrtibute
+	ex af,af'
+	ld a,$07
+    call call_0EC6_Adjusted
+
    ret
-intro_call_780B
-    ;ld   hl,$D55A
-    ;ld   de,intro_data_786B
-    ;ld   bc,$0705
-    ;ld   a,$00
-	ld   a,gfxbank00
-	ld   hl,intro_data_786B
-	ld	 de,$0708
-	ld	 bc,$0500		;b=number of columns - c=colour
-	call extend_0EC6
-;    call $0EC6
-    ;ld   hl,$D69A
-    ;ld   de,intro_data_786B
-    ;ld   bc,$0705
-    ;ld   a,$00
-	ld   a,gfxbank00
-	ld   hl,intro_data_786B
-	ld	 de,$0730
-	ld	 bc,$0590		;b=number of columns - c=colour
-	call extend_0EC6
-;    call $0EC6
-    ;ld   hl,$D7DA
-    ;ld   de,intro_data_786B
-    ;ld   bc,$0705
-    ;ld   a,$00
-	ld   a,gfxbank00
-	ld   hl,intro_data_786B
-	ld	 de,$0758
-	ld	 bc,$0500		;b=number of columns - c=colour
-	call extend_0EC6
-;    call $0EC6
-    ;ld   hl,$D91A
-    ;ld   de,intro_data_786B
-    ;ld   bc,$0705
-    ;ld   a,$00
-	ld   a,gfxbank00
-	ld   hl,intro_data_786B
-	ld	 de,$0780
-	ld	 bc,$0500		;b=number of columns - c=colour
-	call extend_0EC6
-;    call $0EC6
-    ;ld   hl,$DA5A
-    ;ld   de,intro_data_786B
-    ;ld   bc,$0705
-    ;ld   a,$00
-	ld   a,gfxbank00
-	ld   hl,intro_data_786B
-	ld	 de,$07A8
-	ld	 bc,$0500		;b=number of columns - c=colour
-	call extend_0EC6
-;    call $0EC6
-    ;ld   hl,$DB9A
-    ;ld   de,intro_data_786B
-    ;ld   bc,$0705
-    ;ld   a,$00
-	ld   a,gfxbank00
-	ld   hl,intro_data_786B
-	ld	 de,$07D0
-	ld	 bc,$0500		;b=number of columns - c=colour
-	call extend_0EC6
-;    call $0EC6
+intro_call_780B     ;clear the large EXTEND tiles
+    
+    ld   hl,$79CA;7A1A
+    ld   de,intro_data_786B
+    ld   bc,$0705	
+	ld a,$00
+    call call_0EC6
+
+    ld   hl,$79CA+($0A*$01)
+    ld   de,intro_data_786B
+    ld   bc,$0705	
+	ld a,$00
+    call call_0EC6
+
+    ld   hl,$79CA+($0A*$02)
+    ld   de,intro_data_786B
+    ld   bc,$0705	
+	ld a,$00
+    call call_0EC6
+
+    ld   hl,$79CA+($0A*$03)
+    ld   de,intro_data_786B
+    ld   bc,$0705	
+	ld a,$00
+    call call_0EC6
+
+    ld   hl,$79CA+($0A*$04)
+    ld   de,intro_data_786B
+    ld   bc,$0705	
+	ld a,$00
+    call call_0EC6
+
+    ld   hl,$79CA+($0A*$05)
+    ld   de,intro_data_786B
+    ld   bc,$0705	
+	ld a,$00
+    call call_0EC6
+
     ret
 intro_data_7860
 	defb $08,$30,$58,$80,$A8,$D0
@@ -4193,8 +4205,20 @@ intro_call_7913
 ;    inc  hl
 ;    inc  hl
 ;    djnz intro_call_793C
+    nextreg $70,%00000000      ;set layer 2 to 256 x 192
+    nextreg $15,%01100111     ;Set priority - Sprite, ULA/Tiles, Layer 2 and show over borders
+
+    nextreg $18,0
+	nextreg $18,255	
+	nextreg $18,0
+	nextreg $18,183 ;hide bottom line for scrolling text purposes
 	
 	call layer2_update_palette_ret		;this clears the layer 2 screen
+
+    ld hl,MODULE3
+    ld (music_module),hl
+    ld a,2
+    ld (music_playing),a
 	
 intro_call_7947	
 	call call_0020
@@ -4287,67 +4311,222 @@ intro_data_79C6
 
 	
 intro_bank1_data_849E
-    defb $00,$01,$02,$02,$02,$02,$02,$02,$03,$04,$05,$05
-	defb $06,$07,$08,$09,$0A,$0B,$0C,$0D,$0E,$0F,$08,$09
-	defb $00,$10,$11,$12,$13,$14,$15,$16,$17,$18,$11,$19
-	defb $06,$1A,$1B,$1C,$1D,$1E,$1F,$20,$21,$14,$0F,$22
-	defb $00,$01,$23,$24,$25,$20,$26,$1B,$27,$28,$0B,$0A
-	defb $06,$29,$2A,$2B,$2C,$2D,$2E,$2F,$30,$0F,$0E,$31
-	defb $00,$32,$33,$34,$35,$36,$37,$38,$39,$3A,$0A,$22
-	defb $06,$07,$0B,$3B,$3A,$1C,$1B,$3C,$3D,$3E,$31,$18
-	defb $00,$01,$0E,$0F,$0E
-    defb $0F,$0E,$3F,$40,$0A,$22,$41,$06,$07,$08,$09,$0A,$0B,$0C,$0D,$0E
-    defb $0F,$08,$09,$00,$10,$11,$12,$13,$14,$15,$16,$17,$18,$11,$19,$06
-    defb $1A,$1B,$1C,$1D,$1E,$1F,$20,$21,$14,$0F,$22,$00,$01,$23,$24,$25
-    defb $20,$26,$1B,$27,$28,$0B,$0A,$06,$29,$2A,$2B,$2C,$2D,$2E,$2F,$30
-    defb $0F,$0E,$31,$00,$32,$33,$34,$35,$36,$37,$38,$39,$3A,$0A,$22,$06
-    defb $07,$0B,$3B,$3A,$1C,$1B,$3C,$3D,$3E,$31,$18,$00,$01,$0E,$0F,$0E
-    defb $0F,$0E,$3F,$40,$0A,$22,$41,$06,$07,$08,$09,$0A,$0B,$0C,$0D,$0E
-    defb $0F,$08,$09,$00,$01,$11,$12,$13,$14,$15,$16,$17,$18,$11,$19,$06
-    defb $07,$1B,$1C,$1D,$1E,$1F,$20,$21,$14,$0F,$22,$00,$01,$23,$24,$25
-    defb $20,$26,$1B,$27,$28,$0B,$0A,$06,$29,$2A,$2B,$2C,$2D,$2E,$2F,$30
-    defb $0F,$0E,$31,$00,$32,$33,$34,$35,$36,$37,$38,$39,$3A,$0A,$22,$06
-    defb $07,$0B,$3B,$3A,$1C,$1B,$3C,$3D,$3E,$31,$18,$00,$01,$0E,$0F,$0E
-    defb $0F,$0E,$3F,$40,$0A,$22,$41,$06,$07,$02,$02,$02,$02,$02,$02,$42
-    defb $0F,$05,$05
+    defb $00,$01,$02,$02
+    defb $06,$07,$08,$09
+    defb $00,$10,$11,$12
+    defb $06,$1A,$1B,$1C
+    defb $00,$01,$23,$24
+    defb $06,$29,$2A,$2B
+    defb $00,$32,$33,$34
+    defb $06,$07,$0B,$3B
+    defb $00,$01,$0E,$0F
+    defb $06,$07,$08,$09
+    defb $00,$10,$11,$12
+    defb $06,$1A,$1B,$1C
+    defb $00,$01,$23,$24
+    defb $06,$29,$2A,$2B
+    defb $00,$32,$33,$34
+    defb $06,$07,$0B,$3B
+    defb $00,$01,$0E,$0F
+    defb $06,$07,$08,$09
+    defb $00,$01,$11,$12
+    defb $06,$07,$1B,$1C
+    defb $00,$01,$23,$24
+    defb $06,$29,$2A,$2B
+    defb $00,$32,$33,$34
+    defb $06,$07,$0B,$3B
+    defb $00,$01,$0E,$0F
+    defb $06,$07,$02,$02
+intro_bank1_data_84E2
+    defb $02,$02,$02,$02
+    defb $0A,$0B,$0C,$0D
+    defb $13,$14,$15,$16
+    defb $1D,$1E,$1F,$20
+    defb $25,$20,$26,$1B
+    defb $2C,$2D,$2E,$2F
+    defb $35,$36,$37,$38
+    defb $3A,$1C,$1B,$3C
+    defb $0E,$0F,$0E,$3F
+    defb $0A,$0B,$0C,$0D
+    defb $13,$14,$15,$16
+    defb $1D,$1E,$1F,$20
+    defb $25,$20,$26,$1B
+    defb $2C,$2D,$2E,$2F
+    defb $35,$36,$37,$38
+    defb $3A,$1C,$1B,$3C
+    defb $0E,$0F,$0E,$3F
+    defb $0A,$0B,$0C,$0D
+    defb $13,$14,$15,$16
+    defb $1D,$1E,$1F,$20
+    defb $25,$20,$26,$1B
+    defb $2C,$2D,$2E,$2F
+    defb $35,$36,$37,$38
+    defb $3A,$1C,$1B,$3C
+    defb $0E,$0F,$0E,$3F
+    defb $02,$02,$02,$02
+intro_bank1_data_8526
+    defb $03,$04,$05,$05
+    defb $0E,$0F,$08,$09
+    defb $17,$18,$11,$19
+    defb $21,$14,$0F,$22
+    defb $27,$28,$0B,$0A
+    defb $30,$0F,$0E,$31
+    defb $39,$3A,$0A,$22
+    defb $3D,$3E,$31,$18
+    defb $40,$0A,$22,$41
+    defb $0E,$0F,$08,$09
+    defb $17,$18,$11,$19
+    defb $21,$14,$0F,$22
+    defb $27,$28,$0B,$0A
+    defb $30,$0F,$0E,$31
+    defb $39,$3A,$0A,$22
+    defb $3D,$3E,$31,$18
+    defb $40,$0A,$22,$41
+    defb $0E,$0F,$08,$09
+    defb $17,$18,$11,$19
+    defb $21,$14,$0F,$22
+    defb $27,$28,$0B,$0A
+    defb $30,$0F,$0E,$31
+    defb $39,$3A,$0A,$22
+    defb $3D,$3E,$31,$18
+    defb $40,$0A,$22,$41
+    defb $42,$0F,$05,$05
+intro_bank1_data_856A
+    defb $43,$44,$45,$45
+    defb $4A,$4B,$43,$4C
+    defb $54,$55,$56,$57
+    defb $5F,$60,$54,$61
+    defb $69,$4B,$6A,$6B
+    defb $70,$4F,$71,$72
+    defb $5F,$5A,$7A,$7B
+    defb $56,$4B,$4E,$4A
+    defb $84,$85,$86,$67
+    defb $4A,$8A,$8B,$4C
+    defb $54,$8D,$8E,$57
+    defb $5F,$60,$54,$61
+    defb $69,$4B,$6A,$6B
+    defb $70,$4F,$71,$72
+    defb $5F,$5A,$7A,$7B
+    defb $56,$91,$92,$4A
+    defb $84,$93,$94,$67
+    defb $4A,$95,$96,$4C
+    defb $54,$55,$56,$57
+    defb $5F,$60,$54,$61
+    defb $69,$4B,$6A,$6B
+    defb $70,$4F,$71,$72
+    defb $5F,$5A,$7A,$7B
+    defb $56,$4B,$4E,$4A
+    defb $84,$8C,$78,$67
+    defb $98,$99,$45,$45
+intro_bank1_data_85AE
+    defb $45,$45,$45,$46
+    defb $4D,$4E,$4F,$50
+    defb $58,$59,$5A,$5B
+    defb $62,$63,$64,$65
+    defb $6C,$65,$6D,$54
+    defb $73,$74,$75,$76
+    defb $7C,$7D,$7E,$7F
+    defb $80,$61,$54,$81
+    defb $78,$67,$78,$87
+    defb $4D,$4E,$4F,$8C
+    defb $58,$59,$5A,$8F
+    defb $62,$63,$64,$65
+    defb $6C,$65,$6D,$54
+    defb $73,$74,$75,$76
+    defb $7C,$7D,$7E,$7F
+    defb $80,$61,$54,$81
+    defb $78,$67,$78,$87
+    defb $4D,$4E,$4F,$8C
+    defb $58,$59,$5A,$8F
+    defb $62,$63,$64,$65
+    defb $6C,$65,$6D,$54
+    defb $73,$74,$75,$76
+    defb $7C,$7D,$7E,$7F
+    defb $80,$61,$54,$81
+    defb $78,$67,$78,$87
+    defb $45,$45,$45,$46
+intro_bank1_data_85F2
+    defb $47,$48,$49,$45
+    defb $51,$52,$53,$4C
+    defb $5C,$5D,$56,$5E
+    defb $66,$59,$67,$68
+    defb $6E,$6F,$4E,$4D
+    defb $77,$67,$78,$79
+    defb $69,$80,$4D,$68
+    defb $82,$83,$79,$70
+    defb $88,$4D,$68,$89
+    defb $78,$67,$43,$4C
+    defb $90,$70,$56,$5E
+    defb $66,$59,$67,$68
+    defb $6E,$6F,$4E,$4D
+    defb $77,$67,$78,$79
+    defb $69,$80,$4D,$68
+    defb $82,$83,$79,$70
+    defb $88,$4D,$68,$89
+    defb $78,$67,$43,$4C
+    defb $90,$70,$56,$5E
+    defb $66,$59,$67,$68
+    defb $6E,$6F,$4E,$4D
+    defb $77,$67,$78,$79
+    defb $69,$80,$4D,$68
+    defb $82,$83,$79,$70
+    defb $97,$4B,$68,$89
+    defb $46,$46,$46,$45
+intro_bank1_data_8636
+    defb $9A,$9B,$9C,$9C
+    defb $9F,$A0,$A1,$A2
+    defb $A7,$A8,$A9,$AA
+    defb $AE,$AF,$A7,$B0
+    defb $B4,$A0,$B5,$B6
+    defb $BA,$BB,$BC,$BD
+    defb $AE,$C0,$C1,$C2
+    defb $A9,$A0,$A4,$9F
+    defb $C8,$C9,$CA,$CB
+    defb $9F,$CC,$A1,$A2
+    defb $A7,$CD,$A9,$AA
+    defb $AE,$AF,$A7,$B0
+    defb $B4,$A0,$B5,$B6
+    defb $BA,$BB,$BC,$BD
+    defb $AE,$C0,$C1,$C2
+    defb $A9,$CE,$CF,$9F
+    defb $C8,$D0,$D1,$CB
+    defb $9F,$D2,$D3,$A2
+    defb $A7,$A8,$A9,$AA
+    defb $AE,$AF,$A7,$B0
+    defb $B4,$A0,$B5,$B6
+    defb $BA,$BB,$BC,$BD
+    defb $AE,$C0,$C1,$C2
+    defb $A9,$A0,$A4,$9F
+    defb $C8,$D4,$CA,$CB
+    defb $D5,$D6,$9C,$9C
+intro_bank1_data_867A
+    defb $9C,$9C,$9D,$9E
+    defb $A3,$A4,$A5,$A6
+    defb $AB,$AC,$AD,$9E
+    defb $B1,$B2,$B3,$A6
+    defb $B7,$B8,$B9,$9E
+    defb $BE,$BF,$A5,$A6
+    defb $C3,$C4,$C5,$9E
+    defb $C6,$B0,$C7,$A6
+    defb $CA,$CB,$9D,$9E
+    defb $A3,$A4,$A5,$A6
+    defb $AB,$AC,$AD,$9E
+    defb $B1,$B2,$B3,$A6
+    defb $B7,$B8,$B9,$9E
+    defb $BE,$BF,$A5,$A6
+    defb $C3,$C4,$C5,$9E
+    defb $C6,$B0,$C7,$A6
+    defb $CA,$CB,$9D,$9E
+    defb $A3,$A4,$A5,$A6
+    defb $AB,$AC,$AD,$9E
+    defb $B1,$B2,$B3,$A6
+    defb $B7,$B8,$B9,$9E
+    defb $BE,$BF,$A5,$A6
+    defb $C3,$C4,$C5,$9E
+    defb $C6,$B0,$C7,$A6
+    defb $CA,$CB,$9D,$9E
+    defb $9C,$9C,$D7,$A6
 
-intro_bank1_data_85D6
-    defb $43,$44,$45,$45,$45,$45,$45,$46,$47,$48,$49,$45,$4A
-    defb $4B,$43,$4C,$4D,$4E,$4F,$50,$51,$52,$53,$4C,$54,$55,$56,$57,$58
-    defb $59,$5A,$5B,$5C,$5D,$56,$5E,$5F,$60,$54,$61,$62,$63,$64,$65,$66
-    defb $59,$67,$68,$69,$4B,$6A,$6B,$6C,$65,$6D,$54,$6E,$6F,$4E,$4D,$70
-    defb $4F,$71,$72,$73,$74,$75,$76,$77,$67,$78,$79,$5F,$5A,$7A,$7B,$7C
-    defb $7D,$7E,$7F,$69,$80,$4D,$68,$56,$4B,$4E,$4A,$80,$61,$54,$81,$82
-    defb $83,$79,$70,$84,$85,$86,$67,$78,$67,$78,$87,$88,$4D,$68,$89,$4A
-    defb $8A,$8B,$4C,$4D,$4E,$4F,$8C,$78,$67,$43,$4C,$54,$8D,$8E,$57,$58
-    defb $59,$5A,$8F,$90,$70,$56,$5E,$5F,$60,$54,$61,$62,$63,$64,$65,$66
-    defb $59,$67,$68,$69,$4B,$6A,$6B,$6C,$65,$6D,$54,$6E,$6F,$4E,$4D,$70
-    defb $4F,$71,$72,$73,$74,$75,$76,$77,$67,$78,$79,$5F,$5A,$7A,$7B,$7C
-    defb $7D,$7E,$7F,$69,$80,$4D,$68,$56,$91,$92,$4A,$80,$61,$54,$81,$82
-    defb $83,$79,$70,$84,$93,$94,$67,$78,$67,$78,$87,$88,$4D,$68,$89,$4A
-    defb $95,$96,$4C,$4D,$4E,$4F,$8C,$78,$67,$43,$4C,$54,$55,$56,$57,$58
-    defb $59,$5A,$8F,$90,$70,$56,$5E,$5F,$60,$54,$61,$62,$63,$64,$65,$66
-    defb $59,$67,$68,$69,$4B,$6A,$6B,$6C,$65,$6D,$54,$6E,$6F,$4E,$4D,$70
-    defb $4F,$71,$72,$73,$74,$75,$76,$77,$67,$78,$79,$5F,$5A,$7A,$7B,$7C
-    defb $7D,$7E,$7F,$69,$80,$4D,$68,$56,$4B,$4E,$4A,$80,$61,$54,$81,$82
-    defb $83,$79,$70,$84,$8C,$78,$67,$78,$67,$78,$87,$97,$4B,$68,$89,$98
-    defb $99,$45,$45,$45,$45,$45,$46,$46,$46,$46,$45
-
-intro_bank1_data_870E
-    defb $9A,$9B,$9C,$9C,$9C
-    defb $9C,$9D,$9E,$9F,$A0,$A1,$A2,$A3,$A4,$A5,$A6,$A7,$A8,$A9,$AA,$AB
-    defb $AC,$AD,$9E,$AE,$AF,$A7,$B0,$B1,$B2,$B3,$A6,$B4,$A0,$B5,$B6,$B7
-    defb $B8,$B9,$9E,$BA,$BB,$BC,$BD,$BE,$BF,$A5,$A6,$AE,$C0,$C1,$C2,$C3
-    defb $C4,$C5,$9E,$A9,$A0,$A4,$9F,$C6,$B0,$C7,$A6,$C8,$C9,$CA,$CB,$CA
-    defb $CB,$9D,$9E,$9F,$CC,$A1,$A2,$A3,$A4,$A5,$A6,$A7,$CD,$A9,$AA,$AB
-    defb $AC,$AD,$9E,$AE,$AF,$A7,$B0,$B1,$B2,$B3,$A6,$B4,$A0,$B5,$B6,$B7
-    defb $B8,$B9,$9E,$BA,$BB,$BC,$BD,$BE,$BF,$A5,$A6,$AE,$C0,$C1,$C2,$C3
-    defb $C4,$C5,$9E,$A9,$CE,$CF,$9F,$C6,$B0,$C7,$A6,$C8,$D0,$D1,$CB,$CA
-    defb $CB,$9D,$9E,$9F,$D2,$D3,$A2,$A3,$A4,$A5,$A6,$A7,$A8,$A9,$AA,$AB
-    defb $AC,$AD,$9E,$AE,$AF,$A7,$B0,$B1,$B2,$B3,$A6,$B4,$A0,$B5,$B6,$B7
-    defb $B8,$B9,$9E,$BA,$BB,$BC,$BD,$BE,$BF,$A5,$A6,$AE,$C0,$C1,$C2,$C3
-    defb $C4,$C5,$9E,$A9,$A0,$A4,$9F,$C6,$B0,$C7,$A6,$C8,$D4,$CA,$CB,$CA
-    defb $CB,$9D,$9E,$D5,$D6,$9C,$9C,$9C,$9C,$D7,$A6
 intro_bank1_data_87DE
     defb $00,$01,$02,$03,$04,$15,$16,$17,$18,$19,$30,$31,$32,$33,$34,$4E
     defb $4F,$32,$50,$51,$69,$6A,$6B,$6C,$6D,$83,$84,$85,$86,$87,$05,$05
@@ -4397,29 +4576,71 @@ intro_bank1_data_895F
     defb $62,$63,$64,$65,$7A,$7B,$7C,$7D,$7E,$8F,$2B,$2B,$90,$91,$A1,$A2
     defb $A3,$A4,$00
 intro_bank1_data_8982
-    defb $00,$00,$01,$00,$00,$11,$12,$13,$14,$15,$2F,$30,$31,$32,$33,$4D
-    defb $4E,$4F,$50,$51,$69,$6A,$4F,$6B,$6C,$82,$83,$84,$85,$86,$95,$96
-    defb $97,$98,$99	;88A5
+    BYTE $00,$01,$02,$03,$04
+    BYTE $05,$06,$07,$08,$09
+    BYTE $0A,$0B,$0C,$0D,$0E
+    BYTE $0F,$10,$11,$12,$13
+    BYTE $14,$15,$16,$17,$18
+    BYTE $19,$1A,$1B,$1C,$1D
+    BYTE $1E,$1F,$20,$21,$22
+    ;defb $00,$00,$01,$00,$00,$11,$12,$13,$14,$15,$2F,$30,$31,$32,$33,$4D
+    ;defb $4E,$4F,$50,$51,$69,$6A,$4F,$6B,$6C,$82,$83,$84,$85,$86,$95,$96
+    ;defb $97,$98,$99	;88A5
 intro_bank1_data_89A5
-    defb $00,$02,$03,$04,$00,$16,$17,$18,$19,$1A,$34,$35,$36,$37,$38,$52
-    defb $53,$54,$55,$56,$6D,$6E,$6F,$70,$71,$87,$18,$18,$18,$88,$00,$9A
-    defb $9B,$9C,$00	;89C8
+    BYTE $23,$24,$25,$26,$27
+    BYTE $28,$29,$2A,$2B,$2C
+    BYTE $2D,$2E,$2F,$30,$31
+    BYTE $32,$33,$34,$35,$36
+    BYTE $37,$38,$39,$3A,$3B
+    BYTE $3C,$3D,$3E,$3F,$40
+    BYTE $41,$42,$43,$44,$45
+    ;defb $00,$02,$03,$04,$00,$16,$17,$18,$19,$1A,$34,$35,$36,$37,$38,$52
+    ;defb $53,$54,$55,$56,$6D,$6E,$6F,$70,$71,$87,$18,$18,$18,$88,$00,$9A
+    ;defb $9B,$9C,$00	;89C8
 intro_bank1_data_89C8
-    defb $05,$06,$07,$08,$09,$1B,$1C,$1D,$1E,$1F,$39,$3A,$3B,$3C,$3D,$57
-    defb $58,$59,$58,$5A,$72,$58,$73,$58,$74,$89,$8A,$58,$8B,$8C,$00,$00
-    defb $9D,$00,$00	;89EB
+    BYTE $46,$47,$48,$49,$4A
+    BYTE $4B,$4C,$4D,$4E,$4F
+    BYTE $50,$51,$52,$53,$54
+    BYTE $55,$56,$57,$58,$59
+    BYTE $5A,$5B,$5C,$5D,$5E
+    BYTE $5F,$60,$61,$62,$63
+    BYTE $64,$65,$66,$67,$68
+    ;defb $05,$06,$07,$08,$09,$1B,$1C,$1D,$1E,$1F,$39,$3A,$3B,$3C,$3D,$57
+    ;defb $58,$59,$58,$5A,$72,$58,$73,$58,$74,$89,$8A,$58,$8B,$8C,$00,$00
+    ;defb $9D,$00,$00	;89EB
 intro_bank1_data_89EB
-    defb $00,$0A,$0B,$0C,$00,$20,$21,$22,$23,$24,$3E,$3F,$40,$41,$42,$5B
-    defb $5C,$40,$5D,$5E,$75,$76,$40,$41,$77,$8D,$22,$22,$22,$8E,$00,$9E
-    defb $9F,$A0,$00	;8A0E
+    BYTE $69,$6A,$6B,$6C,$6D
+    BYTE $6E,$6F,$70,$71,$72
+    BYTE $73,$74,$75,$76,$77
+    BYTE $78,$79,$7A,$7B,$7C
+    BYTE $7D,$7E,$7F,$80,$81
+    BYTE $82,$83,$84,$85,$86
+    BYTE $87,$88,$89,$8A,$8B
+    ;defb $00,$0A,$0B,$0C,$00,$20,$21,$22,$23,$24,$3E,$3F,$40,$41,$42,$5B
+    ;defb $5C,$40,$5D,$5E,$75,$76,$40,$41,$77,$8D,$22,$22,$22,$8E,$00,$9E
+    ;defb $9F,$A0,$00	;8A0E
 intro_bank1_data_8A0E
-    defb $00,$00,$0D,$00,$00,$25,$26,$27,$28,$29,$43,$44,$45,$46,$47,$5F
-    defb $60,$61,$62,$63,$78,$79,$7A,$7B,$7C,$8F,$90,$27,$91,$92,$A1,$A2
-    defb $A3,$A4,$A5	;8A31
+    BYTE $8C,$8D,$8E,$8F,$90
+    BYTE $91,$92,$93,$94,$95
+    BYTE $96,$97,$98,$99,$9A
+    BYTE $9B,$9C,$9D,$9E,$9F
+    BYTE $A0,$A1,$A2,$A3,$A4
+    BYTE $A5,$A6,$A7,$A8,$A9
+    BYTE $AA,$AB,$AC,$AD,$AE
+    ;defb $00,$00,$0D,$00,$00,$25,$26,$27,$28,$29,$43,$44,$45,$46,$47,$5F
+    ;defb $60,$61,$62,$63,$78,$79,$7A,$7B,$7C,$8F,$90,$27,$91,$92,$A1,$A2
+    ;defb $A3,$A4,$A5	;8A31
 intro_bank1_data_8A31
-    defb $00,$0E,$0F,$10,$00,$2A,$2B,$2C,$2D,$2E,$48,$49,$4A,$4B,$4C,$64
-    defb $65,$66,$67,$68,$7D,$7E,$7F,$80,$81,$93,$2C,$2C,$2C,$94,$00,$A6
-    defb $A7,$A8,$00
+    BYTE $AF,$B0,$B1,$B2,$B3
+    BYTE $B4,$B5,$B6,$B7,$B8
+    BYTE $B9,$BA,$BB,$BC,$BD
+    BYTE $BE,$BF,$C0,$C1,$C2
+    BYTE $C3,$C4,$C5,$C6,$C7
+    BYTE $C8,$C9,$CA,$CB,$CC
+    BYTE $CD,$CE,$CF,$D0,$D1
+    ;defb $00,$0E,$0F,$10,$00,$2A,$2B,$2C,$2D,$2E,$48,$49,$4A,$4B,$4C,$64
+    ;defb $65,$66,$67,$68,$7D,$7E,$7F,$80,$81,$93,$2C,$2C,$2C,$94,$00,$A6
+    ;defb $A7,$A8,$00
 intro_bank1_data_8A54
     defb $00,$00,$01,$00,$00,$00,$02,$03,$04,$00,$05,$06,$07,$08,$09,$00,$0A,$0B,$0C,$00,$00,$00,$0D,$00,$00,$00,$0E,$0F,$10,$00
     defb $11,$12,$13,$14,$15,$16,$17,$18,$19,$1A,$1B,$1C,$1D,$1E,$1F,$20,$21,$22,$23,$24,$25,$26,$27,$28,$29,$2A,$2B,$2C,$2D,$2E
@@ -5212,62 +5433,190 @@ Layer2_320_Write_Char_Loop
 	pop hl
 	ret
 */	
+
+    ;routine to use address $8000 to stage tiles data ahead
+    ;of copy into tilemap
+    ;a = gfxbank
+extend_get_tiles_single_bubble
+    call intro_get_tiles_at_8000
+
+    nextreg $6F,$00				;tile definition start address = 0
+	;nextreg  $6F,$5B				;tile definition start address = 91
+
 	
-extend_0EC6
+	;ld de,$5600
+	;ld hl,$8000		;offset
+	ld bc,$460		;35 tiles (7 x 5) * 32 bytes
+	ldir
+
+    call intro_restore_8000
+
+    ret
+
+
+    ;routine to use address $8000 to stage tiles data ahead
+    ;of copy into tilemap
+    ;a = gfxbank
+extend_get_tiles
+    call intro_get_tiles_at_8000
+
+    nextreg $6F,$00				;tile definition start address = 0
+	;nextreg  $6F,$5B				;tile definition start address = 91
+
+	
+	ld de,$5600
+	ld hl,$8000		;offset
+	ld bc,$2000		;256 tiles * 32 bytes
+	ldir
+
+    call intro_restore_8000
+
+    ret
+	
+extend_0EC6     ;H has bank, L has column number
 	di
-	
-	call intro_get_tiles_at_8000
-	
 	ld 	(oldstack),sp
 	ld sp,$FF00				;space at end of this bank	
-	
-	push bc
-	
-	ld bc,$123B		;now we can safely page in Layer 2 for writes
-	ld a,%01000011	;set write mode
-	out (c),a
-	
-	pop bc
-	
-	
-	ld a,d
-	ld d,0
-extendl2loop2
-    push bc
 	push af
-	push de
-extendl2loop
-	;ld c,$D0
-	ld a,(hl)
+	;push bc
+
+    ex de,hl
+
+    ld a,d
+    nextreg $54,a
+	
+	;ld bc,$123B		;now we can safely page in Layer 2 for writes
+	;ld a,d
+	;and $C0			;get correct bank for Layer 2
+	;or %00000011	;set write mode
+	;out (c),a
+	
+	;ld a,d
+	;and $3f
+	;ld d,a			;mask layer 2 address with 8k bank
+	
+	;pop bc
+    pop af
+    ;ld a,$ff
+    ;sub e
+    ;ld e,a
+    ;actual code here
+    ld d,$80       ;make hl point to offset with $8000
+	
+extend_0EC6_loop2
+	push bc
+	push de;hl
+	ld b,c
+extend_0EC6_loop1
+	push af
+	add a,(hl)
+	;ld a,(hl)
+	;push af
+;	ld (de),a
+;	inc de
+	;pop af
+	jr nc,extend_0EC6_in_first_256
+	ex af,af'
+	inc a
+	;ld (de),a
+    ld c,a
+	dec a
+	jr extend_0EC6_in_second_256
+extend_0EC6_in_first_256
+	ex af,af'
+	;ld (de),a
+    ld c,a
+extend_0EC6_in_second_256
+	ex af,af'
+    ;break
+   ; ld a,65
+   ; ld c,$10
+    call Extend_Write_Char
+    ;call Layer2_Write_Char
+	;inc de
 	inc hl
-	;add a,91
-	;jr nc,extendl2_infirst256
-	;ld c,$D1
-;extendl2_infirst256
-	call Layer2_Write_Char8000
-	djnz extendl2loop
-	pop de
+	pop af
+	djnz extend_0EC6_loop1
+	pop de;hl
 	ex de,hl
-	ld bc,$0800
+	ld bc,$0008;$0800
 	add hl,bc
 	ex de,hl
-	pop af
+    ;inc d
 	pop bc
-	dec a
-	jr nz,extendl2loop2
+	djnz extend_0EC6_loop2
+	ex de,hl
 
-	
+    call intro_restore_8000
 
-	ld bc,$123B
+    ld bc,$123B
 	ld a,%00000010
 	out (c),a
 	ld 	sp,(oldstack)
-	
-	call intro_restore_8000
-	
+	ret
 
+Extend_Write_Char			;write a letter to Layer 2
+;    break
+	push hl
+	push bc
+	push bc
 	
-	ei
+	
+	
+	ld b,$20				;32 bytes per tile in Tilemap Memory
+	call call_0DB1   		;a * b - returned in HL - HL has offset for letter
+	pop bc
+	push bc
+	ld a,c					;get bank value
+	and $07
+	rrca
+	rrca
+	rrca
+	add a,$40
+	ld b,a
+	ld c,0
+	;ld bc,$4000				;Start of tile gfx
+	add hl,bc
+	
+	
+	
+	
+	
+	pop bc
+	ld a,c
+	and $F0				;isolate colour info
+	ld c,a
+	ld b,8
+	push de
+Extend_Write_Char_Loop2
+	push de
+	push bc
+	ld b,4
+Extend_Write_Char_Loop
+	ld a,(hl)
+	and $F0
+	call call_0D62			;div 16
+	or c
+	ld (de),a
+	inc d
+	ld a,(hl)
+	and $0F
+	or c
+	ld (de),a
+	inc d
+	inc hl
+	djnz Extend_Write_Char_Loop
+	pop bc
+	pop de
+	inc e
+	djnz Extend_Write_Char_Loop2
+ ;   break
+	pop de
+	ld hl,$0800
+	add hl,de
+	ex de,hl
+    pop bc
+	pop hl
 	ret
 
 call_Layer2_0EC6

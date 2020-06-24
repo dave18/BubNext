@@ -41,30 +41,31 @@ bank2 EQU 41*2
 bank0 EQU 39*2
 bank3 EQU 42*2     
 divmmcbank EQU 47*2
-gfxbank00  EQU 15*2
-gfxbank01  EQU 16*2
-gfxbank02  EQU 17*2
-gfxbank03  EQU 18*2
-gfxbank04  EQU 19*2
-gfxbank05  EQU 20*2
-gfxbank06  EQU 21*2
-gfxbank07  EQU 22*2
-gfxbank08  EQU 23*2
-gfxbank09  EQU 24*2
-gfxbank10  EQU 25*2
-gfxbank11  EQU 26*2
-gfxbank12  EQU 27*2
-gfxbank13  EQU 28*2
-gfxbank14  EQU 29*2
-gfxbank15  EQU 30*2
-gfxbank16  EQU 31*2
-gfxbank17  EQU 32*2
-gfxbank18  EQU 33*2
-gfxbank19  EQU 34*2
-gfxbank20  EQU 35*2
-gfxbank21  EQU 36*2
-gfxbank22  EQU 37*2
-gfxbank23  EQU 38*2
+gfxbank00  EQU 14*2
+gfxbank01  EQU 15*2
+gfxbank02  EQU 16*2
+gfxbank03  EQU 17*2
+gfxbank04  EQU 18*2
+gfxbank05  EQU 19*2
+gfxbank06  EQU 20*2
+gfxbank07  EQU 21*2
+gfxbank08  EQU 22*2
+gfxbank09  EQU 23*2
+gfxbank10  EQU 24*2
+gfxbank11  EQU 25*2
+gfxbank12  EQU 26*2
+gfxbank13  EQU 27*2
+gfxbank14  EQU 28*2
+gfxbank15  EQU 29*2
+gfxbank16  EQU 30*2
+gfxbank17  EQU 31*2
+gfxbank18  EQU 32*2
+gfxbank19  EQU 33*2
+gfxbank20  EQU 34*2
+gfxbank21  EQU 35*2
+gfxbank22  EQU 36*2
+gfxbank23  EQU 37*2
+gfxbank24  EQU 38*2
 ;gfxbank16  EQU 48*2
 ;gfxbank17  EQU 49*2
 ;gfxbank18  EQU 50*2
@@ -155,6 +156,8 @@ FLOORTILE  EQU 7
 	nextreg $6b,%00000011		;tilemap control - disable until ready
 	nextreg $6F,$00				;tile definition start address = 0
 	nextreg $6E,$76				;tilemap start address $36 * $100 = $3600 + $4000 = $7600
+
+    nextreg $70,%00000000      ;set layer 2 to 256 x 192
 
 
 	;ld hl,l_e1cc
@@ -1764,6 +1767,12 @@ data_20B5
 	;BYTE $0b,$60,$60,$60,$60,$60,$7b,$7b,$60,$60,$60,$60
     BYTE $0b,"     00    "
 call_20C1
+
+    ld hl,MODULE4
+    ld (music_module),hl
+    ld a,3
+    ld (music_playing),a
+
 	ld   a,$05
 	call call_0018
     ld   hl,l_e5db

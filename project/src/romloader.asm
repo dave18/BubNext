@@ -98,6 +98,10 @@
     ORG 0xC000
     INCLUDE "gfxbank23.asm"
 
+    MMU 6 7,gfxbank24
+    ORG 0xC000
+    INCLUDE "gfxbank24.asm"
+
     MMU 6 7,introbank
     ORG 0xC000
     INCLUDE "bank_intro.asm"
