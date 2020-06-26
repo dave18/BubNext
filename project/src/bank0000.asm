@@ -600,7 +600,7 @@ call_04AD
 ;    ld   de,$DD00
 ;    ld   bc,$0168
 ;    ldir
-     call call_136C     ;sound???
+     ;call call_136C     ;process sound queue - moved to interrupt routine
      call call_0E79     ;increase counter at l_e37f
      push bc
      push de
@@ -974,8 +974,9 @@ call_0781
     ld   hl,l_f66b
     ld   (hl),$00
     call call_24B1
-    ld   a,$00
-;    ld   ($FA00),a
+    ld   a,$00          ;Silence music ahead of Hurry Up
+    ld (music_playing),a
+;    ld   ($FA00),a     ;Sound IO
     ld   hl,data_0847
     ld   de,l_e2d5
     ld   bc,$0010
@@ -1751,8 +1752,9 @@ call_0C6D
     and  a
     ret  z
     dec  (hl)
-    ld   a,$34
-    ;ld   (l_fa00),a         ;SOUND IO
+    ;ld   a,$34
+    ;ld   (l_fa00),a         ;SOUND IO - credit insert
+    
     ld   a,$2D
     ld   (l_e369),a
     ld   a,$FF
@@ -2760,19 +2762,7 @@ call_135C
 
     
 
-call_136C
-    ld   a,(l_e391)
-    and  a
-    ret  z
-    ld   a,(l_e381)
-    ;ld   ($FA00),a          ;SOUND IO
-    ld   hl,l_e382
-    ld   de,l_e381
-    ld   bc,$000F
-    ldir
-    ld   hl,l_e391
-    dec  (hl)
-    ret
+
 
 call_1387
     ret
@@ -3261,7 +3251,8 @@ call_3A5C
     cp   $3C
     jr   nz,call_3A79
     ld   a,$00
-;    ld   ($FA00),a				;TODO - Sound
+    ld (music_playing),a
+;    ld   ($FA00),a				;Sound IO - Stop Record Screen sound
     call call_03CB
     call call_03D0
     call call_041E
@@ -5077,8 +5068,8 @@ call_6EF8
     cp   $3F
     jr   nz,call_6F1B		;if not skip to P2 check
 
-    ld hl,MODULE2
-    ld (music_module),hl
+    ld a,1;hl,MODULE2
+    ld (music_module),a
     ld a,3
     ld (music_playing),a
 
@@ -5094,8 +5085,8 @@ call_6F1B
     cp   $3F
     ret  nz					;if not return from function
 
-    ld hl,MODULE2
-    ld (music_module),hl
+    ld a,1;hl,MODULE2
+    ld (music_module),a
     ld a,3
     ld (music_playing),a
 

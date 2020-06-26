@@ -2874,7 +2874,86 @@ slave_layer2_clear_screen
 
 Slave_oldstack
     BYTE $00,$00
-    
+
+slave_call_136C
+    ld   a,(l_e391) ;is sound command queue empty
+    and  a
+    ret  z          ;return if so
+    ld   a,(l_e381) ;get next sound command from queue
+    ;$07 = Intro/Game Music Start
+    ;$08 = Game Music Stop
+    ;$0D = Death sound
+    ;$18 = Hurry Up Alarm and Faster Music
+    ;$20 = Item Pickup
+    ;$2A = Ghost Appear
+    ;$2C = Jump
+    ;$30 = Go back to Normal Speed Music
+    ;$31 = Bubble Blow
+    ;ld   ($FA00),a          ;SOUND IO - Play Sound Effects
+    call slave_process_sound_command
+    ld   hl,l_e382      ;shift queue forward
+    ld   de,l_e381
+    ld   bc,$000F
+    ldir
+    ld   hl,l_e391      ;reduce queue counter
+    dec  (hl)
+    ret
+
+slave_process_sound_command
+    cp $07
+    jr z,slave_intro_music
+  ;  cp $08
+  ;  jr z,slave_music_stop
+    cp $18
+    jr z,slave_music_fast
+    cp $2C
+    jr z,slave_intro_sfx_jump
+    cp $30
+    jr z,slave_game_music
+    cp $31
+    jr z,slave_intro_sfx_fire
+    ret
+
+slave_intro_sfx_jump
+    ld a,1
+    ld c,2
+    ld b,0
+    call SFX_PLAY
+    ret
+
+slave_intro_sfx_fire
+    ld a,2
+    ld c,2
+    ld b,0
+    call SFX_PLAY
+    ret
+
+slave_intro_music
+    ld a,0
+    ld (music_module),a
+    ld a,2
+    ld (music_playing),a
+    ret
+
+slave_music_stop
+    ld a,0
+    ld (music_playing),a
+    ret
+
+slave_music_fast
+    ld a,4
+    ld (music_module),a
+    ld a,2
+    ld (music_playing),a
+    ret
+
+slave_game_music
+    ld a,3
+    ld (music_module),a
+    ld a,2
+    ld (music_playing),a
+    ret
+
 slave_ay_music
     cp 0
     jr z,slave_ay_silence
@@ -2882,6 +2961,9 @@ slave_ay_music
     jr z,slave_ay_new_module
     cp 3
     jr z,slave_ay_new_module
+    ld bc,$FFFD
+    ld a,%11111101
+    out (c),a
     call MUSIC_PLAY
     ret
 slave_ay_silence
@@ -2890,16 +2972,19 @@ slave_ay_silence
 
 slave_ay_new_module
     sub #2      ;make A either 0 or 1
-    ld (MUSIC_START+$0A),a      ;set looping
+    ;ld (MUSIC_START+$0A),a      ;set looping
     ld a,1
     ld (music_playing),a
-    ld hl,(music_module)
+    ld a,(music_module)
+    ld hl,MODULE1;(music_module)
     call MUSIC_MOD_START
     ret
     
 
     ORG MUSIC_START
-    incbin "../data/bb_0_1.bin"
+    incbin "../data/music.bin"
+
+/*    incbin "../data/bb_0_1.bin"
     ORG MODULE1
     incbin "../data/bb_0_2.bin"
 MODULE2
@@ -2908,3 +2993,7 @@ MODULE3
     incbin "../data/bbm_0_2.bin"
 MODULE4
     incbin "../data/gam_0_2.bin"
+*/
+MODULE2
+MODULE3
+MODULE4

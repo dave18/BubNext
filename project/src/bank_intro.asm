@@ -396,10 +396,10 @@ intro_call_1ADA
 intro_call_2578					;this code is run once start button is pressed
     ld a,0
     ld (options_control),a
-    ld hl,MODULE1
-    ld (music_module),hl
+    /*ld a,0;hl,MODULE1
+    ld (music_module),a
     ld a,2
-    ld (music_playing),a
+    ld (music_playing),a*/
 	call call_03D0
 	call intro_call_B391
     call call_03B4
@@ -1062,8 +1062,8 @@ intro_call_35FF		;In game high score entry/player resume
 
 
 intro_call_361D			;Called once all lives are lost	
-    ld a,0
-    ld (music_playing),a
+    ;ld a,0
+    ;ld (music_playing),a
 	call intro_call_clear_level_num
     call intro_call_36AC
     call call_03CB
@@ -4215,8 +4215,8 @@ intro_call_7913
 	
 	call layer2_update_palette_ret		;this clears the layer 2 screen
 
-    ld hl,MODULE3
-    ld (music_module),hl
+    ld a,3;MODULE3
+    ld (music_module),a
     ld a,2
     ld (music_playing),a
 	

@@ -85,10 +85,14 @@ pattern_bank	EQU pattern_addr+256	;this is where we store the bank offsets for e
 ;stack_top   EQU l_f7fe
 
 MUSIC_START EQU $E000
-MUSIC_MOD_START EQU MUSIC_START+$03
-MUSIC_PLAY EQU MUSIC_START+$05
-MUSIC_MUTE EQU MUSIC_START+$08
-MODULE1 EQU $E86E
+MUSIC_MOD_START EQU MUSIC_START+$00
+MUSIC_PLAY EQU MUSIC_START+$03
+MUSIC_MUTE EQU MUSIC_START+$06
+SFX_INIT   EQU MUSIC_START+$09
+SFX_PLAY   EQU MUSIC_START+$0C
+SFX_STOP   EQU MUSIC_START+$0F
+MODULE1 EQU $E8A7;$E86E
+SFX_DATA    EQU $F763
                                                                 
 FLOORTILE  EQU 7
 
@@ -97,8 +101,8 @@ FLOORTILE  EQU 7
     include "romloader.asm"
 
     
-    org mainstart       ;this is point after the variable space
-                         ;and after then $800 byte screen holder
+    org mainstart       ;this is point after the tilemap
+                         ;and after then $180 byte sprite structure
 
     di
 
@@ -146,6 +150,8 @@ FLOORTILE  EQU 7
 
     ld a,slavebank
     call call_026C_DI  ;switch bank    
+    ld hl,SFX_DATA
+    call SFX_INIT
     call MUSIC_START              ;music init
     call call_029B_DI
 
@@ -327,7 +333,7 @@ FLOORTILE  EQU 7
 call_0171
     call call_0BC8   ;$0171
 ;    ld   a,$EF     
- ;   ld   ($FA00),a   ;SOUND IO
+ ;   ld   ($FA00),a   ;TODO - Play intro sound - SOUND IO
     ;call call_0431     ;bank control
     call call_3449
     call call_31E1
@@ -368,6 +374,7 @@ call_0171
     ;$0B2E points to $044D
 
 	;ei
+    
 	
 	;***** Once initialisation is complete everything is controlled through this interrupt driven routine ****
 call_01ED
@@ -1631,8 +1638,14 @@ call_1FA9
     call call_031C
     call call_0372
     call call_21CF
-    ld   a,$02
-    ;ld   ($FA00),a		;TODO - sound
+    ;ld   a,$02
+    ;ld   ($FA00),a		; sound - play record screen music
+    
+    ld a,5;MODULE3
+    ld (music_module),a
+    ld a,2
+    ld (music_playing),a
+
     ld   a,$03
     call call_0018
     ld   c,$08
@@ -1768,8 +1781,8 @@ data_20B5
     BYTE $0b,"     00    "
 call_20C1
 
-    ld hl,MODULE4
-    ld (music_module),hl
+    ld a,2;MODULE4
+    ld (music_module),a
     ld a,3
     ld (music_playing),a
 
@@ -1778,7 +1791,7 @@ call_20C1
     ld   hl,l_e5db
     ld   (hl),$00
     ld   a,$0B
- ;   ld   ($FA00),a			;TODO - sound
+ ;   ld   ($FA00),a			;Play Game Over Music
     ld   hl,data_210D
     ld   de,$7ad0;$D820
     ld   c,$00
@@ -1786,7 +1799,11 @@ call_20C1
     ld   a,$C8
     call call_0018
     ld   a,$00
-    ;ld   ($FA00),a   ;TODO - sound
+    ;ld   ($FA00),a   ;Stop Game Over Music
+
+    ld a,0
+    ld (music_playing),a
+
     ld   hl,l_e391
     ld   (hl),$00
     ld   a,$0A
@@ -2564,7 +2581,7 @@ call_2F54
     call call_1FEE			;LOCATION TO FIND
     call call_063E			;38F0
     ld   a,$00
-;    ld   ($FA00),a         ;SOUND IO
+;    ld   ($FA00),a         ;todo - SOUND IO
     ld   a,$03
     call  call_0008
     ld   a,$04
@@ -7907,6 +7924,7 @@ myinterrupt
 
     call slave_getinput
   ;  break
+    call slave_call_136C     ;process sound queue
     ld a,(music_playing)
     call slave_ay_music              ;music interrupt
 
@@ -8152,7 +8170,7 @@ music_playing
     BYTE 0
 
 music_module
-    BYTE 0,0
+    BYTE 0;,0
 
 options_control         ;controls whether the options screen can be displayed
     BYTE 0
