@@ -394,8 +394,8 @@ intro_call_1ADA
       ret
 
 intro_call_2578					;this code is run once start button is pressed
-    ld a,0
-    ld (options_control),a
+    /*ld a,0
+    ld (options_control),a*/
     /*ld a,0;hl,MODULE1
     ld (music_module),a
     ld a,2
@@ -837,8 +837,184 @@ intro_data_2921
 intro_data_2929
 	defb $64,$68,$7C,$80,$6C,$70,$84,$88
 	defb $3A,$DB,$E5,$A7,$C9,$C0,$00,$00,$00,$00,$18,$02,$E3,$D1
-	
-	
+
+intro_call_2941
+
+    ld a,0
+    ld (options_control),a
+
+    call call_03D0
+    call call_031C
+    call call_0330
+    call call_3395
+    call call_02C8
+    ld   hl,intro_data_2AE1
+    ld   de,$7898;D712
+    ld   c,$00
+    call call_0E9A
+    ld   hl,intro_data_2AF2
+    ld   de,$7C64;D8AA
+    ld   c,$00
+    call call_0E9A    
+    ld   hl,$7A32;D05C
+    ld   de,intro_data_2A55
+    ld   bc,$0406       ;$18 Bytes
+    ;ld   a,$1F
+    ex af,af'
+	ld a,$07*16	;gfx atrtibute
+	ex af,af'
+	ld a,$00
+    call call_0EC6_Adjusted
+
+    ld   hl,$7CB6;D0EC
+    ld   de,intro_data_2A6D
+    ld   bc,$0202       ;$18 Bytes
+    ;ld   a,$1F
+    ex af,af'
+	ld a,$07*16	;gfx atrtibute
+	ex af,af'
+	ld a,$00
+    call call_0EC6_Adjusted  
+    call intro_call_29CB
+    ld   bc,$04B0
+intro_call_2988
+    call call_0020
+    push bc
+    bit  3,c
+    jr   nz,intro_call_299B
+    ld   hl,intro_data_2AF2
+    ld   de,$7C64;D8AA
+    ld   c,$00
+    call call_0E9A
+    jr   intro_call_29A6
+intro_call_299B
+    ld   hl,intro_data_2AF2
+    ld   de,$7C64;D8AA
+    ld   c,$10
+    call call_0E9A
+intro_call_29A6
+    ld   a,(l_fc22)
+    bit  0,a
+    call z,intro_call_29CB
+    ld   a,(l_fc22)
+    bit  1,a
+    call z,intro_call_29FB
+    pop  bc
+    ld   a,(l_fc22)
+    bit  4,a
+    ret  z
+    bit  5,a
+    ret  z
+    dec  bc
+    ld   a,c
+    or   b
+    jr   nz,intro_call_2988
+    ld   hl,l_e5db
+    ld   (hl),$00
+    ret
+intro_call_29CB
+    ld   hl,$7A20;CE1C
+    ld   de,intro_data_2A8D
+    ld   bc,$0407
+    ex af,af'
+	ld a,$07*16	;gfx atrtibute
+	ex af,af'
+	ld a,$00
+    call call_0EC6_Adjusted
+    ld   hl,$7A42;D25C
+    ld   de,intro_data_2AA9
+    ld   bc,$0407
+    ex af,af'
+	ld a,$07*16	;gfx atrtibute
+	ex af,af'
+	ld a,$00
+    call call_0EC6_Adjusted
+    ld   hl,$7A32;D05C
+    ld   de,intro_data_2A55
+    ld   bc,$0406
+    ex af,af'
+	ld a,$07*16	;gfx atrtibute
+	ex af,af'
+	ld a,$00
+    call call_0EC6_Adjusted
+    ld   hl,$E5DB
+    ld   (hl),$00
+    ret
+intro_call_29FB
+    ld   hl,$7A20;CE1C
+    ld   de,intro_data_2A71
+    ld   bc,$0407
+    ex af,af'
+	ld a,$07*16	;gfx atrtibute
+	ex af,af'
+	ld a,$00
+    call call_0EC6_Adjusted
+    ld   hl,$7A42;D25C
+    ld   de,intro_data_2AC5
+    ld   bc,$0407
+    ex af,af'
+	ld a,$07*16	;gfx atrtibute
+	ex af,af'
+	ld a,$00
+    call call_0EC6_Adjusted
+    ld   hl,l_e5db
+    ld   (hl),$01
+    ld   hl,$7A82;D05E
+    ld   (hl),$AE
+    inc  hl
+    ld   (hl),$78
+    inc  hl
+    ld   (hl),$AD;BA
+    inc  hl
+    ld   (hl),$78
+    ld   hl,$7AD2;D09E
+    ld   (hl),$BA
+    inc  hl
+    ld   (hl),$78
+    inc  hl
+    ld   (hl),$B9
+    inc  hl
+    ld   (hl),$78
+    ld   hl,$7A8A;D15E
+    ld   (hl),$AA
+    inc  hl
+    ld   (hl),$78
+    inc  hl
+    ld   (hl),$A9;B6
+    inc  hl
+    ld   (hl),$78
+    ld   hl,$7ADA;D19E
+    ld   (hl),$B6;A9
+    inc  hl
+    ld   (hl),$78
+    inc  hl
+    ld   (hl),$B5
+    inc  hl
+    ld   (hl),$78
+    ret
+intro_data_2A55
+   	BYTE $9E,$9E,$A2,$A3,$9E,$9E,$A9,$AA,$AB,$AC,$AD,$AE,$B5,$B6,$B7,$B8
+	BYTE $B9,$BA,$9E,$9E,$BD,$BE,$9E,$9E
+intro_data_2A6D
+    BYTE $C2,$C3,$C9,$CA
+intro_data_2A71
+	defb $9F,$A0,$A0,$A0,$A0,$A0,$A1,$A0,$A4,$A5,$B3,$A6,$A7,$A8,$A0,$A0
+	defb $B4,$A7,$A6,$B2,$A0,$BB,$A0,$A0,$A0,$A0,$A0,$BC
+intro_data_2A8D
+   	BYTE $BF,$C0,$C0,$C0,$C0,$C0,$C1,$C0,$C4,$C5,$CF,$C6,$C7,$C8,$C0,$C0
+	BYTE $D0,$C7,$C6,$CE,$C0,$D1,$C0,$C0,$C0,$C0,$C0,$D2
+intro_data_2AA9
+	defb $9F,$A0,$A0,$A0,$A0,$A0,$A1,$A0,$AF,$B0,$B1,$B2,$B3,$A0,$A0,$A0
+	defb $B4,$A7,$A6,$B2,$A0,$BB,$A0,$A0,$A0,$A0,$A0,$BC
+intro_data_2AC5
+	defb $BF,$C0,$C0,$C0,$C0,$C0,$C1,$C0,$CB,$CC,$CD,$CE,$CF,$C0,$C0,$C0
+	defb $D0,$C7,$C6,$CE,$C0,$D1,$C0,$C0,$C0,$C0,$C0,$D2
+
+
+intro_data_2AE1
+    BYTE $10,"SELECT GAME MODE"
+intro_data_2AF2
+    BYTE $4,"PUSH"
 intro_call_2F2B
     ld   hl,intro_data_2FA2
     ;ld   de,$7ad0;$D820

@@ -2887,6 +2887,7 @@ slave_call_136C
     ;$20 = Item Pickup
     ;$2A = Ghost Appear
     ;$2C = Jump
+    ;$2D = ?
     ;$30 = Go back to Normal Speed Music
     ;$31 = Bubble Blow
     ;ld   ($FA00),a          ;SOUND IO - Play Sound Effects
@@ -2900,18 +2901,20 @@ slave_call_136C
     ret
 
 slave_process_sound_command
+    ;put jump and fire first as they are most common sound events
+    cp $2C
+    jr z,slave_intro_sfx_jump
+    cp $31
+    jr z,slave_intro_sfx_fire
     cp $07
     jr z,slave_intro_music
   ;  cp $08
   ;  jr z,slave_music_stop
     cp $18
     jr z,slave_music_fast
-    cp $2C
-    jr z,slave_intro_sfx_jump
     cp $30
     jr z,slave_game_music
-    cp $31
-    jr z,slave_intro_sfx_fire
+    
     ret
 
 slave_intro_sfx_jump

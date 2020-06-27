@@ -92,9 +92,15 @@ SFX_INIT   EQU MUSIC_START+$09
 SFX_PLAY   EQU MUSIC_START+$0C
 SFX_STOP   EQU MUSIC_START+$0F
 MODULE1 EQU $E8A7;$E86E
-SFX_DATA    EQU $F763
+SFX_DATA    EQU $FCB5
                                                                 
 FLOORTILE  EQU 7
+
+ZXN_DMA_PORT    EQU $6b
+SPRITE_IMAGE_PORT              equ $5b
+DMA_ENABLE                     equ $87
+DMA_DISABLE                    equ $83
+DMA_LOAD                       equ $cf ; %11001111
 
     include "ramlayout.asm"
 
@@ -1137,7 +1143,7 @@ call_1B0A
 	 
     ld   a,(l_e5db) ;check whether Super Bubble Bobble?
     and  a
-    jr   call_1B45	;bootleg ignores Super flag  
+    jr   z,call_1B45	;bootleg ignores Super flag  
 
     ld   hl,$7702   ;If super game, redraw correct logo
     ld   de,bank1_data_848C
@@ -1367,6 +1373,7 @@ call_1DB5
     call call_2133
     call call_1FF7
     jr   nc,call_1DA3
+    ;carry set for 1 or 2 player start pressed
     call call_2931
 	call copy_intro_tiles
 	ld a,introbank
@@ -2192,9 +2199,24 @@ call_24ED
 
 
 
-call_2931
-    ld   a,(l_e5db)
-    and  a
+call_2931               ;Game type select (BB or Super BB)
+    call call_03CB      ;clear screen
+
+    nextreg $6F,$00				;tile definition start address = 0
+	;nextreg  $6F,$5B				;tile definition start address = 91
+
+	ld	a,gfxbank19
+	call call_026C_DI	;page in gfx bank 0
+	ld de,$53c0
+	ld hl,$f3c0		;offset
+	ld bc,$6C0		;36 tiles * 32 bytes
+	ldir
+	call call_029B_DI  ;restore bank
+
+    ld a,introbank
+    call call_026C
+    call intro_call_2941
+    call call_029B
     ret
 
 
@@ -7810,44 +7832,45 @@ copysprite				;copies sprite pattern from gfx roms banks to internal spritesheet
 	add a,l
     call call_026C
     
-	ld bc,$0020
-	ld h,d
-	ld l,e
-	add hl,bc
-	ex de,hl
-	
-;    ld bc,$005B
+	;ld bc,$0020
+	;ld h,d
+	;ld l,e
+    ex de,hl
+    ld bc,$80
+
+;------------------------------------------------------------------------------
+; hl = source
+; bc = length
+;------------------------------------------------------------------------------
+TransferDMASprite
+    ld (DMASourceS),hl
+    ld (DMALengthS),bc
+    ld hl,DMACodeS
+    ld b,DMACode_LenS
+    ld c,ZXN_DMA_PORT
+    otir
     
-	ld b,2		;2 x 64 byte to copy
-tempspriteloop3
-	push bc
-	ld b,8		;8 x 8 bytes to copy
-tempspriteloop
-	push bc
-    ld b,4      ;4 bytes to copy
-tempspriteloop1
-    ld a,(hl)
-    out ($5b),a
-    inc hl    
-    djnz tempspriteloop1
-    ld b,4      ;4 bytes to copy
-tempspriteloop2
-    ld a,(de)
-    out ($5b),a
-    inc de
-    djnz tempspriteloop2
-	
-	pop bc
-	djnz tempspriteloop
-	
-	ld bc,$20
-	add hl,bc
-	ex de,hl
-	add hl,bc
-	ex de,hl
-	pop bc
-	djnz tempspriteloop3
     jp call_029B    
+
+DMACodeS db DMA_DISABLE
+        db %01111101                   ; R0-Transfer mode, A -> B, write adress 
+                                       ; + block length
+DMASourceS dw 0                        ; R0-Port A, Start address (source address)
+DMALengthS dw 0                        ; R0-Block length (length in bytes)
+        db %01010100                   ; R1-read A time byte, increment, to 
+                                       ; memory, bitmask
+        db %00000010                   ; R1-Cycle length port A
+        db %01101000                   ; R2-write B time byte, increment, to 
+                                       ; memory, bitmask
+        db %00000010                   ; R2-Cycle length port B
+        db %10101101                   ; R4-Continuous mode (use this for block
+                                       ; transfer), write dest adress
+        dw SPRITE_IMAGE_PORT           ; R4-Dest address (destination address)
+        db %10000010                   ; R5-Restart on end of block, RDY active
+                                       ; LOW
+        db DMA_LOAD                    ; R6-Load
+        db DMA_ENABLE                  ; R6-Enable DMA
+DMACode_LenS                   equ $-DMACodeS
 
 
 setinterrupt
