@@ -84,15 +84,15 @@ pattern_bank	EQU pattern_addr+256	;this is where we store the bank offsets for e
 
 ;stack_top   EQU l_f7fe
 
-MUSIC_START EQU $E000
+MUSIC_START EQU $DA00
 MUSIC_MOD_START EQU MUSIC_START+$00
 MUSIC_PLAY EQU MUSIC_START+$03
 MUSIC_MUTE EQU MUSIC_START+$06
 SFX_INIT   EQU MUSIC_START+$09
 SFX_PLAY   EQU MUSIC_START+$0C
 SFX_STOP   EQU MUSIC_START+$0F
-MODULE1 EQU $E8A7;$E86E
-SFX_DATA    EQU $FCB5
+MODULE1 EQU $E2AA;$E86E
+SFX_DATA    EQU $F6d9
                                                                 
 FLOORTILE  EQU 7
 
@@ -160,6 +160,9 @@ DMA_LOAD                       equ $cf ; %11001111
     call SFX_INIT
     call MUSIC_START              ;music init
     call call_029B_DI
+
+    //ld a,0                ;already initialised as 0
+    //ld (music_playing)
 
 	
 	;nextreg $07,$02		;set turbo to 14Mhz
@@ -339,7 +342,7 @@ DMA_LOAD                       equ $cf ; %11001111
 call_0171
     call call_0BC8   ;$0171
 ;    ld   a,$EF     
- ;   ld   ($FA00),a   ;TODO - Play intro sound - SOUND IO
+ ;   ld   ($FA00),a   ;TODO - SOUND IO
     ;call call_0431     ;bank control
     call call_3449
     call call_31E1
@@ -358,7 +361,7 @@ call_0171
 
 
     ;ld   a,$2D
-    ;ld   ($FA00),a   ;SOUND IO
+    ;ld   ($FA00),a   ;TODO SOUND IO - intro sound
     call call_0427  ;bank control
     ;ld   hl,($FC82)
     ;ld   a,h
@@ -1393,7 +1396,7 @@ call_1DB5
     ld   (l_e5dd),a
     ld   (l_e358),a
 
-    ;ld a,99                ;temp to set start level number
+    ;ld a,19                ;temp to set start level number
     ;ld   (l_e64b),a
 	
 	;ld a,$3f				;temp to test extend code
@@ -1464,7 +1467,8 @@ call_1E53
     jr   call_1E2F
 call_1E64
     ld   a,$00
-    ;ld   ($FA00),a			;TODO - Sound
+    ;ld   ($FA00),a			;Sound
+    ld (music_playing),a
     call call_03D0
     ld   a,(l_e5d7)
     bit  0,a
@@ -1559,8 +1563,14 @@ call_1EE1
     jr   nz,call_1EE1
     call call_03CB
 call_1EEA
-    ld   a,$02
-    ;ld   ($FA00),a			;TODO - Sound
+    ;ld   a,$02
+    ;ld   ($FA00),a			;TODO Sound - called before record screen
+
+    /*ld a,5;MODULE3
+    ld (music_module),a
+    ld a,2
+    ld (music_playing),a*/
+
     ld   a,$03
     call call_0018
     ld   c,$08
@@ -1593,7 +1603,8 @@ call_1EEA
     jp   call_1D1E
 call_1F30
     ld   a,$00
-    ;ld   ($FA00),a			;TODO - sound
+    ;ld   ($FA00),a			;sound
+    ld (music_playing),a
     ld   a,r
     and  $07
     ld   hl,data_1F88
@@ -1602,7 +1613,7 @@ call_1F30
     ld   (l_e64b),a
     ld   hl,data_1F74
     ld   de,$7B08;$D6E0
-    ld   c,4*16;$04
+    ld   c,$10;$04
     call call_0E9A
     ld   a,$3C
     call call_0018
@@ -1646,12 +1657,12 @@ call_1FA9
     call call_0372
     call call_21CF
     ;ld   a,$02
-    ;ld   ($FA00),a		; sound - play record screen music
+    ;ld   ($FA00),a		; TODO sound - played before record screen music
     
-    ld a,5;MODULE3
+    /*ld a,5;MODULE3
     ld (music_module),a
     ld a,2
-    ld (music_playing),a
+    ld (music_playing),a*/
 
     ld   a,$03
     call call_0018
@@ -1830,6 +1841,7 @@ call_20C1
     call call_0018
     ld   a,$00
    ; ld   ($FA00),a
+   ld (music_playing),a
     ret
 
 data_210D
@@ -2000,7 +2012,7 @@ call_2290
     ld   a,(l_e613)
     bit  1,a
     ret  z
-call_229C
+call_229C               ;SECRET ROOM CHECKS
     ld   a,(l_e64b)
     cp   $13
     jr   nz,call_22A9
@@ -2603,7 +2615,8 @@ call_2F54
     call call_1FEE			;LOCATION TO FIND
     call call_063E			;38F0
     ld   a,$00
-;    ld   ($FA00),a         ;todo - SOUND IO
+;    ld   ($FA00),a         ;SOUND IO
+    ld (music_playing),a
     ld   a,$03
     call  call_0008
     ld   a,$04
@@ -2965,7 +2978,7 @@ call_32E0
     cp   $64
     ret  z
     inc  (hl)
-    ld   a,$2D
+    ld   a,$2D          ;Intro sound
     ;ld   (l_fa00),a   ;TODO SOUND IO
     ld   c,$01
     call call_22F0
@@ -2976,7 +2989,7 @@ call_32F4
     cp   $64
     ret  z
     inc  (hl)
-    ld   a,$2D
+    ld   a,$2D         ;INtro sound
     ;ld   (l_fa00),a   ;TODO SOUND IO
     ld   c,$01
     call call_22F0
@@ -5360,7 +5373,7 @@ call_50BB
 call_50CB
     ld   a,$03
     call call_0018;rst  $18
-    call call_5498
+    call call_5498  ;draw secret room
     call call_5267
     ld   a,$03
     call call_0010;rst  $10
@@ -5571,23 +5584,20 @@ call_52CD
     add  a,a
     ld   hl,data_533B
     call adda2hl;0D89
-stop52ea
-    jr stop52ea
-    BYTE "stop52ea"
-;    ld   de,$D0E6
-;    ld   bc,$0004
-;52EA: ED B0         ldir
-;52EC: 11 26 D1      ld   de,$D126
-;52EF: 01 04 00      ld   bc,$0004
-;52F2: ED B0         ldir
-;52F4: 21 2D E7      ld   hl,$E72D
-;52F7: 34            inc  (hl)
-;52F8: 7E            ld   a,(hl)
-;52F9: FE 03         cp   $03
-;52FB: C0            ret  nz
-;52FC: 21 2B E7      ld   hl,$E72B
-;52FF: CB CE         set  1,(hl)
-;5301: C9            ret
+    ld   de,$7BC6
+    ld   bc,$0004
+    ldir
+    ld   de,$7C16;$D126
+    ld   bc,$0004
+    ldir
+    ld   hl,l_e72d
+    inc  (hl)
+    ld   a,(hl)
+    cp   $03
+    ret  nz
+    ld   hl,l_e72b
+    set  1,(hl)
+    ret
 call_5302
     ld   hl,l_e5d7
     bit  0,(hl)
@@ -5626,12 +5636,16 @@ call_5320
     ld   (hl),$18
     ret
 data_533B
-    BYTE $25,$3D,$2D,$3D,$26,$3D,$2E,$3D,$36,$3D,$40,$3D,$37,$3D,$41,$3D
-    BYTE $4A,$3D,$54,$3D,$4B,$3D,$55,$3D
+    ;BYTE $25,$3D,$2D,$3D,$26,$3D,$2E,$3D,$36,$3D,$40,$3D,$37,$3D,$41,$3D
+    ;BYTE $4A,$3D,$54,$3D,$4B,$3D,$55,$3D
+    BYTE $70-$15,$F0,$71-$15,$F0,$78-$15,$F0,$79-$15,$F0
+    BYTE $81-$15,$F0,$82-$15,$F0,$8B-$15,$F0,$8C-$15,$F0
+    BYTE $95-$15,$F0,$96-$15,$F0,$9F-$15,$F0,$A0-$15,$F0
 call_5353
     ld   a,(l_e731)
     bit  1,a
-    jr   nz,call_539F
+    ;jr   nz,call_539F
+    jp   nz,call_539F
     bit  0,a
     jr   nz,call_536A
     ld   a,(l_e725)
@@ -5654,98 +5668,26 @@ call_536A
     add  a,a
     ld   hl,data_5406
     call adda2hl;$0D89
-    ld   de,$D0F6
+    ld   de,$7E46;D0F6
     ld   bc,$0004
-stop5389
-    jr stop5389
-    BYTE "stop5389"    
-;    ldir
-;5389: 11 36 D1      ld   de,$D136
-;538C: 01 04 00      ld   bc,$0004
-;538F: ED B0         ldir
-;5391: 21 33 E7      ld   hl,$E733
-;5394: 34            inc  (hl)
-;5395: 7E            ld   a,(hl)
-;5396: FE 02         cp   $02
-;5398: C0            ret  nz
-;5399: 21 31 E7      ld   hl,$E731
-;539C: CB CE         set  1,(hl)
-;539E: C9            ret
-call_539F
-    ld   hl,l_e5d7
-    bit  0,(hl)
-    jr   z,call_53B9
-    ld   hl,l_e2c5
-    ld   a,(hl)
-    cp   $18
-    jr   nz,call_53B9
-    inc  hl
-    inc  hl
-    ld   a,(hl)
-    cp   $77
-    jr   c,call_53B9
-    cp   $7A
-    jr   c,call_53CF
-call_53B9
-    ld   hl,l_e5d7
-    bit  1,(hl)
-    ret  z
-    ld   hl,l_e2b5
-    ld   a,(hl)
-    cp   $18
-    ret  nz
-    inc  hl
-    inc  hl
-    ld   a,(hl)
-    cp   $77
-    ret  c
-    cp   $7A
-    ret  nc
-call_53CF
-    ld   a,$03
-    call call_0008;rst  $08
-    call call_18BB
-    call call_03CB
-    call call_02AC
-    ld   a,(l_e726)
-    ld   (l_e64b),a
-    ld   hl,l_e358
-    ld   (hl),$00
-    ld   c,$30
-    call call_1350
-    ld   hl,l_e342
-    ld   (hl),$01
-    ld   hl,l_e723
-    ld   (hl),$00
-    ld   hl,l_e357
-    ld   (hl),$01
-    ld   hl,l_ed3d
-    ld   (hl),$00
-    ld   hl,l_e730
-    ld   (hl),$00
-    xor  a
-    call call_0018;rst  $18
-data_5406
-    BYTE $5E,$39,$68,$39,$5F,$39,$69,$39,$72,$39,$7B,$39,$73,$39,$7C,$39
-call_5416
-    ld   hl,l_e730
-    bit  7,(hl)
-    ret  z
-    jr   call_53CF
-call_541E
-    ld   hl,l_e727
+    ldir
+    ld   de,$7E96;D136
+    ld   bc,$0004
+    ldir
+    ld   hl,l_e733
     inc  (hl)
     ld   a,(hl)
-    cp   $07
+    cp   $02
     ret  nz
-    ld   (hl),$00
-    inc  hl
-    inc  (hl)
-    bit  0,(hl)
-stop542c
-    jr stop542c
-    BYTE "stop542c"
+    ld   hl,l_e731
+    set  1,(hl)
+    ret
+;539F
 
+/*data_5406
+    BYTE $A9,$E0,$AA,$E0,$B3,$E0,$B4,$E0
+    BYTE $BD,$E0,$BE,$E0,$C6,$E0,$C7,$E0
+*/
 
 
 call_5498
@@ -5757,7 +5699,13 @@ call_5498
     call call_02C8
     ld   hl,data_55BB
     ld   de,$F9C0
-    ld   bc,$0020
+    ;ld   bc,$0020
+    nextreg $43, %00110000        ; (R/W) 0x43 (67) => Palette Control - Tilemap
+    nextreg $40, $E0                  ; (R/W) 0x40 (64) => Palette Index
+    ld   b,$10
+call_5498_loop
+	call call_0B30_update_entry
+	djnz call_5498_loop
     ;ldir               ;TODO - palette    
     ld   a,(l_e724)
     ld   hl,data_54BC
@@ -5769,23 +5717,194 @@ data_54BC
     BYTE LOW call_54ED,HIGH call_54ED
     BYTE LOW call_5518,HIGH call_5518
 
+;SECRET ROUND CODE
 call_54C2
-    jr call_54C2
-    BYTE "call_54C2"
-    
+    nextreg $6F,$00				;tile definition start address = 0
+	;nextreg  $6F,$5B				;tile definition start address = 91
+
+	ld	a,gfxbank18
+	call call_026C_DI	;page in gfx bank 0
+
+    ld de,$4B60;4E00
+	ld hl,$E4A0		;offset
+	ld bc,$1520;1180		;169 tiles * 32 bytes
+	ldir
+
+	;ld de,$4E00
+	ld hl,$D280		;offset
+	ld bc,$1220;2740		;145 tiles * 32 bytes
+	ldir
+	call call_029B_DI  ;restore bank
+
+    ld   a,bank3
+    call call_026C
+
+    ld   hl,data_555B
+    nextreg $43, %00110000        ; (R/W) 0x43 (67) => Palette Control - Tilemap
+    nextreg $40, $F0                  ; (R/W) 0x40 (64) => Palette Index
+    ld   b,$10
+call_54C2_loop
+	call call_0B30_update_entry
+	djnz call_54C2_loop
+
+    ;ld   de,$F9E0          ;TODO - Palette
+    ;ld   bc,$0020
+    ;ldir
+    ld   hl,$76f8;CD08       ;TODO - screen
+    ld   de,bank3_data_8000
+    ld   bc,$1A10
+    call call_5543
+    ld   hl,$7718;D108       ;TODO - screen
+    ld   de,bank3_data_8340
+    ld   bc,$1A10
+    call call_5543
+    jp   call_029B
 call_54ED
-    jr call_54ED
-    BYTE "call_54ED"
+    nextreg $6F,$00				;tile definition start address = 0
+	;nextreg  $6F,$5B				;tile definition start address = 91
 
+	ld	a,gfxbank18
+	call call_026C_DI	;page in gfx bank 0
+	ld de,$4B60
+	ld hl,$E4A0;$EE80		;offset
+	ld bc,$1B60		;219 tiles * 32 bytes
+	ldir
+	call call_029B_DI  ;restore bank
+    ld	a,gfxbank19
+	call call_026C_DI	;page in gfx bank 0
+	ld de,$66C0;5F80
+	ld hl,$C000		;offset
+	ld bc,$0F40;$1100		;122 tiles * 32 bytes (9 shorT)
+	ldir
+
+    ld de,$4B60+$40
+	ld hl,$CF40		;offset
+	ld bc,$20*$06		;6 tiles * 32 bytes
+	ldir
+
+    ld de,$4B60+$140
+	;ld hl,$D000		;offset
+	ld bc,$20*$03		;3 tiles * 32 bytes
+	ldir
+
+	call call_029B_DI  ;restore bank
+    ld   a,bank3
+    call call_026C
+    ld   hl,data_557B
+    nextreg $43, %00110000        ; (R/W) 0x43 (67) => Palette Control - Tilemap
+    nextreg $40, $F0                  ; (R/W) 0x40 (64) => Palette Index
+    ld   b,$10
+call_54ED_loop
+	call call_0B30_update_entry
+	djnz call_54ED_loop
+    ;ld   de,$F9E0      ;TODO - Palette
+    ;ld   bc,$0020
+    ;ldir
+    ld   hl,$76f8;CD08   ;TODO - Screen
+    ld   de,bank3_data_8680
+    ld   bc,$1A10
+    call call_5543
+    ld   hl,$7718;D108       ;TODO - Screen
+    ld   de,bank3_data_89C0
+    ld   bc,$1A10
+    call call_5543
+    jp   call_029B
 call_5518
-    jr call_5518
-    BYTE "call_5518"
+    nextreg $6F,$00				;tile definition start address = 0
+	;nextreg  $6F,$5B				;tile definition start address = 91
 
+	ld	a,gfxbank18
+	call call_026C_DI	;page in gfx bank 0
+	ld de,$4B60;4E00
+	ld hl,$E4A0;$EE80		;offset
+	ld bc,$1500		;83 tiles * 32 bytes
+	ldir
+	call call_029B_DI  ;restore bank
+    ld	a,gfxbank19
+	call call_026C_DI	;page in gfx bank 0
+	ld de,$6060
+	ld hl,$D060		;offset
+	ld bc,$15A0		;88 tiles * 32 bytes
+	ldir
 
+    ld de,$4B60+$40
+	ld hl,$E600		;offset
+	ld bc,$20*$06		;6 tiles * 32 bytes
+	ldir
+
+    ld de,$4B60+$140
+	;ld hl,$E6C0		;offset
+	ld bc,$20*$02		;2 tiles * 32 bytes
+	ldir
+;    ld de,$4B60+$180
+;	ld hl,$FA60		;offset
+;	ld bc,$0020		;1 tile * 32 bytes
+;	ldir
+	call call_029B_DI  ;restore bank
+    ld   a,bank3
+    call call_026C
+    ld   hl,data_559B
+    nextreg $43, %00110000        ; (R/W) 0x43 (67) => Palette Control - Tilemap
+    nextreg $40, $F0                  ; (R/W) 0x40 (64) => Palette Index
+    ld   b,$10
+call_5518_loop
+	call call_0B30_update_entry
+	djnz call_5518_loop
+    ;ld   de,$F9E0      ;TODO - palette
+    ;ld   bc,$0020
+    ;ldir
+    ld   hl,$76f8;CD08           ;TODO - screen
+    ld   de,bank3_data_8D00
+    ld   bc,$1A10
+    call call_5543
+    ld   hl,$7718;D108           ;TODO - screen
+    ld   de,bank3_data_9040
+    ld   bc,$1A10
+    call call_5543
+    jp   call_029B
+call_5543           ;draw secret screen tiles
+    push bc
+    push hl
+    ld   b,c
+call_5546
+    ld   a,(de)
+    ld   (hl),a
+    inc  hl
+    inc  de
+    ld   a,(de)
+    ld   (hl),a
+    inc  de
+    inc  hl
+    ;ld   a,$3F
+    ;call $0D89
+    djnz call_5546
+    pop  hl
+    ld bc,$50
+    add hl,bc
+    pop  bc
+;    inc  hl
+;     inc  hl
+    djnz call_5543
+    ret
+data_555B
+	BYTE $77,$00,$55,$00,$FF,$F0,$0A,$A0,$AC,$C0,$09,$90,$03,$30,$02,$20
+	BYTE $04,$40,$07,$70,$08,$80,$0A,$A0,$06,$60,$F0,$00,$05,$50,$00,$00
+data_557B
+	BYTE $77,$00,$55,$00,$FF,$F0,$7A,$70,$8C,$00,$09,$00,$03,$00,$02,$00
+	BYTE $04,$00,$07,$00,$08,$00,$0A,$00,$06,$00,$F3,$70,$05,$00,$00,$00
+data_559B
+	BYTE $77,$00,$55,$00,$FF,$F0,$AA,$A0,$AA,$A0,$77,$70,$33,$30,$22,$20
+	BYTE $44,$40,$77,$70,$88,$80,$99,$90,$66,$60,$F5,$90,$55,$50,$00,$00
 data_55BB
     BYTE $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$33,$00,$44,$00,$88,$00
     BYTE $66,$00,$55,$00,$FA,$00,$FF,$00,$F8,$00,$F7,$00,$94,$00,$00,$00
 call_55DB
+    ld  a,introbank
+    call call_026C
+    call intro_call_55DB
+    call call_029B
+    ret
+/*
     ld   a,(l_e729)
     and  a
     jr   z,call_55E5
@@ -5817,7 +5936,7 @@ data_560F
     
 data_5627
     BYTE $17,"                       "
-	
+*/	
 call_563F
     ld   a,0
     ld  (intro_scroll_counter),a

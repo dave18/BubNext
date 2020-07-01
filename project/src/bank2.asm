@@ -2119,8 +2119,14 @@ bank2_call_9207
      ld   (hl),$01
      ld   hl,l_e358
      ld   (hl),$01
-     ld   a,$0A
+     ;ld   a,$0A
 ;     ld   ($FA00),a
+
+     ld a,6                   ;invincible music
+     ld (music_module),a
+     ld a,2
+     ld (music_playing),a
+
      ld   hl,$001E
      ld   (l_f516),hl
      ld   hl,l_f514
@@ -2151,8 +2157,12 @@ bank2_call_9248
      jr   nz,bank2_call_926B
      ld   hl,l_e358
      ld   (hl),$00
-     ld   a,$30
+     ;ld   a,$30
 ;     ld   ($FA00),a
+     ld a,3
+    ld (music_module),a
+    ld a,2
+    ld (music_playing),a
 bank2_call_926B
      call bank2_call_8F17
      inc  (ix+$16)

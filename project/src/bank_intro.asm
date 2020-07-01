@@ -937,7 +937,7 @@ intro_call_29CB
 	ex af,af'
 	ld a,$00
     call call_0EC6_Adjusted
-    ld   hl,$E5DB
+    ld   hl,l_e5db
     ld   (hl),$00
     ret
 intro_call_29FB
@@ -1234,7 +1234,6 @@ intro_call_35FF		;In game high score entry/player resume
     inc  hl
     ld   (hl),$54
     ret
-
 
 
 intro_call_361D			;Called once all lives are lost	
@@ -1654,6 +1653,472 @@ intro_data_38D4
 	;defb $41,$42,$43,$44,$45,$46,$47,$48,$49,$4A,$4B,$4C,$4D,$4E,$4F,$50
 	;defb $51,$52,$53,$54,$55,$56,$57,$58,$59,$5A,$20,$2E
 
+
+;Record Screen
+intro_call_38FC
+    ld   ix,l_e682
+    ld   (ix+$01),$00
+    ld   a,(l_e644)
+    ld   (ix+$02),a
+    ld   a,(l_e5d3)
+    and  a
+    jr   z,intro_call_3916
+    ld   a,(l_e67c)
+    ld   (ix+$02),a
+intro_call_3916
+    ld   ix,l_e689
+    ld   (ix+$01),$01
+    ld   a,(l_e649)
+    ld   (ix+$02),a
+    ld   a,(l_e5d3)
+    and  a
+    jr   z,intro_call_3930
+    ld   a,(l_e67d)
+    ld   (ix+$02),a
+intro_call_3930
+    ld   hl,l_e20d
+    ld   de,$0000
+    ld   b,$28
+intro_call_3938
+    call call_18A5
+    ld   de,intro_data_3D02
+    ld   hl,l_e20d
+    ld   b,$28
+intro_call_3943
+    ld   a,(de)
+    ld   (hl),a
+    inc  de
+    inc  hl
+    inc  hl
+    ld   a,(de)
+    ld   (hl),a
+    inc  hl
+    inc  de
+    ld   a,(de)
+    ld   (hl),a
+    inc  de
+    inc  hl
+    djnz intro_call_3943
+    ld   hl,l_e220
+    set  6,(hl)
+    ld   hl,l_e234
+    set  6,(hl)
+    ld   hl,intro_data_3D88
+    ld   bc,$041F
+    ld   e,$00
+    call call_14C0
+    ld   hl,intro_data_3D7A
+    ld   bc,$071E
+    ld   e,$01
+    call call_14C0
+    ld   a,$03
+    ld   bc,$FC1E
+    call call_147D
+    ld   a,$23
+    ld   bc,$F81E
+    call call_147D
+    ld   a,(l_e67b)
+    inc  a
+    cp   $65
+    jr   nz,intro_call_398C
+    ld   a,$64
+intro_call_398C
+    call intro_call_3C57
+    ld   a,$BA
+    sub  h
+    ld   (l_e241),a
+    ld   (l_e291),a
+    ld   a,(l_e5d8)
+    and  a
+    jr   nz,intro_call_39A6
+    ld   hl,l_e67e
+    set  1,(hl)
+    jp   intro_call_39DB
+intro_call_39A6
+    ld   hl,intro_data_3D88
+    ld   bc,$0423
+    ld   e,$05
+    call call_14C0
+    ld   hl,intro_data_3D81
+    ld   bc,$0722
+    ld   e,$06
+    call call_14C0
+    ld   a,$08
+    ld   bc,$FC22
+    call call_147D
+    ld   a,$28
+    ld   bc,$F822
+    call call_147D
+;    ld   hl,($0004)
+;    ld   de,$00B9
+;    or   a
+;    sbc  hl,de
+    jr   intro_call_39DB
+;    rst  $38
+/*intro_call_39D8
+    ld   a,$05				;failed protection check?!
+    call call_0018*/
+intro_call_39DB
+    ld   a,(l_e67e)
+    cp   $03
+    jp   nz,intro_call_3A79
+    ld   hl,intro_data_3DC4
+    ld   de,$774a;$D54A
+    ld   c,3*16;$00
+    call call_0E9A	;writetext "TODAY'S RECORD IS"
+    ld   hl,l_e680
+    inc  (hl)
+    bit  2,(hl)
+    jr   nz,intro_call_3A41
+    ld   a,$23
+    ld   bc,$F81E
+    call call_147D
+    ld   a,(l_e5d8)
+    and  a
+    jr   z,intro_call_3A0C
+    ld   a,$28
+    ld   bc,$F822
+    call call_147D
+intro_call_3A0C
+    ld   hl,intro_data_3DD6
+    ld   de,$776E;$D9CA
+    ld   c,4*16
+    call call_0E9A			;writetext "ROUND "      ""
+    ld   iy,$777e;$DBCA
+    ld   a,(l_e67b)			;best level reached
+    inc  a
+    cp   $65
+    jr   nz,intro_call_3A31
+    ld   (iy-$02),$41
+    ld   (iy+$00),$4C
+    ld   (iy+$02),$4C
+    jr   intro_call_3A34
+intro_call_3A31
+    call call_0FC2
+intro_call_3A34
+    ld   a,4*16
+    ld   (iy-$01),a
+    ld   (iy+$01),a
+    ld   (iy+$03),a
+    jr   intro_call_3A5C
+intro_call_3A41
+    ld   hl,intro_data_3DE3
+    ld   de,$776C;$D9CA
+    ld   c,4*16;$04
+    call call_0E9A		;writetext "                "
+    ld   a,$23
+    ld   bc,$001E
+    call call_147D
+    ld   a,$28
+    ld   bc,$0022
+    call call_147D
+intro_call_3A5C
+    ld   hl,l_e67f
+    inc  (hl)
+    ld   a,(hl)
+    cp   $3C
+    jr   nz,intro_call_3A79
+    ld   a,$00
+    ld (music_playing),a
+;    ld   ($FA00),a				;Sound IO - Stop Record Screen sound
+    call call_03CB
+    call call_03D0
+    call call_041E
+    call call_031C
+    jp   call_0372
+intro_call_3A79
+    ld   ix,l_e682
+    ld   b,$02
+intro_call_3A7F
+    push bc
+    bit  0,(ix+$01)
+    jp   nz,intro_call_3B63
+    ld   de,$0302
+    call call_15CA
+    push af
+    add  a,a
+    add  a,a
+    ld   hl,intro_data_3D8C
+    call call_0D89
+    ld   bc,$041F
+    ld   e,$04
+    call call_14C0
+    ld   a,$43
+    ld   bc,$C80F			;This is a gfx code for the 'Round' sprite
+    pop  de
+    bit  0,d
+    jr   z,intro_call_3AAD
+    call call_147D
+    jr   intro_call_3AB0
+intro_call_3AAD
+    call call_149C
+intro_call_3AB0
+    bit  0,(ix+$00)
+    jp   nz,intro_call_3C4A
+    ld   a,(ix+$03)
+    cp   (ix+$02)
+    jr   nz,intro_call_3AC8
+    ld   (ix+$00),$01
+    ld   hl,l_e67e
+    set  0,(hl)
+intro_call_3AC8
+    inc  (ix+$03)
+    ld   a,(ix+$03)
+    cp   $65
+    jr   nz,intro_call_3AD4
+    ld   a,$64
+intro_call_3AD4
+    call intro_call_3C57
+    ld   a,$BA
+    sub  h
+    ld   (l_e23d),a
+    ld   a,$D2
+    sub  h
+    ld   (l_e24d),a
+    ld   (l_e251),a
+    ld   a,$C2
+    sub  h
+    ld   (l_e255),a
+    ld   (l_e259),a
+    ld   (l_e20d),a
+    ld   (l_e215),a
+    ld   (l_e21d),a
+    ld   (l_e221),a
+    ld   (l_e225),a
+    ld   (l_e229),a
+    ld   (l_e22d),a
+    ld   a,$B2
+    sub  h
+    ld   (l_e211),a
+    ld   (l_e219),a
+    ld   (l_e231),a
+    ld   (l_e235),a
+    ld   a,(ix+$03)
+    cp   $64
+    jr   z,intro_call_3B47
+    cp   $65
+    jr   z,intro_call_3B55
+    call call_1040
+    ld   a,b
+    push bc
+    add  a,a
+    ld   hl,intro_data_3D94
+    call call_0D89
+    ld   bc,$021F
+    ld   e,$00
+    call call_14C0
+    pop  bc
+    ld   a,c
+    add  a,a
+    ld   hl,intro_data_3DA8
+    call call_0D89
+    ld   bc,$021F
+    ld   de,$0200
+    call call_14C2
+    jp   intro_call_3C4A
+intro_call_3B47
+    ld   hl,intro_data_3DBC
+    ld   bc,$041F
+    ld   e,$00
+    call call_14C0
+    jp   intro_call_3C4A
+intro_call_3B55
+    ld   hl,intro_data_3DC0
+    ld   bc,$041F
+    ld   e,$00
+    call call_14C0
+    jp   intro_call_3C4A
+intro_call_3B63
+    ld   de,$0302
+    call call_15CA
+    push af
+    ld   c,a
+    ld   a,(l_e5d8)
+    and  a
+    jp   z,intro_call_3B83
+    ld   a,c
+    add  a,a
+    add  a,a
+    ld   hl,intro_data_3D8C
+    call call_0D89
+    ld   bc,$0423
+    ld   e,$09
+    call call_14C0
+intro_call_3B83
+    pop  de
+    ld   a,$48
+    ld   bc,$C81B
+    bit  0,d
+    jr   nz,intro_call_3B92
+    call call_147D
+    jr   intro_call_3B95
+intro_call_3B92
+    call call_149C
+intro_call_3B95
+    ld   a,(l_e5d8)
+    and  a
+    jp   z,intro_call_3C4A
+    bit  0,(ix+$00)
+    jp   nz,intro_call_3C4A
+    ld   a,(ix+$03)
+    cp   (ix+$02)
+    jr   nz,intro_call_3BB4
+    ld   (ix+$00),$01
+    ld   hl,l_e67e
+    set  1,(hl)
+intro_call_3BB4
+    inc  (ix+$03)
+    ld   a,(ix+$03)
+    cp   $65
+    jr   nz,intro_call_3BC0
+    ld   a,$64
+intro_call_3BC0
+    call intro_call_3C57
+    ld   a,$BA
+    sub  h
+    ld   (l_e28d),a
+    ld   a,$D2
+    sub  h
+    ld   (l_e29d),a
+    ld   (l_e2a1),a
+    ld   a,$C2
+    sub  h
+    ld   (l_e2a5),a
+    ld   (l_e2a9),a
+    ld   (l_e25d),a
+    ld   (l_e265),a
+    ld   (l_e26d),a
+    ld   (l_e271),a
+    ld   (l_e275),a
+    ld   (l_e279),a
+    ld   (l_e27d),a
+    ld   a,$B2
+    sub  h
+    ld   (l_e261),a
+    ld   (l_e269),a
+    ld   (l_e281),a
+    ld   (l_e285),a
+    ld   a,(ix+$03)
+    cp   $64
+    jr   z,intro_call_3C32
+    cp   $65
+    jr   z,intro_call_3C3F
+    call call_1040
+    ld   a,b
+    push bc
+intro_call_3C0F
+    add  a,a
+    ld   hl,intro_data_3D94
+    call call_0D89
+    ld   bc,$0223
+    ld   e,$05
+    call call_14C0
+    pop  bc
+    ld   a,c
+    add  a,a
+    ld   hl,intro_data_3DA8
+    call call_0D89
+    ld   bc,$0223
+    ld   de,$0205
+    call call_14C2
+    jr   intro_call_3C4A
+intro_call_3C32
+    ld   hl,intro_data_3DBC
+    ld   bc,$0423
+    ld   e,$05
+    call call_14C0
+    jr   intro_call_3C4A
+intro_call_3C3F
+    ld   hl,intro_data_3DC0
+    ld   bc,$0423
+    ld   e,$05
+    call call_14C0
+intro_call_3C4A
+    pop  bc
+    ld   de,$0007
+    add  ix,de
+    dec  b
+    jp   nz,intro_call_3A7F
+    jp   call_39D8
+intro_call_3C57
+    ld   b,$00
+    ld   c,a
+    ld   de,$019A
+    jp   call_0DC1
+
+/*intro_data_3CC2
+	BYTE $FF,$F0,$00,$00,$0B,$00,$60,$00,$00,$F0,$90,$00,$40,$00,$09,$F0
+	BYTE $0B,$F0,$F0,$70,$0F,$00,$FF,$00,$F8,$00,$F7,$70,$D4,$00,$00,$00
+	BYTE $FF,$F0,$00,$00,$08,$F0,$60,$00,$00,$F0,$90,$00,$40,$00,$09,$F0
+	BYTE $0B,$F0,$F0,$70,$0A,$F0,$0F,$F0,$F8,$00,$F7,$70,$D4,$00,$00,$00*/
+intro_data_3D02
+	BYTE $C0,$0A,$15,$B0,$0A,$15,$C0,$1A,$15,$B0,$1A,$15,$C0,$FA,$14,$C0
+	BYTE $2A,$14,$C0,$3A,$14,$C0,$4A,$14,$C0,$5A,$14,$B0,$FA,$14,$B0,$2A
+	BYTE $14,$00,$00,$00,$C8,$68,$14,$B6,$68,$14,$18,$68,$16,$00,$00,$00
+	BYTE $D0,$60,$14,$D0,$70,$14,$C0,$60,$14,$C0,$70,$14,$C0,$D6,$15,$B0
+	BYTE $D6,$15,$C0,$E6,$15,$B0,$E6,$15,$C0,$96,$14,$C0,$A6,$14,$C0,$B6
+	BYTE $14,$C0,$C6,$14,$C0,$F6,$14,$B0,$C6,$14,$B0,$F6,$14,$00,$00,$00
+	BYTE $C8,$88,$14,$B6,$88,$14,$18,$88,$16,$00,$00,$00,$D0,$80,$14,$D0
+	BYTE $90,$14,$C0,$80,$14,$C0,$90,$14
+intro_data_3D7A
+	BYTE $B4,$B8,$BC,$C0,$C4,$C8,$CC
+intro_data_3D81
+	BYTE $D0,$D4,$D8,$DC,$E0,$F0,$F4
+intro_data_3D88
+	BYTE $40,$54,$94,$A8
+intro_data_3D8C
+	BYTE $04,$08,$1C,$20,$0C,$10,$24,$28
+intro_data_3D94
+	BYTE $40,$54,$44,$58
+	BYTE $48,$5C,$4C,$60,$50,$64,$68,$7C,$6C,$80,$70,$84,$74,$88,$78,$8C
+intro_data_3DA8
+	BYTE $90,$A4,$94,$A8,$98,$AC,$9C,$B0,$A0,$B4,$B8,$CC,$BC,$D0,$C0,$D4
+	BYTE $C4,$D8,$C8,$DC
+intro_data_3DBC
+	BYTE $E0,$E8,$E4,$EC
+intro_data_3DC0
+	BYTE $F0,$F8,$F4,$FC
+intro_data_3DC4
+	BYTE $11,"TODAY'S RECORD IS"
+intro_data_3DD6
+	BYTE $0c,$22,"ROUND    ",$22," "
+intro_data_3DE3
+	BYTE $0c,"            "
+
+
+intro_call_55DB
+    ld   a,(l_e729)
+    and  a
+    jr   z,intro_call_55E5
+    jp   m,intro_call_55FA
+    ret
+intro_call_55E5
+    ld   hl,l_e729
+    ld   (hl),$FF
+    ld   hl,l_e72a
+    ld   (hl),$78
+    ld   hl,intro_data_560F
+    ld   de,$5028;$D65E
+    ld   c,$00
+    ;jp   call_0E9A;writetext;$0E9A
+    jp   Write_Layer2_Text
+intro_call_55FA
+    ld   hl,l_e72a
+    dec  (hl)
+    ret  nz
+    ld   hl,l_e729
+    ld   (hl),$01
+    ld   hl,intro_data_5627
+    ld   de,$5028;$D65E
+    ld   c,$00
+    ;jp   call_0E9A;writetext;0E9A
+    jp   Write_Layer2_Text
+    
+intro_data_560F
+    BYTE $17,"WELCOME TO SECRET ROUND"
+    
+intro_data_5627
+    BYTE $17,"                       "
 
 /*intro_call_563F
     ld   a,0

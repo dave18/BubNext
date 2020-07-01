@@ -1,98 +1,68 @@
-L0038:       equ  0038h
-L1FCC:       equ  1FCCh
-LC1CC:       equ  C1CCh
-LCC1C:       equ  CC1Ch
+L9ECC:       equ  9ECCh
+LCC9E:       equ  CC9Eh
 LCCCC:       equ  CCCCh
 
 
-             org 5BFDh
+             org 5912h
 
 
-5BFD L5BFD:
-5BFD CC 1C CC     CALL Z,LCC1C 
-5C00 FF           RST  38h    
-5C01 FF           RST  38h    
-5C02 FF           RST  38h    
-5C03 FF           RST  38h    
-5C04 FF           RST  38h    
-5C05 11 11 FF     LD   DE,FF11h 
-5C08 F1           POP  AF     
-5C09 CC CC 1F     CALL Z,L1FCC 
-5C0C 1C           INC  E      
-5C0D CC CC C1     CALL Z,LC1CC 
-5C10 CC CC CC     CALL Z,LCCCC 
-5C13 C1           POP  BC     
-5C14 CC CC CC     CALL Z,LCCCC 
-5C17 C1           POP  BC     
-5C18 CC CC CC     CALL Z,LCCCC 
-5C1B C1           POP  BC     
-5C1C CC CC CC     CALL Z,LCCCC 
-5C1F 1F           RRA         
-5C20 FF           RST  38h    
-5C21 BF           CP   A      
-5C22 FF           RST  38h    
-5C23 FF           RST  38h    
-5C24 FF           RST  38h    
-5C25 FF           RST  38h    
-5C26 FF           RST  38h    
-5C27 FF           RST  38h    
-5C28 FF           RST  38h    
-5C29 FF           RST  38h    
-5C2A FF           RST  38h    
-5C2B FF           RST  38h    
-5C2C FF           RST  38h    
-5C2D FF           RST  38h    
-5C2E FF           RST  38h    
-5C2F FF           RST  38h    
-5C30 FF           RST  38h    
-5C31 FF           RST  38h    
-5C32 FF           RST  38h    
-5C33 FF           RST  38h    
-5C34 FF           RST  38h    
-5C35 FF           RST  38h    
-5C36 FF           RST  38h    
-5C37 FF           RST  38h    
-5C38 FF           RST  38h    
-5C39 FF           RST  38h    
-5C3A FF           RST  38h    
-5C3B FF           RST  38h    
-5C3C FF           RST  38h    
-5C3D FF           RST  38h    
-5C3E FF           RST  38h    
-5C3F FF           RST  38h    
-5C40 FF           RST  38h    
-5C41 FF           RST  38h    
-5C42 FF           RST  38h    
-5C43 FF           RST  38h    
-5C44 FF           RST  38h    
-5C45 FF           RST  38h    
-5C46 FF           RST  38h    
-5C47 FF           RST  38h    
-5C48 FF           RST  38h    
-5C49 FF           RST  38h    
-5C4A FF           RST  38h    
-5C4B FF           RST  38h    
-5C4C FF           RST  38h    
-5C4D FF           RST  38h    
-5C4E FF           RST  38h    
-5C4F FF           RST  38h    
-5C50 FF           RST  38h    
-5C51 FF           RST  38h    
-5C52 FF           RST  38h    
-5C53 FF           RST  38h    
-5C54 FF           RST  38h    
-5C55 FF           RST  38h    
-5C56 FF           RST  38h    
-5C57 FF           RST  38h    
-5C58 FF           RST  38h    
-5C59 FF           RST  38h    
-5C5A FF           RST  38h    
-5C5B FF           RST  38h    
-5C5C FF           RST  38h    
-5C5D FF           RST  38h    
-5C5E FF           RST  38h    
-5C5F FF           RST  38h    
-5C60 FF           RST  38h    
+5912 L5912:
+5912 CC 9E CC     CALL Z,LCC9E 
+5915 EC CC 9E     CALL PE,L9ECC 
+5918 CC CC CC     CALL Z,LCCCC 
+591B 9E           SBC  A,(HL) 
+591C EE EE        XOR  EEh    
+591E EE E8        XOR  E8h    
+5920 EE EE        XOR  EEh    
+5922 EE EE        XOR  EEh    
+5924 EE EE        XOR  EEh    
+5926 EE EE        XOR  EEh    
+5928 EE EE        XOR  EEh    
+592A EE EE        XOR  EEh    
+592C EE EE        XOR  EEh    
+592E E8           RET  PE     
+592F EE EE        XOR  EEh    
+5931 EE EE        XOR  EEh    
+5933 EE EE        XOR  EEh    
+5935 E8           RET  PE     
+5936 EE EE        XOR  EEh    
+5938 EE EE        XOR  EEh    
+593A EE EE        XOR  EEh    
+593C 88           ADC  A,B    
+593D 88           ADC  A,B    
+593E 88           ADC  A,B    
+593F 88           ADC  A,B    
+5940 EE EE        XOR  EEh    
+5942 EE EE        XOR  EEh    
+5944 EE EE        XOR  EEh    
+5946 EE EE        XOR  EEh    
+5948 EE EE        XOR  EEh    
+594A EE EE        XOR  EEh    
+594C EE E8        XOR  E8h    
+594E EE EE        XOR  EEh    
+5950 EE EE        XOR  EEh    
+5952 EE EE        XOR  EEh    
+5954 EE EE        XOR  EEh    
+5956 EE 8E        XOR  8Eh    
+5958 EE EE        XOR  EEh    
+595A EE EE        XOR  EEh    
+595C 88           ADC  A,B    
+595D 88           ADC  A,B    
+595E 88           ADC  A,B    
+595F 88           ADC  A,B    
+5960 EE EE        XOR  EEh    
+5962 EE EE        XOR  EEh    
+5964 EE EE        XOR  EEh    
+5966 EE E8        XOR  E8h    
+5968 8E           ADC  A,(HL) 
+5969 EE EE        XOR  EEh    
+596B 8E           ADC  A,(HL) 
+596C EE EE        XOR  EEh    
+596E EE EE        XOR  EEh    
+5970 EE EE        XOR  EEh    
+5972 8E           ADC  A,(HL) 
+5973 EE E8        XOR  E8h    
+5975 EE 00        XOR  00h    
 
 
              org 8180h

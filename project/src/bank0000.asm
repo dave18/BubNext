@@ -1754,6 +1754,11 @@ call_0C6D
     dec  (hl)
     ;ld   a,$34
     ;ld   (l_fa00),a         ;SOUND IO - credit insert
+
+    push bc         ;load credit sound into queue
+    ld c,$34
+    call call_135C
+    pop bc
     
     ld   a,$2D
     ld   (l_e369),a
@@ -2749,7 +2754,7 @@ call_1350
     ld   hl,l_fc20
     bit  3,(hl)
     ret  z
-call_135C
+call_135C               ;add sound command to queue
     ld   hl,l_e391
     ld   a,(hl)
     cp   $0F
@@ -3088,13 +3093,34 @@ call_38F0  	;Routines for the Best Today Level Screen
     ld   bc,$0012
     call call_0D50
     call call_3C60
+
+    ;break
+    ld a,introbank		;page in the intro bank
+	call call_026C		;and call the intro bank version of the routine
+	call intro_call_38FC
+   ; break
+	jp call_029B
+    ;ret
+
+call_39D8
+    ;break
+    call call_029B      ;Exit intro bank
+    ld   a,$05				;failed protection check?!
+    call call_0018
+    ld a,introbank		;page in the intro bank
+	call call_026C		;and call the intro bank version of the routine
+	jp intro_call_39DB
+	jp call_029B
+    ;ret
+    
+/*
     ld   ix,l_e682
     ld   (ix+$01),$00
     ld   a,(l_e644)
     ld   (ix+$02),a
     ld   a,(l_e5d3)
     and  a
-    jr   z,call_3916
+    jr   z,call_3916B
     ld   a,(l_e67c)
     ld   (ix+$02),a
 call_3916
@@ -3477,6 +3503,7 @@ call_3C57
     ld   c,a
     ld   de,$019A
     jp   call_0DC1
+*/
 call_3C60
     call call_02AC
     call call_02E4
@@ -3554,11 +3581,13 @@ call_3CB0
     ;inc  hl
     djnz call_3CAD
     ret
+
 data_3CC2
 	BYTE $FF,$F0,$00,$00,$0B,$00,$60,$00,$00,$F0,$90,$00,$40,$00,$09,$F0
 	BYTE $0B,$F0,$F0,$70,$0F,$00,$FF,$00,$F8,$00,$F7,$70,$D4,$00,$00,$00
 	BYTE $FF,$F0,$00,$00,$08,$F0,$60,$00,$00,$F0,$90,$00,$40,$00,$09,$F0
 	BYTE $0B,$F0,$F0,$70,$0A,$F0,$0F,$F0,$F8,$00,$F7,$70,$D4,$00,$00,$00
+/*
 data_3D02
 	BYTE $C0,$0A,$15,$B0,$0A,$15,$C0,$1A,$15,$B0,$1A,$15,$C0,$FA,$14,$C0
 	BYTE $2A,$14,$C0,$3A,$14,$C0,$4A,$14,$C0,$5A,$14,$B0,$FA,$14,$B0,$2A
@@ -3593,8 +3622,127 @@ data_3DD6
 data_3DE3
 	BYTE $0c,"            "
 
+*/
 
-	
+call_539F
+    ld   hl,l_e5d7
+    bit  0,(hl)
+    jr   z,call_53B9
+    ld   hl,l_e2c5
+    ld   a,(hl)
+    cp   $18
+    jr   nz,call_53B9
+    inc  hl
+    inc  hl
+    ld   a,(hl)
+    cp   $77
+    jr   c,call_53B9
+    cp   $7A
+    jr   c,call_53CF
+call_53B9
+    ld   hl,l_e5d7
+    bit  1,(hl)
+    ret  z
+    ld   hl,l_e2b5
+    ld   a,(hl)
+    cp   $18
+    ret  nz
+    inc  hl
+    inc  hl
+    ld   a,(hl)
+    cp   $77
+    ret  c
+    cp   $7A
+    ret  nc
+call_53CF
+    ld   a,$03
+    call call_0008;rst  $08
+    call call_18BB
+    call call_03CB
+    call call_02AC
+    ld   a,(l_e726)
+    ld   (l_e64b),a
+    ld   hl,l_e358
+    ld   (hl),$00
+    ld   c,$30
+    call call_1350
+    ld   hl,l_e342
+    ld   (hl),$01
+    ld   hl,l_e723
+    ld   (hl),$00
+    ld   hl,l_e357
+    ld   (hl),$01
+    ld   hl,l_ed3d
+    ld   (hl),$00
+    ld   hl,l_e730
+    ld   (hl),$00
+    xor  a
+    call call_0018;rst  $18
+/*data_5406
+    BYTE $5E,$39,$68,$39,$5F,$39,$69,$39,$72,$39,$7B,$39,$73,$39,$7C,$39*/
+data_5406
+    BYTE $A9-$15,$E0,$AA-$15,$E0,$B3-$15,$E0,$B4-$15,$E0
+    BYTE $BD-$15,$E0,$BE-$15,$E0,$C6-$15,$E0,$C7-$15,$E0
+
+call_5416
+    ld   hl,l_e730
+    bit  7,(hl)
+    ret  z
+    jr   call_53CF
+call_541E
+    ld   hl,l_e727
+    inc  (hl)
+    ld   a,(hl)
+    cp   $07
+    ret  nz
+    ld   (hl),$00
+    inc  hl
+    inc  (hl)
+    bit  0,(hl)
+    jr   nz,call_545B
+    ld   hl,data_5488
+    ld   de,$774c;CD8A
+    ld   bc,$0004
+    ldir
+    ld   hl,data_548C
+    ld   de,$779c;CDCA
+    ld   bc,$0004
+    ldir
+    ld   hl,data_5488
+    ld   de,$7780;D40A
+    ld   bc,$0004
+    ldir
+    ld   hl,data_548C
+    ld   de,$77d0;D44A
+    ld   bc,$0004
+    ldir
+    ret
+call_545B
+    ld   hl,data_5490
+    ld   de,$774c;CD8A
+    ld   bc,$0004
+    ldir
+    ld   hl,data_5494
+    ld   de,$779c;CDCA
+    ld   bc,$0004
+    ldir
+    ld   hl,data_5490
+    ld   de,$7780;D40A
+    ld   bc,$0004
+    ldir
+    ld   hl,data_5494
+    ld   de,$77d0;D44A
+    ld   bc,$0004
+    ldir
+    ret
+data_5488
+    BYTE $E4-$15,$E0,$E5-$15,$E0
+data_548C
+    BYTE $EE-$15,$E0,$EF-$15,$E0
+data_5490
+    BYTE $F8-$15,$E0,$F9-$15,$E0
+data_5494
+    BYTE $EC,$E0,$ED,$E0
 	
 call_5C2B				;INTRO ERROR - THIS IS WHERE IX SHOULD GET LOADED (PROBABLY)
     call call_60F3
@@ -4469,7 +4617,7 @@ call_63A9
 call_63C3
     call call_159D
     set  7,(ix+$21)
-    ld   a,$22
+    ld   a,$22        ;Enemy fireball
     ;ld   ($FA00),a   ;TODO - sound
     xor  a
 call_63D0

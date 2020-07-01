@@ -704,6 +704,7 @@ bank0_call_863B
 bank0_call_8673
      ld   a,$00
   ;   ld   ($FA00),a
+     ld (music_playing),a
      ld   hl,l_ed3d
      ld   (hl),$01
      ld   a,$05
@@ -6101,7 +6102,7 @@ bank0_call_B370
     ld   a,(l_e5d7)
     cp   $03
     jr   nz,bank0_call_B389
-    ld   a,$04
+    ld   a,$04                  ;need to find oout what sound this is
     ;ld   ($FA00),a				;TODO sound
     ld   a,$03
     call call_0018
@@ -7116,7 +7117,7 @@ bank0_call_BF61
     ret  nz
     bit  1,a
     jr   nz,bank0_call_BFB5
-    ld   a,$03
+    ld   a,$03              ;need to find oout what sound this is
     ;ld   ($FA00),a         ;SOUND IO
 bank0_call_BF75                 ;end screen shooting star
     ld   hl,l_e2d5
