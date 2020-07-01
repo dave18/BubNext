@@ -1755,10 +1755,10 @@ call_0C6D
     ;ld   a,$34
     ;ld   (l_fa00),a         ;SOUND IO - credit insert
 
-    push bc         ;load credit sound into queue
+  ;  push bc         ;load credit sound into queue
     ld c,$34
     call call_135C
-    pop bc
+  ;  pop bc
     
     ld   a,$2D
     ld   (l_e369),a

@@ -5682,12 +5682,8 @@ call_536A
     ld   hl,l_e731
     set  1,(hl)
     ret
-;539F
+;539F       - located in Bank0000
 
-/*data_5406
-    BYTE $A9,$E0,$AA,$E0,$B3,$E0,$B4,$E0
-    BYTE $BD,$E0,$BE,$E0,$C6,$E0,$C7,$E0
-*/
 
 
 call_5498
@@ -5747,6 +5743,14 @@ call_54C2_loop
 	call call_0B30_update_entry
 	djnz call_54C2_loop
 
+    ld   hl,data_555B
+    nextreg $43, %00100000        ; (R/W) 0x43 (67) => Palette Control - Sprites
+    nextreg $40, $F0                  ; (R/W) 0x40 (64) => Palette Index
+    ld   b,$10
+call_54C2_loop2
+	call call_0B30_update_entry
+	djnz call_54C2_loop2
+
     ;ld   de,$F9E0          ;TODO - Palette
     ;ld   bc,$0020
     ;ldir
@@ -5797,6 +5801,14 @@ call_54ED
 call_54ED_loop
 	call call_0B30_update_entry
 	djnz call_54ED_loop
+
+    ld   hl,data_557B
+    nextreg $43, %00100000        ; (R/W) 0x43 (67) => Palette Control - Tilemap
+    nextreg $40, $F0                  ; (R/W) 0x40 (64) => Palette Index
+    ld   b,$10
+call_54ED_loop2
+	call call_0B30_update_entry
+	djnz call_54ED_loop2
     ;ld   de,$F9E0      ;TODO - Palette
     ;ld   bc,$0020
     ;ldir
@@ -5850,6 +5862,14 @@ call_5518
 call_5518_loop
 	call call_0B30_update_entry
 	djnz call_5518_loop
+
+    ld   hl,data_559B
+    nextreg $43, %00100000        ; (R/W) 0x43 (67) => Palette Control - Tilemap
+    nextreg $40, $F0                  ; (R/W) 0x40 (64) => Palette Index
+    ld   b,$10
+call_5518_loop2
+	call call_0B30_update_entry
+	djnz call_5518_loop2
     ;ld   de,$F9E0      ;TODO - palette
     ;ld   bc,$0020
     ;ldir
