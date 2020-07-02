@@ -4827,7 +4827,7 @@ call_65BC
 call_65D0
     ret
 
-	
+;66D1 to 660C nopped out in Redux!	
 
 call_660D
     ld   a,(l_fc85)

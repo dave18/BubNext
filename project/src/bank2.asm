@@ -14,7 +14,7 @@ bank2_call_8000				;TODO - only first line of code added to pass security at $8B
 bank2_call_8016				;TODO - nothing here - used by security routine that has been bypassed
 	jp bank2_call_8016
 /*
-    call bank2_call_82CB
+    call bank2_call_BD66
     call bank2_call_83B3
     call bank2_call_8360
     ;ld   ($FA80),a
@@ -146,6 +146,14 @@ bank2_call_80F3
     exx
     djnz bank2_call_80F3
 */
+
+;8120
+;    ld a,(l_ff02) - redux ld a,(l_fc22) - oiginal bootleg
+
+bank2_call_82CB
+     ;redux return address
+     jp bank2_call_82CB
+     BYTE "bank2_call_82CB"
 
 bank2_call_83E8
     ld   a,(l_e5d3)
@@ -1221,7 +1229,7 @@ bank2_call_8B99
      ld   a,(l_f46a)
      ld   hl,l_f469
      cp   (hl)
-     ret  z
+     ret  ;z       ;Redux patch
      push hl
      ld   hl,l_f46b
      ld   bc,$000B
@@ -6978,6 +6986,40 @@ bank2_data_BB40
     BYTE $3A,$68,$F6,$77,$C3,$9E,$BB,$F5,$CD,$31,$04,$79,$21,$00,$F8,$77
     BYTE $CD,$27,$04,$F1,$C9,$10,$20,$40,$80,$FF,$07,$10,$08,$10,$09,$10
 */
+
+;redux code
+bank2_call_BD66
+     ld   a,(l_ff01)
+     or   $00
+     ld   (l_fc21),a
+     ld   a,(l_ff00)
+     ld   (l_fc20),a
+     ld   a,(l_ff02)
+     or   $8C
+     ld   (l_fc22),a
+     ld   a,(l_ff03)
+     or   $8C
+     ld   (l_fc23),a
+     ld   a,(l_ff02)
+     ld   hl,l_fc1f
+     res  2,(hl)
+     bit  3,a
+     jr   nz,bank2_call_BD92
+     set  2,(hl)
+bank2_call_BD92
+     res  3,(hl)
+     bit  2,a
+     jr   nz,bank2_call_BD9A
+     set  3,(hl)
+bank2_call_BD9A
+     ld   a,(l_ff03)
+     set  1,(hl)
+     bit  3,a
+     jr   nz,bank2_call_BDA5
+     res  1,(hl)
+bank2_call_BDA5
+     set  0,(hl)
+     jp   bank2_call_82CB
 
 ENDBANK2
      BYTE "END OF BANK2"

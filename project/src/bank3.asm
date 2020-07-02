@@ -231,7 +231,8 @@ bank3_data_93B7
 	BYTE $FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF
 	BYTE $FF,$FF
 
-
+;redux nops out
+;$95A9 to $9602
 
 
 bank3_call_9603
@@ -248,6 +249,368 @@ bank3_call_9611
     ld   a,h
     or   l
     jr   nz,bank3_call_9611
+;replacement redux code
+    ld   a,$37
+    ld   (l_fc85),a
+    ld   hl,bank3_call_9621;$9621
+    ld   (l_fd86),hl
+bank3_call_9621
+    ld   a,(l_ff01)
+    or   $C0
+    ld   (l_fc21),a
+    ld   a,(l_ff01)
+    rlca
+    rlca
+    and  $03
+    ld  (l_fd84),a
+    ld   a,(l_ff00)
+    ld   (l_fc20),a
+    ld   a,(l_ff02)     ;get P1 input
+    or   $8C
+    ld   (l_fc22),a
+    ld   a,(l_ff03)     ;get p2 input
+    or   $8C
+    ld   (l_fc23),a
+    ld   a,(l_ff02)
+    ld   hl,l_fc1f
+    res  2,(hl)
+    bit  3,a
+    jr   nz,bank3_call_9657
+    set  2,(hl)
+bank3_call_9657
+    res  3,(hl)
+    bit  2,a
+    jr   nz,bank3_call_965F
+    set  3,(hl)
+bank3_call_965F
+    ld   a,(l_ff03)
+    set  1,(hl)
+    bit  3,a
+    jr   nz,bank3_call_966A
+    res  1,(hl)
+bank3_call_966A
+    set  0,(hl)
+    ld   hl,l_fd61
+    ld   a,(hl)
+    or   a
+    jr   z,bank3_call_9678
+    dec  (hl)
+    jr   z,bank3_call_9682
+    jr   bank3_call_9688
+bank3_call_9678
+    ld   a,(l_e194)
+    or   a
+    jr   nz,bank3_call_9682
+    ld   (hl),$05
+    jr   bank3_call_9688
+bank3_call_9682
+    call bank3_call_9694
+    call bank3_call_9763
+bank3_call_9688
+    call bank3_call_983C
+    call bank3_call_985D
+    call bank3_call_9873
+    jp   call_0D15
+bank3_call_9694
+    ld   a,(l_fc5f)
+    and  $01
+    cp   $01
+    jr   z,bank3_call_969E
+    ret
+bank3_call_969E
+    xor  a
+    ld   (l_fd57),a
+    ld   a,(l_fc60)
+    ld   (l_fd55),a
+    ld   a,(l_fc61)
+    ld   (l_fd56),a
+    ld   hl,l_fc01
+    ld   (l_fd58),hl
+    ld   hl,l_fc27
+    ld   (l_fd5a),hl
+    xor  a
+    ld   (l_fd5c),a
+bank3_call_96BE
+    ld   hl,(l_fd58)
+    ld   a,(hl)
+    and  $01
+    cp   $01
+    jr   z,bank3_call_96CA
+    jr   bank3_call_9722
+bank3_call_96CA
+    ld   hl,(l_fd58)
+    inc  hl
+    ld   b,(hl)
+    ld   a,(l_fd55)
+    sub  b
+    jr   z,bank3_call_96E1
+    jr   nc,bank3_call_96DD
+    ld   b,$01
+    neg
+    jr   bank3_call_96E3
+bank3_call_96DD
+    ld   b,$00
+    jr   bank3_call_96E3
+bank3_call_96E1
+    ld   b,$80
+bank3_call_96E3
+    ld   hl,(l_fd5a)
+    ld   (hl),b
+    inc  hl
+    inc  hl
+    inc  hl
+    inc  hl
+    ld   (hl),a
+    cp   $08
+    jr   nc,bank3_call_96F4
+    ld   hl,l_fd5c
+     inc  (hl)
+bank3_call_96F4
+    ld   hl,(l_fd58)
+    inc  hl
+    inc  hl
+    ld   b,(hl)
+    ld   a,(l_fd56)
+    sub  b
+    jr   z,bank3_call_970C
+    jr   nc,bank3_call_9708
+    ld   b,$01
+    neg
+    jr   bank3_call_970E
+bank3_call_9708
+    ld   b,$00
+    jr   bank3_call_970E
+bank3_call_970C
+    ld   b,$80
+bank3_call_970E
+    ld   hl,(l_fd5a)
+    inc  hl
+    inc  hl
+    ld   (hl),b
+    ld   hl,(l_fd5a)
+    inc  hl
+    inc  hl
+    inc  hl
+    inc  hl
+    inc  hl
+    inc  hl
+    ld   (hl),a
+    cp   $08
+    jr   c,bank3_call_9747
+bank3_call_9722
+    ld   hl,(l_fd58)
+    inc  hl
+    inc  hl
+    inc  hl
+    inc  hl
+    ld   (l_fd58),hl
+    ld   hl,(l_fd5a)
+    inc  hl
+    inc  hl
+    inc  hl
+    inc  hl
+    inc  hl
+    inc  hl
+    inc  hl
+    inc  hl
+    ld   (l_fd5a),hl
+    ld   hl,l_fd57
+    inc  (hl)
+    ld   a,(hl)
+    cp   $07
+    jr   z,bank3_call_9746
+    jp   bank3_call_96BE
+bank3_call_9746
+    ret
+bank3_call_9747
+    ld   a,(l_fd5c)
+    cp   $00
+    jr   z,bank3_call_9746
+    ld   a,(l_fc5f)
+    and  $01
+    cp   $01
+    jr   nz,bank3_call_9746
+    ld   a,$01
+    ld   (l_fc62),a
+    ld   a,(l_fd57)
+    ld   (l_fc63),a
+    ret
+bank3_call_9763
+    ld   a,(l_fc67)
+    and  $01
+    cp   $01
+    jr   z,bank3_call_976D
+    ret
+bank3_call_976D
+    xor  a
+    ld   (l_fd57),a
+    ld   a,(l_fc68)
+    ld   (l_fd55),a
+    ld   a,(l_fc69)
+    ld   (l_fd56),a
+    ld   hl,l_fc01
+    ld   (l_fd58),hl
+    ld   hl,l_fc27
+    ld   (l_fd5a),hl
+    xor  a
+    ld   (l_fd5c),a
+bank3_call_978D
+    ld   hl,(l_fd58)
+    ld   a,(hl)
+    and  $01
+    cp   $01
+    jr   z,bank3_call_9799
+    jr   bank3_call_97F8
+bank3_call_9799
+    ld   hl,(l_fd58)
+    inc  hl
+    ld   b,(hl)
+    ld   a,(l_fd55)
+    sub  b
+    jr   z,bank3_call_97B0
+    jr   nc,bank3_call_97AC
+    ld   b,$01
+    neg
+    jr   bank3_call_97B2
+bank3_call_97AC
+    ld   b,$00
+    jr   bank3_call_97B2
+bank3_call_97B0
+    ld   b,$80
+bank3_call_97B2
+    ld   hl,(l_fd5a)
+    inc  hl
+    ld   (hl),b
+    ld   hl,(l_fd5a)
+    inc  hl
+    inc  hl
+    inc  hl
+    inc  hl
+    inc  hl
+    ld   (hl),a
+    cp   $08
+    jr   nc,bank3_call_97C8
+    ld   hl,l_fd5c
+    inc  (hl)
+bank3_call_97C8
+    ld   hl,(l_fd58)
+    inc  hl
+    inc  hl
+    ld   b,(hl)
+    ld   a,(l_fd56)
+    sub  b
+    jr   z,bank3_call_97E0
+    jr   nc,bank3_call_97DC
+    ld   b,$01
+    neg
+    jr   bank3_call_97E2
+bank3_call_97DC
+    ld   b,$00
+    jr   bank3_call_97E2
+bank3_call_97E0
+    ld   b,$80
+bank3_call_97E2
+    ld   hl,(l_fd5a)
+    inc  hl
+    inc  hl
+    inc  hl
+    ld   (hl),b
+    ld   hl,(l_fd5a)
+    inc  hl
+    inc  hl
+    inc  hl
+    inc  hl
+    inc  hl
+    inc  hl
+    inc  hl
+    ld   (hl),a
+    cp   $08
+    jr   c,bank3_call_981F
+bank3_call_97F8
+    ld   hl,(l_fd58)
+    inc  hl
+    inc  hl
+    inc  hl
+    inc  hl
+    ld   (l_fd58),hl
+    ld   hl,(l_fd5a)
+    inc  hl
+    inc  hl
+    inc  hl
+    inc  hl
+    inc  hl
+    inc  hl
+    inc  hl
+    inc  hl
+    ld   (l_fd5a),hl
+    ld   hl,l_fd57
+    inc  (hl)
+    ld   a,(l_fd57)
+    cp   $07
+    jr   z,bank3_call_981E
+    jp   bank3_call_978D
+bank3_call_981E
+    ret
+bank3_call_981F
+    ld   a,(l_fd5c)
+    cp   $00
+    jr   z,bank3_call_981E
+    ld   hl,l_fc67
+    ld   a,(hl)
+    and  $01
+    cp   $01
+    jr   nz,bank3_call_981E
+    ld   hl,l_fc6a
+    ld   (hl),$01
+    ld   a,(l_fd57)
+    ld   (l_fc6b),a
+    ret
+bank3_call_983C
+    ld   a,(l_fc7a)
+    cp   $00
+    jr   nz,bank3_call_9844
+    ret
+bank3_call_9844
+    ld   hl,(l_fc78)
+    ld   bc,$0001
+    scf
+    ccf
+    sbc  hl,bc
+    jr   nz,bank3_call_9859
+    xor  a
+    ld   (l_fc7a),a
+    inc  a
+    ld   (l_fc7b),a
+    ret
+bank3_call_9859
+    ld   (l_fc78),hl
+    ret
+bank3_call_985D
+    ld   a,(l_fc71)
+    cp   $0D
+    jr   z,bank3_call_9865
+    ret
+bank3_call_9865
+    ld   a,(l_fd54)
+    cp   $0C
+    jr   z,bank3_call_986D
+    ret
+bank3_call_986D
+    ld   a,$2A
+    ld   (l_fc1e),a
+    ret
+bank3_call_9873
+    ld   a,(l_fc7c)
+    inc  a
+    cp   $06
+    jr   nz,bank3_call_987C
+    xor  a
+bank3_call_987C
+    ld   (l_fc7c),a
+    ret
+
+/*
+;**old code
     nop
     nop
     nop
@@ -801,6 +1164,8 @@ bank3_data_BA33
     BYTE $70,$10,$D0,$40,$30,$90,$C0,$20,$F0,$00,$B0,$80,$A0,$E0,$60,$FF
     BYTE $66,$13,$CD,$06,$1F,$78,$B7,$28,$28,$FE,$02,$38,$24,$CD,$15,$21
     BYTE $28,$0A
+*/
+;*** end of old code
 
 bank3_call_BE00
 	
@@ -845,6 +1210,8 @@ bank3_call_BE2D_loop
 	
 bank3_data_BE42
 	BYTE $0a,$01,$02,$03,$04,$05,$06,$07,$08,$09,$0a		;TAITO top half
+
+;BE4D ;PRINT REDUX MESSAGE
 
 bank3_data_BE7F
 	BYTE $09,$0b,$0c,$0d,$0e,$0f,$10,$11,$12,$13			;TAITO bottom half

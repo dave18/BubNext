@@ -1,0 +1,3657 @@
+# file opened: c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm
+   1  0000
+   2  0000              	org $c000
+   3  C000
+   4  C000              slave_call_0190
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(5): error: Label not found: l_e338
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(5): warning: Accessing low memory address 0x0000, is it ok?: ld   a,(l_e338)
+   5  C000 3A 00 00         ld   a,(l_e338)
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(6): error: Label not found: l_f66c
+   6  C003 21 00 00         ld   hl,l_f66c
+   7  C006 BE               cp   (hl)
+   8  C007 77               ld   (hl),a
+   9  C008 23               inc  hl
+  10  C009              	;jr   slave_call_01B6
+  11  C009 20 1B            jr   nz,slave_call_01B6
+  12  C00B 34               inc  (hl)
+  13  C00C 7E               ld   a,(hl)
+  14  C00D FE 3C            cp   $3C
+  15  C00F D8               ret  c
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(16): error: Label not found: l_e800
+  16  C010 21 00 00         ld   hl,l_e800
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(17): error: Label not found: l_e000
+  17  C013 11 00 00         ld   de,l_e000
+  18  C016 01 00 08         ld   bc,$0800
+  19  C019              slave_call_01A9
+  20  C019 7E               ld   a,(hl)
+  21  C01A 2F               cpl
+  22  C01B 12               ld   (de),a
+  23  C01C 23               inc  hl
+  24  C01D 13               inc  de
+  25  C01E 0B               dec  bc
+  26  C01F 79               ld   a,c
+  27  C020 B0               or   b
+  28  C021 20 F6            jr   nz,slave_call_01A9
+  29  C023              slave_call_01B3
+  30  C023                  ;jp   slave_call_01B3			;Protection or error hang!
+  31  C023 C3 28 C0     	jp   slave_call_01B8			;Bodge fix
+  32  C026              slave_call_01B6
+  33  C026 36 00            ld   (hl),$00
+  34  C028              slave_call_01B8
+  35  C028 C9               ret
+  36  C029              slave_call_01B9
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(37): error: Label not found: l_e737
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(37): warning: Accessing low memory address 0x0000, is it ok?: ld   a,(l_e737)
+  37  C029 3A 00 00         ld   a,(l_e737)
+  38  C02C A7               and  a
+  39  C02D C0               ret  nz
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(40): error: Label not found: l_e691
+  40  C02E 21 00 00         ld   hl,l_e691
+  41  C031 CB 46            bit  0,(hl)
+  42  C033 28 21            jr   z,slave_call_01E6
+  43  C035 23               inc  hl
+  44  C036 5E               ld   e,(hl)
+  45  C037 23               inc  hl
+  46  C038 56               ld   d,(hl)
+  47  C039 0E 0A            ld   c,$0A
+  48  C03B CD 24 C1         call slave_call_02B4
+  49  C03E 30 16            jr   nc,slave_call_01E6
+  50  C040 E5               push hl
+  51  C041 CD 7C C0         call slave_call_020C
+  52  C044 E1               pop  hl
+  53  C045 EB               ex   de,hl
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(54): error: Label not found: l_e6a4
+  54  C046 21 00 00         ld   hl,l_e6a4
+  55  C049 CB 46            bit  0,(hl)
+  56  C04B C8               ret  z
+  57  C04C CB CE            set  1,(hl)
+  58  C04E EB               ex   de,hl
+  59  C04F 36 02            ld   (hl),$02
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(60): error: Label not found: l_ed3d
+  60  C051 21 00 00         ld   hl,l_ed3d
+  61  C054 35               dec  (hl)
+  62  C055 C9               ret
+  63  C056              slave_call_01E6
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(64): error: Label not found: l_e6c3
+  64  C056 21 00 00         ld   hl,l_e6c3
+  65  C059 CB 46            bit  0,(hl)
+  66  C05B C8               ret  z
+  67  C05C 23               inc  hl
+  68  C05D 5E               ld   e,(hl)
+  69  C05E 23               inc  hl
+  70  C05F 56               ld   d,(hl)
+  71  C060 0E 0A            ld   c,$0A
+  72  C062 CD 24 C1         call slave_call_02B4
+  73  C065 D0               ret  nc
+  74  C066 E5               push hl
+  75  C067 CD A9 C0         call slave_call_0239
+  76  C06A E1               pop  hl
+  77  C06B EB               ex   de,hl
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(78): error: Label not found: l_e6d6
+  78  C06C 21 00 00         ld   hl,l_e6d6
+  79  C06F CB 46            bit  0,(hl)
+  80  C071 C8               ret  z
+  81  C072 CB CE            set  1,(hl)
+  82  C074 EB               ex   de,hl
+  83  C075 36 02            ld   (hl),$02
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(84): error: Label not found: l_ed3d
+  84  C077 21 00 00         ld   hl,l_ed3d
+  85  C07A 35               dec  (hl)
+  86  C07B C9               ret
+  87  C07C              slave_call_020C					;should only be called when hit by enemy
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(88): error: Label not found: l_e690
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(88): warning: Accessing low memory address 0x0000, is it ok?: ld   a,(l_e690)
+  88  C07C 3A 00 00         ld   a,(l_e690)
+  89  C07F A7               and  a
+  90  C080 C2 A7 C0         jp   nz,slave_call_0237
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(91): error: Label not found: l_e6b6
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(91): warning: Accessing low memory address 0x0000, is it ok?: ld   a,(l_e6b6)
+  91  C083 3A 00 00         ld   a,(l_e6b6)
+  92  C086 A7               and  a
+  93  C087 C2 A7 C0         jp   nz,slave_call_0237
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(94): error: Label not found: l_e6a4
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(94): warning: Accessing low memory address 0x0000, is it ok?: ld   a,(l_e6a4)
+  94  C08A 3A 00 00         ld   a,(l_e6a4)
+  95  C08D A7               and  a
+  96  C08E C2 A7 C0         jp   nz,slave_call_0237
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(97): error: Label not found: l_e692
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(97): warning: Accessing low memory address 0x0000, is it ok?: ld   a,(l_e692)
+  97  C091 3A 00 00         ld   a,(l_e692)
+  98  C094 FE 08            cp   $08
+  99  C096 DA A7 C0         jp   c,slave_call_0237
+ 100  C099 FE F8            cp   $F8
+ 101  C09B D2 A7 C0         jp   nc,slave_call_0237
+ 102  C09E E5               push hl
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(103): error: Label not found: l_e691
+ 103  C09F 21 00 00         ld   hl,l_e691				;flag that hit by hurry up ghost
+ 104  C0A2 36 10            ld   (hl),$10
+ 105  C0A4 E1               pop  hl
+ 106  C0A5 37               scf
+ 107  C0A6 C9               ret
+ 108  C0A7              slave_call_0237
+ 109  C0A7 AF               xor  a
+ 110  C0A8 C9               ret
+ 111  C0A9              slave_call_0239
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(112): error: Label not found: l_e690
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(112): warning: Accessing low memory address 0x0000, is it ok?: ld   a,(l_e690)
+ 112  C0A9 3A 00 00         ld   a,(l_e690)
+ 113  C0AC A7               and  a
+ 114  C0AD C2 D4 C0         jp   nz,slave_call_0264
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(115): error: Label not found: l_e6e8
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(115): warning: Accessing low memory address 0x0000, is it ok?: ld   a,(l_e6e8)
+ 115  C0B0 3A 00 00         ld   a,(l_e6e8)
+ 116  C0B3 A7               and  a
+ 117  C0B4 C2 D4 C0         jp   nz,slave_call_0264
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(118): error: Label not found: l_e6d6
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(118): warning: Accessing low memory address 0x0000, is it ok?: ld   a,(l_e6d6)
+ 118  C0B7 3A 00 00         ld   a,(l_e6d6)
+ 119  C0BA A7               and  a
+ 120  C0BB C2 D4 C0         jp   nz,slave_call_0264
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(121): error: Label not found: l_e6c4
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(121): warning: Accessing low memory address 0x0000, is it ok?: ld   a,(l_e6c4)
+ 121  C0BE 3A 00 00         ld   a,(l_e6c4)
+ 122  C0C1 FE 08            cp   $08
+ 123  C0C3 DA D4 C0         jp   c,slave_call_0264
+ 124  C0C6 FE F8            cp   $F8
+ 125  C0C8 D2 D4 C0         jp   nc,slave_call_0264
+ 126  C0CB E5               push hl
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(127): error: Label not found: l_e6c3
+ 127  C0CC 21 00 00         ld   hl,l_e6c3
+ 128  C0CF 36 10            ld   (hl),$10
+ 129  C0D1 E1               pop  hl
+ 130  C0D2 37               scf
+ 131  C0D3 C9               ret
+ 132  C0D4              slave_call_0264
+ 133  C0D4 AF               xor  a
+ 134  C0D5 C9               ret
+ 135  C0D6              slave_call_0266
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(136): error: Label not found: l_e737
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(136): warning: Accessing low memory address 0x0000, is it ok?: ld   a,(l_e737)
+ 136  C0D6 3A 00 00         ld   a,(l_e737)
+ 137  C0D9 A7               and  a
+ 138  C0DA C0               ret  nz
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(139): error: Label not found: l_e691
+ 139  C0DB 21 00 00         ld   hl,l_e691
+ 140  C0DE CB 46            bit  0,(hl)
+ 141  C0E0 28 05            jr   z,slave_call_0277
+ 142  C0E2 0E 01            ld   c,$01
+ 143  C0E4 CD EF C0         call slave_call_027F
+ 144  C0E7              slave_call_0277
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(145): error: Label not found: l_e6c3
+ 145  C0E7 21 00 00         ld   hl,l_e6c3
+ 146  C0EA CB 46            bit  0,(hl)
+ 147  C0EC C8               ret  z
+ 148  C0ED 0E FF            ld   c,$FF
+ 149  C0EF              slave_call_027F
+ 150  C0EF 23               inc  hl
+ 151  C0F0 5E               ld   e,(hl)
+ 152  C0F1 23               inc  hl
+ 153  C0F2 56               ld   d,(hl)
+ 154  C0F3 06 00            ld   b,$00
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(155): error: Label not found: l_ed21
+ 155  C0F5 21 00 00         ld   hl,l_ed21
+ 156  C0F8              slave_call_0288
+ 157  C0F8 CB 5E            bit  3,(hl)
+ 158  C0FA 28 1D            jr   z,slave_call_02A9
+ 159  C0FC E5               push hl
+ 160  C0FD 23               inc  hl
+ 161  C0FE 7E               ld   a,(hl)
+ 162  C0FF 93               sub  e
+ 163  C100 F2 05 C1         jp   p,slave_call_0295
+ 164  C103 ED 44            neg
+ 165  C105              slave_call_0295
+ 166  C105 FE 10            cp   $10
+ 167  C107 30 0F            jr   nc,slave_call_02A8
+ 168  C109 23               inc  hl
+ 169  C10A 7E               ld   a,(hl)
+ 170  C10B 92               sub  d
+ 171  C10C F2 11 C1         jp   p,slave_call_02A1
+ 172  C10F ED 44            neg
+ 173  C111              slave_call_02A1
+ 174  C111 FE 10            cp   $10
+ 175  C113 D2 18 C1         jp   nc,slave_call_02A8
+ 176  C116 23               inc  hl
+ 177  C117 71               ld   (hl),c
+ 178  C118              slave_call_02A8
+ 179  C118 E1               pop  hl
+ 180  C119              slave_call_02A9
+ 181  C119 23               inc  hl
+ 182  C11A 23               inc  hl
+ 183  C11B 23               inc  hl
+ 184  C11C 23               inc  hl
+ 185  C11D 04               inc  b
+ 186  C11E 78               ld   a,b
+ 187  C11F FE 07            cp   $07
+ 188  C121 20 D5            jr   nz,slave_call_0288
+ 189  C123 C9               ret
+ 190  C124              slave_call_02B4
+ 191  C124 06 00            ld   b,$00
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(192): error: Label not found: l_ed21
+ 192  C126 21 00 00         ld   hl,l_ed21
+ 193  C129              slave_call_02B9
+ 194  C129 CB 46            bit  0,(hl)
+ 195  C12B 28 17            jr   z,slave_call_02D4
+ 196  C12D E5               push hl
+ 197  C12E 23               inc  hl
+ 198  C12F 7E               ld   a,(hl)
+ 199  C130 93               sub  e
+ 200  C131 F2 36 C1         jp   p,slave_call_02C6
+ 201  C134 ED 44            neg
+ 202  C136              slave_call_02C6
+ 203  C136 B9               cp   c
+ 204  C137 30 09            jr   nc,slave_call_02D2
+ 205  C139 23               inc  hl
+ 206  C13A 7E               ld   a,(hl)
+ 207  C13B 92               sub  d
+ 208  C13C F2 41 C1         jp   p,slave_call_02D1
+ 209  C13F ED 44            neg
+ 210  C141              slave_call_02D1
+ 211  C141 B9               cp   c
+ 212  C142              slave_call_02D2
+ 213  C142 E1               pop  hl
+ 214  C143 D8               ret  c
+ 215  C144              slave_call_02D4
+ 216  C144 23               inc  hl
+ 217  C145 23               inc  hl
+ 218  C146 23               inc  hl
+ 219  C147 23               inc  hl
+ 220  C148 04               inc  b
+ 221  C149 78               ld   a,b
+ 222  C14A FE 07            cp   $07
+ 223  C14C 20 DB            jr   nz,slave_call_02B9
+ 224  C14E AF               xor  a
+ 225  C14F C9               ret
+ 226  C150              slave_call_02E0			;check hurry up ghost collision
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(227): error: Label not found: l_e723
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(227): warning: Accessing low memory address 0x0000, is it ok?: ld   a,(l_e723)		
+ 227  C150 3A 00 00         ld   a,(l_e723)
+ 228  C153 FE 29            cp   $29
+ 229  C155 28 06            jr   z,slave_call_02ED
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(230): error: Label not found: l_f66b
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(230): warning: Accessing low memory address 0x0000, is it ok?: ld   a,(l_f66b)		
+ 230  C157 3A 00 00         ld   a,(l_f66b)		;seems to get set once player travel bubble bursts
+ 231  C15A FE 49            cp   $49
+ 232  C15C C0               ret  nz
+ 233  C15D              slave_call_02ED
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(234): error: Label not found: l_f1c2
+ 234  C15D DD 21 00 00      ld   ix,l_f1c2
+ 235  C161 DD CB 00 7E      bit  7,(ix+$00)
+ 236  C165 28 36            jr   z,slave_call_032D
+ 237  C167 1E 0A            ld   e,$0A
+ 238  C169 CD DB C1         call slave_call_036B
+ 239  C16C 30 2F            jr   nc,slave_call_032D
+ 240  C16E DD CB 00 C6      set  0,(ix+$00)
+ 241  C172 A7               and  a
+ 242  C173 20 14            jr   nz,slave_call_0319
+ 243  C175 DD CB 00 8E      res  1,(ix+$00)
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(244): error: Label not found: l_e723
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(244): warning: Accessing low memory address 0x0000, is it ok?: ld   a,(l_e723)
+ 244  C179 3A 00 00         ld   a,(l_e723)
+ 245  C17C FE 29            cp   $29
+ 246  C17E C2 7C C0         jp   nz,slave_call_020C
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(247): error: Label not found: l_e730
+ 247  C181 21 00 00         ld   hl,l_e730
+ 248  C184 36 01            ld   (hl),$01
+ 249  C186 C3 7C C0         jp   slave_call_020C
+ 250  C189              slave_call_0319
+ 251  C189 DD CB 00 CE      set  1,(ix+$00)
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(252): error: Label not found: l_e723
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(252): warning: Accessing low memory address 0x0000, is it ok?: ld   a,(l_e723)
+ 252  C18D 3A 00 00         ld   a,(l_e723)
+ 253  C190 FE 29            cp   $29
+ 254  C192 C2 A9 C0         jp   nz,slave_call_0239
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(255): error: Label not found: l_e730
+ 255  C195 21 00 00         ld   hl,l_e730
+ 256  C198 36 01            ld   (hl),$01
+ 257  C19A C3 A9 C0         jp   slave_call_0239
+ 258  C19D              slave_call_032D
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(259): error: Label not found: l_f1d4
+ 259  C19D DD 21 00 00      ld   ix,l_f1d4
+ 260  C1A1 DD CB 00 7E      bit  7,(ix+$00)
+ 261  C1A5 C8               ret  z
+ 262  C1A6 1E 0A            ld   e,$0A
+ 263  C1A8 CD DB C1         call slave_call_036B
+ 264  C1AB D0               ret  nc
+ 265  C1AC DD CB 00 C6      set  0,(ix+$00)
+ 266  C1B0 A7               and  a
+ 267  C1B1 20 14            jr   nz,slave_call_0357
+ 268  C1B3 DD CB 00 8E      res  1,(ix+$00)
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(269): error: Label not found: l_e723
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(269): warning: Accessing low memory address 0x0000, is it ok?: ld   a,(l_e723)
+ 269  C1B7 3A 00 00         ld   a,(l_e723)
+ 270  C1BA FE 29            cp   $29
+ 271  C1BC C2 7C C0         jp   nz,slave_call_020C
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(272): error: Label not found: l_e730
+ 272  C1BF 21 00 00         ld   hl,l_e730
+ 273  C1C2 36 01            ld   (hl),$01
+ 274  C1C4 C3 7C C0         jp   slave_call_020C
+ 275  C1C7              slave_call_0357
+ 276  C1C7 DD CB 00 CE      set  1,(ix+$00)
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(277): error: Label not found: l_e723
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(277): warning: Accessing low memory address 0x0000, is it ok?: ld   a,(l_e723)
+ 277  C1CB 3A 00 00         ld   a,(l_e723)
+ 278  C1CE FE 29            cp   $29
+ 279  C1D0 C2 A9 C0         jp   nz,slave_call_0239
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(280): error: Label not found: l_e730
+ 280  C1D3 21 00 00         ld   hl,l_e730
+ 281  C1D6 36 01            ld   (hl),$01
+ 282  C1D8 C3 A9 C0         jp   slave_call_0239
+ 283  C1DB              slave_call_036B
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(284): error: Label not found: l_e691
+ 284  C1DB 21 00 00         ld   hl,l_e691
+ 285  C1DE CB 46            bit  0,(hl)
+ 286  C1E0 28 21            jr   z,slave_call_0393
+ 287  C1E2 23               inc  hl
+ 288  C1E3 7E               ld   a,(hl)
+ 289  C1E4 DD 96 01         sub  (ix+$01)
+ 290  C1E7 F2 EC C1         jp   p,slave_call_037C
+ 291  C1EA ED 44            neg
+ 292  C1EC              slave_call_037C
+ 293  C1EC BB               cp   e
+ 294  C1ED 30 14            jr   nc,slave_call_0393
+ 295  C1EF 23               inc  hl
+ 296  C1F0 7E               ld   a,(hl)
+ 297  C1F1 DD 96 02         sub  (ix+$02)
+ 298  C1F4 F2 F9 C1         jp   p,slave_call_0389
+ 299  C1F7 ED 44            neg
+ 300  C1F9              slave_call_0389
+ 301  C1F9 BB               cp   e
+ 302  C1FA 30 07            jr   nc,slave_call_0393
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(303): error: Label not found: l_e699
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(303): warning: Accessing low memory address 0x0000, is it ok?: ld   a,(l_e699)
+ 303  C1FC 3A 00 00         ld   a,(l_e699)
+ 304  C1FF 4F               ld   c,a
+ 305  C200 3E 00            ld   a,$00
+ 306  C202 C9               ret
+ 307  C203              slave_call_0393
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(308): error: Label not found: l_e6c3
+ 308  C203 21 00 00         ld   hl,l_e6c3
+ 309  C206 CB 46            bit  0,(hl)
+ 310  C208 28 1F            jr   z,slave_call_03B9
+ 311  C20A 23               inc  hl
+ 312  C20B 7E               ld   a,(hl)
+ 313  C20C DD 96 01         sub  (ix+$01)
+ 314  C20F F2 14 C2         jp   p,slave_call_03A4
+ 315  C212 ED 44            neg
+ 316  C214              slave_call_03A4
+ 317  C214 BB               cp   e
+ 318  C215 D0               ret  nc
+ 319  C216 23               inc  hl
+ 320  C217 7E               ld   a,(hl)
+ 321  C218 DD 96 02         sub  (ix+$02)
+ 322  C21B F2 20 C2         jp   p,slave_call_03B0
+ 323  C21E ED 44            neg
+ 324  C220              slave_call_03B0
+ 325  C220 BB               cp   e
+ 326  C221 D0               ret  nc
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(327): error: Label not found: l_e6cb
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(327): warning: Accessing low memory address 0x0000, is it ok?: ld   a,(l_e6cb)
+ 327  C222 3A 00 00         ld   a,(l_e6cb)
+ 328  C225 4F               ld   c,a
+ 329  C226 3E 01            ld   a,$01
+ 330  C228 C9               ret
+ 331  C229              slave_call_03B9
+ 332  C229 AF               xor  a
+ 333  C22A C9               ret
+ 334  C22B
+ 335  C22B
+ 336  C22B              slave_call_03BB
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(337): error: Label not found: l_e76b
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(337): warning: Accessing low memory address 0x0000, is it ok?: ld   a,(l_e76b)
+ 337  C22B 3A 00 00         ld   a,(l_e76b)
+ 338  C22E A7               and  a
+ 339  C22F C8               ret  z
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(340): error: Label not found: l_f5b6
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(340): warning: Accessing low memory address 0x0000, is it ok?: ld   a,(l_f5b6)
+ 340  C230 3A 00 00         ld   a,(l_f5b6)
+ 341  C233 A7               and  a
+ 342  C234 C0               ret  nz
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(343): error: Label not found: l_f59e
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(343): warning: Accessing low memory address 0x0000, is it ok?: ld   a,(l_f59e)
+ 343  C235 3A 00 00         ld   a,(l_f59e)
+ 344  C238 A7               and  a
+ 345  C239 C0               ret  nz
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(346): error: Label not found: l_e76c
+ 346  C23A DD 21 00 00      ld   ix,l_e76c
+ 347  C23E AF               xor  a
+ 348  C23F              slave_call_03CF
+ 349  C23F F5               push af
+ 350  C240 DD 7E 00         ld   a,(ix+$00)
+ 351  C243 CB 47            bit  0,a
+ 352  C245 C2 6C C2         jp   nz,slave_call_03FC
+ 353  C248 CB 57            bit  2,a
+ 354  C24A C2 A3 C2         jp   nz,slave_call_0433
+ 355  C24D CB 5F            bit  3,a
+ 356  C24F C2 EE C2         jp   nz,slave_call_047E
+ 357  C252 CB 67            bit  4,a
+ 358  C254 C2 25 C3         jp   nz,slave_call_04B5
+ 359  C257 CB 6F            bit  5,a
+ 360  C259 C2 5C C3         jp   nz,slave_call_04EC
+ 361  C25C DD 7E 21         ld   a,(ix+$21)
+ 362  C25F CB 77            bit  6,a
+ 363  C261 C2 6E C4         jp   nz,slave_call_05FE
+ 364  C264 CB 6F            bit  5,a
+ 365  C266 C2 37 C4         jp   nz,slave_call_05C7
+ 366  C269 C3 A5 C4         jp   slave_call_0635
+ 367  C26C              slave_call_03FC
+ 368  C26C DD CB 1A 46      bit  0,(ix+$1a)
+ 369  C270 C2 A5 C4         jp   nz,slave_call_0635
+ 370  C273 CD E2 C5         call slave_call_0772
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(371): error: Label not found: l_e691
+ 371  C276 FD 21 00 00      ld   iy,l_e691
+ 372  C27A CD D4 C4         call slave_call_0664
+ 373  C27D 30 06            jr   nc,slave_call_0415
+ 374  C27F DD 36 16 00      ld   (ix+$16),$00
+ 375  C283 18 0E            jr   slave_call_0423
+ 376  C285              slave_call_0415
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(377): error: Label not found: l_e6c3
+ 377  C285 FD 21 00 00      ld   iy,l_e6c3
+ 378  C289 CD D4 C4         call slave_call_0664
+ 379  C28C D2 A5 C4         jp   nc,slave_call_0635
+ 380  C28F DD 36 16 01      ld   (ix+$16),$01
+ 381  C293              slave_call_0423
+ 382  C293 FD 7E 08         ld   a,(iy+$08)
+ 383  C296 DD 77 0F         ld   (ix+$0f),a
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(384): error: Label not found: l_f674
+ 384  C299 32 00 00         ld   (l_f674),a
+ 385  C29C DD 36 1A 01      ld   (ix+$1a),$01
+ 386  C2A0 C3 A5 C4         jp   slave_call_0635
+ 387  C2A3              slave_call_0433
+ 388  C2A3 DD CB 1A 56      bit  2,(ix+$1a)
+ 389  C2A7 C2 A5 C4         jp   nz,slave_call_0635
+ 390  C2AA CD 2A C9         call slave_call_0ABA
+ 391  C2AD 38 2F            jr   c,slave_call_046E
+ 392  C2AF CD 62 C9         call slave_call_0AF2
+ 393  C2B2 38 2A            jr   c,slave_call_046E
+ 394  C2B4 CD 9A C9         call slave_call_0B2A
+ 395  C2B7 38 25            jr   c,slave_call_046E
+ 396  C2B9 CD E6 C9         call slave_call_0B76
+ 397  C2BC 38 20            jr   c,slave_call_046E
+ 398  C2BE CD E2 C5         call slave_call_0772
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(399): error: Label not found: l_e691
+ 399  C2C1 FD 21 00 00      ld   iy,l_e691
+ 400  C2C5 CD D4 C4         call slave_call_0664
+ 401  C2C8 30 06            jr   nc,slave_call_0460
+ 402  C2CA DD 36 16 00      ld   (ix+$16),$00
+ 403  C2CE 18 0E            jr   slave_call_046E
+ 404  C2D0              slave_call_0460
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(405): error: Label not found: l_e6c3
+ 405  C2D0 FD 21 00 00      ld   iy,l_e6c3
+ 406  C2D4 CD D4 C4         call slave_call_0664
+ 407  C2D7 D2 A5 C4         jp   nc,slave_call_0635
+ 408  C2DA DD 36 16 01      ld   (ix+$16),$01
+ 409  C2DE              slave_call_046E
+ 410  C2DE FD 7E 08         ld   a,(iy+$08)
+ 411  C2E1 DD 77 0F         ld   (ix+$0f),a
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(412): error: Label not found: l_f674
+ 412  C2E4 32 00 00         ld   (l_f674),a
+ 413  C2E7 DD 36 1A 04      ld   (ix+$1a),$04
+ 414  C2EB C3 A5 C4         jp   slave_call_0635
+ 415  C2EE              slave_call_047E
+ 416  C2EE DD CB 1A 5E      bit  3,(ix+$1a)
+ 417  C2F2 C2 A5 C4         jp   nz,slave_call_0635
+ 418  C2F5 CD E2 C5         call slave_call_0772
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(419): error: Label not found: l_e691
+ 419  C2F8 FD 21 00 00      ld   iy,l_e691
+ 420  C2FC CD D4 C4         call slave_call_0664
+ 421  C2FF 30 06            jr   nc,slave_call_0497
+ 422  C301 DD 36 16 00      ld   (ix+$16),$00
+ 423  C305 18 0E            jr   slave_call_04A5
+ 424  C307              slave_call_0497
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(425): error: Label not found: l_e6c3
+ 425  C307 FD 21 00 00      ld   iy,l_e6c3
+ 426  C30B CD D4 C4         call slave_call_0664
+ 427  C30E D2 A5 C4         jp   nc,slave_call_0635
+ 428  C311 DD 36 16 01      ld   (ix+$16),$01
+ 429  C315              slave_call_04A5
+ 430  C315 FD 7E 08         ld   a,(iy+$08)
+ 431  C318 DD 77 0F         ld   (ix+$0f),a
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(432): error: Label not found: l_f674
+ 432  C31B 32 00 00         ld   (l_f674),a
+ 433  C31E DD 36 1A 08      ld   (ix+$1a),$08
+ 434  C322 C3 A5 C4         jp   slave_call_0635
+ 435  C325              slave_call_04B5
+ 436  C325 DD CB 1A 66      bit  4,(ix+$1a)
+ 437  C329 C2 A5 C4         jp   nz,slave_call_0635
+ 438  C32C CD E2 C5         call slave_call_0772
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(439): error: Label not found: l_e691
+ 439  C32F FD 21 00 00      ld   iy,l_e691
+ 440  C333 CD D4 C4         call slave_call_0664
+ 441  C336 30 06            jr   nc,slave_call_04CE
+ 442  C338 DD 36 16 00      ld   (ix+$16),$00
+ 443  C33C 18 0E            jr   slave_call_04DC
+ 444  C33E              slave_call_04CE
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(445): error: Label not found: l_e6c3
+ 445  C33E FD 21 00 00      ld   iy,l_e6c3
+ 446  C342 CD D4 C4         call slave_call_0664
+ 447  C345 D2 A5 C4         jp   nc,slave_call_0635
+ 448  C348 DD 36 16 01      ld   (ix+$16),$01
+ 449  C34C              slave_call_04DC
+ 450  C34C FD 7E 08         ld   a,(iy+$08)
+ 451  C34F DD 77 0F         ld   (ix+$0f),a
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(452): error: Label not found: l_f674
+ 452  C352 32 00 00         ld   (l_f674),a
+ 453  C355 DD 36 1A 10      ld   (ix+$1a),$10
+ 454  C359 C3 A5 C4         jp   slave_call_0635
+ 455  C35C              slave_call_04EC
+ 456  C35C DD CB 1A 6E      bit  5,(ix+$1a)
+ 457  C360 C2 A5 C4         jp   nz,slave_call_0635
+ 458  C363 DD CB 1C 46      bit  0,(ix+$1c)
+ 459  C367 C2 A5 C4         jp   nz,slave_call_0635
+ 460  C36A 1E 0A            ld   e,$0A
+ 461  C36C CD DB C1         call slave_call_036B
+ 462  C36F 30 51            jr   nc,slave_call_0552
+ 463  C371 A7               and  a
+ 464  C372 20 27            jr   nz,slave_call_052B
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(465): error: Label not found: l_e6be
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(465): warning: Accessing low memory address 0x0000, is it ok?: ld   a,(l_e6be)
+ 465  C374 3A 00 00         ld   a,(l_e6be)
+ 466  C377 CB 67            bit  4,a
+ 467  C379 20 47            jr   nz,slave_call_0552
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(468): error: Label not found: l_e6b6
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(468): warning: Accessing low memory address 0x0000, is it ok?: ld   a,(l_e6b6)
+ 468  C37B 3A 00 00         ld   a,(l_e6b6)
+ 469  C37E A7               and  a
+ 470  C37F 20 41            jr   nz,slave_call_0552
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(471): error: Label not found: l_e6a4
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(471): warning: Accessing low memory address 0x0000, is it ok?: ld   a,(l_e6a4)
+ 471  C381 3A 00 00         ld   a,(l_e6a4)
+ 472  C384 A7               and  a
+ 473  C385 20 3B            jr   nz,slave_call_0552
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(474): error: Label not found: l_e6ac
+ 474  C387 21 00 00         ld   hl,l_e6ac
+ 475  C38A CB 46            bit  0,(hl)
+ 476  C38C C2 A5 C4         jp   nz,slave_call_0635
+ 477  C38F CB C6            set  0,(hl)
+ 478  C391 23               inc  hl
+ 479  C392              slave_call_0522
+ 480  C392 36 3C            ld   (hl),$3C
+ 481  C394 DD 36 1A 20      ld   (ix+$1a),$20
+ 482  C398 C3 A5 C4         jp   slave_call_0635
+ 483  C39B              slave_call_052B
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(484): error: Label not found: l_e6f0
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(484): warning: Accessing low memory address 0x0000, is it ok?: ld   a,(l_e6f0)
+ 484  C39B 3A 00 00         ld   a,(l_e6f0)
+ 485  C39E CB 67            bit  4,a
+ 486  C3A0 20 20            jr   nz,slave_call_0552
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(487): error: Label not found: l_e6e8
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(487): warning: Accessing low memory address 0x0000, is it ok?: ld   a,(l_e6e8)
+ 487  C3A2 3A 00 00         ld   a,(l_e6e8)
+ 488  C3A5 A7               and  a
+ 489  C3A6 20 1A            jr   nz,slave_call_0552
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(490): error: Label not found: l_e6d6
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(490): warning: Accessing low memory address 0x0000, is it ok?: ld   a,(l_e6d6)
+ 490  C3A8 3A 00 00         ld   a,(l_e6d6)
+ 491  C3AB A7               and  a
+ 492  C3AC 20 14            jr   nz,slave_call_0552
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(493): error: Label not found: l_e6de
+ 493  C3AE 21 00 00         ld   hl,l_e6de
+ 494  C3B1 CB 46            bit  0,(hl)
+ 495  C3B3 C2 A5 C4         jp   nz,slave_call_0635
+ 496  C3B6 CB C6            set  0,(hl)
+ 497  C3B8 23               inc  hl
+ 498  C3B9 36 3C            ld   (hl),$3C
+ 499  C3BB DD 36 1A 20      ld   (ix+$1a),$20
+ 500  C3BF C3 A5 C4         jp   slave_call_0635
+ 501  C3C2              slave_call_0552
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(502): error: Label not found: l_e64b
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(502): warning: Accessing low memory address 0x0000, is it ok?: ld   a,(l_e64b)
+ 502  C3C2 3A 00 00         ld   a,(l_e64b)
+ 503  C3C5 FE 63            cp   $63
+ 504  C3C7 28 24            jr   z,slave_call_057D
+ 505  C3C9 DD 5E 01         ld   e,(ix+$01)
+ 506  C3CC DD 56 02         ld   d,(ix+$02)
+ 507  C3CF 0E 0F            ld   c,$0F
+ 508  C3D1 CD 24 C1         call slave_call_02B4
+ 509  C3D4 D2 A5 C4         jp   nc,slave_call_0635
+ 510  C3D7 36 10            ld   (hl),$10
+ 511  C3D9 23               inc  hl
+ 512  C3DA 23               inc  hl
+ 513  C3DB 23               inc  hl
+ 514  C3DC 36 08            ld   (hl),$08
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(515): error: Label not found: l_ed3d
+ 515  C3DE 21 00 00         ld   hl,l_ed3d
+ 516  C3E1 35               dec  (hl)
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(517): error: Label not found: l_e5f4
+ 517  C3E2 21 00 00         ld   hl,l_e5f4
+ 518  C3E5 34               inc  (hl)
+ 519  C3E6 DD 36 1A 20      ld   (ix+$1a),$20
+ 520  C3EA C3 A5 C4         jp   slave_call_0635
+ 521  C3ED              slave_call_057D
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(522): error: Label not found: l_f296
+ 522  C3ED 21 00 00         ld   hl,l_f296
+ 523  C3F0 CB 46            bit  0,(hl)
+ 524  C3F2 CA A5 C4         jp   z,slave_call_0635
+ 525  C3F5 23               inc  hl
+ 526  C3F6 7E               ld   a,(hl)
+ 527  C3F7 DD 96 01         sub  (ix+$01)
+ 528  C3FA F2 FF C3         jp   p,slave_call_058F
+ 529  C3FD ED 44            neg
+ 530  C3FF              slave_call_058F
+ 531  C3FF FE 2C            cp   $2C
+ 532  C401 D2 A5 C4         jp   nc,slave_call_0635
+ 533  C404 23               inc  hl
+ 534  C405 7E               ld   a,(hl)
+ 535  C406 DD 96 02         sub  (ix+$02)
+ 536  C409 F2 0E C4         jp   p,slave_call_059E
+ 537  C40C ED 44            neg
+ 538  C40E              slave_call_059E
+ 539  C40E FE 2C            cp   $2C
+ 540  C410 D2 A5 C4         jp   nc,slave_call_0635
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(541): error: Label not found: l_f296
+ 541  C413 21 00 00         ld   hl,l_f296
+ 542  C416 CB FE            set  7,(hl)
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(543): error: Label not found: l_f2a1
+ 543  C418 21 00 00         ld   hl,l_f2a1
+ 544  C41B 34               inc  (hl)
+ 545  C41C DD 36 1A 20      ld   (ix+$1a),$20
+ 546  C420 C3 A5 C4         jp   slave_call_0635
+ 547  C423 CD E2 C5     	call slave_call_0772
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(548): error: Label not found: l_e691
+ 548  C426 FD 21 00 00      ld   iy,l_e691
+ 549  C42A CD D4 C4         call slave_call_0664
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(550): error: Label not found: l_e6c3
+ 550  C42D FD 21 00 00      ld   iy,l_e6c3
+ 551  C431 CD D4 C4         call slave_call_0664
+ 552  C434 C3 A5 C4         jp   slave_call_0635
+ 553  C437              slave_call_05C7
+ 554  C437 DD CB 26 6E      bit  5,(ix+$26)
+ 555  C43B C2 A5 C4         jp   nz,slave_call_0635
+ 556  C43E CD E2 C5         call slave_call_0772
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(557): error: Label not found: l_e691
+ 557  C441 FD 21 00 00      ld   iy,l_e691
+ 558  C445 CD D4 C4         call slave_call_0664
+ 559  C448 30 06            jr   nc,slave_call_05E0
+ 560  C44A DD 36 16 00      ld   (ix+$16),$00
+ 561  C44E 18 0E            jr   slave_call_05EE
+ 562  C450              slave_call_05E0
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(563): error: Label not found: l_e6c3
+ 563  C450 FD 21 00 00      ld   iy,l_e6c3
+ 564  C454 CD D4 C4         call slave_call_0664
+ 565  C457 D2 A5 C4         jp   nc,slave_call_0635
+ 566  C45A DD 36 16 01      ld   (ix+$16),$01
+ 567  C45E              slave_call_05EE
+ 568  C45E FD 7E 08         ld   a,(iy+$08)
+ 569  C461 DD 77 0F         ld   (ix+$0f),a
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(570): error: Label not found: l_f674
+ 570  C464 32 00 00         ld   (l_f674),a
+ 571  C467 DD CB 26 EE      set  5,(ix+$26)
+ 572  C46B C3 A5 C4         jp   slave_call_0635
+ 573  C46E              slave_call_05FE
+ 574  C46E DD CB 26 76      bit  6,(ix+$26)
+ 575  C472 C2 A5 C4         jp   nz,slave_call_0635
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(576): error: Label not found: l_e691
+ 576  C475 21 00 00         ld   hl,l_e691
+ 577  C478 CB 46            bit  0,(hl)
+ 578  C47A 28 10            jr   z,slave_call_061C
+ 579  C47C CD B8 C4         call slave_call_0648
+ 580  C47F 30 0B            jr   nc,slave_call_061C
+ 581  C481 DD 36 16 00      ld   (ix+$16),$00
+ 582  C485 DD CB 26 F6      set  6,(ix+$26)
+ 583  C489 C3 A5 C4         jp   slave_call_0635
+ 584  C48C              slave_call_061C
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(585): error: Label not found: l_e6c3
+ 585  C48C 21 00 00         ld   hl,l_e6c3
+ 586  C48F CB 46            bit  0,(hl)
+ 587  C491 CA A5 C4         jp   z,slave_call_0635
+ 588  C494 CD B8 C4         call slave_call_0648
+ 589  C497 D2 A5 C4         jp   nc,slave_call_0635
+ 590  C49A DD 36 16 01      ld   (ix+$16),$01
+ 591  C49E DD CB 26 F6      set  6,(ix+$26)
+ 592  C4A2 C3 A5 C4         jp   slave_call_0635
+ 593  C4A5              slave_call_0635
+ 594  C4A5 DD 36 1E 00      ld   (ix+$1e),$00
+ 595  C4A9 11 28 00         ld   de,$0028
+ 596  C4AC DD 19            add  ix,de
+ 597  C4AE F1               pop  af
+ 598  C4AF 3C               inc  a
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(599): error: Label not found: l_e76b
+ 599  C4B0 21 00 00         ld   hl,l_e76b
+ 600  C4B3 BE               cp   (hl)
+ 601  C4B4 C2 3F C2         jp   nz,slave_call_03CF
+ 602  C4B7 C9               ret
+ 603  C4B8              slave_call_0648
+ 604  C4B8 23               inc  hl
+ 605  C4B9 5E               ld   e,(hl)
+ 606  C4BA 23               inc  hl
+ 607  C4BB 56               ld   d,(hl)
+ 608  C4BC 7B               ld   a,e
+ 609  C4BD DD 96 01         sub  (ix+$01)
+ 610  C4C0 F2 C5 C4         jp   p,slave_call_0655
+ 611  C4C3 ED 44            neg
+ 612  C4C5              slave_call_0655
+ 613  C4C5 FE 10            cp   $10
+ 614  C4C7 D0               ret  nc
+ 615  C4C8 7A               ld   a,d
+ 616  C4C9 DD 96 02         sub  (ix+$02)
+ 617  C4CC F2 D1 C4         jp   p,slave_call_0661
+ 618  C4CF ED 44            neg
+ 619  C4D1              slave_call_0661
+ 620  C4D1 FE 10            cp   $10
+ 621  C4D3 C9               ret
+ 622  C4D4              slave_call_0664
+ 623  C4D4 FD CB 00 46      bit  0,(iy+$00)
+ 624  C4D8 20 02            jr   nz,slave_call_066C
+ 625  C4DA AF               xor  a
+ 626  C4DB C9               ret
+ 627  C4DC              slave_call_066C
+ 628  C4DC FD 7E 23         ld   a,(iy+$23)
+ 629  C4DF FE 03            cp   $03
+ 630  C4E1 CA B3 C5         jp   z,slave_call_0743
+ 631  C4E4 FD CB 08 46      bit  0,(iy+$08)
+ 632  C4E8 CA 4F C5         jp   z,slave_call_06DF
+ 633  C4EB FD 7E 01         ld   a,(iy+$01)
+ 634  C4EE DD 96 01         sub  (ix+$01)
+ 635  C4F1 F2 F6 C4         jp   p,slave_call_0686
+ 636  C4F4 ED 44            neg
+ 637  C4F6              slave_call_0686
+ 638  C4F6 FE 0C            cp   $0C
+ 639  C4F8 D0               ret  nc
+ 640  C4F9 FD 7E 02         ld   a,(iy+$02)
+ 641  C4FC C6 05            add  a,$05
+ 642  C4FE DD 96 02         sub  (ix+$02)
+ 643  C501 FA 0A C5         jp   m,slave_call_069A
+ 644  C504 FE 12            cp   $12
+ 645  C506 D0               ret  nc
+ 646  C507 C3 37 C8         jp   slave_call_09C7
+ 647  C50A              slave_call_069A
+ 648  C50A ED 44            neg
+ 649  C50C FE 0A            cp   $0A
+ 650  C50E D0               ret  nc
+ 651  C50F FD 7E 23         ld   a,(iy+$23)
+ 652  C512 A7               and  a
+ 653  C513 20 0B            jr   nz,slave_call_06B0
+ 654  C515 DD 7E 23         ld   a,(ix+$23)
+ 655  C518 FD 86 20         add  a,(iy+$20)
+ 656  C51B ED 44            neg
+ 657  C51D FD 77 22         ld   (iy+$22),a
+ 658  C520              slave_call_06B0
+ 659  C520 FD 7E 20         ld   a,(iy+$20)
+ 660  C523 DD 86 14         add  a,(ix+$14)
+ 661  C526 DD 77 14         ld   (ix+$14),a
+ 662  C529 DD CB 1E C6      set  0,(ix+$1e)
+ 663  C52D FD 7E 09         ld   a,(iy+$09)
+ 664  C530 DD 77 16         ld   (ix+$16),a
+ 665  C533 DD 36 0F 01      ld   (ix+$0f),$01
+ 666  C537 FD 7E 23         ld   a,(iy+$23)
+ 667  C53A FE 01            cp   $01
+ 668  C53C 20 07            jr   nz,slave_call_06D5
+ 669  C53E DD 36 1B 04      ld   (ix+$1b),$04
+ 670  C542 C3 49 C5         jp   slave_call_06D9
+ 671  C545              slave_call_06D5
+ 672  C545 DD 36 1B 08      ld   (ix+$1b),$08
+ 673  C549              slave_call_06D9
+ 674  C549 DD 36 25 00      ld   (ix+$25),$00
+ 675  C54D AF               xor  a
+ 676  C54E C9               ret
+ 677  C54F              slave_call_06DF
+ 678  C54F FD 7E 01         ld   a,(iy+$01)
+ 679  C552 DD 96 01         sub  (ix+$01)
+ 680  C555 F2 5A C5         jp   p,slave_call_06EA
+ 681  C558 ED 44            neg
+ 682  C55A              slave_call_06EA
+ 683  C55A FE 0C            cp   $0C
+ 684  C55C D0               ret  nc
+ 685  C55D FD 7E 02         ld   a,(iy+$02)
+ 686  C560 C6 FB            add  a,$FB
+ 687  C562 DD 96 02         sub  (ix+$02)
+ 688  C565 F2 70 C5         jp   p,slave_call_0700
+ 689  C568 ED 44            neg
+ 690  C56A FE 12            cp   $12
+ 691  C56C D0               ret  nc
+ 692  C56D C3 37 C8         jp   slave_call_09C7
+ 693  C570              slave_call_0700
+ 694  C570 FE 0A            cp   $0A
+ 695  C572 D0               ret  nc
+ 696  C573 FD 7E 23         ld   a,(iy+$23)
+ 697  C576 A7               and  a
+ 698  C577 20 09            jr   nz,slave_call_0712
+ 699  C579 DD 7E 23         ld   a,(ix+$23)
+ 700  C57C FD 86 20         add  a,(iy+$20)
+ 701  C57F FD 77 22         ld   (iy+$22),a
+ 702  C582              slave_call_0712
+ 703  C582 FD 7E 20         ld   a,(iy+$20)
+ 704  C585 ED 44            neg
+ 705  C587 DD 86 14         add  a,(ix+$14)
+ 706  C58A DD 77 14         ld   (ix+$14),a
+ 707  C58D DD CB 1E C6      set  0,(ix+$1e)
+ 708  C591 FD 7E 09         ld   a,(iy+$09)
+ 709  C594 DD 77 16         ld   (ix+$16),a
+ 710  C597 DD 36 0F 03      ld   (ix+$0f),$03
+ 711  C59B FD 7E 23         ld   a,(iy+$23)
+ 712  C59E FE 01            cp   $01
+ 713  C5A0 20 07            jr   nz,slave_call_0739
+ 714  C5A2 DD 36 1B 04      ld   (ix+$1b),$04
+ 715  C5A6 C3 49 C5         jp   slave_call_06D9
+ 716  C5A9              slave_call_0739
+ 717  C5A9 DD 36 1B 08      ld   (ix+$1b),$08
+ 718  C5AD DD 36 25 00      ld   (ix+$25),$00
+ 719  C5B1 AF               xor  a
+ 720  C5B2 C9               ret
+ 721  C5B3              slave_call_0743
+ 722  C5B3 FD 7E 02         ld   a,(iy+$02)
+ 723  C5B6 DD 96 02         sub  (ix+$02)
+ 724  C5B9 F2 BE C5         jp   p,slave_call_074E
+ 725  C5BC ED 44            neg
+ 726  C5BE              slave_call_074E
+ 727  C5BE FE 0C            cp   $0C
+ 728  C5C0 D0               ret  nc
+ 729  C5C1 FD 7E 01         ld   a,(iy+$01)
+ 730  C5C4 DD 96 01         sub  (ix+$01)
+ 731  C5C7 F2 CC C5         jp   p,slave_call_075C
+ 732  C5CA AF               xor  a
+ 733  C5CB C9               ret
+ 734  C5CC              slave_call_075C
+ 735  C5CC FE 0C            cp   $0C
+ 736  C5CE DA 37 C8         jp   c,slave_call_09C7
+ 737  C5D1 FE 16            cp   $16
+ 738  C5D3 D0               ret  nc
+ 739  C5D4 FD CB 24 C6      set  0,(iy+$24)
+ 740  C5D8 DD 36 1B 04      ld   (ix+$1b),$04
+ 741  C5DC DD 36 25 00      ld   (ix+$25),$00
+ 742  C5E0 AF               xor  a
+ 743  C5E1 C9               ret
+ 744  C5E2              slave_call_0772
+ 745  C5E2 DD 7E 0F         ld   a,(ix+$0f)
+ 746  C5E5 E6 0F            and  $0F
+ 747  C5E7 87               add  a,a
+ 748  C5E8 21 F5 C5         ld   hl,slave_data_0785
+ 749  C5EB 85               add  a,l
+ 750  C5EC 6F               ld   l,a
+ 751  C5ED 30 01            jr   nc,slave_call_0780
+ 752  C5EF 24               inc  h
+ 753  C5F0              slave_call_0780
+ 754  C5F0 5E               ld   e,(hl)
+ 755  C5F1 23               inc  hl
+ 756  C5F2 56               ld   d,(hl)
+ 757  C5F3 EB               ex   de,hl
+ 758  C5F4 E9               jp   (hl)
+ 759  C5F5              slave_data_0785
+ 760  C5F5 B9 C6        	defb	LOW slave_call_0849,HIGH slave_call_0849
+ 761  C5F7 B9 C6        	defb	LOW slave_call_0849,HIGH slave_call_0849
+ 762  C5F9 15 C6        	defb	LOW slave_call_07A5,HIGH slave_call_07A5
+ 763  C5FB 67 C6        	defb	LOW slave_call_07F7,HIGH slave_call_07F7
+ 764  C5FD 0C C7        	defb	LOW slave_call_089C,HIGH slave_call_089C
+ 765  C5FF 66 C6        	defb	LOW slave_call_07F6,HIGH slave_call_07F6
+ 766  C601 66 C6        	defb	LOW slave_call_07F6,HIGH slave_call_07F6
+ 767  C603 B9 C6        	defb	LOW slave_call_0849,HIGH slave_call_0849
+ 768  C605 B9 C6        	defb	LOW slave_call_0849,HIGH slave_call_0849
+ 769  C607 B9 C6        	defb	LOW slave_call_0849,HIGH slave_call_0849
+ 770  C609 B9 C6        	defb	LOW slave_call_0849,HIGH slave_call_0849
+ 771  C60B B9 C6        	defb	LOW slave_call_0849,HIGH slave_call_0849
+ 772  C60D B9 C6        	defb	LOW slave_call_0849,HIGH slave_call_0849
+ 773  C60F B9 C6        	defb	LOW slave_call_0849,HIGH slave_call_0849
+ 774  C611 B9 C6        	defb	LOW slave_call_0849,HIGH slave_call_0849
+ 775  C613 B9 C6        	defb	LOW slave_call_0849,HIGH slave_call_0849
+ 776  C615              slave_call_07A5
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(777): error: Label not found: l_e76c
+ 777  C615 FD 21 00 00      ld   iy,l_e76c
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(778): error: Label not found: l_e76b
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(778): warning: Accessing low memory address 0x0000, is it ok?: ld   a,(l_e76b)
+ 778  C619 3A 00 00         ld   a,(l_e76b)
+ 779  C61C 47               ld   b,a
+ 780  C61D              slave_call_07AD
+ 781  C61D DD 7E 21         ld   a,(ix+$21)
+ 782  C620 CB 67            bit  4,a
+ 783  C622 20 0B            jr   nz,slave_call_07BF
+ 784  C624 CB 6F            bit  5,a
+ 785  C626 20 07            jr   nz,slave_call_07BF
+ 786  C628 FD 7E 00         ld   a,(iy+$00)
+ 787  C62B E6 1D            and  $1D
+ 788  C62D 28 30            jr   z,slave_call_07EF
+ 789  C62F              slave_call_07BF
+ 790  C62F DD 7E 1D         ld   a,(ix+$1d)
+ 791  C632 FD BE 1D         cp   (iy+$1d)
+ 792  C635 28 28            jr   z,slave_call_07EF
+ 793  C637 FD 7E 01         ld   a,(iy+$01)
+ 794  C63A DD 96 01         sub  (ix+$01)
+ 795  C63D F2 42 C6         jp   p,slave_call_07D2
+ 796  C640 ED 44            neg
+ 797  C642              slave_call_07D2
+ 798  C642 FE 0D            cp   $0D
+ 799  C644 30 19            jr   nc,slave_call_07EF
+ 800  C646 FD 7E 02         ld   a,(iy+$02)
+ 801  C649 DD 96 02         sub  (ix+$02)
+ 802  C64C FA 5F C6         jp   m,slave_call_07EF
+ 803  C64F FE 0D            cp   $0D
+ 804  C651 30 0C            jr   nc,slave_call_07EF
+ 805  C653 FD 34 14         inc  (iy+$14)
+ 806  C656 FD CB 1E 46      bit  0,(iy+$1e)
+ 807  C65A 28 03            jr   z,slave_call_07EF
+ 808  C65C FD 34 14         inc  (iy+$14)
+ 809  C65F              slave_call_07EF
+ 810  C65F 11 28 00         ld   de,$0028
+ 811  C662 FD 19            add  iy,de
+ 812  C664 10 B7            djnz slave_call_07AD
+ 813  C666              slave_call_07F6
+ 814  C666 C9               ret
+ 815  C667              slave_call_07F7
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(816): error: Label not found: l_e76c
+ 816  C667 FD 21 00 00      ld   iy,l_e76c
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(817): error: Label not found: l_e76b
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(817): warning: Accessing low memory address 0x0000, is it ok?: ld   a,(l_e76b)
+ 817  C66B 3A 00 00         ld   a,(l_e76b)
+ 818  C66E 47               ld   b,a
+ 819  C66F              slave_call_07FF
+ 820  C66F DD 7E 21         ld   a,(ix+$21)
+ 821  C672 CB 67            bit  4,a
+ 822  C674 20 0B            jr   nz,slave_call_0811
+ 823  C676 CB 6F            bit  5,a
+ 824  C678 20 07            jr   nz,slave_call_0811
+ 825  C67A FD 7E 00         ld   a,(iy+$00)
+ 826  C67D E6 1D            and  $1D
+ 827  C67F 28 30            jr   z,slave_call_0841
+ 828  C681              slave_call_0811
+ 829  C681 DD 7E 1D         ld   a,(ix+$1d)
+ 830  C684 FD BE 1D         cp   (iy+$1d)
+ 831  C687 28 28            jr   z,slave_call_0841
+ 832  C689 FD 7E 01         ld   a,(iy+$01)
+ 833  C68C DD 96 01         sub  (ix+$01)
+ 834  C68F F2 94 C6         jp   p,slave_call_0824
+ 835  C692 ED 44            neg
+ 836  C694              slave_call_0824
+ 837  C694 FE 0D            cp   $0D
+ 838  C696 30 19            jr   nc,slave_call_0841
+ 839  C698 FD 7E 02         ld   a,(iy+$02)
+ 840  C69B DD 96 02         sub  (ix+$02)
+ 841  C69E F2 B1 C6         jp   p,slave_call_0841
+ 842  C6A1 FE F3            cp   $F3
+ 843  C6A3 38 0C            jr   c,slave_call_0841
+ 844  C6A5 FD 35 14         dec  (iy+$14)
+ 845  C6A8 FD CB 1E 46      bit  0,(iy+$1e)
+ 846  C6AC 28 03            jr   z,slave_call_0841
+ 847  C6AE FD 35 14         dec  (iy+$14)
+ 848  C6B1              slave_call_0841
+ 849  C6B1 11 28 00     	ld   de,$0028
+ 850  C6B4 FD 19            add  iy,de
+ 851  C6B6 10 B7            djnz slave_call_07FF
+ 852  C6B8 C9               ret
+ 853  C6B9              slave_call_0849
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(854): error: Label not found: l_e76c
+ 854  C6B9 FD 21 00 00      ld   iy,l_e76c
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(855): error: Label not found: l_e76b
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(855): warning: Accessing low memory address 0x0000, is it ok?: ld   a,(l_e76b)
+ 855  C6BD 3A 00 00         ld   a,(l_e76b)
+ 856  C6C0 47               ld   b,a
+ 857  C6C1              slave_call_0851
+ 858  C6C1 DD 7E 21         ld   a,(ix+$21)
+ 859  C6C4 CB 67            bit  4,a
+ 860  C6C6 20 0B            jr   nz,slave_call_0863
+ 861  C6C8 CB 6F            bit  5,a
+ 862  C6CA 20 07            jr   nz,slave_call_0863
+ 863  C6CC FD 7E 00         ld   a,(iy+$00)
+ 864  C6CF E6 1D            and  $1D
+ 865  C6D1 28 31            jr   z,slave_call_0894
+ 866  C6D3              slave_call_0863
+ 867  C6D3 DD 7E 1D         ld   a,(ix+$1d)
+ 868  C6D6 FD BE 1D         cp   (iy+$1d)
+ 869  C6D9 28 29            jr   z,slave_call_0894
+ 870  C6DB FD 7E 02         ld   a,(iy+$02)
+ 871  C6DE DD 96 02         sub  (ix+$02)
+ 872  C6E1 F2 E6 C6         jp   p,slave_call_0876
+ 873  C6E4 ED 44            neg
+ 874  C6E6              slave_call_0876
+ 875  C6E6 FE 0D            cp   $0D
+ 876  C6E8 30 1A            jr   nc,slave_call_0894
+ 877  C6EA FD 7E 01         ld   a,(iy+$01)
+ 878  C6ED DD 96 01         sub  (ix+$01)
+ 879  C6F0 FA 04 C7         jp   m,slave_call_0894
+ 880  C6F3 FE 0D            cp   $0D
+ 881  C6F5 30 0D            jr   nc,slave_call_0894
+ 882  C6F7 FD 34 13         inc  (iy+$13)
+ 883  C6FA FD CB 1E 46      bit  0,(iy+$1e)
+ 884  C6FE CA 04 C7         jp   z,slave_call_0894
+ 885  C701 FD 34 13         inc  (iy+$13)
+ 886  C704              slave_call_0894
+ 887  C704 11 28 00         ld   de,$0028
+ 888  C707 FD 19            add  iy,de
+ 889  C709 10 B6            djnz slave_call_0851
+ 890  C70B C9               ret
+ 891  C70C              slave_call_089C
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(892): error: Label not found: l_e76c
+ 892  C70C FD 21 00 00      ld   iy,l_e76c
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(893): error: Label not found: l_e76b
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(893): warning: Accessing low memory address 0x0000, is it ok?: ld   a,(l_e76b)
+ 893  C710 3A 00 00         ld   a,(l_e76b)
+ 894  C713 47               ld   b,a
+ 895  C714              slave_call_08A4
+ 896  C714 DD 7E 21         ld   a,(ix+$21)
+ 897  C717 CB 67            bit  4,a
+ 898  C719 C2 27 C7         jp   nz,slave_call_08B7
+ 899  C71C CB 6F            bit  5,a
+ 900  C71E 20 07            jr   nz,slave_call_08B7
+ 901  C720 FD 7E 00         ld   a,(iy+$00)
+ 902  C723 E6 1D            and  $1D
+ 903  C725 28 31            jr   z,slave_call_08E8
+ 904  C727              slave_call_08B7
+ 905  C727 DD 7E 1D         ld   a,(ix+$1d)
+ 906  C72A FD BE 1D         cp   (iy+$1d)
+ 907  C72D 28 29            jr   z,slave_call_08E8
+ 908  C72F FD 7E 02         ld   a,(iy+$02)
+ 909  C732 DD 96 02         sub  (ix+$02)
+ 910  C735 F2 3A C7         jp   p,slave_call_08CA
+ 911  C738 ED 44            neg
+ 912  C73A              slave_call_08CA
+ 913  C73A FE 0D            cp   $0D
+ 914  C73C 30 1A            jr   nc,slave_call_08E8
+ 915  C73E FD 7E 01         ld   a,(iy+$01)
+ 916  C741 DD 96 01         sub  (ix+$01)
+ 917  C744 F2 58 C7         jp   p,slave_call_08E8
+ 918  C747 FE F3            cp   $F3
+ 919  C749 38 0D            jr   c,slave_call_08E8
+ 920  C74B FD 35 13         dec  (iy+$13)
+ 921  C74E FD CB 1E 46      bit  0,(iy+$1e)
+ 922  C752 CA 58 C7         jp   z,slave_call_08E8
+ 923  C755 FD 35 13         dec  (iy+$13)
+ 924  C758              slave_call_08E8
+ 925  C758 11 28 00         ld   de,$0028
+ 926  C75B FD 19            add  iy,de
+ 927  C75D 10 B5            djnz slave_call_08A4
+ 928  C75F C9               ret
+ 929  C760              slave_call_08F0
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(930): error: Label not found: l_e76b
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(930): warning: Accessing low memory address 0x0000, is it ok?: ld   a,(l_e76b)
+ 930  C760 3A 00 00         ld   a,(l_e76b)
+ 931  C763 A7               and  a
+ 932  C764 C8               ret  z
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(933): error: Label not found: l_f66f
+ 933  C765 21 00 00         ld   hl,l_f66f
+ 934  C768 CB 46            bit  0,(hl)
+ 935  C76A CA BE C7         jp   z,slave_call_094E
+ 936  C76D 36 00            ld   (hl),$00
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(937): error: Label not found: l_e76c
+ 937  C76F DD 21 00 00      ld   ix,l_e76c
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(938): error: Label not found: l_e76b
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(938): warning: Accessing low memory address 0x0000, is it ok?: ld   a,(l_e76b)
+ 938  C773 3A 00 00         ld   a,(l_e76b)
+ 939  C776 47               ld   b,a
+ 940  C777              slave_call_0907
+ 941  C777 DD CB 21 6E      bit  5,(ix+$21)
+ 942  C77B 20 07            jr   nz,slave_call_0914
+ 943  C77D DD 7E 00         ld   a,(ix+$00)
+ 944  C780 E6 1D            and  $1D
+ 945  C782 28 33            jr   z,slave_call_0947
+ 946  C784              slave_call_0914
+ 947  C784 DD 7E 1A         ld   a,(ix+$1a)
+ 948  C787 A7               and  a
+ 949  C788 20 2D            jr   nz,slave_call_0947
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(950): error: Label not found: l_f670
+ 950  C78A 21 00 00         ld   hl,l_f670
+ 951  C78D 7E               ld   a,(hl)
+ 952  C78E DD BE 1D         cp   (ix+$1d)
+ 953  C791 28 24            jr   z,slave_call_0947
+ 954  C793 23               inc  hl
+ 955  C794 7E               ld   a,(hl)
+ 956  C795 DD 96 01         sub  (ix+$01)
+ 957  C798 F2 9D C7         jp   p,slave_call_092D
+ 958  C79B ED 44            neg
+ 959  C79D              slave_call_092D
+ 960  C79D FE 14            cp   $14
+ 961  C79F 30 16            jr   nc,slave_call_0947
+ 962  C7A1 23               inc  hl
+ 963  C7A2 7E               ld   a,(hl)
+ 964  C7A3 DD 96 02         sub  (ix+$02)
+ 965  C7A6 F2 AB C7         jp   p,slave_call_093B
+ 966  C7A9 ED 44            neg
+ 967  C7AB              slave_call_093B
+ 968  C7AB FE 14            cp   $14
+ 969  C7AD 30 08            jr   nc,slave_call_0947
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(970): error: Label not found: l_f674
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(970): warning: Accessing low memory address 0x0000, is it ok?: ld   a,(l_f674)
+ 970  C7AF 3A 00 00         ld   a,(l_f674)
+ 971  C7B2 DD 77 0F         ld   (ix+$0f),a
+ 972  C7B5 18 21            jr   slave_call_0968
+ 973  C7B7              slave_call_0947
+ 974  C7B7 11 28 00         ld   de,$0028
+ 975  C7BA DD 19            add  ix,de
+ 976  C7BC 10 B9            djnz slave_call_0907
+ 977  C7BE              slave_call_094E
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(978): error: Label not found: l_f673
+ 978  C7BE 21 00 00         ld   hl,l_f673
+ 979  C7C1 36 00            ld   (hl),$00
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(980): error: Label not found: l_f677
+ 980  C7C3 21 00 00         ld   hl,l_f677
+ 981  C7C6 7E               ld   a,(hl)
+ 982  C7C7 A7               and  a
+ 983  C7C8 CA CE C7         jp   z,slave_call_095E
+ 984  C7CB 23               inc  hl
+ 985  C7CC 36 01            ld   (hl),$01
+ 986  C7CE              slave_call_095E
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(987): error: Label not found: l_f679
+ 987  C7CE 21 00 00         ld   hl,l_f679
+ 988  C7D1 7E               ld   a,(hl)
+ 989  C7D2 A7               and  a
+ 990  C7D3 C8               ret  z
+ 991  C7D4 23               inc  hl
+ 992  C7D5 36 01            ld   (hl),$01
+ 993  C7D7 C9               ret
+ 994  C7D8              slave_call_0968
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(995): error: Label not found: l_f66f
+ 995  C7D8 21 00 00         ld   hl,l_f66f
+ 996  C7DB 36 01            ld   (hl),$01
+ 997  C7DD 23               inc  hl
+ 998  C7DE DD 7E 1D         ld   a,(ix+$1d)
+ 999  C7E1 77               ld   (hl),a
+1000  C7E2 23               inc  hl
+1001  C7E3 DD 7E 01         ld   a,(ix+$01)
+1002  C7E6 77               ld   (hl),a
+1003  C7E7 23               inc  hl
+1004  C7E8 DD 7E 02         ld   a,(ix+$02)
+1005  C7EB 77               ld   (hl),a
+1006  C7EC 23               inc  hl
+1007  C7ED DD CB 00 56      bit  2,(ix+$00)
+1008  C7F1 28 1B            jr   z,slave_call_099E
+1009  C7F3 34               inc  (hl)
+1010  C7F4 7E               ld   a,(hl)
+1011  C7F5 3D               dec  a
+1012  C7F6 DD 77 22         ld   (ix+$22),a
+1013  C7F9 FE 02            cp   $02
+1014  C7FB 38 11            jr   c,slave_call_099E
+1015  C7FD EB               ex   de,hl
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(1016): error: Label not found: l_f676
+1016  C7FE 21 00 00         ld   hl,l_f676
+1017  C801 34               inc  (hl)
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(1018): error: Label not found: l_e5d7
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(1018): warning: Accessing low memory address 0x0000, is it ok?: ld   a,(l_e5d7)
+1018  C802 3A 00 00         ld   a,(l_e5d7)
+1019  C805 FE 03            cp   $03
+1020  C807 20 04            jr   nz,slave_call_099D
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(1021): error: Label not found: l_f676
+1021  C809 21 00 00         ld   hl,l_f676
+1022  C80C 34               inc  (hl)
+1023  C80D              slave_call_099D
+1024  C80D EB               ex   de,hl
+1025  C80E              slave_call_099E
+1026  C80E 23               inc  hl
+1027  C80F 23               inc  hl
+1028  C810 7E               ld   a,(hl)
+1029  C811 DD 77 16         ld   (ix+$16),a
+1030  C814 DD CB 00 56      bit  2,(ix+$00)
+1031  C818 28 09            jr   z,slave_call_09B3
+1032  C81A 87               add  a,a
+1033  C81B 5F               ld   e,a
+1034  C81C 16 00            ld   d,$00
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(1035): error: Label not found: l_f677
+1035  C81E 21 00 00         ld   hl,l_f677
+1036  C821 19               add  hl,de
+1037  C822 34               inc  (hl)
+1038  C823              slave_call_09B3
+1039  C823 DD CB 21 6E      bit  5,(ix+$21)
+1040  C827 28 06            jr   z,slave_call_09BF
+1041  C829 DD CB 26 EE      set  5,(ix+$26)
+1042  C82D 37               scf
+1043  C82E C9               ret
+1044  C82F              slave_call_09BF
+1045  C82F DD 7E 00         ld   a,(ix+$00)
+1046  C832 DD 77 1A         ld   (ix+$1a),a
+1047  C835 37               scf
+1048  C836 C9               ret
+1049  C837
+1050  C837
+1051  C837
+1052  C837
+1053  C837              slave_call_09C7
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(1054): error: Label not found: l_f66f
+1054  C837 21 00 00     	ld   hl,l_f66f
+1055  C83A CB 46            bit  0,(hl)
+1056  C83C C2 9E C8         jp   nz,slave_call_0A2E
+1057  C83F 36 01            ld   (hl),$01
+1058  C841 23               inc  hl
+1059  C842 DD 7E 1D         ld   a,(ix+$1d)
+1060  C845 77               ld   (hl),a
+1061  C846 23               inc  hl
+1062  C847 DD 7E 01         ld   a,(ix+$01)
+1063  C84A 77               ld   (hl),a
+1064  C84B 23               inc  hl
+1065  C84C DD 7E 02         ld   a,(ix+$02)
+1066  C84F 77               ld   (hl),a
+1067  C850 23               inc  hl
+1068  C851 DD CB 00 56      bit  2,(ix+$00)
+1069  C855 28 1B            jr   z,slave_call_0A02
+1070  C857 34               inc  (hl)
+1071  C858 7E               ld   a,(hl)
+1072  C859 3D               dec  a
+1073  C85A DD 77 22         ld   (ix+$22),a
+1074  C85D FE 02            cp   $02
+1075  C85F 38 11            jr   c,slave_call_0A02
+1076  C861 EB               ex   de,hl
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(1077): error: Label not found: l_f676
+1077  C862 21 00 00         ld   hl,l_f676
+1078  C865 34               inc  (hl)
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(1079): error: Label not found: l_e5d7
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(1079): warning: Accessing low memory address 0x0000, is it ok?: ld   a,(l_e5d7)
+1079  C866 3A 00 00         ld   a,(l_e5d7)
+1080  C869 FE 03            cp   $03
+1081  C86B 20 04            jr   nz,slave_call_0A01
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(1082): error: Label not found: l_f676
+1082  C86D 21 00 00         ld   hl,l_f676
+1083  C870 34               inc  (hl)
+1084  C871              slave_call_0A01
+1085  C871 EB               ex   de,hl
+1086  C872              slave_call_0A02
+1087  C872 23               inc  hl
+1088  C873 23               inc  hl
+1089  C874 FD 7E 09         ld   a,(iy+$09)
+1090  C877 DD 77 16         ld   (ix+$16),a
+1091  C87A 77               ld   (hl),a
+1092  C87B DD CB 00 56      bit  2,(ix+$00)
+1093  C87F 28 09            jr   z,slave_call_0A1A
+1094  C881 87               add  a,a
+1095  C882 5F               ld   e,a
+1096  C883 16 00            ld   d,$00
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(1097): error: Label not found: l_f677
+1097  C885 21 00 00         ld   hl,l_f677
+1098  C888 19               add  hl,de
+1099  C889 34               inc  (hl)
+1100  C88A              slave_call_0A1A
+1101  C88A DD CB 21 6E      bit  5,(ix+$21)
+1102  C88E 28 06            jr   z,slave_call_0A26
+1103  C890 DD CB 26 EE      set  5,(ix+$26)
+1104  C894 37               scf
+1105  C895 C9               ret
+1106  C896              slave_call_0A26
+1107  C896 DD 7E 00         ld   a,(ix+$00)
+1108  C899 DD 77 1A         ld   (ix+$1a),a
+1109  C89C 37               scf
+1110  C89D C9               ret
+1111  C89E              slave_call_0A2E
+1112  C89E AF               xor  a
+1113  C89F C9               ret
+1114  C8A0              slave_call_0A30
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(1115): error: Label not found: l_f47c
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(1115): warning: Accessing low memory address 0x0000, is it ok?: ld   a,(l_f47c)
+1115  C8A0 3A 00 00         ld   a,(l_f47c)
+1116  C8A3 A7               and  a
+1117  C8A4 C8               ret  z
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(1118): error: Label not found: l_f47e
+1118  C8A5 DD 21 00 00      ld   ix,l_f47e
+1119  C8A9 06 08            ld   b,$08
+1120  C8AB              slave_call_0A3B
+1121  C8AB C5               push bc
+1122  C8AC DD CB 00 46      bit  0,(ix+$00)
+1123  C8B0 28 1C            jr   z,slave_call_0A5E
+1124  C8B2 DD 5E 01         ld   e,(ix+$01)
+1125  C8B5 DD 56 02         ld   d,(ix+$02)
+1126  C8B8 0E 0F            ld   c,$0F
+1127  C8BA CD 24 C1         call slave_call_02B4
+1128  C8BD 30 0F            jr   nc,slave_call_0A5E
+1129  C8BF 36 10            ld   (hl),$10
+1130  C8C1 23               inc  hl
+1131  C8C2 23               inc  hl
+1132  C8C3 23               inc  hl
+1133  C8C4 36 06            ld   (hl),$06
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(1134): error: Label not found: l_ed3d
+1134  C8C6 21 00 00         ld   hl,l_ed3d
+1135  C8C9 35               dec  (hl)
+1136  C8CA DD 36 00 02      ld   (ix+$00),$02
+1137  C8CE              slave_call_0A5E
+1138  C8CE 11 09 00         ld   de,$0009
+1139  C8D1 DD 19            add  ix,de
+1140  C8D3 C1               pop  bc
+1141  C8D4 10 D5            djnz slave_call_0A3B
+1142  C8D6 C9               ret
+1143  C8D7              slave_call_0A67
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(1144): error: Label not found: l_f4cb
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(1144): warning: Accessing low memory address 0x0000, is it ok?: ld   a,(l_f4cb)
+1144  C8D7 3A 00 00         ld   a,(l_f4cb)
+1145  C8DA A7               and  a
+1146  C8DB C8               ret  z
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(1147): error: Label not found: l_f4ce
+1147  C8DC DD 21 00 00      ld   ix,l_f4ce
+1148  C8E0 06 08            ld   b,$08
+1149  C8E2              slave_call_0A72
+1150  C8E2 C5               push bc
+1151  C8E3 DD CB 00 46      bit  0,(ix+$00)
+1152  C8E7 28 1C            jr   z,slave_call_0A95
+1153  C8E9 DD 5E 01         ld   e,(ix+$01)
+1154  C8EC DD 56 02         ld   d,(ix+$02)
+1155  C8EF 0E 0F            ld   c,$0F
+1156  C8F1 CD 24 C1         call slave_call_02B4
+1157  C8F4 30 0F            jr   nc,slave_call_0A95
+1158  C8F6 36 10            ld   (hl),$10
+1159  C8F8 23               inc  hl
+1160  C8F9 23               inc  hl
+1161  C8FA 23               inc  hl
+1162  C8FB 36 06            ld   (hl),$06
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(1163): error: Label not found: l_ed3d
+1163  C8FD 21 00 00         ld   hl,l_ed3d
+1164  C900 35               dec  (hl)
+1165  C901 DD 36 00 02      ld   (ix+$00),$02
+1166  C905              slave_call_0A95
+1167  C905 11 08 00         ld   de,$0008
+1168  C908 DD 19            add  ix,de
+1169  C90A C1               pop  bc
+1170  C90B 10 D5            djnz slave_call_0A72
+1171  C90D C9               ret
+1172  C90E              slave_call_0A9E
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(1173): error: Label not found: l_f595
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(1173): warning: Accessing low memory address 0x0000, is it ok?: ld   a,(l_f595)
+1173  C90E 3A 00 00         ld   a,(l_f595)
+1174  C911 A7               and  a
+1175  C912 C8               ret  z
+1176  C913 F8               ret  m
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(1177): error: Label not found: l_f597
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(1177): warning: Accessing low memory address 0x0000, is it ok?: ld   de,(l_f597)
+1177  C914 ED 5B 00 00      ld   de,(l_f597)
+1178  C918 0E 18            ld   c,$18
+1179  C91A CD 24 C1         call slave_call_02B4
+1180  C91D D0               ret  nc
+1181  C91E 36 10            ld   (hl),$10
+1182  C920 23               inc  hl
+1183  C921 23               inc  hl
+1184  C922 23               inc  hl
+1185  C923 36 08            ld   (hl),$08
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(1186): error: Label not found: l_ed3d
+1186  C925 21 00 00         ld   hl,l_ed3d
+1187  C928 35               dec  (hl)
+1188  C929 C9               ret
+1189  C92A              slave_call_0ABA
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(1190): error: Label not found: l_f47c
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(1190): warning: Accessing low memory address 0x0000, is it ok?: ld   a,(l_f47c)
+1190  C92A 3A 00 00         ld   a,(l_f47c)
+1191  C92D A7               and  a
+1192  C92E 28 30            jr   z,slave_call_0AF0
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(1193): error: Label not found: l_f47e
+1193  C930 FD 21 00 00      ld   iy,l_f47e
+1194  C934 06 08            ld   b,$08
+1195  C936              slave_call_0AC6
+1196  C936 FD CB 00 46      bit  0,(iy+$00)
+1197  C93A 28 1D            jr   z,slave_call_0AE9
+1198  C93C FD 7E 01         ld   a,(iy+$01)
+1199  C93F DD 96 01         sub  (ix+$01)
+1200  C942 F2 47 C9         jp   p,slave_call_0AD7
+1201  C945 ED 44            neg
+1202  C947              slave_call_0AD7
+1203  C947 FE 10            cp   $10
+1204  C949 30 0E            jr   nc,slave_call_0AE9
+1205  C94B FD 7E 02         ld   a,(iy+$02)
+1206  C94E DD 96 02         sub  (ix+$02)
+1207  C951 F2 56 C9         jp   p,slave_call_0AE6
+1208  C954 ED 44            neg
+1209  C956              slave_call_0AE6
+1210  C956 FE 10            cp   $10
+1211  C958 D8               ret  c
+1212  C959              slave_call_0AE9
+1213  C959 11 09 00         ld   de,$0009
+1214  C95C FD 19            add  iy,de
+1215  C95E 10 D6            djnz slave_call_0AC6
+1216  C960              slave_call_0AF0
+1217  C960 AF               xor  a
+1218  C961 C9               ret
+1219  C962              slave_call_0AF2
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(1220): error: Label not found: l_f4cb
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(1220): warning: Accessing low memory address 0x0000, is it ok?: ld   a,(l_f4cb)
+1220  C962 3A 00 00         ld   a,(l_f4cb)
+1221  C965 A7               and  a
+1222  C966 28 30            jr   z,slave_call_0B28
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(1223): error: Label not found: l_f4ce
+1223  C968 FD 21 00 00      ld   iy,l_f4ce
+1224  C96C 06 08            ld   b,$08
+1225  C96E              slave_call_0AFE
+1226  C96E FD CB 00 46      bit  0,(iy+$00)
+1227  C972 28 1D            jr   z,slave_call_0B21
+1228  C974 FD 7E 01         ld   a,(iy+$01)
+1229  C977 DD 96 01         sub  (ix+$01)
+1230  C97A F2 7F C9         jp   p,slave_call_0B0F
+1231  C97D ED 44            neg
+1232  C97F              slave_call_0B0F
+1233  C97F FE 10            cp   $10
+1234  C981 30 0E            jr   nc,slave_call_0B21
+1235  C983 FD 7E 02         ld   a,(iy+$02)
+1236  C986 DD 96 02         sub  (ix+$02)
+1237  C989 F2 8E C9         jp   p,slave_call_0B1E
+1238  C98C ED 44            neg
+1239  C98E              slave_call_0B1E
+1240  C98E FE 10            cp   $10
+1241  C990 D8               ret  c
+1242  C991              slave_call_0B21
+1243  C991 11 08 00         ld   de,$0008
+1244  C994 FD 19            add  iy,de
+1245  C996 10 D6            djnz slave_call_0AFE
+1246  C998              slave_call_0B28
+1247  C998 AF               xor  a
+1248  C999 C9               ret
+1249  C99A              slave_call_0B2A
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(1250): error: Label not found: l_f595
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(1250): warning: Accessing low memory address 0x0000, is it ok?: ld   a,(l_f595)
+1250  C99A 3A 00 00         ld   a,(l_f595)
+1251  C99D A7               and  a
+1252  C99E C8               ret  z
+1253  C99F F8               ret  m
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(1254): error: Label not found: l_f597
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(1254): warning: Accessing low memory address 0x0000, is it ok?: ld   de,(l_f597)
+1254  C9A0 ED 5B 00 00      ld   de,(l_f597)
+1255  C9A4 DD 7E 01         ld   a,(ix+$01)
+1256  C9A7 93               sub  e
+1257  C9A8 F2 AD C9         jp   p,slave_call_0B3D
+1258  C9AB ED 44            neg
+1259  C9AD              slave_call_0B3D
+1260  C9AD FE 10            cp   $10
+1261  C9AF D0               ret  nc
+1262  C9B0 DD 7E 02         ld   a,(ix+$02)
+1263  C9B3 92               sub  d
+1264  C9B4 F2 B9 C9         jp   p,slave_call_0B49
+1265  C9B7 ED 44            neg
+1266  C9B9              slave_call_0B49
+1267  C9B9 FE 10            cp   $10
+1268  C9BB C9               ret
+1269  C9BC              slave_call_0B4C
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(1270): error: Label not found: l_f5ac
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(1270): warning: Accessing low memory address 0x0000, is it ok?: ld   a,(l_f5ac)
+1270  C9BC 3A 00 00         ld   a,(l_f5ac)
+1271  C9BF A7               and  a
+1272  C9C0 C8               ret  z
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(1273): error: Label not found: l_f5ad
+1273  C9C1 DD 21 00 00      ld   ix,l_f5ad
+1274  C9C5 DD CB 00 46      bit  0,(ix+$00)
+1275  C9C9 C8               ret  z
+1276  C9CA DD 5E 01         ld   e,(ix+$01)
+1277  C9CD DD 56 02         ld   d,(ix+$02)
+1278  C9D0 0E 0F            ld   c,$0F
+1279  C9D2 CD 24 C1         call slave_call_02B4
+1280  C9D5 D0               ret  nc
+1281  C9D6 36 10            ld   (hl),$10
+1282  C9D8 23               inc  hl
+1283  C9D9 23               inc  hl
+1284  C9DA 23               inc  hl
+1285  C9DB 36 06            ld   (hl),$06
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(1286): error: Label not found: l_ed3d
+1286  C9DD 21 00 00         ld   hl,l_ed3d
+1287  C9E0 35               dec  (hl)
+1288  C9E1 DD 36 00 02      ld   (ix+$00),$02
+1289  C9E5 C9               ret
+1290  C9E6              slave_call_0B76
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(1291): error: Label not found: l_f5ac
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(1291): warning: Accessing low memory address 0x0000, is it ok?: ld   a,(l_f5ac)
+1291  C9E6 3A 00 00         ld   a,(l_f5ac)
+1292  C9E9 A7               and  a
+1293  C9EA C8               ret  z
+1294  C9EB F8               ret  m
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(1295): error: Label not found: l_f5ae
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(1295): warning: Accessing low memory address 0x0000, is it ok?: ld   de,(l_f5ae)
+1295  C9EC ED 5B 00 00      ld   de,(l_f5ae)
+1296  C9F0 DD 7E 01         ld   a,(ix+$01)
+1297  C9F3 93               sub  e
+1298  C9F4 F2 F9 C9         jp   p,slave_call_0B89
+1299  C9F7 ED 44            neg
+1300  C9F9              slave_call_0B89
+1301  C9F9 FE 10            cp   $10
+1302  C9FB D0               ret  nc
+1303  C9FC DD 7E 02         ld   a,(ix+$02)
+1304  C9FF 92               sub  d
+1305  CA00 F2 05 CA         jp   p,slave_call_0B95
+1306  CA03 ED 44            neg
+1307  CA05              slave_call_0B95
+1308  CA05 FE 10            cp   $10
+1309  CA07 C9               ret
+1310  CA08              slave_call_0B98
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(1311): error: Label not found: l_e737
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(1311): warning: Accessing low memory address 0x0000, is it ok?: ld   a,(l_e737)
+1311  CA08 3A 00 00        ld   a,(l_e737)
+1312  CA0B A7              and  a
+1313  CA0C C0              ret  nz
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(1314): error: Label not found: l_ecaa
+1314  CA0D DD 21 00 00     ld   ix,l_ecaa
+1315  CA11 06 07           ld   b,$07
+1316  CA13              slave_call_0BA3
+1317  CA13 C5               push bc
+1318  CA14 DD CB 00 46      bit  0,(ix+$00)
+1319  CA18 28 1C            jr   z,slave_call_0BC6
+1320  CA1A DD CB 00 56      bit  2,(ix+$00)
+1321  CA1E 20 16            jr   nz,slave_call_0BC6
+1322  CA20 1E 08            ld   e,$08
+1323  CA22 CD DB C1         call slave_call_036B
+1324  CA25 30 0F            jr   nc,slave_call_0BC6
+1325  CA27 A7               and  a
+1326  CA28 20 05            jr   nz,slave_call_0BBF
+1327  CA2A CD 6C CA         call slave_call_0BFC
+1328  CA2D 18 03            jr   slave_call_0BC2
+1329  CA2F              slave_call_0BBF
+1330  CA2F CD 91 CA         call slave_call_0C21
+1331  CA32              slave_call_0BC2
+1332  CA32 DD CB 00 CE      set  1,(ix+$00)
+1333  CA36              slave_call_0BC6
+1334  CA36 11 11 00         ld   de,$0011
+1335  CA39 DD 19            add  ix,de
+1336  CA3B C1               pop  bc
+1337  CA3C 10 D5            djnz slave_call_0BA3
+1338  CA3E C9               ret
+1339  CA3F              slave_call_0BCF
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(1340): error: Label not found: l_e737
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(1340): warning: Accessing low memory address 0x0000, is it ok?: ld   a,(l_e737)
+1340  CA3F 3A 00 00         ld   a,(l_e737)
+1341  CA42 A7               and  a
+1342  CA43 C0               ret  nz
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(1343): error: Label not found: l_eb99
+1343  CA44 DD 21 00 00      ld   ix,l_eb99
+1344  CA48 06 08            ld   b,$08
+1345  CA4A              slave_call_0BDA
+1346  CA4A C5               push bc
+1347  CA4B DD CB 00 46      bit  0,(ix+$00)
+1348  CA4F 28 12            jr   z,slave_call_0BF3
+1349  CA51 1E 08            ld   e,$08
+1350  CA53 CD DB C1         call slave_call_036B
+1351  CA56 30 0B            jr   nc,slave_call_0BF3
+1352  CA58 A7               and  a
+1353  CA59 20 05            jr   nz,slave_call_0BF0
+1354  CA5B CD 6C CA         call slave_call_0BFC
+1355  CA5E 18 03            jr   slave_call_0BF3
+1356  CA60              slave_call_0BF0
+1357  CA60 CD 91 CA         call slave_call_0C21
+1358  CA63              slave_call_0BF3
+1359  CA63 11 12 00         ld   de,$0012
+1360  CA66 DD 19            add  ix,de
+1361  CA68 C1               pop  bc
+1362  CA69 10 DF            djnz slave_call_0BDA
+1363  CA6B C9               ret
+1364  CA6C              slave_call_0BFC
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(1365): error: Label not found: l_e690
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(1365): warning: Accessing low memory address 0x0000, is it ok?: ld   a,(l_e690)
+1365  CA6C 3A 00 00         ld   a,(l_e690)
+1366  CA6F A7               and  a
+1367  CA70 C0               ret  nz
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(1368): error: Label not found: l_e6b6
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(1368): warning: Accessing low memory address 0x0000, is it ok?: ld   a,(l_e6b6)
+1368  CA71 3A 00 00         ld   a,(l_e6b6)
+1369  CA74 A7               and  a
+1370  CA75 C0               ret  nz
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(1371): error: Label not found: l_e6a4
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(1371): warning: Accessing low memory address 0x0000, is it ok?: ld   a,(l_e6a4)
+1371  CA76 3A 00 00         ld   a,(l_e6a4)
+1372  CA79 A7               and  a
+1373  CA7A C0               ret  nz
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(1374): error: Label not found: l_e692
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(1374): warning: Accessing low memory address 0x0000, is it ok?: ld   a,(l_e692)
+1374  CA7B 3A 00 00         ld   a,(l_e692)
+1375  CA7E FE 08            cp   $08
+1376  CA80 D8               ret  c
+1377  CA81 FE F0            cp   $F0
+1378  CA83 D0               ret  nc
+1379  CA84 E5               push hl
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(1380): error: Label not found: l_e6aa
+1380  CA85 21 00 00         ld   hl,l_e6aa
+1381  CA88 36 01            ld   (hl),$01
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(1382): error: Label not found: l_e691
+1382  CA8A 21 00 00         ld   hl,l_e691
+1383  CA8D 36 10            ld   (hl),$10
+1384  CA8F E1               pop  hl
+1385  CA90 C9               ret
+1386  CA91              slave_call_0C21
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(1387): error: Label not found: l_e690
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(1387): warning: Accessing low memory address 0x0000, is it ok?: ld   a,(l_e690)
+1387  CA91 3A 00 00         ld   a,(l_e690)
+1388  CA94 A7               and  a
+1389  CA95 C0               ret  nz
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(1390): error: Label not found: l_e6e8
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(1390): warning: Accessing low memory address 0x0000, is it ok?: ld   a,(l_e6e8)
+1390  CA96 3A 00 00         ld   a,(l_e6e8)
+1391  CA99 A7               and  a
+1392  CA9A C0               ret  nz
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(1393): error: Label not found: l_e6d6
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(1393): warning: Accessing low memory address 0x0000, is it ok?: ld   a,(l_e6d6)
+1393  CA9B 3A 00 00         ld   a,(l_e6d6)
+1394  CA9E A7               and  a
+1395  CA9F C0               ret  nz
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(1396): error: Label not found: l_e6c4
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(1396): warning: Accessing low memory address 0x0000, is it ok?: ld   a,(l_e6c4)
+1396  CAA0 3A 00 00         ld   a,(l_e6c4)
+1397  CAA3 FE 08            cp   $08
+1398  CAA5 D8               ret  c
+1399  CAA6 FE F0            cp   $F0
+1400  CAA8 D0               ret  nc
+1401  CAA9 E5               push hl
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(1402): error: Label not found: l_e6dc
+1402  CAAA 21 00 00         ld   hl,l_e6dc
+1403  CAAD 36 01            ld   (hl),$01
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(1404): error: Label not found: l_e6c3
+1404  CAAF 21 00 00         ld   hl,l_e6c3
+1405  CAB2 36 10            ld   (hl),$10
+1406  CAB4 E1               pop  hl
+1407  CAB5 C9               ret
+1408  CAB6              slave_call_0C46
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(1409): error: Label not found: l_e737
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(1409): warning: Accessing low memory address 0x0000, is it ok?: ld   a,(l_e737)
+1409  CAB6 3A 00 00         ld   a,(l_e737)
+1410  CAB9 A7               and  a
+1411  CABA C0               ret  nz
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(1412): error: Label not found: l_ec29
+1412  CABB DD 21 00 00      ld   ix,l_ec29
+1413  CABF 06 08            ld   b,$08
+1414  CAC1              slave_call_0C51
+1415  CAC1 C5               push bc
+1416  CAC2 DD CB 00 46      bit  0,(ix+$00)
+1417  CAC6 28 18            jr   z,slave_call_0C70
+1418  CAC8 DD CB 00 5E      bit  3,(ix+$00)
+1419  CACC 20 12            jr   nz,slave_call_0C70
+1420  CACE 1E 08            ld   e,$08
+1421  CAD0 CD DB C1         call slave_call_036B
+1422  CAD3 30 0B            jr   nc,slave_call_0C70
+1423  CAD5 A7               and  a
+1424  CAD6 20 05            jr   nz,slave_call_0C6D
+1425  CAD8 CD 7C C0         call slave_call_020C
+1426  CADB 18 03            jr   slave_call_0C70
+1427  CADD              slave_call_0C6D
+1428  CADD CD A9 C0         call slave_call_0239
+1429  CAE0              slave_call_0C70
+1430  CAE0 11 10 00         ld   de,$0010
+1431  CAE3 DD 19            add  ix,de
+1432  CAE5 C1               pop  bc
+1433  CAE6 10 D9            djnz slave_call_0C51
+1434  CAE8 C9               ret
+1435  CAE9              slave_call_0C79
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(1436): error: Label not found: l_e737
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(1436): warning: Accessing low memory address 0x0000, is it ok?: ld   a,(l_e737)
+1436  CAE9 3A 00 00         ld   a,(l_e737)
+1437  CAEC A7               and  a
+1438  CAED C0               ret  nz
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(1439): error: Label not found: l_f3ce
+1439  CAEE DD 21 00 00      ld   ix,l_f3ce
+1440  CAF2 06 07            ld   b,$07
+1441  CAF4              slave_call_0C84
+1442  CAF4 C5               push bc
+1443  CAF5 DD CB 00 46      bit  0,(ix+$00)
+1444  CAF9 28 12            jr   z,slave_call_0C9D
+1445  CAFB 1E 08            ld   e,$08
+1446  CAFD CD DB C1         call slave_call_036B
+1447  CB00 30 0B            jr   nc,slave_call_0C9D
+1448  CB02 A7               and  a
+1449  CB03 20 05            jr   nz,slave_call_0C9A
+1450  CB05 CD 7C C0         call slave_call_020C
+1451  CB08 18 03            jr   slave_call_0C9D
+1452  CB0A              slave_call_0C9A
+1453  CB0A CD A9 C0         call slave_call_0239
+1454  CB0D              slave_call_0C9D
+1455  CB0D 11 11 00         ld   de,$0011
+1456  CB10 DD 19            add  ix,de
+1457  CB12 C1               pop  bc
+1458  CB13 10 DF            djnz slave_call_0C84
+1459  CB15 C9               ret
+1460  CB16              slave_call_0CA6
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(1461): error: Label not found: l_f367
+1461  CB16 DD 21 00 00      ld   ix,l_f367
+1462  CB1A 06 08            ld   b,$08
+1463  CB1C              slave_call_0CAC
+1464  CB1C C5               push bc
+1465  CB1D DD CB 00 46      bit  0,(ix+$00)
+1466  CB21 28 12            jr   z,slave_call_0CC5
+1467  CB23 1E 08            ld   e,$08
+1468  CB25 CD DB C1         call slave_call_036B
+1469  CB28 30 0B            jr   nc,slave_call_0CC5
+1470  CB2A A7               and  a
+1471  CB2B 20 05            jr   nz,slave_call_0CC2
+1472  CB2D CD 7C C0         call slave_call_020C
+1473  CB30 18 03            jr   slave_call_0CC5
+1474  CB32              slave_call_0CC2
+1475  CB32 CD A9 C0         call slave_call_0239
+1476  CB35              slave_call_0CC5
+1477  CB35 11 0C 00         ld   de,$000C
+1478  CB38 DD 19            add  ix,de
+1479  CB3A C1               pop  bc
+1480  CB3B 10 DF            djnz slave_call_0CAC
+1481  CB3D C9               ret
+1482  CB3E              slave_call_0CCE
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(1483): error: Label not found: l_f296
+1483  CB3E DD 21 00 00      ld   ix,l_f296
+1484  CB42 DD 7E 00         ld   a,(ix+$00)
+1485  CB45 CB 47            bit  0,a
+1486  CB47 20 14            jr   nz,slave_call_0CED
+1487  CB49 CB 4F            bit  1,a
+1488  CB4B C8               ret  z
+1489  CB4C CB 57            bit  2,a
+1490  CB4E C0               ret  nz
+1491  CB4F 1E 24            ld   e,$24
+1492  CB51 CD DB C1         call slave_call_036B
+1493  CB54 D0               ret  nc
+1494  CB55 DD 77 0D         ld   (ix+$0d),a
+1495  CB58 DD CB 00 D6      set  2,(ix+$00)
+1496  CB5C C9               ret
+1497  CB5D              slave_call_0CED
+1498  CB5D 1E 24            ld   e,$24
+1499  CB5F CD DB C1         call slave_call_036B
+1500  CB62 D0               ret  nc
+1501  CB63 A7               and  a
+1502  CB64 20 03            jr   nz,slave_call_0CF9
+1503  CB66 C3 7C C0         jp   slave_call_020C
+1504  CB69              slave_call_0CF9
+1505  CB69 C3 A9 C0         jp   slave_call_0239
+1506  CB6C
+1507  CB6C
+1508  CB6C
+1509  CB6C
+1510  CB6C 00           joyresult    BYTE   0
+1511  CB6D 00           joyresult2    BYTE   0
+1512  CB6E              ;input 1 byte at l_ff02 - bits:
+1513  CB6E              ;0 = Joy left	- active low
+1514  CB6E              ;1 = Joy Right	- active low
+1515  CB6E              ;2 = Coin 2		- active high
+1516  CB6E              ;3 = Coin 1		- active high
+1517  CB6E              ;4 = Button 2	- active low
+1518  CB6E              ;5 = Button 1	- active low
+1519  CB6E              ;6 = Start 1	- active low
+1520  CB6E              ;7 = N/A		- active low - Should always be 1
+1521  CB6E              slave_getinput
+1522  CB6E 3A 8C CD         ld a,(control_status)
+1523  CB71 FE 08            cp 8
+1524  CB73 CA E1 D2         jp z,change_options
+1525  CB76 FE 02            cp 2
+1526  CB78 D2 95 CF         jp nc,control_redefine
+1527  CB7B FE 01            cp 1
+1528  CB7D CA A5 CE         jp z,change_inputs
+1529  CB80 3A 5A CD         ld a,(p1_control)       ;check Player 1 control option
+1530  CB83 FE 00            cp $00
+1531  CB85 20 07            jr nz,p1_not_kemp_1_up
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(1532): error: Label not found: kempston1
+1532  CB87 01 00 00     	ld bc,kempston1         ;code exec for input method 0 & 1
+1533  CB8A ED 78            in a,(c)
+1534  CB8C 18 5A            jr p1_input_done
+1535  CB8E              p1_not_kemp_1_up
+1536  CB8E FE 01            cp $01
+1537  CB90 20 0F            jr nz,p1_not_kemp_1
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(1538): error: Label not found: kempston1
+1538  CB92 01 00 00     	ld bc,kempston1         ;code exec for input method 0 & 1
+1539  CB95 ED 78            in a,(c)
+1540  CB97 CB 9F            res 3,a
+1541  CB99 CB 6F            bit 5,a
+1542  CB9B 28 4B            jr z,p1_input_done
+1543  CB9D CB DF            set 3,a
+1544  CB9F 18 47            jr p1_input_done
+1545  CBA1              p1_not_kemp_1
+1546  CBA1 FE 02            cp $02
+1547  CBA3 20 07            jr nz,p1_not_kemp_2_up
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(1548): error: Label not found: kempston2
+1548  CBA5 01 00 00     	ld bc,kempston2         ;code exec for input method 0 & 1
+1549  CBA8 ED 78            in a,(c)
+1550  CBAA 18 3C            jr p1_input_done
+1551  CBAC              p1_not_kemp_2_up
+1552  CBAC FE 01            cp $01
+1553  CBAE 20 0F            jr nz,p1_not_kemp_2
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(1554): error: Label not found: kempston2
+1554  CBB0 01 00 00     	ld bc,kempston2         ;code exec for input method 0 & 1
+1555  CBB3 ED 78            in a,(c)
+1556  CBB5 CB 9F            res 3,a
+1557  CBB7 CB 6F            bit 5,a
+1558  CBB9 28 2D            jr z,p1_input_done
+1559  CBBB CB DF            set 3,a
+1560  CBBD 18 29            jr p1_input_done
+1561  CBBF              p1_not_kemp_2
+1562  CBBF FE 04            cp $04
+1563  CBC1 20 0F            jr nz,p1_not_md_1
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(1564): error: Label not found: kempston1
+1564  CBC3 01 00 00         ld bc,kempston1         ;code exec for input method 0 & 1
+1565  CBC6 ED 78            in a,(c)
+1566  CBC8 CB 9F            res 3,a
+1567  CBCA CB 6F            bit 5,a
+1568  CBCC 28 1A            jr z,p1_input_done
+1569  CBCE CB DF            set 3,a
+1570  CBD0 18 16            jr p1_input_done
+1571  CBD2              p1_not_md_1
+1572  CBD2 FE 05            cp $05
+1573  CBD4 20 0F            jr nz,p1_not_md_2
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(1574): error: Label not found: kempston2
+1574  CBD6 01 00 00         ld bc,kempston2         ;code exec for input method 0 & 1
+1575  CBD9 ED 78            in a,(c)
+1576  CBDB CB 9F            res 3,a
+1577  CBDD CB 6F            bit 5,a
+1578  CBDF 28 07            jr z,p1_input_done
+1579  CBE1 CB DF            set 3,a
+1580  CBE3 18 03            jr p1_input_done
+1581  CBE5              p1_not_md_2
+1582  CBE5 CD 85 CC         call p1_getkeyboard
+1583  CBE8              p1_input_done
+1584  CBE8 32 6C CB         ld (joyresult),a
+1585  CBEB
+1586  CBEB 3A 5B CD         ld a,(p2_control)       ;check Player 1 control option
+1587  CBEE FE 00            cp $00
+1588  CBF0 20 07            jr nz,p2_not_kemp_1_up
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(1589): error: Label not found: kempston1
+1589  CBF2 01 00 00     	ld bc,kempston1         ;code exec for input method 0 & 1
+1590  CBF5 ED 78            in a,(c)
+1591  CBF7 18 52            jr p2_input_done
+1592  CBF9              p2_not_kemp_1_up
+1593  CBF9 FE 01            cp $01
+1594  CBFB 20 0D            jr nz,p2_not_kemp_1
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(1595): error: Label not found: kempston1
+1595  CBFD 01 00 00     	ld bc,kempston1         ;code exec for input method 0 & 1
+1596  CC00 ED 78            in a,(c)
+1597  CC02 CB 6F            bit 5,a
+1598  CC04 28 45            jr z,p2_input_done
+1599  CC06 CB DF            set 3,a
+1600  CC08 18 41            jr p2_input_done
+1601  CC0A              p2_not_kemp_1
+1602  CC0A FE 02            cp $02
+1603  CC0C 20 07            jr nz,p2_not_kemp_2_up
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(1604): error: Label not found: kempston2
+1604  CC0E 01 00 00     	ld bc,kempston2         ;code exec for input method 0 & 1
+1605  CC11 ED 78            in a,(c)
+1606  CC13 18 36            jr p2_input_done
+1607  CC15              p2_not_kemp_2_up
+1608  CC15 FE 03            cp $03
+1609  CC17 20 0D            jr nz,p2_not_kemp_2
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(1610): error: Label not found: kempston2
+1610  CC19 01 00 00     	ld bc,kempston2         ;code exec for input method 0 & 1
+1611  CC1C ED 78            in a,(c)
+1612  CC1E CB 6F            bit 5,a
+1613  CC20 28 29            jr z,p2_input_done
+1614  CC22 CB DF            set 3,a
+1615  CC24 18 25            jr p2_input_done
+1616  CC26              p2_not_kemp_2
+1617  CC26 FE 04            cp $04
+1618  CC28 20 0D            jr nz,p2_not_md_1
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(1619): error: Label not found: kempston1
+1619  CC2A 01 00 00         ld bc,kempston1         ;code exec for input method 0 & 1
+1620  CC2D ED 78            in a,(c)
+1621  CC2F CB 6F            bit 5,a
+1622  CC31 28 18            jr z,p2_input_done
+1623  CC33 CB DF            set 3,a
+1624  CC35 18 14            jr p2_input_done
+1625  CC37              p2_not_md_1
+1626  CC37 FE 05            cp $05
+1627  CC39 20 0D            jr nz,p2_not_md_2
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(1628): error: Label not found: kempston2
+1628  CC3B 01 00 00         ld bc,kempston2         ;code exec for input method 0 & 1
+1629  CC3E ED 78            in a,(c)
+1630  CC40 CB 6F            bit 5,a
+1631  CC42 28 07            jr z,p2_input_done
+1632  CC44 CB DF            set 3,a
+1633  CC46 18 03            jr p2_input_done
+1634  CC48              p2_not_md_2
+1635  CC48 CD D1 CC         call p2_getkeyboard
+1636  CC4B              p2_input_done
+1637  CC4B 32 6D CB         ld (joyresult2),a
+1638  CC4E
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(1639): error: Label not found: l_ff02
+1639  CC4E 21 00 00     	ld hl,l_ff02		;input 1 byte
+1640  CC51 3E F3        	ld a,$f3
+1641  CC53 77           	ld (hl),a
+1642  CC54 3A 6C CB     	ld a,(joyresult)
+1643  CC57 CD 6A CC     	call checkjoyresult
+1644  CC5A
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(1645): error: Label not found: l_ff03
+1645  CC5A 21 00 00     	ld hl,l_ff03		;input 1 byte
+1646  CC5D 3E F3        	ld a,$f3
+1647  CC5F 77           	ld (hl),a
+1648  CC60 3A 6D CB     	ld a,(joyresult2)
+1649  CC63 CD 6A CC         call checkjoyresult
+1650  CC66
+1651  CC66 CD 1D CD         call system_keys
+1652  CC69
+1653  CC69 C9               ret
+1654  CC6A
+1655  CC6A              checkjoyresult
+1656  CC6A CB 47            bit 0,a ;test right
+1657  CC6C 28 02            jr z,p1_moveleft
+1658  CC6E CB 8E            res 1,(hl)				;clear left bit of input
+1659  CC70
+1660  CC70              p1_moveleft
+1661  CC70 CB 4F            bit 1,a ;test left
+1662  CC72 28 02            jr z,p1_fire1
+1663  CC74 CB 86        	res 0,(hl)
+1664  CC76              p1_fire1
+1665  CC76 CB 5F            bit 3,a ;test up
+1666  CC78 28 02        	jr z,p1_fire2
+1667  CC7A CB A6            res 4,(hl)			;jump
+1668  CC7C              p1_fire2
+1669  CC7C CB 67            bit 4,a ;test fire2
+1670  CC7E 28 04        	jr z,pastdirection
+1671  CC80 CB AE            res 5,(hl)			;fire
+1672  CC82
+1673  CC82
+1674  CC82 18 00            jr pastdirection
+1675  CC84
+1676  CC84
+1677  CC84
+1678  CC84
+1679  CC84              pastdirection
+1680  CC84 C9               ret
+1681  CC85
+1682  CC85              p1_getkeyboard
+1683  CC85                  ;break
+1684  CC85 16 00            ld d,$00        ;nothing pressed
+1685  CC87 ED 4B 5C CD      ld bc,(p1_key_left)
+1686  CC8B ED 58            in e,(c)            ;read keyboard row/col
+1687  CC8D 3A 5E CD         ld a,(p1_key_left+2)    ;get actual value
+1688  CC90 B3               or e
+1689  CC91 E6 1F            and $1f
+1690  CC93 FE 1F            cp $1f
+1691  CC95 28 02            jr z,no_p1_key_left
+1692  CC97 CB CA            set 1,d
+1693  CC99              no_p1_key_left
+1694  CC99 ED 4B 62 CD      ld bc,(p1_key_right)
+1695  CC9D ED 58            in e,(c)            ;read keyboard row/col
+1696  CC9F 3A 64 CD         ld a,(p1_key_right+2)    ;get actual value
+1697  CCA2 B3               or e
+1698  CCA3 E6 1F            and $1f
+1699  CCA5 FE 1F            cp $1f
+1700  CCA7 28 02            jr z,no_p1_key_right
+1701  CCA9 CB C2            set 0,d
+1702  CCAB              no_p1_key_right
+1703  CCAB ED 4B 68 CD      ld bc,(p1_key_jump)
+1704  CCAF ED 58            in e,(c)            ;read keyboard row/col
+1705  CCB1 3A 6A CD         ld a,(p1_key_jump+2)    ;get actual value
+1706  CCB4 B3               or e
+1707  CCB5 E6 1F            and $1f
+1708  CCB7 FE 1F            cp $1f
+1709  CCB9 28 02            jr z,no_p1_key_jump
+1710  CCBB CB DA            set 3,d
+1711  CCBD              no_p1_key_jump
+1712  CCBD ED 4B 6E CD      ld bc,(p1_key_fire)
+1713  CCC1 ED 58            in e,(c)            ;read keyboard row/col
+1714  CCC3 3A 70 CD         ld a,(p1_key_fire+2)    ;get actual value
+1715  CCC6 B3               or e
+1716  CCC7 E6 1F            and $1f
+1717  CCC9 FE 1F            cp $1f
+1718  CCCB 28 02            jr z,no_p1_key_fire
+1719  CCCD CB E2            set 4,d
+1720  CCCF              no_p1_key_fire
+1721  CCCF 7A               ld a,d
+1722  CCD0 C9               ret
+1723  CCD1
+1724  CCD1              p2_getkeyboard
+1725  CCD1                  ;break
+1726  CCD1 16 00            ld d,$00        ;nothing pressed
+1727  CCD3 ED 4B 74 CD      ld bc,(p2_key_left)
+1728  CCD7 ED 58            in e,(c)            ;read keyboard row/col
+1729  CCD9 3A 76 CD         ld a,(p2_key_left+2)    ;get actual value
+1730  CCDC B3               or e
+1731  CCDD E6 1F            and $1f
+1732  CCDF FE 1F            cp $1f
+1733  CCE1 28 02            jr z,no_p2_key_left
+1734  CCE3 CB CA            set 1,d
+1735  CCE5              no_p2_key_left
+1736  CCE5 ED 4B 7A CD      ld bc,(p2_key_right)
+1737  CCE9 ED 58            in e,(c)            ;read keyboard row/col
+1738  CCEB 3A 7C CD         ld a,(p2_key_right+2)    ;get actual value
+1739  CCEE B3               or e
+1740  CCEF E6 1F            and $1f
+1741  CCF1 FE 1F            cp $1f
+1742  CCF3 28 02            jr z,no_p2_key_right
+1743  CCF5 CB C2            set 0,d
+1744  CCF7              no_p2_key_right
+1745  CCF7 ED 4B 80 CD      ld bc,(p2_key_jump)
+1746  CCFB ED 58            in e,(c)            ;read keyboard row/col
+1747  CCFD 3A 82 CD         ld a,(p2_key_jump+2)    ;get actual value
+1748  CD00 B3               or e
+1749  CD01 E6 1F            and $1f
+1750  CD03 FE 1F            cp $1f
+1751  CD05 28 02            jr z,no_p2_key_jump
+1752  CD07 CB DA            set 3,d
+1753  CD09              no_p2_key_jump
+1754  CD09 ED 4B 86 CD      ld bc,(p2_key_fire)
+1755  CD0D ED 58            in e,(c)            ;read keyboard row/col
+1756  CD0F 3A 88 CD         ld a,(p2_key_fire+2)    ;get actual value
+1757  CD12 B3               or e
+1758  CD13 E6 1F            and $1f
+1759  CD15 FE 1F            cp $1f
+1760  CD17 28 02            jr z,no_p2_key_fire
+1761  CD19 CB E2            set 4,d
+1762  CD1B              no_p2_key_fire
+1763  CD1B 7A               ld a,d
+1764  CD1C C9               ret
+1765  CD1D
+1766  CD1D              system_keys
+1767  CD1D                  ;break
+1768  CD1D 01 FE F7         ld bc,$F7FE         ;1 to 5
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(1769): error: Label not found: l_ff02
+1769  CD20 21 00 00         ld hl,l_ff02        ;p1 input
+1770  CD23 ED 78            in a,(c)            ;read val
+1771  CD25 E6 1F            and $1f
+1772  CD27 CB 5F            bit 3,a
+1773  CD29 20 02            jr nz,no_p1_coin
+1774  CD2B CB DE            set 3,(hl)			;insert coin
+1775  CD2D              no_p1_coin
+1776  CD2D CB 47            bit 0,a
+1777  CD2F 20 02        	jr nz,no_p1_start
+1778  CD31 CB B6            res 6,(hl)			;start game p1
+1779  CD33              no_p1_start
+1780  CD33 CB 67            bit 4,a
+1781  CD35 20 02            jr nz,no_p2_coin
+1782  CD37 CB D6            set 2,(hl)			;insesrt coin 2
+1783  CD39              no_p2_coin
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(1784): error: Label not found: l_ff03
+1784  CD39 21 00 00         ld hl,l_ff03
+1785  CD3C CB 4F            bit 1,a
+1786  CD3E 20 02            jr nz,no_p2_start
+1787  CD40 CB B6            res 6,(hl)			;start game p2
+1788  CD42              no_p2_start
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(1789): error: Label not found: options_control
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(1789): warning: Accessing low memory address 0x0000, is it ok?: ld a,(options_control)
+1789  CD42 3A 00 00         ld a,(options_control)
+1790  CD45 FE 00            cp 0
+1791  CD47 C8               ret z               ;don't allow options if game if running
+1792  CD48 01 FE EF         ld bc,$EFFE         ;6 to 7
+1793  CD4B ED 78            in a,(c)            ;read val
+1794  CD4D E6 1F            and $1f
+1795  CD4F CB 57            bit 2,a
+1796  CD51 CA 8D CD         jp z,configure_controls
+1797  CD54 CB 4F            bit 1,a
+1798  CD56 CA 0B D2         jp z,configure_options
+1799  CD59 C9               ret
+1800  CD5A
+1801  CD5A ~            /*
+1802  CD5A ~            jumpup
+1803  CD5A ~            moveright
+1804  CD5A ~            moveleft
+1805  CD5A ~            retpoint
+1806  CD5A ~                ret
+1807  CD5A ~            */
+1808  CD5A              p1_control
+1809  CD5A 06               BYTE $06
+1810  CD5B                  ;0/1=kemp 1/2 button joystick port A  2/3=kemp 1/2 button joystick Port B  4=MD Port A, 5=MD Port B,  6=keyboard
+1811  CD5B              p2_control
+1812  CD5B 06               BYTE $06
+1813  CD5C                  ;0/1=kemp 1/2 button joystick port A  2/3=kemp 1/2 button joystick Port B  4=MD Port A, 5=MD Port B,  6=keyboard
+1814  CD5C
+1815  CD5C              p1_key_left    ;bc val - in val
+1816  CD5C FE FE FD 02      BYTE $FE,$FE,$FD,2,"Z "        ;default z
+1816  CD60 5A 20
+1817  CD62              p1_key_right    ;bc val - in val
+1818  CD62 FE FE FB 02      BYTE $FE,$FE,$FB,2,"X "        ;default x
+1818  CD66 58 20
+1819  CD68              p1_key_jump    ;bc val - in val
+1820  CD68 FE FB FE 02      BYTE $FE,$FB,$FE,2,"Q "       ;default q
+1820  CD6C 51 20
+1821  CD6E              p1_key_fire    ;bc val - in val
+1822  CD6E FE FD FE 02      BYTE $FE,$FD,$FE,2,"A "        ;default a
+1822  CD72 41 20
+1823  CD74              p2_key_left    ;bc val - in val
+1824  CD74 FE 7F F7 02      BYTE $FE,$7F,$F7,2,"N "        ;default n
+1824  CD78 4E 20
+1825  CD7A              p2_key_right    ;bc val - in val
+1826  CD7A FE 7F FB 02      BYTE $FE,$7F,$FB,2,"M "        ;default m
+1826  CD7E 4D 20
+1827  CD80              p2_key_jump    ;bc val - in val
+1828  CD80 FE DF FE 02      BYTE $FE,$DF,$FE,2,"P "        ;default p
+1828  CD84 50 20
+1829  CD86              p2_key_fire    ;bc val - in val
+1830  CD86 FE BF FD 02      BYTE $FE,$BF,$FD,2,"L "        ;default l
+1830  CD8A 4C 20
+1831  CD8C
+1832  CD8C              control_status
+1833  CD8C 00               BYTE $00
+1834  CD8D
+1835  CD8D              configure_controls
+1836  CD8D 21 EF D0         ld   hl,control_config_data_1
+1837  CD90 11 30 08         ld   de,$0830
+1838  CD93 0E 40            ld   c,$40
+1839  CD95 CD 45 D5     	call Slave_Write_Layer2_Text
+1840  CD98 21 02 D1         ld   hl,control_config_data_2
+1841  CD9B 11 18 20         ld   de,$2018
+1842  CD9E 0E 20            ld   c,$20
+1843  CDA0 CD 45 D5     	call Slave_Write_Layer2_Text
+1844  CDA3 21 0B D1         ld   hl,control_config_data_3
+1845  CDA6 11 A0 20         ld   de,$20a0
+1846  CDA9 0E 50            ld   c,$50
+1847  CDAB CD 45 D5     	call Slave_Write_Layer2_Text
+1848  CDAE 21 84 D1         ld   hl,control_config_data_5
+1849  CDB1 11 30 60         ld   de,$6030
+1850  CDB4 0E 40            ld   c,$40
+1851  CDB6 CD 45 D5     	call Slave_Write_Layer2_Text
+1852  CDB9 21 B1 D1         ld   hl,control_config_data_7
+1853  CDBC 11 10 40         ld   de,$4010
+1854  CDBF 0E 00            ld   c,$00
+1855  CDC1 CD 45 D5     	call Slave_Write_Layer2_Text
+1856  CDC4 21 BD D1         ld   hl,control_config_data_8
+1857  CDC7 11 98 40         ld   de,$4098
+1858  CDCA 0E 00            ld   c,$00
+1859  CDCC CD 45 D5     	call Slave_Write_Layer2_Text
+1860  CDCF 21 C9 D1         ld   hl,control_config_data_9
+1861  CDD2 11 10 B0         ld   de,$b010
+1862  CDD5 0E 00            ld   c,$00
+1863  CDD7 CD 45 D5     	call Slave_Write_Layer2_Text
+1864  CDDA 21 D5 D1         ld   hl,control_config_data_10
+1865  CDDD 11 98 B0         ld   de,$b098
+1866  CDE0 0E 00            ld   c,$00
+1867  CDE2 CD 45 D5     	call Slave_Write_Layer2_Text
+1868  CDE5
+1869  CDE5 21 99 D1         ld  hl,control_config_data_6
+1870  CDE8 11 18 70         ld  de,$7018
+1871  CDEB 06 04            ld b,4
+1872  CDED              configure_controls_loop
+1873  CDED C5               push bc
+1874  CDEE E5               push hl
+1875  CDEF D5               push de
+1876  CDF0 0E 20            ld c,$20
+1877  CDF2 CD 45 D5         call Slave_Write_Layer2_Text
+1878  CDF5 D1               pop de
+1879  CDF6 E1               pop hl
+1880  CDF7 E5               push hl
+1881  CDF8 D5               push de
+1882  CDF9 1E A0            ld e,$a0
+1883  CDFB 0E 50            ld c,$50
+1884  CDFD CD 45 D5         call Slave_Write_Layer2_Text
+1885  CE00 E1               pop hl
+1886  CE01 11 00 10         ld de,$1000
+1887  CE04 19               add hl,de
+1888  CE05 EB               ex de,hl
+1889  CE06 E1               pop hl
+1890  CE07 01 06 00         ld bc,$0006
+1891  CE0A 09               add hl,bc
+1892  CE0B C1               pop bc
+1893  CE0C 10 DF            djnz configure_controls_loop
+1894  CE0E CD 1E CE         call control_show_info
+1895  CE11 ED 91 14 E0      nextreg $14,$e0			   ;change layer 2 mask
+1896  CE15 3E 01            ld a,1
+1897  CE17 32 8C CD         ld (control_status),a
+1898  CE1A 32 EE D0         ld (control_timer),a
+1899  CE1D C9               ret
+1900  CE1E
+1901  CE1E              control_show_info
+1902  CE1E 3A 5A CD         ld a,(p1_control)
+1903  CE21 47               ld b,a
+1904  CE22 87               add a,a
+1905  CE23 87               add a,a
+1906  CE24 87               add a,a
+1907  CE25 87               add a,a     ;*16
+1908  CE26 16 00            ld d,0
+1909  CE28 5F               ld e,a
+1910  CE29 21 14 D1         ld hl,control_config_data_4
+1911  CE2C 19               add hl,de
+1912  CE2D 11 00 30         ld   de,$3000
+1913  CE30 0E 20            ld   c,$20
+1914  CE32 CD 45 D5     	call Slave_Write_Layer2_Text
+1915  CE35
+1916  CE35 3A 5B CD         ld a,(p2_control)
+1917  CE38 47               ld b,a
+1918  CE39 87               add a,a
+1919  CE3A 87               add a,a
+1920  CE3B 87               add a,a
+1921  CE3C 87               add a,a     ;*16
+1922  CE3D 16 00            ld d,0
+1923  CE3F 5F               ld e,a
+1924  CE40 21 14 D1         ld hl,control_config_data_4
+1925  CE43 19               add hl,de
+1926  CE44 11 88 30         ld   de,$3088
+1927  CE47 0E 50            ld   c,$50
+1928  CE49 CD 45 D5     	call Slave_Write_Layer2_Text
+1929  CE4C
+1930  CE4C 21 5F CD         ld hl,p1_key_left+3
+1931  CE4F 11 50 70         ld de,$7050
+1932  CE52 0E 00            ld c,$00
+1933  CE54 CD 45 D5         call Slave_Write_Layer2_Text
+1934  CE57 21 65 CD         ld hl,p1_key_right+3
+1935  CE5A 11 50 80         ld de,$8050
+1936  CE5D 0E 00            ld c,$00
+1937  CE5F CD 45 D5         call Slave_Write_Layer2_Text
+1938  CE62 21 6B CD         ld hl,p1_key_jump+3
+1939  CE65 11 50 90         ld de,$9050
+1940  CE68 0E 00            ld c,$00
+1941  CE6A CD 45 D5         call Slave_Write_Layer2_Text
+1942  CE6D 21 71 CD         ld hl,p1_key_fire+3
+1943  CE70 11 50 A0         ld de,$a050
+1944  CE73 0E 00            ld c,$00
+1945  CE75 CD 45 D5         call Slave_Write_Layer2_Text
+1946  CE78
+1947  CE78 21 77 CD         ld hl,p2_key_left+3
+1948  CE7B 11 D8 70         ld de,$70D8
+1949  CE7E 0E 00            ld c,$00
+1950  CE80 CD 45 D5         call Slave_Write_Layer2_Text
+1951  CE83 21 7D CD         ld hl,p2_key_right+3
+1952  CE86 11 D8 80         ld de,$80D8
+1953  CE89 0E 00            ld c,$00
+1954  CE8B CD 45 D5         call Slave_Write_Layer2_Text
+1955  CE8E 21 83 CD         ld hl,p2_key_jump+3
+1956  CE91 11 D8 90         ld de,$90D8
+1957  CE94 0E 00            ld c,$00
+1958  CE96 CD 45 D5         call Slave_Write_Layer2_Text
+1959  CE99 21 89 CD         ld hl,p2_key_fire+3
+1960  CE9C 11 D8 A0         ld de,$a0D8
+1961  CE9F 0E 00            ld c,$00
+1962  CEA1 CD 45 D5         call Slave_Write_Layer2_Text
+1963  CEA4
+1964  CEA4 C9               ret
+1965  CEA5
+1966  CEA5              change_inputs
+1967  CEA5                  ;break
+1968  CEA5 3A EE D0         ld a,(control_timer)
+1969  CEA8 FE 00            cp 0
+1970  CEAA 28 07            jr z,change_inputs_1
+1971  CEAC 3C               inc a
+1972  CEAD E6 0F            and $0f
+1973  CEAF 32 EE D0         ld (control_timer),a
+1974  CEB2 C9               ret
+1975  CEB3              change_inputs_1
+1976  CEB3 01 FE F7         ld bc,$F7FE         ;1 to 5
+1977  CEB6 ED 78            in a,(c)            ;read val
+1978  CEB8 E6 1F            and $1f
+1979  CEBA FE 1F            cp $1f
+1980  CEBC 28 3F            jr z,change_input_end_2
+1981  CEBE CB 47            bit 0,a
+1982  CEC0 20 0F            jr nz,no_change_inp_1
+1983  CEC2 3A 5A CD         ld a,(p1_control)
+1984  CEC5 3C               inc a
+1985  CEC6 FE 07            cp 7
+1986  CEC8 38 02            jr c,no_p1_overflow
+1987  CECA 3E 00            ld a,0
+1988  CECC              no_p1_overflow
+1989  CECC 32 5A CD         ld (p1_control),a
+1990  CECF 18 27            jr change_input_end
+1991  CED1              no_change_inp_1
+1992  CED1 CB 4F            bit 1,a
+1993  CED3 20 0F            jr nz,no_change_inp_2
+1994  CED5 3A 5B CD         ld a,(p2_control)
+1995  CED8 3C               inc a
+1996  CED9 FE 07            cp 7
+1997  CEDB 38 02            jr c,no_p2_overflow
+1998  CEDD 3E 00            ld a,0
+1999  CEDF              no_p2_overflow
+2000  CEDF 32 5B CD         ld (p2_control),a
+2001  CEE2 18 14            jr change_input_end
+2002  CEE4              no_change_inp_2
+2003  CEE4 CB 57            bit 2,a
+2004  CEE6 20 07            jr nz,no_redef_1
+2005  CEE8 3E 02            ld a,2
+2006  CEEA 32 8C CD         ld (control_status),a
+2007  CEED 18 09            jr change_input_end
+2008  CEEF              no_redef_1
+2009  CEEF CB 5F            bit 3,a
+2010  CEF1 20 05            jr nz,change_input_end
+2011  CEF3 3E 03            ld a,3
+2012  CEF5 32 8C CD         ld (control_status),a
+2013  CEF8              change_input_end
+2014  CEF8 3E 01            ld a,1
+2015  CEFA 32 EE D0         ld (control_timer),a
+2016  CEFD              change_input_end_2
+2017  CEFD 01 FE EF         ld bc,$EFFE         ;6 to 0
+2018  CF00 ED 78            in a,(c)            ;read val
+2019  CF02 E6 1F            and $1f
+2020  CF04 CB 47            bit 0,a             ;exit control changes
+2021  CF06 28 04            jr z,control_change_exit
+2022  CF08 CD 1E CE         call control_show_info
+2023  CF0B C9               ret
+2024  CF0C
+2025  CF0C              control_change_exit
+2026  CF0C 3E 00            ld a,0
+2027  CF0E 32 8C CD         ld (control_status),a
+2028  CF11 CD B3 D5         call slave_layer2_clear_screen
+2029  CF14 ED 91 14 00      nextreg $14,$00			   ;change layer 2 mask
+2030  CF18                  ;change Next Ports for correct controller
+2031  CF18 01 3B 24         ld bc,$243b         ;select peripheral 1 setting
+2032  CF1B 3E 05            ld a,$05
+2033  CF1D ED 79            out (c),a
+2034  CF1F 01 3B 25         ld bc,$253b
+2035  CF22                ;  break
+2036  CF22 3A 5A CD         ld a,(p1_control)
+2037  CF25 FE 02            cp 2
+2038  CF27 38 0C            jr c,changep1tokemp1
+2039  CF29 FE 04            cp 4
+2040  CF2B 38 12            jr c,changep1tokemp2
+2041  CF2D 28 1A            jr z,changep1tomd1
+2042  CF2F FE 05            cp 5
+2043  CF31 28 20            jr z,changep1tomd2
+2044  CF33 18 26            jr control_change_p2_settings
+2045  CF35              changep1tokemp1
+2046  CF35 ED 78            in a,(c)
+2047  CF37 E6 37            and %00110111
+2048  CF39 F6 40            or  %01000000
+2049  CF3B ED 79            out (c),a
+2050  CF3D 18 1C            jr control_change_p2_settings
+2051  CF3F              changep1tokemp2
+2052  CF3F ED 78            in a,(c)
+2053  CF41 E6 37            and %00110111
+2054  CF43 F6 08            or  %00001000
+2055  CF45 ED 79            out (c),a
+2056  CF47 18 12            jr control_change_p2_settings
+2057  CF49              changep1tomd1
+2058  CF49 ED 78            in a,(c)
+2059  CF4B E6 37            and %00110111
+2060  CF4D F6 48            or  %01001000
+2061  CF4F ED 79            out (c),a
+2062  CF51 18 08            jr control_change_p2_settings
+2063  CF53              changep1tomd2
+2064  CF53 ED 78            in a,(c)
+2065  CF55 E6 37            and %00110111
+2066  CF57 F6 88            or  %10001000
+2067  CF59 ED 79            out (c),a
+2068  CF5B              control_change_p2_settings
+2069  CF5B 3A 5B CD         ld a,(p2_control)
+2070  CF5E FE 02            cp 2
+2071  CF60 38 0C            jr c,changep2tokemp1
+2072  CF62 FE 04            cp 4
+2073  CF64 38 12            jr c,changep2tokemp2
+2074  CF66 28 1A            jr z,changep2tomd1
+2075  CF68 FE 05            cp 5
+2076  CF6A 28 20            jr z,changep2tomd2
+2077  CF6C 18 26            jr control_change_final_exit
+2078  CF6E              changep2tokemp1
+2079  CF6E ED 78            in a,(c)
+2080  CF70 E6 CD            and %11001101
+2081  CF72 F6 10            or  %00010000
+2082  CF74 ED 79            out (c),a
+2083  CF76 18 1C            jr control_change_final_exit
+2084  CF78              changep2tokemp2
+2085  CF78 ED 78            in a,(c)
+2086  CF7A E6 CD            and %11001101
+2087  CF7C F6 02            or  %00000010
+2088  CF7E ED 79            out (c),a
+2089  CF80 18 12            jr control_change_final_exit
+2090  CF82              changep2tomd1
+2091  CF82 ED 78            in a,(c)
+2092  CF84 E6 CD            and %11001101
+2093  CF86 F6 12            or  %00010010
+2094  CF88 ED 79            out (c),a
+2095  CF8A 18 08            jr control_change_final_exit
+2096  CF8C              changep2tomd2
+2097  CF8C ED 78            in a,(c)
+2098  CF8E E6 CD            and %11001101
+2099  CF90 F6 22            or  %00100010
+2100  CF92 ED 79            out (c),a
+2101  CF94              control_change_final_exit
+2102  CF94 C9               ret
+2103  CF95
+2104  CF95              control_redefine
+2105  CF95 3A EE D0         ld a,(control_timer)
+2106  CF98 FE 00            cp 0
+2107  CF9A 28 07            jr z,control_redefine_1
+2108  CF9C 3C               inc a
+2109  CF9D E6 0F            and $0f
+2110  CF9F 32 EE D0         ld (control_timer),a
+2111  CFA2 C9               ret
+2112  CFA3              control_redefine_1
+2113  CFA3 CD 1E CE         call control_show_info
+2114  CFA6                  ;control status
+2115  CFA6                  ;2 = refefine P1 keys
+2116  CFA6                  ;3 = refefine P2 keys
+2117  CFA6 3A 8C CD         ld a,(control_status)
+2118  CFA9 FE 03            cp 3
+2119  CFAB 28 15            jr z,control_redefine_p2
+2120  CFAD
+2121  CFAD 21 E1 D1         ld   hl,control_config_data_11
+2122  CFB0 11 30 60         ld   de,$6030
+2123  CFB3 0E 40            ld   c,$40
+2124  CFB5 CD 45 D5     	call Slave_Write_Layer2_Text
+2125  CFB8
+2126  CFB8 11 50 70         ld de,$7050
+2127  CFBB 21 5C CD         ld hl,p1_key_left
+2128  CFBE CD D7 CF         call control_get_new_keys
+2129  CFC1
+2130  CFC1 C9               ret
+2131  CFC2
+2132  CFC2              control_redefine_p2
+2133  CFC2
+2134  CFC2 21 F6 D1         ld   hl,control_config_data_12
+2135  CFC5 11 30 60         ld   de,$6030
+2136  CFC8 0E 40            ld   c,$40
+2137  CFCA CD 45 D5     	call Slave_Write_Layer2_Text
+2138  CFCD
+2139  CFCD 11 D8 70         ld de,$70D8
+2140  CFD0 21 74 CD         ld hl,p2_key_left
+2141  CFD3 CD D7 CF         call control_get_new_keys
+2142  CFD6
+2143  CFD6 C9               ret
+2144  CFD7
+2145  CFD7              control_get_new_keys
+2146  CFD7 E5               push hl
+2147  CFD8 ~             /*   ld a,(control_current_key)
+2148  CFD8 ~                ld b,$10
+2149  CFD8 ~                call call_0DB1  ;a * b into HL
+2150  CFD8 ~                ld h,l
+2151  CFD8 ~                ld l,0
+2152  CFD8 ~                add hl,de
+2153  CFD8 ~                ex de,hl
+2154  CFD8 ~                ld   hl,control_config_data_13
+2155  CFD8 ~                ld   c,$00
+2156  CFD8 ~            	call Slave_Write_Layer2_Text*/
+2157  CFD8 3A ED D0         ld a,(control_current_key)
+2158  CFDB 06 06            ld b,6          ;size of structure entry
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(2159): error: Label not found: call_0DB1
+2159  CFDD CD 00 00         call call_0DB1  ;a * b into HL	;80 bytes per row
+2160  CFE0 C1               pop bc          ;retrieve control structure start into BC
+2161  CFE1 09               add hl,bc       ;structure offset into HL
+2162  CFE2 E5               push hl
+2163  CFE3 23               inc hl
+2164  CFE4 23               inc hl
+2165  CFE5 23               inc hl
+2166  CFE6 23               inc hl
+2167  CFE7 3E 3F            ld a,'?'
+2168  CFE9 77               ld (hl),a
+2169  CFEA 23               inc hl
+2170  CFEB 3E 20            ld a,' '
+2171  CFED 77               ld (hl),a
+2172  CFEE E1               pop hl
+2173  CFEF
+2174  CFEF
+2175  CFEF CD F3 CF         call check_for_valid_key
+2176  CFF2 C9               ret
+2177  CFF3
+2178  CFF3              check_for_valid_key
+2179  CFF3 01 FE FE         ld bc,$FEFE
+2180  CFF6 ED 78            in a,(c)
+2181  CFF8 E6 1F            and $1f
+2182  CFFA FE 1F            cp $1f
+2183  CFFC 20 4E            jr nz,control_store_key
+2184  CFFE 01 FE FD         ld bc,$FDFE
+2185  D001 ED 78            in a,(c)
+2186  D003 E6 1F            and $1f
+2187  D005 FE 1F            cp $1f
+2188  D007 20 43            jr nz,control_store_key
+2189  D009 01 FE FB         ld bc,$FBFE
+2190  D00C ED 78            in a,(c)
+2191  D00E E6 1F            and $1f
+2192  D010 FE 1F            cp $1f
+2193  D012 20 38            jr nz,control_store_key
+2194  D014 01 FE F7         ld bc,$F7FE
+2195  D017 ED 78            in a,(c)
+2196  D019 E6 1F            and $1f
+2197  D01B FE 1F            cp $1f
+2198  D01D 20 2D            jr nz,control_store_key
+2199  D01F 01 FE EF         ld bc,$EFFE
+2200  D022 ED 78            in a,(c)
+2201  D024 E6 1F            and $1f
+2202  D026 FE 1F            cp $1f
+2203  D028 20 22            jr nz,control_store_key
+2204  D02A 01 FE DF         ld bc,$DFFE
+2205  D02D ED 78            in a,(c)
+2206  D02F E6 1F            and $1f
+2207  D031 FE 1F            cp $1f
+2208  D033 20 17            jr nz,control_store_key
+2209  D035 01 FE BF         ld bc,$BFFE
+2210  D038 ED 78            in a,(c)
+2211  D03A E6 1F            and $1f
+2212  D03C FE 1F            cp $1f
+2213  D03E 20 0C            jr nz,control_store_key
+2214  D040 01 FE 7F         ld bc,$7FFE
+2215  D043 ED 78            in a,(c)
+2216  D045 E6 1F            and $1f
+2217  D047 FE 1F            cp $1f
+2218  D049 20 01            jr nz,control_store_key
+2219  D04B C9               ret
+2220  D04C
+2221  D04C              control_store_key
+2222  D04C 71               ld (hl),c
+2223  D04D 23               inc hl
+2224  D04E 70               ld (hl),b
+2225  D04F 23               inc hl
+2226  D050 77               ld (hl),a
+2227  D051 23               inc hl
+2228  D052 23               inc hl
+2229  D053 E5               push hl
+2230  D054 CD 77 D0         call control_lookup_key_char
+2231  D057 E1               pop hl
+2232  D058 72               ld (hl),d
+2233  D059 23               inc hl
+2234  D05A 73               ld (hl),e
+2235  D05B 3E 01            ld a,1
+2236  D05D 32 EE D0         ld (control_timer),a
+2237  D060 3A ED D0         ld a,(control_current_key)
+2238  D063 3C               inc a
+2239  D064 32 ED D0         ld (control_current_key),a
+2240  D067 FE 04            cp 4
+2241  D069 28 01            jr z,control_redefine_finished
+2242  D06B C9               ret
+2243  D06C
+2244  D06C              control_redefine_finished
+2245  D06C 3E 00            ld a,0
+2246  D06E 32 ED D0         ld (control_current_key),a
+2247  D071 3E 01            ld a,1
+2248  D073 32 8C CD         ld (control_status),a
+2249  D076 C9               ret
+2250  D077
+2251  D077              control_lookup_key_char
+2252  D077                  ;xor $1f     ;get value of key pressed
+2253  D077 5F               ld e,a
+2254  D078 50               ld d,b
+2255  D079 3E 00            ld a,0
+2256  D07B              control_lookup_loop_1
+2257  D07B CB 08            rrc b
+2258  D07D 30 03            jr nc,control_lookup_found_row
+2259  D07F 3C               inc a
+2260  D080 18 F9            jr control_lookup_loop_1
+2261  D082              control_lookup_found_row
+2262  D082                  ;a now has the key row num
+2263  D082 06 0A            ld b,10
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(2264): error: Label not found: call_0DB1
+2264  D084 CD 00 00         call call_0DB1  ;a * b into HL
+2265  D087 3E 00            ld a,0
+2266  D089              control_lookup_loop_2
+2267  D089 CB 0B            rrc e
+2268  D08B 30 03            jr nc,control_lookup_found_col
+2269  D08D 3C               inc a
+2270  D08E 18 F9            jr control_lookup_loop_2
+2271  D090              control_lookup_found_col
+2272  D090 87               add a,a
+2273  D091 85               add a,l
+2274  D092                  ;now a contains offset into char table
+2275  D092 21 9D D0         ld hl,control_char_table
+2276  D095 5F               ld e,a
+2277  D096 16 00            ld d,0
+2278  D098 19               add hl,de
+2279  D099 56               ld d,(hl)
+2280  D09A 23               inc hl
+2281  D09B 5E               ld e,(hl)
+2282  D09C C9               ret
+2283  D09D
+2284  D09D              control_char_table
+2285  D09D 43 53 5A 20      BYTE "CSZ X C V "
+2285  D0A1 58 20 43 20
+2285  D0A5 56 20
+2286  D0A7 41 20 53 20      BYTE "A S D F G "
+2286  D0AB 44 20 46 20
+2286  D0AF 47 20
+2287  D0B1 51 20 57 20      BYTE "Q W E R T "
+2287  D0B5 45 20 52 20
+2287  D0B9 54 20
+2288  D0BB 31 20 32 20      BYTE "1 2 3 4 5 "
+2288  D0BF 33 20 34 20
+2288  D0C3 35 20
+2289  D0C5 30 20 39 20      BYTE "0 9 8 7 6 "
+2289  D0C9 38 20 37 20
+2289  D0CD 36 20
+2290  D0CF 50 20 4F 20      BYTE "P O I U Y "
+2290  D0D3 49 20 55 20
+2290  D0D7 59 20
+2291  D0D9 45 4E 4C 20      BYTE "ENL K J H "
+2291  D0DD 4B 20 4A 20
+2291  D0E1 48 20
+2292  D0E3 53 50 53 53      BYTE "SPSSM N B "
+2292  D0E7 4D 20 4E 20
+2292  D0EB 42 20
+2293  D0ED
+2294  D0ED              control_current_key
+2295  D0ED 00               BYTE 0
+2296  D0EE
+2297  D0EE              control_timer
+2298  D0EE 00               BYTE 0
+2299  D0EF
+2300  D0EF              control_config_data_1
+2301  D0EF 12 43 4F 4E      BYTE $12,"CONFIGURE CONTROLS"
+2301  D0F3 46 49 47 55
+2301  D0F7 52 45 20 43
+2301  D0FB 4F 4E 54 52
+2301  D0FF 4F 4C 53
+2302  D102              control_config_data_2
+2303  D102 08 50 4C 41      BYTE $8,"PLAYER 1"
+2303  D106 59 45 52 20
+2303  D10A 31
+2304  D10B              control_config_data_3
+2305  D10B 08 50 4C 41      BYTE $8,"PLAYER 2"
+2305  D10F 59 45 52 20
+2305  D113 32
+2306  D114              control_config_data_4
+2307  D114 0F 4A 4F 59      BYTE $0f,"JOY A  1 BUTTON"
+2307  D118 20 41 20 20
+2307  D11C 31 20 42 55
+2307  D120 54 54 4F 4E
+2308  D124 0F 4A 4F 59      BYTE $0f,"JOY A  2 BUTTON"
+2308  D128 20 41 20 20
+2308  D12C 32 20 42 55
+2308  D130 54 54 4F 4E
+2309  D134 0F 4A 4F 59      BYTE $0f,"JOY B  1 BUTTON"
+2309  D138 20 42 20 20
+2309  D13C 31 20 42 55
+2309  D140 54 54 4F 4E
+2310  D144 0F 4A 4F 59      BYTE $0f,"JOY B  2 BUTTON"
+2310  D148 20 42 20 20
+2310  D14C 32 20 42 55
+2310  D150 54 54 4F 4E
+2311  D154 0F 4D 45 47      BYTE $0f,"MEGADRIVE PAD A"
+2311  D158 41 44 52 49
+2311  D15C 56 45 20 50
+2311  D160 41 44 20 41
+2312  D164 0F 4D 45 47      BYTE $0f,"MEGADRIVE PAD B"
+2312  D168 41 44 52 49
+2312  D16C 56 45 20 50
+2312  D170 41 44 20 42
+2313  D174 0F 20 20 20      BYTE $0f,"   KEYBOARD    "
+2313  D178 4B 45 59 42
+2313  D17C 4F 41 52 44
+2313  D180 20 20 20 20
+2314  D184
+2315  D184              control_config_data_5
+2316  D184 14 20 20 4B      BYTE $14,"  KEY DEFINITIONS   "
+2316  D188 45 59 20 44
+2316  D18C 45 46 49 4E
+2316  D190 49 54 49 4F
+2316  D194 4E 53 20 20
+2316  D198 20
+2317  D199              control_config_data_6
+2318  D199 05 4C 45 46      BYTE $05,"LEFT "
+2318  D19D 54 20
+2319  D19F 05 52 49 47      BYTE $05,"RIGHT"
+2319  D1A3 48 54
+2320  D1A5 05 4A 55 4D      BYTE $05,"JUMP "
+2320  D1A9 50 20
+2321  D1AB 05 46 49 52      BYTE $05,"FIRE "
+2321  D1AF 45 20
+2322  D1B1
+2323  D1B1              control_config_data_7
+2324  D1B1 0B 31 20 54      BYTE $0b,"1 TO CHANGE"
+2324  D1B5 4F 20 43 48
+2324  D1B9 41 4E 47 45
+2325  D1BD              control_config_data_8
+2326  D1BD 0B 32 20 54      BYTE $0b,"2 TO CHANGE"
+2326  D1C1 4F 20 43 48
+2326  D1C5 41 4E 47 45
+2327  D1C9              control_config_data_9
+2328  D1C9 0B 33 20 54      BYTE $0b,"3 TO CHANGE"
+2328  D1CD 4F 20 43 48
+2328  D1D1 41 4E 47 45
+2329  D1D5              control_config_data_10
+2330  D1D5 0B 34 20 54      BYTE $0b,"4 TO CHANGE"
+2330  D1D9 4F 20 43 48
+2330  D1DD 41 4E 47 45
+2331  D1E1
+2332  D1E1              control_config_data_11
+2333  D1E1 14 50 4C 41      BYTE $14,"PLAYER 1 SELECT KEYS"
+2333  D1E5 59 45 52 20
+2333  D1E9 31 20 53 45
+2333  D1ED 4C 45 43 54
+2333  D1F1 20 4B 45 59
+2333  D1F5 53
+2334  D1F6              control_config_data_12
+2335  D1F6 14 50 4C 41      BYTE $14,"PLAYER 2 SELECT KEYS"
+2335  D1FA 59 45 52 20
+2335  D1FE 32 20 53 45
+2335  D202 4C 45 43 54
+2335  D206 20 4B 45 59
+2335  D20A 53
+2336  D20B
+2337  D20B              configure_options
+2338  D20B 21 DA D3         ld   hl,option_data_1
+2339  D20E 11 48 08         ld   de,$0848
+2340  D211 0E 40            ld   c,$40
+2341  D213 CD 45 D5         call Slave_Write_Layer2_Text
+2342  D216
+2343  D216 21 E9 D3         ld   hl,option_data_2
+2344  D219 11 18 28         ld   de,$2818
+2345  D21C 0E 20            ld   c,$20
+2346  D21E CD 45 D5         call Slave_Write_Layer2_Text
+2347  D221
+2348  D221 21 03 D4         ld   hl,option_data_3
+2349  D224 11 08 40         ld   de,$4008
+2350  D227 01 00 05         ld   bc,$0500
+2351  D22A                  ;ld   bc,$0400
+2352  D22A              configure_options_loop_1
+2353  D22A C5               push bc
+2354  D22B E5               push hl
+2355  D22C D5               push de
+2356  D22D CD 45 D5         call Slave_Write_Layer2_Text
+2357  D230 E1               pop hl
+2358  D231 01 00 10         ld bc,$1000
+2359  D234 09               add hl,bc
+2360  D235 EB               ex de,hl
+2361  D236 E1               pop hl
+2362  D237 01 10 00         ld bc,$0010
+2363  D23A 09               add hl,bc
+2364  D23B C1               pop bc
+2365  D23C 10 EC            djnz configure_options_loop_1
+2366  D23E
+2367  D23E 21 53 D4         ld   hl,option_data_4
+2368  D241 11 40 98         ld   de,$9840
+2369  D244 0E 40            ld   c,$40
+2370  D246 CD 45 D5         call Slave_Write_Layer2_Text
+2371  D249
+2372  D249 CD 88 D3         call get_dip_values
+2373  D24C
+2374  D24C CD 5E D2         call options_show_values
+2375  D24F
+2376  D24F ED 91 14 E0      nextreg $14,$e0			   ;change layer 2 mask
+2377  D253 3E 08            ld a,8
+2378  D255 32 8C CD         ld (control_status),a
+2379  D258 3E 01            ld a,1
+2380  D25A 32 EE D0         ld (control_timer),a
+2381  D25D C9               ret
+2382  D25E
+2383  D25E              options_show_values
+2384  D25E 3A D6 D3         ld a,(option_difficulty)
+2385  D261 06 0A            ld b,$0A
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(2386): error: Label not found: call_0DB1
+2386  D263 CD 00 00         call call_0DB1  ;a * b into HL	;80 bytes per row
+2387  D266 11 63 D4         ld de,option_data_5
+2388  D269 19               add hl,de
+2389  D26A 11 88 40         ld   de,$4088
+2390  D26D 0E 50            ld   c,$50
+2391  D26F CD 45 D5     	call Slave_Write_Layer2_Text
+2392  D272
+2393  D272 3A D7 D3         ld a,(option_bonus)
+2394  D275 06 0E            ld b,$0e
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(2395): error: Label not found: call_0DB1
+2395  D277 CD 00 00         call call_0DB1  ;a * b into HL	;80 bytes per row
+2396  D27A 11 8B D4         ld de,option_data_6
+2397  D27D 19               add hl,de
+2398  D27E 11 88 50         ld   de,$5088
+2399  D281 0E 50            ld   c,$50
+2400  D283 CD 45 D5     	call Slave_Write_Layer2_Text
+2401  D286
+2402  D286 3A D8 D3         ld a,(option_lives)
+2403  D289 06 02            ld b,$02
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(2404): error: Label not found: call_0DB1
+2404  D28B CD 00 00         call call_0DB1  ;a * b into HL	;80 bytes per row
+2405  D28E 11 C3 D4         ld de,option_data_7
+2406  D291 19               add hl,de
+2407  D292 11 88 60         ld   de,$6088
+2408  D295 0E 50            ld   c,$50
+2409  D297 CD 45 D5     	call Slave_Write_Layer2_Text
+2410  D29A
+2411  D29A ~                /*ld a,(option_speed)
+2412  D29A ~                ld b,$0a
+2413  D29A ~                call call_0DB1  ;a * b into HL	;80 bytes per row
+2414  D29A ~                ld de,option_data_8
+2415  D29A ~                add hl,de
+2416  D29A ~                ld   de,$7088
+2417  D29A ~                ld   c,$50
+2418  D29A ~            	call Slave_Write_Layer2_Text
+2419  D29A ~            */
+2420  D29A 01 3B 24         ld bc,$243b
+2421  D29D 3E 09            ld a,09
+2422  D29F ED 79            out (c),a    ;Select register #09  (peripheral 4)
+2423  D2A1 01 3B 25         ld bc,$253b
+2424  D2A4 ED 78            in a,(c)
+2425  D2A6 E6 03            and $03
+2426  D2A8 06 05            ld b,$05
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(2427): error: Label not found: call_0DB1
+2427  D2AA CD 00 00         call call_0DB1  ;a * b into HL	;80 bytes per row
+2428  D2AD 11 D5 D4         ld de,option_data_11
+2429  D2B0 19               add hl,de
+2430  D2B1 11 88 80         ld   de,$8088
+2431  D2B4 0E 50            ld   c,$50
+2432  D2B6 CD 45 D5     	call Slave_Write_Layer2_Text
+2433  D2B9
+2434  D2B9 01 3B 24         ld bc,$243b
+2435  D2BC 3E 05            ld a,05
+2436  D2BE ED 79            out (c),a    ;Select register #05  (peripheral 1)
+2437  D2C0 01 3B 25         ld bc,$253b
+2438  D2C3 ED 78            in a,(c)
+2439  D2C5 E6 04        	and $04		;check which refresh rate is currently used
+2440  D2C7 28 0C            jr z,option_50hz
+2441  D2C9 21 D0 D4         ld hl,option_data_10
+2442  D2CC 11 88 70         ld   de,$7088
+2443  D2CF 0E 50            ld   c,$50
+2444  D2D1 CD 45 D5     	call Slave_Write_Layer2_Text
+2445  D2D4
+2446  D2D4 C9               ret
+2447  D2D5              option_50hz
+2448  D2D5 21 CB D4         ld hl,option_data_9
+2449  D2D8 11 88 70         ld   de,$7088
+2450  D2DB 0E 50            ld   c,$50
+2451  D2DD CD 45 D5     	call Slave_Write_Layer2_Text
+2452  D2E0 C9               ret
+2453  D2E1
+2454  D2E1
+2455  D2E1
+2456  D2E1              change_options
+2457  D2E1                  ;break
+2458  D2E1 3A EE D0         ld a,(control_timer)
+2459  D2E4 FE 00            cp 0
+2460  D2E6 28 07            jr z,change_options_1
+2461  D2E8 3C               inc a
+2462  D2E9 E6 0F            and $0f
+2463  D2EB 32 EE D0         ld (control_timer),a
+2464  D2EE C9               ret
+2465  D2EF              change_options_1
+2466  D2EF 01 FE F7         ld bc,$F7FE         ;1 to 5
+2467  D2F2 ED 78            in a,(c)            ;read val
+2468  D2F4 E6 1F            and $1f
+2469  D2F6 FE 1F            cp $1f
+2470  D2F8 28 6F            jr z,options_input_end_2
+2471  D2FA CB 47            bit 0,a
+2472  D2FC 20 0F            jr nz,no_change_diff
+2473  D2FE 3A D6 D3         ld a,(option_difficulty)
+2474  D301 3C               inc a
+2475  D302 FE 04            cp 4
+2476  D304 38 02            jr c,no_diff_overflow
+2477  D306 3E 00            ld a,0
+2478  D308              no_diff_overflow
+2479  D308 32 D6 D3         ld (option_difficulty),a
+2480  D30B 18 57            jr options_input_end
+2481  D30D              no_change_diff
+2482  D30D CB 4F            bit 1,a
+2483  D30F 20 0F            jr nz,no_change_bonus
+2484  D311 3A D7 D3         ld a,(option_bonus)
+2485  D314 3C               inc a
+2486  D315 FE 04            cp 4
+2487  D317 38 02            jr c,no_bonus_overflow
+2488  D319 3E 00            ld a,0
+2489  D31B              no_bonus_overflow
+2490  D31B 32 D7 D3         ld (option_bonus),a
+2491  D31E 18 44            jr options_input_end
+2492  D320              no_change_bonus
+2493  D320 CB 57            bit 2,a
+2494  D322 20 0F            jr nz,no_change_lives
+2495  D324 3A D8 D3         ld a,(option_lives)
+2496  D327 3C               inc a
+2497  D328 FE 04            cp 4
+2498  D32A 38 02            jr c,no_lives_overflow
+2499  D32C 3E 00            ld a,0
+2500  D32E              no_lives_overflow
+2501  D32E 32 D8 D3         ld (option_lives),a
+2502  D331 18 31            jr options_input_end
+2503  D333              no_change_lives
+2504  D333 ~            /*    bit 3,a
+2505  D333 ~                jr nz,no_change_speed
+2506  D333 ~                ld a,(option_speed)
+2507  D333 ~                inc a
+2508  D333 ~                cp 4
+2509  D333 ~                jr c,no_speed_overflow
+2510  D333 ~                ld a,0
+2511  D333 ~            no_speed_overflow
+2512  D333 ~                ld (option_speed),a
+2513  D333 ~                jr options_input_end
+2514  D333 ~            no_change_speed*/
+2515  D333 CB 5F            bit 3,a
+2516  D335 20 12            jr nz,options_no_freq
+2517  D337 01 3B 24         ld bc,$243b
+2518  D33A 3E 05            ld a,05
+2519  D33C ED 79            out (c),a    ;Select register #05  (peripheral 1)
+2520  D33E 01 3B 25         ld bc,$253b
+2521  D341 ED 78            in a,(c)
+2522  D343 EE 04            xor 4
+2523  D345 ED 79            out (c),a
+2524  D347 18 1B            jr options_input_end
+2525  D349              options_no_freq
+2526  D349 CB 67            bit 4,a
+2527  D34B 20 17            jr nz,options_input_end
+2528  D34D 01 3B 24         ld bc,$243b
+2529  D350 3E 09            ld a,09
+2530  D352 ED 79            out (c),a    ;Select register #09  (peripheral 4)
+2531  D354 01 3B 25         ld bc,$253b
+2532  D357 ED 78            in a,(c)
+2533  D359 57               ld d,a
+2534  D35A E6 FC            and $FC
+2535  D35C 5F               ld e,a
+2536  D35D 7A               ld a,d
+2537  D35E 3C               inc a
+2538  D35F E6 03            and $03
+2539  D361 B3               or e
+2540  D362 ED 79            out (c),a
+2541  D364              options_input_end
+2542  D364 3E 01            ld a,1
+2543  D366 32 EE D0         ld (control_timer),a
+2544  D369              options_input_end_2
+2545  D369 01 FE EF         ld bc,$EFFE         ;6 to 0
+2546  D36C ED 78            in a,(c)            ;read val
+2547  D36E E6 1F            and $1f
+2548  D370 CB 47            bit 0,a             ;exit control changes
+2549  D372 28 04            jr z,change_options_exit
+2550  D374 CD 5E D2         call options_show_values
+2551  D377 C9               ret
+2552  D378
+2553  D378              change_options_exit
+2554  D378 3E 00            ld a,0
+2555  D37A 32 8C CD         ld (control_status),a
+2556  D37D CD B3 D5         call slave_layer2_clear_screen
+2557  D380 ED 91 14 00      nextreg $14,$00			   ;change layer 2 mask
+2558  D384 CD B7 D3         call set_dip_values
+2559  D387 C9               ret
+2560  D388
+2561  D388              get_dip_values
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(2562): error: Label not found: l_ff01
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(2562): warning: Accessing low memory address 0x0000, is it ok?: ld a,(l_ff01)
+2562  D388 3A 00 00         ld a,(l_ff01)
+2563  D38B E6 03            and $03
+2564  D38D 32 D6 D3         ld (option_difficulty),a
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(2565): error: Label not found: l_ff01
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(2565): warning: Accessing low memory address 0x0000, is it ok?: ld a,(l_ff01)
+2565  D390 3A 00 00         ld a,(l_ff01)
+2566  D393 E6 0C            and $0c
+2567  D395 CB 3F            srl a
+2568  D397 CB 3F            srl a
+2569  D399 32 D7 D3         ld (option_bonus),a
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(2570): error: Label not found: l_ff01
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(2570): warning: Accessing low memory address 0x0000, is it ok?: ld a,(l_ff01)
+2570  D39C 3A 00 00         ld a,(l_ff01)
+2571  D39F E6 30            and $30
+2572  D3A1 CB 3F            srl a
+2573  D3A3 CB 3F            srl a
+2574  D3A5 CB 3F            srl a
+2575  D3A7 CB 3F            srl a
+2576  D3A9 32 D8 D3         ld (option_lives),a
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(2577): error: Label not found: l_ff01
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(2577): warning: Accessing low memory address 0x0000, is it ok?: ld a,(l_ff01)
+2577  D3AC 3A 00 00         ld a,(l_ff01)
+2578  D3AF E6 C0            and $c0
+2579  D3B1 07               rlca
+2580  D3B2 07               rlca
+2581  D3B3 32 D9 D3         ld (option_speed),a
+2582  D3B6 C9               ret
+2583  D3B7
+2584  D3B7              set_dip_values
+2585  D3B7                  ;break
+2586  D3B7                  ;ld a,(option_speed)
+2587  D3B7                  ;rrca        ;move to top 2 bits
+2588  D3B7                  ;rrca
+2589  D3B7                  ;ld b,a
+2590  D3B7 3A D8 D3         ld a,(option_lives)
+2591  D3BA CB 27            sla a
+2592  D3BC CB 27            sla a
+2593  D3BE CB 27            sla a
+2594  D3C0 CB 27            sla a
+2595  D3C2                  ;or b
+2596  D3C2 47               ld b,a
+2597  D3C3 3A D7 D3         ld a,(option_bonus)
+2598  D3C6 CB 27            sla a
+2599  D3C8 CB 27            sla a
+2600  D3CA B0               or b
+2601  D3CB 47               ld b,a
+2602  D3CC 3A D6 D3         ld a,(option_difficulty)
+2603  D3CF B0               or b
+2604  D3D0 F6 40            or %01000000
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(2605): error: Label not found: l_ff01
+2605  D3D2 32 00 00         ld (l_ff01),a
+2606  D3D5 C9               ret
+2607  D3D6
+2608  D3D6
+2609  D3D6              option_difficulty
+2610  D3D6 00               BYTE $00
+2611  D3D7              option_bonus
+2612  D3D7 00               BYTE $00
+2613  D3D8              option_lives
+2614  D3D8 00               BYTE $00
+2615  D3D9              option_speed
+2616  D3D9 00               BYTE $00
+2617  D3DA
+2618  D3DA              option_data_1
+2619  D3DA 0E 53 45 4C      BYTE $0e,"SELECT OPTIONS"
+2619  D3DE 45 43 54 20
+2619  D3E2 4F 50 54 49
+2619  D3E6 4F 4E 53
+2620  D3E9
+2621  D3E9              option_data_2
+2622  D3E9 19 55 53 45      BYTE $19,"USE NUMBER KEYS TO CHANGE"
+2622  D3ED 20 4E 55 4D
+2622  D3F1 42 45 52 20
+2622  D3F5 4B 45 59 53
+2622  D3F9 20 54 4F 20
+2622  D3FD 43 48 41 4E
+2622  D401 47 45
+2623  D403
+2624  D403              option_data_3
+2625  D403 0F 31 2E 20      BYTE $0f,"1. DIFFICULTY  "
+2625  D407 44 49 46 46
+2625  D40B 49 43 55 4C
+2625  D40F 54 59 20 20
+2626  D413 0F 32 2E 20      BYTE $0f,"2. BONUS LIFE  "
+2626  D417 42 4F 4E 55
+2626  D41B 53 20 4C 49
+2626  D41F 46 45 20 20
+2627  D423 0F 33 2E 20      BYTE $0f,"3. NUMBER LIVES"
+2627  D427 4E 55 4D 42
+2627  D42B 45 52 20 4C
+2627  D42F 49 56 45 53
+2628  D433 0F 34 2E 20      BYTE $0f,"4. REFRESH RATE"
+2628  D437 52 45 46 52
+2628  D43B 45 53 48 20
+2628  D43F 52 41 54 45
+2629  D443 0F 35 2E 20      BYTE $0f,"5. SCANLINES   "
+2629  D447 53 43 41 4E
+2629  D44B 4C 49 4E 45
+2629  D44F 53 20 20 20
+2630  D453
+2631  D453              option_data_4
+2632  D453 0F 50 52 45      BYTE $0f,"PRESS 0 TO EXIT"
+2632  D457 53 53 20 30
+2632  D45B 20 54 4F 20
+2632  D45F 45 58 49 54
+2633  D463
+2634  D463              option_data_5
+2635  D463 09 56 45 52      BYTE $09,"VERY HARD"
+2635  D467 59 20 48 41
+2635  D46B 52 44
+2636  D46D 09 48 41 52      BYTE $09,"HARD     "
+2636  D471 44 20 20 20
+2636  D475 20 20
+2637  D477 09 45 41 53      BYTE $09,"EASY     "
+2637  D47B 59 20 20 20
+2637  D47F 20 20
+2638  D481 09 4E 4F 52      BYTE $09,"NORMAL   "
+2638  D485 4D 41 4C 20
+2638  D489 20 20
+2639  D48B
+2640  D48B              option_data_6
+2641  D48B 0D 35 30 4B      BYTE $0d,"50K 250K 500K"
+2641  D48F 20 32 35 30
+2641  D493 4B 20 35 30
+2641  D497 30 4B
+2642  D499 0D 34 30 4B      BYTE $0d,"40K 200K 500K"
+2642  D49D 20 32 30 30
+2642  D4A1 4B 20 35 30
+2642  D4A5 30 4B
+2643  D4A7 0D 32 30 4B      BYTE $0d,"20K 80K 300K "
+2643  D4AB 20 38 30 4B
+2643  D4AF 20 33 30 30
+2643  D4B3 4B 20
+2644  D4B5 0D 33 30 4B      BYTE $0d,"30K 100K 400K"
+2644  D4B9 20 31 30 30
+2644  D4BD 4B 20 34 30
+2644  D4C1 30 4B
+2645  D4C3
+2646  D4C3              option_data_7
+2647  D4C3 01 32            BYTE $01,"2"
+2648  D4C5 01 31            BYTE $01,"1"
+2649  D4C7 01 35            BYTE $01,"5"
+2650  D4C9 01 33            BYTE $01,"3"
+2651  D4CB
+2652  D4CB ~            /*option_data_8
+2653  D4CB ~                BYTE $09,"NORMAL   "
+2654  D4CB ~                BYTE $09,"MEDIUM   "
+2655  D4CB ~                BYTE $09,"HIGH     "
+2656  D4CB ~                BYTE $09,"VERY HIGH"
+2657  D4CB ~            */
+2658  D4CB              option_data_9
+2659  D4CB 04 35 30 48      BYTE $04,"50HZ"
+2659  D4CF 5A
+2660  D4D0
+2661  D4D0              option_data_10
+2662  D4D0 04 36 30 48      BYTE $04,"60HZ"
+2662  D4D4 5A
+2663  D4D5
+2664  D4D5              option_data_11
+2665  D4D5 04 4E 4F 4E      BYTE $04,"NONE"
+2665  D4D9 45
+2666  D4DA 04 37 35 25      BYTE $04,"75% "
+2666  D4DE 20
+2667  D4DF 04 35 30 25      BYTE $04,"50% "
+2667  D4E3 20
+2668  D4E4 04 32 35 25      BYTE $04,"25% "
+2668  D4E8 20
+2669  D4E9
+2670  D4E9
+2671  D4E9              Slave_Write_Layer2_Num
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(2672): error: Label not found: call_1028
+2672  D4E9 CD 00 00     	call call_1028
+2673  D4EC
+2674  D4EC ED 73 F7 D5  	ld 	(Slave_oldstack),sp
+2675  D4F0 31 00 FF     	ld sp,$FF00				;space at end of this bank
+2676  D4F3
+2677  D4F3 C5           	push bc
+2678  D4F4 F5           	push af
+2679  D4F5
+2680  D4F5 01 3B 12     	ld bc,$123B		;now we can safely page in Layer 2 for writes
+2681  D4F8 FD 7C        	ld a,iyh
+2682  D4FA E6 C0        	and $C0			;get correct bank for Layer 2
+2683  D4FC F6 03        	or %00000011	;set write mode
+2684  D4FE ED 79        	out (c),a
+2685  D500
+2686  D500 FD 7C        	ld a,iyh
+2687  D502 E6 3F        	and $3f
+2688  D504 FD 67        	ld iyh,a			;mask layer 2 address with 16k bank
+2689  D506
+2690  D506 F1           	pop af
+2691  D507 C1           	pop bc
+2692  D508
+2693  D508 51               ld   d,c
+2694  D509 FE 30            cp   $30
+2695  D50B 20 08            jr   nz,Slave_Write_Layer2_Num2
+2696  D50D 78               ld   a,b
+2697  D50E FE 30            cp   $30
+2698  D510 20 02            jr   nz,Slave_Write_Layer2_Num1
+2699  D512 06 00            ld   b,$00
+2700  D514              Slave_Write_Layer2_Num1
+2701  D514 AF           	xor  a
+2702  D515              Slave_Write_Layer2_Num2
+2703  D515 0E 00            ld	 c,0
+2704  D517 6A           	ld 	 l,d
+2705  D518 FD 54        	ld   d,iyh
+2706  D51A FD 5D        	ld	 e,iyl
+2707  D51C CD 71 D5     	call Slave_Layer2_Write_Char
+2708  D51F
+2709  D51F 11 08 00     	ld	 de,$0008
+2710  D522 FD 19        	add  iy,de
+2711  D524 78           	ld	 a,b
+2712  D525 FD 54        	ld   d,iyh
+2713  D527 FD 5D        	ld	 e,iyl
+2714  D529 CD 71 D5     	call Slave_Layer2_Write_Char
+2715  D52C
+2716  D52C 11 08 00     	ld	 de,$0008
+2717  D52F FD 19        	add  iy,de
+2718  D531 7D           	ld	 a,l
+2719  D532 FD 54        	ld   d,iyh
+2720  D534 FD 5D        	ld	 e,iyl
+2721  D536 CD 71 D5     	call Slave_Layer2_Write_Char
+2722  D539
+2723  D539
+2724  D539 01 3B 12     	ld bc,$123B
+2725  D53C 3E 02        	ld a,%00000010
+2726  D53E ED 79        	out (c),a
+2727  D540 ED 7B F7 D5  	ld 	sp,(Slave_oldstack)
+2728  D544 C9           	ret
+2729  D545
+2730  D545
+2731  D545              Slave_Write_Layer2_Text
+2732  D545 ED 73 F7 D5  	ld 	(Slave_oldstack),sp
+2733  D549 31 00 FF     	ld sp,$FF00				;space at end of this bank
+2734  D54C
+2735  D54C C5           	push bc
+2736  D54D
+2737  D54D 01 3B 12     	ld bc,$123B		;now we can safely page in Layer 2 for writes
+2738  D550 7A           	ld a,d
+2739  D551 E6 C0        	and $C0			;get correct bank for Layer 2
+2740  D553 F6 03        	or %00000011	;set write mode
+2741  D555 ED 79        	out (c),a
+2742  D557
+2743  D557 7A           	ld a,d
+2744  D558 E6 3F        	and $3f
+2745  D55A 57           	ld d,a			;mask layer 2 address with 16k bank
+2746  D55B
+2747  D55B
+2748  D55B C1           	pop bc
+2749  D55C
+2750  D55C                  ;hl points to text
+2751  D55C                  ;de screen location
+2752  D55C                  ;c=colour
+2753  D55C              ;	ld de,$0000
+2754  D55C 46           	ld   b,(hl)		;get text length
+2755  D55D 23           	inc  hl
+2756  D55E              Slave_Write_Layer2_Text_Loop
+2757  D55E
+2758  D55E
+2759  D55E 7E           	ld   a,(hl)
+2760  D55F                  ;ld   (de),a
+2761  D55F 23               inc  hl
+2762  D560 CD 71 D5     	call Slave_Layer2_Write_Char
+2763  D563
+2764  D563
+2765  D563                  ;inc  de
+2766  D563                  ;ld   a,c
+2767  D563              	;ld   (de),a
+2768  D563              	;inc  de
+2769  D563 10 F9            djnz Slave_Write_Layer2_Text_Loop
+2770  D565
+2771  D565 01 3B 12     	ld bc,$123B
+2772  D568 3E 02        	ld a,%00000010
+2773  D56A ED 79        	out (c),a
+2774  D56C ED 7B F7 D5  	ld 	sp,(Slave_oldstack)
+2775  D570 C9           	ret
+2776  D571
+2777  D571              Slave_Layer2_Write_Char			;write a letter to Layer 2
+2778  D571 E5           	push hl
+2779  D572 C5           	push bc
+2780  D573 C5           	push bc
+2781  D574
+2782  D574
+2783  D574
+2784  D574 06 20        	ld b,$20				;32 bytes per tile in Tilemap Memory
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(2785): error: Label not found: call_0DB1
+2785  D576 CD 00 00     	call call_0DB1   		;a * b - returned in HL - HL has offset for letter
+2786  D579 C1           	pop bc
+2787  D57A C5           	push bc
+2788  D57B 79           	ld a,c					;get bank value
+2789  D57C E6 07        	and $07
+2790  D57E 0F           	rrca
+2791  D57F 0F           	rrca
+2792  D580 0F           	rrca
+2793  D581 C6 40        	add a,$40
+2794  D583 47           	ld b,a
+2795  D584 0E 00        	ld c,0
+2796  D586              	;ld bc,$4000				;Start of tile gfx
+2797  D586 09           	add hl,bc
+2798  D587
+2799  D587
+2800  D587
+2801  D587
+2802  D587
+2803  D587 C1           	pop bc
+2804  D588 79           	ld a,c
+2805  D589 E6 F0        	and $F0				;isolate colour info
+2806  D58B 4F           	ld c,a
+2807  D58C 06 08        	ld b,8
+2808  D58E D5           	push de
+2809  D58F              Slave_Layer2_Write_Char_Loop2
+2810  D58F D5           	push de
+2811  D590 C5           	push bc
+2812  D591 06 04        	ld b,4
+2813  D593              Slave_Layer2_Write_Char_Loop
+2814  D593 7E           	ld a,(hl)
+2815  D594 E6 F0        	and $F0
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(2816): error: Label not found: call_0D62
+2816  D596 CD 00 00     	call call_0D62			;div 16
+2817  D599 B1           	or c
+2818  D59A 12           	ld (de),a
+2819  D59B 13           	inc de
+2820  D59C 7E           	ld a,(hl)
+2821  D59D E6 0F        	and $0F
+2822  D59F B1           	or c
+2823  D5A0 12           	ld (de),a
+2824  D5A1 13           	inc de
+2825  D5A2 23           	inc hl
+2826  D5A3 10 EE        	djnz Slave_Layer2_Write_Char_Loop
+2827  D5A5 C1           	pop bc
+2828  D5A6 D1           	pop de
+2829  D5A7 14           	inc d
+2830  D5A8 10 E5        	djnz Slave_Layer2_Write_Char_Loop2
+2831  D5AA D1           	pop de
+2832  D5AB 21 08 00     	ld hl,$0008
+2833  D5AE 19           	add hl,de
+2834  D5AF EB           	ex de,hl
+2835  D5B0 C1           	pop bc
+2836  D5B1 E1           	pop hl
+2837  D5B2 C9           	ret
+2838  D5B3
+2839  D5B3              slave_layer2_clear_screen
+2840  D5B3
+2841  D5B3              ;	nextreg $12,$08		;ensure layer 2 points to bank 8
+2842  D5B3              ;	nextreg $13,$08		;ensure layer 2 shadow also points to bank 8
+2843  D5B3
+2844  D5B3 01 3B 12     	ld bc,$123B
+2845  D5B6 3E 05        	ld a,%00000101	;set write mode for bank 0
+2846  D5B8 ED 79        	out (c),a
+2847  D5BA 01 FF 3F     	ld bc,$3fff
+2848  D5BD 21 00 00     	ld hl,$0000
+2849  D5C0 11 01 00     	ld de,$0001
+2850  D5C3 36 0F        	ld (hl),$0f			;this is our transparency colour
+2851  D5C5 ED B0        	ldir
+2852  D5C7 01 3B 12     	ld bc,$123B
+2853  D5CA 3E 45        	ld a,%01000101	;set write mode for bank 1
+2854  D5CC ED 79        	out (c),a
+2855  D5CE 01 FF 3F     	ld bc,$3fff
+2856  D5D1 21 00 00     	ld hl,$0000
+2857  D5D4 11 01 00     	ld de,$0001
+2858  D5D7 36 0F        	ld (hl),$0f			;this is our transparency colour
+2859  D5D9 ED B0        	ldir
+2860  D5DB 01 3B 12     	ld bc,$123B
+2861  D5DE 3E 85        	ld a,%10000101	;set write mode for bank 2
+2862  D5E0 ED 79        	out (c),a
+2863  D5E2 01 FF 3F     	ld bc,$3fff
+2864  D5E5 21 00 00     	ld hl,$0000
+2865  D5E8 11 01 00     	ld de,$0001
+2866  D5EB 36 0F        	ld (hl),$0f			;this is our transparency colour
+2867  D5ED ED B0        	ldir
+2868  D5EF
+2869  D5EF
+2870  D5EF 01 3B 12     	ld bc,$123B
+2871  D5F2 3E 02        	ld a,%00000010
+2872  D5F4 ED 79        	out (c),a
+2873  D5F6 C9           	ret
+2874  D5F7
+2875  D5F7              Slave_oldstack
+2876  D5F7 00 00            BYTE $00,$00
+2877  D5F9
+2878  D5F9              slave_call_136C
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(2879): error: Label not found: l_e391
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(2879): warning: Accessing low memory address 0x0000, is it ok?: ld   a,(l_e391) 
+2879  D5F9 3A 00 00         ld   a,(l_e391) ;is sound command queue empty
+2880  D5FC A7               and  a
+2881  D5FD C8               ret  z          ;return if so
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(2882): error: Label not found: l_e381
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(2882): warning: Accessing low memory address 0x0000, is it ok?: ld   a,(l_e381) 
+2882  D5FE 3A 00 00         ld   a,(l_e381) ;get next sound command from queue
+2883  D601                  ;$00 - Silence (not called from queue)
+2884  D601                  ;$02 - Unknown - no obvious sound (not called from queue)
+2885  D601                  ;$03 - Unknown - no obvious sound (not called from queue)
+2886  D601                  ;$04 - Unknown - no obvious sound (not called from queue)
+2887  D601                  ;$07 = Intro/Game Music Start
+2888  D601                  ;$08 = Record Screen Music
+2889  D601                  ;$09 = Boss Music
+2890  D601                  ;$0A = Invincible Music
+2891  D601                  ;$0B = Game Over Music
+2892  D601                  ;$0C = Lightning??
+2893  D601                  ;$0D = Death sound
+2894  D601                  ;$0E = Enemy Projectile Hits Wall (thud sound)
+2895  D601                  ;$0F = Fast Music
+2896  D601                  ;$10 = EXTEND Music (with bubble rotate lead)
+2897  D601                  ;$11 = Pick Up 2 (alternative pick up noise)
+2898  D601                  ;$12 = Explosion
+2899  D601                  ;$13 = Shooting Star
+2900  D601                  ;$14 = Good Ending Music
+2901  D601                  ;$15 = Boss Fire sound (might also be other enemy fire?)
+2902  D601                  ;$16 = Pick up special item
+2903  D601                  ;$17 = Burst Extend Bubble
+2904  D601                  ;$18 = Hurry Up Alarm and Faster Music
+2905  D601                  ;$19 = Ghost Appear (also at 2A)
+2906  D601                  ;$1A = Bottle hitting wall
+2907  D601                  ;$1B = Unknown Sfx
+2908  D601                  ;$1C = Ending Noise - Walls Crummbling
+2909  D601                  ;$1D = Unknown Sfx
+2910  D601                  ;$1E = Water Bubble Burst
+2911  D601                  ;$1F = Unknown - no obvious sound
+2912  D601                  ;$20 = Item Pickup
+2913  D601                  ;$21 = Unknown Sfx
+2914  D601                  ;$22 = Enemy fire (fireball)
+2915  D601                  ;$23 = Big Lightning from Cross
+2916  D601                  ;$24 = Unknown Sfx
+2917  D601                  ;$25 = Burst Enemy Bubble
+2918  D601                  ;$26 = Burst Enemy Bubble (alt channel?)
+2919  D601                  ;$27 = Burst Lots of bubbles at once
+2920  D601                  ;$28 = Unknown Sfx
+2921  D601                  ;$29 = Secret Room Music
+2922  D601                  ;$2A = Ghost Appear (also at 19)
+2923  D601                  ;$2B = Bad End Music
+2924  D601                  ;$2C = Jump
+2925  D601                  ;$2D = Game intro/boot noise (not called from queue)
+2926  D601                  ;$2E = Unknown - no obvious sound
+2927  D601                  ;$2F = Unknown Sfx
+2928  D601                  ;$30 = Go back to Normal Speed Music
+2929  D601                  ;$31 = Bubble Blow
+2930  D601                  ;$32 = EXTEND Music (without bubble rotate lead)
+2931  D601                  ;$33 = Hit by Lightning
+2932  D601                  ;$34 = Credit sound
+2933  D601                  ;ld   ($FA00),a          ;SOUND IO - Play Sound Effects
+2934  D601 CD 14 D6         call slave_process_sound_command
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(2935): error: Label not found: l_e382
+2935  D604 21 00 00         ld   hl,l_e382      ;shift queue forward
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(2936): error: Label not found: l_e381
+2936  D607 11 00 00         ld   de,l_e381
+2937  D60A 01 0F 00         ld   bc,$000F
+2938  D60D ED B0            ldir
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(2939): error: Label not found: l_e391
+2939  D60F 21 00 00         ld   hl,l_e391      ;reduce queue counter
+2940  D612 35               dec  (hl)
+2941  D613 C9               ret
+2942  D614
+2943  D614              slave_process_sound_command
+2944  D614                  ;put jump and fire first as they are most common sound events
+2945  D614 FE 2C            cp $2C
+2946  D616 28 6F            jr z,slave_intro_sfx_jump
+2947  D618 FE 31            cp $31
+2948  D61A 28 75            jr z,slave_intro_sfx_fire
+2949  D61C FE 25            cp $25
+2950  D61E 28 7B            jr z,slave_intro_sfx_burst
+2951  D620 FE 26            cp $26
+2952  D622 28 77            jr z,slave_intro_sfx_burst
+2953  D624 FE 27            cp $27
+2954  D626 28 73            jr z,slave_intro_sfx_burst
+2955  D628 FE 20            cp $20
+2956  D62A 28 79            jr z,slave_intro_sfx_pickup
+2957  D62C FE 11            cp $11
+2958  D62E CA AF D6         jp z,slave_intro_sfx_pickup2
+2959  D631 FE 16            cp $16
+2960  D633 CA B9 D6         jp z,slave_intro_sfx_pickup_special
+2961  D636 FE 0D            cp $0D
+2962  D638 CA C3 D6         jp z,slave_intro_sfx_death
+2963  D63B
+2964  D63B FE 22            cp $22
+2965  D63D CA E1 D6         jp z,slave_intro_sfx_enemy_fireball
+2966  D640
+2967  D640 FE 0E            cp $0E
+2968  D642 CA CD D6         jp z,slave_intro_sfx_proj_wall
+2969  D645 FE 1A            cp $1A
+2970  D647 CA D7 D6         jp z,slave_intro_sfx_bottle_wall
+2971  D64A
+2972  D64A FE 1E            cp $1e
+2973  D64C CA EC D6         jp z,slave_intro_sfx_burst_water
+2974  D64F
+2975  D64F FE 33            cp $33
+2976  D651 CA F6 D6         jp z,slave_intro_sfx_lighting_hit
+2977  D654
+2978  D654 FE 17            cp $17
+2979  D656 CA E2 D6         jp z,slave_intro_sfx_burst_extend
+2980  D659
+2981  D659 FE 0A            cp $0a
+2982  D65B CA 59 D7         jp z,slave_intro_music_invincible
+2983  D65E
+2984  D65E FE 15            cp $15
+2985  D660 CA 00 D7         jp z,slave_intro_sfx_boss_fire
+2986  D663
+2987  D663 FE 07            cp $07
+2988  D665 CA 0B D7         jp z,slave_intro_music
+2989  D668                ;  cp $08
+2990  D668                ;  jr z,slave_music_stop
+2991  D668 FE 18            cp $18
+2992  D66A CA 38 D7         jp z,slave_music_fast
+2993  D66D FE 2A            cp $2A
+2994  D66F CA 1C D7         jp z,slave_intro_sfx_ghost
+2995  D672 FE 30            cp $30
+2996  D674 CA 43 D7         jp z,slave_game_music
+2997  D677 FE 09            cp $09
+2998  D679 CA 64 D7         jp z,slave_game_music_boss
+2999  D67C FE 08            cp $08
+3000  D67E CA 4E D7         jp z,slave_game_record_music
+3001  D681 FE 34            cp $34
+3002  D683 CA 01 D7         jp z,slave_game_sfx_credit
+3003  D686                  ;break
+3004  D686 C9               ret
+3005  D687
+3006  D687              slave_intro_sfx_jump
+3007  D687 3E 01            ld a,1
+3008  D689 0E 02            ld c,2
+3009  D68B 06 00            ld b,0
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(3010): error: Label not found: SFX_PLAY
+3010  D68D CD 00 00         call SFX_PLAY
+3011  D690 C9               ret
+3012  D691
+3013  D691              slave_intro_sfx_fire
+3014  D691 3E 02            ld a,2
+3015  D693 0E 02            ld c,2
+3016  D695 06 00            ld b,0
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(3017): error: Label not found: SFX_PLAY
+3017  D697 CD 00 00         call SFX_PLAY
+3018  D69A C9               ret
+3019  D69B
+3020  D69B              slave_intro_sfx_burst
+3021  D69B                  ;TODO - Enemy trapped bubble burst sound
+3022  D69B 3E 0C            ld a,$0c
+3023  D69D 0E 02            ld c,2
+3024  D69F 06 00            ld b,0
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(3025): error: Label not found: SFX_PLAY
+3025  D6A1 CD 00 00         call SFX_PLAY
+3026  D6A4 C9               ret
+3027  D6A5
+3028  D6A5              slave_intro_sfx_pickup
+3029  D6A5                  ;TODO - item pick up sound
+3030  D6A5 3E 08            ld a,$08
+3031  D6A7 0E 02            ld c,2
+3032  D6A9 06 00            ld b,0
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(3033): error: Label not found: SFX_PLAY
+3033  D6AB CD 00 00         call SFX_PLAY
+3034  D6AE C9               ret
+3035  D6AF
+3036  D6AF              slave_intro_sfx_pickup2
+3037  D6AF                  ;TODO - alternative item pick up sound
+3038  D6AF 3E 09            ld a,$09
+3039  D6B1 0E 02            ld c,2
+3040  D6B3 06 00            ld b,0
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(3041): error: Label not found: SFX_PLAY
+3041  D6B5 CD 00 00         call SFX_PLAY
+3042  D6B8 C9               ret
+3043  D6B9
+3044  D6B9              slave_intro_sfx_pickup_special
+3045  D6B9                  ;TODO - alternative item pick up sound
+3046  D6B9 3E 0A            ld a,$0a
+3047  D6BB 0E 02            ld c,2
+3048  D6BD 06 00            ld b,0
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(3049): error: Label not found: SFX_PLAY
+3049  D6BF CD 00 00         call SFX_PLAY
+3050  D6C2 C9               ret
+3051  D6C3
+3052  D6C3              slave_intro_sfx_death
+3053  D6C3 3E 03            ld a,3
+3054  D6C5 0E 02            ld c,2
+3055  D6C7 06 00            ld b,0
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(3056): error: Label not found: SFX_PLAY
+3056  D6C9 CD 00 00         call SFX_PLAY
+3057  D6CC C9               ret
+3058  D6CD
+3059  D6CD              slave_intro_sfx_proj_wall
+3060  D6CD                  ;TODO - Enemy projectile hitting wall
+3061  D6CD 3E 07            ld a,$07
+3062  D6CF 0E 02            ld c,2
+3063  D6D1 06 00            ld b,0
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(3064): error: Label not found: SFX_PLAY
+3064  D6D3 CD 00 00         call SFX_PLAY
+3065  D6D6 C9               ret
+3066  D6D7
+3067  D6D7              slave_intro_sfx_bottle_wall
+3068  D6D7                  ;TODO - Enemy bottle hitting wall
+3069  D6D7 3E 0B            ld a,$0b
+3070  D6D9 0E 02            ld c,2
+3071  D6DB 06 00            ld b,0
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(3072): error: Label not found: SFX_PLAY
+3072  D6DD CD 00 00         call SFX_PLAY
+3073  D6E0 C9               ret
+3074  D6E1
+3075  D6E1              slave_intro_sfx_enemy_fireball
+3076  D6E1                  ;TODO - Enemy fireball (Super BB)
+3077  D6E1 C9               ret
+3078  D6E2
+3079  D6E2              slave_intro_sfx_burst_extend
+3080  D6E2                  ;TODO - Extend bubble burst sound
+3081  D6E2 3E 0E            ld a,$0e
+3082  D6E4 0E 02            ld c,2
+3083  D6E6 06 00            ld b,0
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(3084): error: Label not found: SFX_PLAY
+3084  D6E8 CD 00 00         call SFX_PLAY
+3085  D6EB C9               ret
+3086  D6EC
+3087  D6EC              slave_intro_sfx_burst_water
+3088  D6EC                  ;TODO - Extend bubble burst sound
+3089  D6EC 3E 0D            ld a,$0d
+3090  D6EE 0E 02            ld c,2
+3091  D6F0 06 00            ld b,0
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(3092): error: Label not found: SFX_PLAY
+3092  D6F2 CD 00 00         call SFX_PLAY
+3093  D6F5 C9               ret
+3094  D6F6
+3095  D6F6
+3096  D6F6
+3097  D6F6              slave_intro_sfx_lighting_hit
+3098  D6F6 3E 04            ld a,4
+3099  D6F8 0E 02            ld c,2
+3100  D6FA 06 00            ld b,0
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(3101): error: Label not found: SFX_PLAY
+3101  D6FC CD 00 00         call SFX_PLAY
+3102  D6FF C9               ret
+3103  D700
+3104  D700
+3105  D700
+3106  D700              slave_intro_sfx_boss_fire
+3107  D700                  ;TODO - Boss fire sound
+3108  D700 C9               ret
+3109  D701
+3110  D701              slave_game_sfx_credit
+3111  D701 3E 06            ld a,$06
+3112  D703 0E 02            ld c,2
+3113  D705 06 00            ld b,0
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(3114): error: Label not found: SFX_PLAY
+3114  D707 CD 00 00         call SFX_PLAY
+3115  D70A C9               ret
+3116  D70B
+3117  D70B
+3118  D70B              slave_intro_music
+3119  D70B 3E 00            ld a,0
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(3120): error: Label not found: music_module
+3120  D70D 32 00 00         ld (music_module),a
+3121  D710 3E 02            ld a,2
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(3122): error: Label not found: music_playing
+3122  D712 32 00 00         ld (music_playing),a
+3123  D715 C9               ret
+3124  D716
+3125  D716              slave_music_stop
+3126  D716 3E 00            ld a,0
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(3127): error: Label not found: music_playing
+3127  D718 32 00 00         ld (music_playing),a
+3128  D71B C9               ret
+3129  D71C
+3130  D71C              slave_intro_sfx_ghost
+3131  D71C                  ;need to play on all 3 channel to silence music
+3132  D71C 3E 05            ld a,5
+3133  D71E 0E 00            ld c,0
+3134  D720 06 00            ld b,0
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(3135): error: Label not found: SFX_PLAY
+3135  D722 CD 00 00         call SFX_PLAY
+3136  D725 3E 05            ld a,5
+3137  D727 0E 01            ld c,1
+3138  D729 06 00            ld b,0
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(3139): error: Label not found: SFX_PLAY
+3139  D72B CD 00 00         call SFX_PLAY
+3140  D72E 3E 05            ld a,5
+3141  D730 0E 02            ld c,2
+3142  D732 06 00            ld b,0
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(3143): error: Label not found: SFX_PLAY
+3143  D734 CD 00 00         call SFX_PLAY
+3144  D737 C9               ret
+3145  D738
+3146  D738              slave_music_fast
+3147  D738 3E 04            ld a,4
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(3148): error: Label not found: music_module
+3148  D73A 32 00 00         ld (music_module),a
+3149  D73D 3E 02            ld a,2
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(3150): error: Label not found: music_playing
+3150  D73F 32 00 00         ld (music_playing),a
+3151  D742 C9               ret
+3152  D743
+3153  D743              slave_game_music
+3154  D743 3E 03            ld a,3
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(3155): error: Label not found: music_module
+3155  D745 32 00 00         ld (music_module),a
+3156  D748 3E 02            ld a,2
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(3157): error: Label not found: music_playing
+3157  D74A 32 00 00         ld (music_playing),a
+3158  D74D C9               ret
+3159  D74E
+3160  D74E              slave_game_record_music
+3161  D74E 3E 05            ld a,5
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(3162): error: Label not found: music_module
+3162  D750 32 00 00         ld (music_module),a
+3163  D753 3E 02            ld a,2
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(3164): error: Label not found: music_playing
+3164  D755 32 00 00         ld (music_playing),a
+3165  D758 C9               ret
+3166  D759
+3167  D759              slave_intro_music_invincible
+3168  D759 3E 06            ld a,6
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(3169): error: Label not found: music_module
+3169  D75B 32 00 00         ld (music_module),a
+3170  D75E 3E 02            ld a,2
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(3171): error: Label not found: music_playing
+3171  D760 32 00 00         ld (music_playing),a
+3172  D763 C9               ret
+3173  D764
+3174  D764              slave_game_music_boss
+3175  D764 3E 07            ld a,7
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(3176): error: Label not found: music_module
+3176  D766 32 00 00         ld (music_module),a
+3177  D769 3E 02            ld a,2
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(3178): error: Label not found: music_playing
+3178  D76B 32 00 00         ld (music_playing),a
+3179  D76E C9               ret
+3180  D76F
+3181  D76F              slave_ay_music
+3182  D76F FE 00            cp 0
+3183  D771 28 13            jr z,slave_ay_silence
+3184  D773 FE 02            cp 2
+3185  D775 28 1D            jr z,slave_ay_new_module
+3186  D777 FE 03            cp 3
+3187  D779 28 19            jr z,slave_ay_new_module
+3188  D77B 01 FD FF         ld bc,$FFFD
+3189  D77E 3E FD            ld a,%11111101
+3190  D780 ED 79            out (c),a
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(3191): error: Label not found: MUSIC_PLAY
+3191  D782 CD 00 00         call MUSIC_PLAY
+3192  D785 C9               ret
+3193  D786              slave_ay_silence
+3194  D786                  ;call MUSIC_MUTE ;need to change this to play a silent track!
+3195  D786 3E 01            ld a,1
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(3196): error: Label not found: music_playing
+3196  D788 32 00 00         ld (music_playing),a
+3197  D78B 3E 08            ld a,8 ;silent track
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(3198): error: Label not found: MODULE1
+3198  D78D 21 00 00         ld hl,MODULE1;(music_module)
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(3199): error: Label not found: MUSIC_MOD_START
+3199  D790 CD 00 00         call MUSIC_MOD_START
+3200  D793                  ;call MUSIC_PLAY
+3201  D793 C9               ret
+3202  D794
+3203  D794              slave_ay_new_module
+3204  D794 D6 02            sub #2      ;make A either 0 or 1
+3205  D796                  ;ld (MUSIC_START+$0A),a      ;set looping
+3206  D796 3E 01            ld a,1
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(3207): error: Label not found: music_playing
+3207  D798 32 00 00         ld (music_playing),a
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(3208): error: Label not found: music_module
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(3208): warning: Accessing low memory address 0x0000, is it ok?: ld a,(music_module)
+3208  D79B 3A 00 00         ld a,(music_module)
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(3209): error: Label not found: MODULE1
+3209  D79E 21 00 00         ld hl,MODULE1;(music_module)
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(3210): error: Label not found: MUSIC_MOD_START
+3210  D7A1 CD 00 00         call MUSIC_MOD_START
+3211  D7A4                  ;call MUSIC_PLAY
+3212  D7A4 C9               ret
+3213  D7A5
+3214  D7A5
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm(3215): error: Label not found: MUSIC_START
+3215  D7A5                  ORG MUSIC_START
+3216  0000                  incbin "../data/music.bin"
+3217  1F74
+3218  1F74 ~            /*    incbin "../data/bb_0_1.bin"
+3219  1F74 ~                ORG MODULE1
+3220  1F74 ~                incbin "../data/bb_0_2.bin"
+3221  1F74 ~            MODULE2
+3222  1F74 ~                incbin "../data/ext_0_2.bin"
+3223  1F74 ~            MODULE3
+3224  1F74 ~                incbin "../data/bbm_0_2.bin"
+3225  1F74 ~            MODULE4
+3226  1F74 ~                incbin "../data/gam_0_2.bin"
+3227  1F74 ~            */
+3228  1F74              MODULE2
+3229  1F74              MODULE3
+3230  1F74              MODULE4
+# file closed: c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\slave.asm
