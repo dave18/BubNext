@@ -39,7 +39,8 @@ bank1 EQU 40*2;12
 //gfx2bank  EQU 25*2;14
 bank2 EQU 41*2
 bank0 EQU 39*2
-bank3 EQU 42*2     
+bank3 EQU 42*2  
+musicbank EQU 13*2   
 divmmcbank EQU 47*2
 gfxbank00  EQU 14*2
 gfxbank01  EQU 15*2
@@ -84,7 +85,7 @@ pattern_bank	EQU pattern_addr+256	;this is where we store the bank offsets for e
 
 ;stack_top   EQU l_f7fe
 
-MUSIC_START EQU $DA00
+MUSIC_START EQU $D000
 MUSIC_MOD_START EQU MUSIC_START+$00
 MUSIC_PLAY EQU MUSIC_START+$03
 MUSIC_MUTE EQU MUSIC_START+$06
@@ -92,7 +93,22 @@ SFX_INIT   EQU MUSIC_START+$09
 SFX_PLAY   EQU MUSIC_START+$0C
 SFX_STOP   EQU MUSIC_START+$0F
 MODULE1    EQU MUSIC_START+$8AA
-SFX_DATA   EQU MUSIC_START+$21B2;   EQU $F6d9
+SFX_DATA   EQU MUSIC_START+$2268;   EQU $F6d9
+
+music_intro     EQU $00
+music_extend    EQU $01
+music_gameover  EQU $02
+music_mainshort EQU $03
+music_mainfast  EQU $04
+music_record    EQU $05
+music_invincible EQU $06
+music_boss      EQU $07
+music_silent    EQU $08
+music_secret    EQU $09
+music_badend    EQU $0a
+music_goodend   EQU $0b
+music_crumble   EQU $0d
+music_vs        EQU $0e
                                                                 
 FLOORTILE  EQU 7
 
@@ -154,7 +170,7 @@ DMA_LOAD                       equ $cf ; %11001111
 	
 	;nextreg $06,%10000000	;Enable Turbo Mode
 
-    ld a,slavebank
+    ld a,musicbank
     call call_026C_DI  ;switch bank    
     ld hl,SFX_DATA
     call SFX_INIT
@@ -362,6 +378,10 @@ call_0171
 
     ;ld   a,$2D
     ;ld   ($FA00),a   ;TODO SOUND IO - intro sound
+    ld a,$0C
+    ld (music_module),a
+    ld a,2
+    ld (music_playing),a
     call call_0427  ;bank control
     ;ld   hl,($FC82)
     ;ld   a,h
@@ -383,6 +403,8 @@ call_0171
     ;$0B2E points to $044D
 
 	;ei
+    nextreg $22,%00000110
+    nextreg $23,192
     
 	
 	;***** Once initialisation is complete everything is controlled through this interrupt driven routine ****
@@ -408,7 +430,7 @@ l_fe83  BYTE $FF
 
 ;DIP Switches
 l_ff00  BYTE %11111110  ;11 Coin B, 11 Coin A, 1 Demo Sounds, 110, Game, English, No Flip Screen
-l_ff01  BYTE %00111111  ;00 - Normal Monster Speed, 11 - 3 lives, 11 - Bonus 30K,100K,400K, 11 - Normal Difficulty
+l_ff01  BYTE %01111111  ;0 (rom type) 1 - avoid hang, 11 - 3 lives, 11 - Bonus 30K,100K,400K, 11 - Normal Difficulty
 ;Inputs
 l_ff02  BYTE %11110011
 l_ff03  BYTE %11111111
@@ -1396,7 +1418,7 @@ call_1DB5
     ld   (l_e5dd),a
     ld   (l_e358),a
 
-    ;ld a,19                ;temp to set start level number
+    ;ld a,59                ;temp to set start level number
     ;ld   (l_e64b),a
 	
 	;ld a,$3f				;temp to test extend code
@@ -1799,7 +1821,7 @@ data_20B5
     BYTE $0b,"     00    "
 call_20C1
 
-    ld a,2;MODULE4
+    ld a,music_gameover;MODULE4      
     ld (music_module),a
     ld a,3
     ld (music_playing),a
@@ -1819,7 +1841,7 @@ call_20C1
     ld   a,$00
     ;ld   ($FA00),a   ;Stop Game Over Music
 
-    ld a,0
+    ;ld a,0
     ld (music_playing),a
 
     ld   hl,l_e391
@@ -2978,8 +3000,17 @@ call_32E0
     cp   $64
     ret  z
     inc  (hl)
-    ld   a,$2D          ;Intro sound
+    ;ld   a,$2D          ;Intro sound
     ;ld   (l_fa00),a   ;TODO SOUND IO
+    ;break
+
+    ld c,$27
+    call call_1350
+
+    /*ld a,$0C
+    ld (music_module),a
+    ld a,2
+    ld (music_playing),a*/
     ld   c,$01
     call call_22F0
     jr   call_3308
@@ -2989,8 +3020,18 @@ call_32F4
     cp   $64
     ret  z
     inc  (hl)
-    ld   a,$2D         ;INtro sound
+    ;break
+    ;ld   a,$2D         ;Intro sound
     ;ld   (l_fa00),a   ;TODO SOUND IO
+
+    ld c,$27
+    call call_1350
+
+
+    /*ld a,$0C
+    ld (music_module),a
+    ld a,2
+    ld (music_playing),a*/
     ld   c,$01
     call call_22F0
     jr   call_3353
@@ -8051,6 +8092,8 @@ setinterrupt
     ret
 
 myinterrupt
+    ld (int_spbackup),sp		;avoid danger of destroying game stack
+	ld sp,$bfec					;use space beyond interrupt
 	push iy
     push ix
     push hl
@@ -8063,32 +8106,43 @@ myinterrupt
 	ld a,(l_e1cc)
 	ld (int_membackup+1),a
 	
+    /*nextreg $43,%10110000
+    nextreg $40,$0f
+    nextreg $41,$e0
+    nextreg $4C,$00*/
+
 	ld a,(l_e1cd)		;scroll pos tilemap
 	nextreg $31,a
 
     ld a,(l_e2f5)       ;scroll pos Layer 2
     nextreg $17,a
 	
-   ; nextreg $43,%10110000
-   ; nextreg $40,$0f
-   ; nextreg $41,$e0
-   ; nextreg $4C,$00
+    /*nextreg $43,%10110000
+    nextreg $40,$0f
+    nextreg $41,$e0
+    nextreg $4C,$00*/
     call spriteupdate
-   ; nextreg $40,$0f
-   ; nextreg $41,$e0
-   ; nextreg $4C,$0F
+    /*nextreg $40,$0f
+    nextreg $41,$e0
+    nextreg $4C,$0F*/
+
+    ld a,musicbank
+    call call_026C_DI  ;switch bank
+    call music_call_136C     ;process sound queue
+    ld a,(music_playing)
+    call music_ay_music              ;music interrupt
+    call call_029B_DI  ;switch bank
 	
     ld hl,l_f66e;   slave frame counter   
     inc (hl)
     call slave_map_decode		;call 00A9
+
 	ld a,slavebank
     call call_026C_DI  ;switch bank
 
     call slave_getinput
   ;  break
-    call slave_call_136C     ;process sound queue
-    ld a,(music_playing)
-    call slave_ay_music              ;music interrupt
+    
 
 	call slave_call_02E0
 	ld   a,(l_f66b) ;control byte...
@@ -8126,10 +8180,15 @@ interruptexit
     pop hl
     pop ix
 	pop iy
+
+    ld sp,(int_spbackup)		;avoid danger of destroying game stack
+
     ret  
 
 int_membackup
 	BYTE $00,$00
+int_spbackup
+    BYTE $00,$00
 
 slave_map_decode ;extra code to select correct 16k level bank
      ld   a,(l_e397)	;this byte set to 1 if new map to be drawn
@@ -8234,7 +8293,12 @@ sprite_noflip_x_axis
 	ld d,(hl)		;get high byte
 	ld a,e
 	or d
+    jr nz,nothiddensprite
+    ld a,(ix+$03)
+    and a
 	jr z,hiddensprite
+
+nothiddensprite
 	ld a,(attr2+2)
 	or $80
 	ld (attr2+2),a

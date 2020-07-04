@@ -2130,7 +2130,7 @@ bank2_call_9207
      ;ld   a,$0A
 ;     ld   ($FA00),a
 
-     ld a,6                   ;invincible music
+     ld a,music_invincible                   ;invincible music
      ld (music_module),a
      ld a,2
      ld (music_playing),a
@@ -2167,7 +2167,7 @@ bank2_call_9248
      ld   (hl),$00
      ;ld   a,$30
 ;     ld   ($FA00),a
-     ld a,3
+     ld a,music_mainshort;3
     ld (music_module),a
     ld a,2
     ld (music_playing),a
@@ -3435,8 +3435,9 @@ bank2_call_9B2D
      ld   (iy-$50),a;$02),a
      ld   (iy-$01),a;$3f),a
      ld   (iy-$02),a;$40),a
-     ;ld   (iy-$a1),a;$41),a		;todo - check these!
-     ;ld   (iy-$a2),a;$42),a
+     ld   (iy-$51),a;$41),a	
+     ld   (iy-$52),a;$42),a
+     
      scf
      ret
 bank2_call_9B59
@@ -3453,8 +3454,8 @@ bank2_call_9B6E
      xor  a
      ld   (iy+$50),a;$02),a
      ld   (iy+$51),a;$03),a
-     ld   (iy-$52),a;$3d),a
-     ld   (iy-$51),a;$3e),a
+     ld   (iy+$4e),a;$3d),a
+     ld   (iy+$4f),a;$3e),a
      ld   (iy-$01),a;$3f),a
      ld   (iy-$02),a;$40),a
      scf
@@ -6646,6 +6647,8 @@ bank2_data_B77A
 bank2_data_B788
 	BYTE $02
 bank2_call_B77A
+    ld a,0
+    ld (music_playing),a
     call call_03CB       ;clear screen
     call call_03D0       ;clear top layer
     call call_031C
@@ -6655,7 +6658,7 @@ bank2_call_B789				;used for protection routine at $85c4
      nextreg $43,%00110000         ;tiles palette
      nextreg $40,$F0
      ld   hl,bank2_data_B9A4
-    ;ld   de,l_f9e0			;TODO Palette
+    ;ld   de,l_f9e0			; Palette
     ld   b,$10
 bank2_call_B789_Loop
      call call_0B30_update_entry

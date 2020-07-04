@@ -4130,7 +4130,10 @@ call_5F5C
 data_5F71
 	BYTE $04,$08,$0c,$08
 data_5F75
-	BYTE $e2,$e5,$e3,$e5,$e1,$e5
+	;BYTE $e2,$e5,$e3,$e5,$e1,$e5
+    BYTE LOW l_e5e2,HIGH l_e5e2
+    BYTE LOW l_e5e3,HIGH l_e5e3
+    BYTE LOW l_e5e1,HIGH l_e5e1
 call_5F7B
     ld   hl,l_e75b
     dec  (hl)
@@ -5216,10 +5219,10 @@ call_6EF8
     cp   $3F
     jr   nz,call_6F1B		;if not skip to P2 check
 
-    ld a,1;hl,MODULE2
+    /*ld a,1;hl,MODULE2
     ld (music_module),a
     ld a,3
-    ld (music_playing),a
+    ld (music_playing),a*/
 
     ld   hl,l_e742			;reset player 1 EXTEND bits
     ld   (hl),$00
@@ -5233,10 +5236,10 @@ call_6F1B
     cp   $3F
     ret  nz					;if not return from function
 
-    ld a,1;hl,MODULE2
+    /*ld a,1;hl,MODULE2
     ld (music_module),a
     ld a,3
-    ld (music_playing),a
+    ld (music_playing),a*/
 
     ld   hl,l_e743			;reset player 2 EXTEND bits
     ld   (hl),$00

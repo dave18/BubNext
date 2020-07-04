@@ -297,7 +297,7 @@ bank0_call_833F
     call resetframetimer;call_1556
     ld   (ix+$00),$04
     ld   c,$0E
-    call call_1350
+    call call_1350      ;add projectile hitting wall sound effect to queue
     jp   bank0_call_8400
 bank0_call_834F
     ld   a,(ix+$0d)
@@ -539,7 +539,7 @@ bank0_call_84AF
     ld   c,$1E
     call call_147D
     set  0,(ix+$00)
-    ld   c,$1D
+    ld   c,$1D      ;add invader fire sound effect to queue
     call call_1350
 bank0_call_8517
     bit  2,(ix+$00)
@@ -709,7 +709,7 @@ bank0_call_8673
      ld   (hl),$01
      ld   a,$05
      call call_0018;rst  $18
-     ld   c,$09
+     ld   c,$09      ;add boss music to queue
      call call_1350
      ld   a,$B4
      call call_0018;rst  $18
@@ -1055,7 +1055,7 @@ bank0_call_88E2
     set  4,(ix+$00)
     set  1,(ix+$00)
     ld   (ix+$0e),$00
-    ld   c,$25
+    ld   c,$25              ;add bubble burst sound effect to queue
     call call_1350
     scf
     ret
@@ -1065,7 +1065,7 @@ bank0_call_88F5
     call resetframetimer;$1556
     ld   (ix+$0e),$04
     set  1,(ix+$00)
-    ld   c,$25
+    ld   c,$25              ;add bubble burst sound effect to queue
     call call_1350
     ld   b,$00
     ld   c,$1C
@@ -1090,7 +1090,7 @@ bank0_call_892D
     set  1,(ix+$00)
     ld   (ix+$0e),$00
     ld   c,$25
-    call call_1350
+    call call_1350             ;add bubble burst sound effect to queue
     scf
     ret
 bank0_call_8940
@@ -2898,7 +2898,7 @@ bank0_call_984D
     ret  nz
     res  4,(ix+$18)
     set  3,(ix+$18)
-    ld   c,$22
+    ld   c,$22      ;add enemy fireball sound effect to queue
     call call_1350
     xor  a
     call resetframetimer;$1556
@@ -4169,11 +4169,11 @@ bank0_call_A2CA
     ld   hl,l_e723
     bit  0,(hl)
     jr   z,bank0_call_A2F6
-    ld   c,$19
+    ld   c,$19      ;add ghost appear sound effect to queue
     call call_1350
     jp   bank0_call_A4B1
 bank0_call_A2F6
-    ld   c,$2A
+    ld   c,$2A      ;add ghost appear sound effect to queue
     call call_1350
     jp   bank0_call_A4B1
 bank0_data_A2FE
@@ -4806,6 +4806,27 @@ bank0_data_A83A
 bank0_data_A846    
     BYTE $A0
 bank0_call_A847
+
+/*    ld hl,l_e278-3
+    ld b,16*4
+bank0_call_A847_1_3
+    ld a,0
+    ld (hl),a
+    inc hl
+    ;inc hl
+    ;inc hl
+    ;inc hl
+    djnz bank0_call_A847_1_3*/
+
+/*    ld hl,$8100         ;hack clear gfx before boss appears
+    ld b,$80
+bank0_call_A847_1_2
+    ld a,(hl)
+    or $02
+    ld (hl),a
+    inc hl
+    djnz bank0_call_A847_1_2
+*/
     ld   hl,l_f296
     ld   bc,$0014
     call clearbytes;$0D50
@@ -4817,20 +4838,30 @@ bank0_call_A847
     ld   de,$000C
     ld   b,$10
     call call_18A5
-    ld   de,bank0_data_AF0C
+/*
+    ;need to move this to nearer when the boss should actuall be displayed
+    ld   de,bank0_data_AF0C     ;boss sprite data
     ld   hl,l_e275
     ld   b,$10
-    ld   c,$18
+    ld   c,$18                  ;boss sprite bank
     call bank0_call_AEAD
+*/
 
-    ld hl,$8100
+
+ 
+    ld hl,$8100         ;hack clear gfx before boss appears
     ld b,$80
 bank0_call_A847_1
-    ld a,(hl)
-    or $02
+    ;ld a,(hl)
+    ;or $02
+    ld a,0
     ld (hl),a
     inc hl
     djnz bank0_call_A847_1
+
+    
+
+    
 
     ld   hl,l_e28d
     ld   (ix+$03),l
@@ -4845,7 +4876,7 @@ bank0_call_A847_2
     djnz bank0_call_A847_2
 ;    ld   de,l_f920         
  ;   ld   bc,$0040
-  ;  ldir
+  ;  ldir      
     ret
     
 bank0_data_A887 
@@ -4912,6 +4943,14 @@ bank0_call_A906
     ret
 bank0_call_A913
     call resetframetimer;$1556
+    
+    ;boss set up code moved here as it is just after screen flash finishes
+    ld   de,bank0_data_AF0C     ;boss sprite data
+    ld   hl,l_e275
+    ld   b,$10
+    ld   c,$18                  ;boss sprite bank
+    call bank0_call_AEAD
+
 bank0_call_A916
     set  0,(ix+$00)
     ret
@@ -4928,7 +4967,7 @@ bank0_call_A91B
     ld   (hl),$01
     ld   hl,l_f3c8
     ld   (hl),$00
-    ld   c,$15
+    ld   c,$15      ;add boss fire sound effect to queue
     call call_1350
 bank0_call_A939
     call bank0_call_AE9C
@@ -5166,7 +5205,7 @@ bank0_call_AADF
 bank0_call_AAE2
     bit  2,(ix+$00)
     jr   z,bank0_call_AB00
-    ld   c,$27
+    ld   c,$27      ;add bubble burst (3) sound effect to queue
     call call_1350
     ld   (ix+$00),$50
     ld   a,(ix+$02)
@@ -6106,11 +6145,11 @@ bank0_call_B370
     ;ld   ($FA00),a				;TODO sound
     ld   a,$03
     call call_0018
-    ld   c,$14
+    ld   c,$14      ;add good ending music to queue
     call call_1350
     jr   bank0_call_B38E
 bank0_call_B389
-    ld   c,$2B
+    ld   c,$2B      ;add bad ending music to queue
     call call_1350
 bank0_call_B38E
     jp   call_563F
@@ -6151,9 +6190,9 @@ bank0_call_B3B5_loop
 	nextreg $44,$00
 	nextreg $44,$00
 	djnz bank0_call_B3B5_loop
-	nextreg $40, $11                  ; (R/W) 0x40 (64) => Palette Index
-	nextreg $44,$00
-	nextreg $44,$00
+	;nextreg $40, $11                  ; (R/W) 0x40 (64) => Palette Index
+	;nextreg $44,$00
+	;nextreg $44,$00
     call call_02D6
     call call_0020
     ld   hl,$76F8;CD08
@@ -6800,7 +6839,7 @@ bank0_call_BD3D
     ld   (ix+$07),$01
     ld   (ix+$08),$01
     set  1,(ix+$00)
-    ld   c,$1A
+    ld   c,$1A      ;add bottle hitting wall sound effect to queue
     call call_1350
     pop  hl
     push hl
@@ -6851,7 +6890,7 @@ bank0_call_BDA5
     ld   (ix+$07),$03
     ld   (ix+$08),$03
     set  1,(ix+$00)
-    ld   c,$1A
+    ld   c,$1A      ;add bottle hitting wall sound effect to queue
     call call_1350
     pop  hl
     push hl
@@ -7155,7 +7194,7 @@ bank0_call_BFA3
     ld (l_e252),a
     ld   hl,l_f448
     set  1,(hl)
-    ld   c,$13
+    ld   c,$13      ;add shooting star sound effect to queue
     call call_1350
 bank0_call_BFB5
     ld   b,$07

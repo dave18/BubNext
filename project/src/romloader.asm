@@ -133,6 +133,10 @@
     MMU 6 7,bank3
     ORG 0xC000
     INCLUDE "bank3.asm"
+
+    MMU 6 7,musicbank
+    ORG 0xC000
+    INCLUDE "bankmusic.asm"
 /*
     MMU 6 7,gfx1bank
     ORG 0xC000

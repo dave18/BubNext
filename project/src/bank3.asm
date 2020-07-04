@@ -235,7 +235,7 @@ bank3_data_93B7
 ;$95A9 to $9602
 
 
-bank3_call_9603
+bank3_call_9603     ;called by first run of $0AFC
     ld   a,$FF
     ld   hl,l_fc20
     ld   b,$04
@@ -254,7 +254,7 @@ bank3_call_9611
     ld   (l_fc85),a
     ld   hl,bank3_call_9621;$9621
     ld   (l_fd86),hl
-bank3_call_9621
+bank3_call_9621     ;called by subsequent runs of $0AFC
     ld   a,(l_ff01)
     or   $C0
     ld   (l_fc21),a

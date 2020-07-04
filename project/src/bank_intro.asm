@@ -2709,7 +2709,7 @@ intro_call_6322
     ld   (iy+$52),a
     ld   (iy+$53),e
     ret
-*/
+*/ 
 
 
 intro_call_67F0
@@ -4856,7 +4856,7 @@ intro_call_7913
 	
 	call layer2_update_palette_ret		;this clears the layer 2 screen
 
-    ld a,3;MODULE3
+    ld a,music_mainshort;3;MODULE3
     ld (music_module),a
     ld a,2
     ld (music_playing),a
