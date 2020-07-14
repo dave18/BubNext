@@ -2620,6 +2620,46 @@ intro_bank1_data_91BF
     BYTE $11,"FOR YOUR PLAYING!"
     BYTE $FF
 
+intro_call_57D4
+    ;ld   de,$D80E   ;TODO - screen loc
+    ;ld   de,$7800			;write the 'TIME' message for the vs screen
+    ;ld   c,$10		;red
+    ;jp   call_0E9A;writetext;$0E9A
+    ld   hl,data_57DF
+    ld   de,$1060;$7b22;$D822
+    ld   c,$10;$00
+    jp   Write_Layer2_Text
+
+intro_call_59E8
+    ;ld   de,$D80E   ;TODO - screen loc
+    ;ld   de,$7800			;write the 'TIME' message for the vs screen
+    ;ld   c,$10		;red
+    ;jp   call_0E9A;writetext;$0E9A
+    ld   hl,intro_data_59E8_1
+    ld   de,$1060;$7b22;$D822
+    ld   c,$00;$00
+    jp   Write_Layer2_Text
+
+intro_data_59E8_1
+    BYTE $08,$00,$00,$00,$00,$00,$00,$00,$00
+
+intro_call_5AD3
+    ld   hl,l_e740
+    inc  (hl)
+    ld   a,(hl)
+    cp   $3C
+    jr   c,intro_call_5AE4
+    ld   (hl),$00
+    inc  hl
+    ld   a,(hl)
+    and  a
+    jr   z,intro_call_5AE4
+    dec  (hl)
+intro_call_5AE4
+    ld   a,(l_e741)
+    ld   iy,$1088;$780c;$D98E   ;screen loc - the Vs timer
+    jp   Write_Layer2_Num
+
 intro_call_62FB
     ld   iy,$D020;$79c8	
     ld   hl,l_e742

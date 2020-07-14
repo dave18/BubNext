@@ -2572,8 +2572,8 @@ bank2_call_953A
      xor  a
      ld   (iy+$50),a;$02),a
      ld   (iy+$51),a;$03),a
-     ld   (iy+$01),a;$40),a
-     ld   (iy+$02),a;$41),a
+     ld   (iy+$02),a;$40),a
+     ld   (iy+$03),a;$41),a
      ld   (iy+$52),a;$42),a
      ld   (iy+$53),a;$43),a
      scf
@@ -4076,6 +4076,12 @@ bank2_call_A082
      jp   nz,bank2_call_A0AE
      ld   bc,$0000
 bank2_call_A0AE
+
+     bit 6,h
+     jr nz,ok6
+     break
+ok6
+
      ld   (hl),c
      inc  hl
      ld   (hl),b
@@ -4084,12 +4090,19 @@ bank2_call_A0B2
      push de
      ld   a,(l_e737)
      and  a
+     ;break 
      jp   nz,bank2_call_A0C0
-     call call_16C2
+     call call_16C2      ;get tilemap coords into HL
      jp   bank2_call_A0C3
 bank2_call_A0C0
-     call call_16E1
+     call call_16E1      ;get tilemap coords into HL
 bank2_call_A0C3
+     
+     bit 6,h
+     jr nz,ok1
+     break
+ok1
+
 					;ix points to l_f54b (at least on first hit)
      pop  de		;points to l_f558 (at least on first hit)
      push hl		;contain location of water flow start/next location
@@ -4107,6 +4120,9 @@ bank2_call_A0C3
      inc  de		
      ld   a,(de)	;get the tile attribute for the current location
      ld   (hl),a	;and store in l_f55c
+
+  ;   break          ;need to test whether HL goes beyond screen memory
+
      pop  hl		;retrieve screen location into hl
      ld   a,(ix+$08);get tile held in water structure offset $08
      ld   (hl),a	;and draw to screen
@@ -4173,6 +4189,12 @@ bank2_call_A12C
      inc  hl
      ld   d,(hl)
      ex   de,hl
+
+     bit 6,h
+     jr nz,ok5
+     break
+ok5
+
      ld   (hl),b
      inc  hl
      ld   (hl),c
@@ -4184,6 +4206,13 @@ bank2_call_A13A
      inc  hl
      ld   d,(hl)
      ex   de,hl		;this + 4 lines above retrieve screen location into DE
+
+;     break
+     bit 6,h
+     jr nz,ok2
+     break
+ok2
+
      ld   (hl),b	;and write value in BC
      inc  hl
      ld   (hl),c
@@ -4226,6 +4255,14 @@ bank2_call_A17C
      inc  hl
      ld   d,(hl)
      ex   de,hl
+
+;     break
+
+     bit 6,h
+     jr nz,ok3
+     break
+ok3
+
      ld   (hl),b
      inc  hl
      ld   (hl),c
@@ -4351,6 +4388,12 @@ bank2_call_A24F
      jp   nz,bank2_call_A229
      ret
 bank2_call_A25B
+
+     bit 6,h
+     jr nz,ok4
+     break
+ok4
+
      push hl
      ld   (hl),$04
      inc  hl

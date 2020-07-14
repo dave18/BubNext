@@ -1389,7 +1389,7 @@ call_0A5F
  	nextreg $1B,0
 	nextreg $1B,159	;(this will be internally doubled as we have set sprites over border mode)
 	nextreg $1B,0
-	nextreg $1B,255
+	nextreg $1B,255-16
  
     xor  a
     ld   (l_e351),a

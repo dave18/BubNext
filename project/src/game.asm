@@ -230,6 +230,11 @@ DMA_LOAD                       equ $cf ; %11001111
 	nextreg $18,255	
 	nextreg $18,0
 	nextreg $18,183 ;hide bottom line for scrolling text purposes
+
+    nextreg $1B,0
+	nextreg $1B,159	;(this will be internally doubled as we have set sprites over border mode)
+	nextreg $1B,0
+	nextreg $1B,255-16
 	
 
 	
@@ -736,8 +741,12 @@ call_16C5			;translates column/row (H/L) into Tilemap coords
     srl  a
     srl  a
 	srl  a
-    and  $1F;$3E
+    ;and  $1F;$3E
 	dec a
+    and  $1F;$3E
+    ;jp p,call_16C5_1       ;additional code to stop 0 gonig to FF
+    ;ld a,$1f;0
+;call_16C5_1
     ld   b,$50
 	call call_0DB1   ;a * b - returned in HL
 	
@@ -6438,9 +6447,18 @@ call_577F
     ld   (hl),$1E
     ld   hl,data_57DF
     ;ld   de,$D80E   ;TODO - screen loc
-    ld   de,$7800			;write the 'TIME' message for the vs screen
-    ld   c,$10		;red
-    jp   call_0E9A;writetext;$0E9A
+    ;ld   de,$7800			;write the 'TIME' message for the vs screen
+    ;ld   c,$10		;red
+    ;jp   call_0E9A;writetext;$0E9A
+
+    ;break
+    call call_029B
+    ld a,introbank
+    call call_026C
+    call intro_call_57D4
+    call call_029B
+    ld a,bank2
+    jp call_026C
 
 
 data_57DF
@@ -6616,7 +6634,7 @@ call_58C9
     inc  hl
     djnz call_58C9
     ld   a,(l_e20d)
-    cp   $70           ;check if bonus message has reached final position
+    cp   $70           ;check if bonus message has reached middle position
     ret  nz
     ld   hl,l_e738
     ld   (hl),$08
@@ -6752,8 +6770,20 @@ call_59DA
     ld   a,(hl)
     cp   $B4
     ret  nz
-    ld   hl,$77e8;D50E
-    call call_03FD		;clear row
+
+    ;break
+    ;clear layer 2 TIME message
+
+    call call_029B
+    ld a,introbank
+    call call_026C
+    call intro_call_59E8
+    call call_029B
+    ld a,bank2
+    call call_026C
+
+    ;ld   hl,$77e8;D50E
+    ;call call_03FD		;clear row
     ld   hl,l_ed3d
     ld   (hl),$00
     ld   hl,l_e738
@@ -6888,7 +6918,15 @@ call_5AC9
     ret
 
 call_5AD3
-    ld   hl,l_e740
+    call call_029B
+    ld a,introbank
+    call call_026C
+    call intro_call_5AD3
+    call call_029B
+    ld a,bank2
+    jp call_026C
+
+/*    ld   hl,l_e740
     inc  (hl)
     ld   a,(hl)
     cp   $3C
@@ -6900,9 +6938,12 @@ call_5AD3
     jr   z,call_5AE4
     dec  (hl)
 call_5AE4
+    break
     ld   a,(l_e741)
     ld   iy,$780c;$D98E   ;screen loc - the Vs timer
     jp   call_0FC2
+*/
+    
 
 data_5AEE
     BYTE $00,$28,$00,$38,$00,$48,$00,$58,$00,$68,$00,$90,$00,$A0,$00,$B0

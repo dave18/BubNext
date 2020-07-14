@@ -4849,7 +4849,7 @@ bank0_call_A847_1_2
 
 
  
-    ld hl,$8100         ;hack clear gfx before boss appears
+    ld hl,pattern_bank;$8100         ;hack clear gfx before boss appears
     ld b,$80
 bank0_call_A847_1
     ;ld a,(hl)
