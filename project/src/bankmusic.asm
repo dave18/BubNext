@@ -42,7 +42,7 @@ music_call_136C
     ;$25 = Burst Enemy Bubble
     ;$26 = Burst Enemy Bubble (alt channel?)
     ;$27 = Burst Lots of bubbles at once
-    ;$28 = Unknown Sfx
+    ;$28 = Bell alert sound
     ;$29 = Secret Room Music
     ;$2A = Ghost Appear (also at 19)
     ;$2B = Bad End Music
@@ -143,6 +143,12 @@ music_process_sound_command
     jp z,slave_game_record_music
     cp $34
     jp z,slave_game_sfx_credit
+    cp $28
+    jp z,slave_intro_sfx_bell
+    cp $12
+    jp z,slave_intro_sfx_boom
+    cp $13
+    jp z,slave_intro_sfx_shooting_star
     cp $29
     jp z,slave_secret_room_music
     cp $14
@@ -151,13 +157,26 @@ music_process_sound_command
     jp z,slave_bad_end_music
     cp $1C
     jp z,slave_wall_crumble_music
-    cp $13
-    jp z,slave_intro_sfx_shooting_star
+    
     ;break
     ret
 
 slave_intro_sfx_jump
     ld a,1
+    ld c,2
+    ld b,0
+    call SFX_PLAY
+    ret
+
+slave_intro_sfx_boom
+    ld a,$15
+    ld c,2
+    ld b,0
+    call SFX_PLAY
+    ret
+
+slave_intro_sfx_bell
+    ld a,$16
     ld c,2
     ld b,0
     call SFX_PLAY

@@ -1,80 +1,4 @@
-L0028:       equ  0028h
-L0038:       equ  0038h
-LCCCC:       equ  CCCCh
-LEECC:       equ  EECCh
-LFECF:       equ  FECFh
-LFFCC:       equ  FFCCh
-
-
-             org 65FDh
-
-
-65FD L65FD:
-65FD CC CF FE     CALL Z,LFECF 
-6600 EE FF        XOR  FFh    
-6602 FF           RST  38h    
-6603 FF           RST  38h    
-6604 EE EE        XOR  EEh    
-6606 FF           RST  38h    
-6607 FF           RST  38h    
-6608 EE EE        XOR  EEh    
-660A EE FF        XOR  FFh    
-660C EE EE        XOR  EEh    
-660E EE EE        XOR  EEh    
-6610 EE EE        XOR  EEh    
-6612 EE EE        XOR  EEh    
-6614 EE EE        XOR  EEh    
-6616 EE EE        XOR  EEh    
-6618 EE EE        XOR  EEh    
-661A EE EE        XOR  EEh    
-661C EE EE        XOR  EEh    
-661E EE EE        XOR  EEh    
-6620 FF           RST  38h    
-6621 EE EE        XOR  EEh    
-6623 EE FF        XOR  FFh    
-6625 FE EF        CP   EFh    
-6627 FF           RST  38h    
-6628 FF           RST  38h    
-6629 FF           RST  38h    
-662A EF           RST  28h    
-662B FF           RST  38h    
-662C FF           RST  38h    
-662D FF           RST  38h    
-662E EF           RST  28h    
-662F FF           RST  38h    
-6630 FF           RST  38h    
-6631 FF           RST  38h    
-6632 FF           RST  38h    
-6633 FF           RST  38h    
-6634 EF           RST  28h    
-6635 FF           RST  38h    
-6636 FF           RST  38h    
-6637 FF           RST  38h    
-6638 EF           RST  28h    
-6639 FF           RST  38h    
-663A FF           RST  38h    
-663B FF           RST  38h    
-663C EF           RST  28h    
-663D FF           RST  38h    
-663E EF           RST  28h    
-663F FF           RST  38h    
-6640 EE EE        XOR  EEh    
-6642 EE EE        XOR  EEh    
-6644 EE EE        XOR  EEh    
-6646 EE EE        XOR  EEh    
-6648 FF           RST  38h    
-6649 EE EE        XOR  EEh    
-664B EE FC        XOR  FCh    
-664D FF           RST  38h    
-664E EE EE        XOR  EEh    
-6650 CC CC FF     CALL Z,LFFCC 
-6653 EE FC        XOR  FCh    
-6655 CC CC FF     CALL Z,LFFCC 
-6658 FF           RST  38h    
-6659 CC CC CC     CALL Z,LCCCC 
-665C FF           RST  38h    
-665D FF           RST  38h    
-665E CC CC EE     CALL Z,LEECC 
+LBD00:       equ  BD00h
 
 
              org 8180h
@@ -87,3 +11,109 @@ LFFCC:       equ  FFCCh
 8189 ED 91 13 08  NEXTREG REG_LAYER_2_SHADOW_RAM_PAGE,08h 
 818D ED 91 50 5E  NEXTREG REG_MMU0,5Eh 
 8191 ED 91 51 00  NEXTREG REG_MMU1,00h 
+
+
+             org BFA5h
+
+
+BFA5 LBFA5:
+BFA5 00           NOP         
+BFA6 00           NOP         
+BFA7 00           NOP         
+BFA8 00           NOP         
+BFA9 00           NOP         
+BFAA 00           NOP         
+BFAB 00           NOP         
+BFAC 00           NOP         
+BFAD 00           NOP         
+BFAE 00           NOP         
+BFAF 00           NOP         
+BFB0 00           NOP         
+BFB1 00           NOP         
+BFB2 00           NOP         
+BFB3 00           NOP         
+BFB4 00           NOP         
+BFB5 00           NOP         
+BFB6 00           NOP         
+BFB7 00           NOP         
+BFB8 00           NOP         
+BFB9 00           NOP         
+BFBA 00           NOP         
+BFBB 00           NOP         
+BFBC 00           NOP         
+BFBD 00           NOP         
+BFBE 00           NOP         
+BFBF F3           DI          
+BFC0 CD 00 BD     CALL LBD00  
+BFC3 C9           RET         
+
+
+BFC4 00           defb 00h    
+BFC5 00           defb 00h    
+BFC6 00           defb 00h    
+BFC7 00           defb 00h    
+BFC8 00           defb 00h    
+BFC9 00           defb 00h    
+BFCA 00           defb 00h    
+BFCB 00           defb 00h    
+BFCC 00           defb 00h    
+BFCD 00           defb 00h    
+BFCE 00           defb 00h    
+BFCF 00           defb 00h    
+BFD0 00           defb 00h    
+BFD1 00           defb 00h    
+BFD2 00           defb 00h    
+BFD3 00           defb 00h    
+BFD4 00           defb 00h    
+BFD5 00           defb 00h    
+BFD6 00           defb 00h    
+BFD7 00           defb 00h    
+BFD8 00           defb 00h    
+BFD9 00           defb 00h    
+BFDA C3           defb C3h    
+BFDB BF           defb BFh    
+BFDC 1C           defb 1Ch    
+BFDD 4A           defb 4Ah    
+BFDE 2A           defb 2Ah    
+BFDF BD           defb BDh    
+BFE0 42           defb 42h    
+BFE1 00           defb 00h    
+BFE2 00           defb 00h    
+BFE3 08           defb 08h    
+BFE4 1C           defb 1Ch    
+BFE5 4A           defb 4Ah    
+BFE6 1F           defb 1Fh    
+BFE7 3E           defb 3Eh    
+BFE8 0D           defb 0Dh    
+BFE9 28           defb 28h    
+BFEA 00           defb 00h    
+BFEB 00           defb 00h    
+BFEC 00           defb 00h    
+BFED 00           defb 00h    
+BFEE 00           defb 00h    
+BFEF 00           defb 00h    
+BFF0 00           defb 00h    
+BFF1 00           defb 00h    
+BFF2 00           defb 00h    
+BFF3 00           defb 00h    
+BFF4 00           defb 00h    
+BFF5 00           defb 00h    
+BFF6 00           defb 00h    
+BFF7 00           defb 00h    
+BFF8 00           defb 00h    
+BFF9 00           defb 00h    
+BFFA 00           defb 00h    
+BFFB 00           defb 00h    
+BFFC 00           defb 00h    
+BFFD 00           defb 00h    
+BFFE 00           defb 00h    
+BFFF 00           defb 00h    
+C000 C8           defb C8h    
+C001 DD           defb DDh    
+C002 CB           defb CBh    
+C003 00           defb 00h    
+C004 66           defb 66h    
+C005 C8           defb C8h    
+C006 35           defb 35h    
+C007 C9           defb C9h    
+C008 90           defb 90h    

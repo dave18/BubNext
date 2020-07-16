@@ -1427,7 +1427,7 @@ call_1DB5
     ld   (l_e5dd),a
     ld   (l_e358),a
 
-    ;ld a,59                ;temp to set start level number
+    ;ld a,99                ;temp to set start level number
     ;ld   (l_e64b),a
 	
 	;ld a,$3f				;temp to test extend code
@@ -1436,6 +1436,29 @@ call_1DB5
 	;ld a,$1f				;temp to test extend code
 	;ld   (l_e743),a
     
+    ;ld a,$13                ;temp to produce bomb
+    ;ld (l_e5e2),a
+
+    ;ld a,$02                ;temp to produce purple lantern
+    ;ld (l_e5ec),a
+
+    ;ld a,$10                ;temp to produce book of death
+    ;ld (l_e5f3),a
+
+    ;ld a,$10                ;temp to produce star tiara
+    ;ld (l_e5f4),a
+
+    ;ld a,$1                  ;temp to produce purple chest
+    ;ld (l_f458),a
+
+    ;ld a,$1e                ;temp to produce red necklace
+    ;ld (l_e5d9),a
+
+   ; ld a,$0e                ;temp to produce bell
+   ; ld (l_e5fe),a
+
+    ;ld a,$1E                ;temp to produce skull
+    ;ld (l_e611),a
 	
     ld   a,(l_e5d8)
     and  a
@@ -3200,7 +3223,7 @@ call_343B
     ld   a,(l_e653)
     ld   hl,l_e652
     cp   (hl)
-    ret  z    
+    ret  ;z    
     push de
 call_3449
     ld   hl,data_347C
@@ -3408,87 +3431,6 @@ data_35ED
 
 
 
-call_3DF0
-    call call_0020
-    call call_4C35
-    ld   a,bank2;$02
-    call call_026C
-    call bank2_call_A59B
-    call bank2_call_A2FC
-    call bank2_call_936A
-    call bank2_call_99E2
-    call bank2_call_96E6
-    call bank2_call_90DD
-    call bank2_call_83E8
-    call bank2_call_85EB
-    call bank2_call_92B6
-    call bank2_call_A820
-    call clearp1;call_3EB5
-    call clearp2;call_3F39
-    call call_5776
-    call bank2_call_9F76
-    call bank2_call_B9C4
-    call bank2_call_8BA7
-    call bank2_call_AC80
-    call call_029B
-    call call_4F52 
-   ; BYTE "CALL_4F52"
-   
-	;3E32
-    ld   hl,l_f448
-    ld   (hl),$00
-    ld   a,(l_f536)
-    cp   $01
-    jr   z,call_3E5B
-    ld   a,(l_e64b)
-    cp   $00
-    jr   z,call_3E5B
-    cp   $64
-    jr   z,call_3E5B
-    ld   a,$04
-    call call_0030
-;    ld   b,$03         ;ROM CHECK
-;    xor  a
-;    ld   hl,data_0000
-;call_3E52
-;    add  a,(hl)
-;    inc  hl
-;    djnz call_3E52
-;    sub  $3E
-;    jr   $3E5B
-;    push de
-
-    ;set of routines called by RST20 during normal gameplay
-call_3E5B					;9852 IN ASSEMBLED CODE 
-    call  call_0020;$20
-    call call_4D13
-    ld   a,bank2;$02
-    call call_026C
-    call bank2_call_8499
-    call bank2_call_8686
-    call bank2_call_A5A4
-    call bank2_call_A480
-    call bank2_call_A310        ;call flood fill
-    call bank2_call_9373
-    call bank2_call_99EB
-    call bank2_call_96EF
-    call bank2_call_AAC5
-    call bank2_call_90ED
-    call bank2_call_8DFF
-    call bank2_call_8FA6
-    call bank2_call_A829
-    call call_577F              ;call VS mode
-    call bank2_call_9F7F
-    call bank2_call_B9CD
-    call bank2_call_92CF
-    call bank2_call_8BB0
-    call bank2_call_ACBA
-    call call_029B
-    call call_4F5B
-   ; BYTE "CALL_4F5B"
-    call bank0_call_BF48
-    call call_4012
-    jp   call_3E5B
     
 
 
@@ -5305,7 +5247,11 @@ data_4EF7
 data_4F03
     BYTE $74,$78,$8C,$90,$94,$98,$AC,$B0,$00,$00,$00,$00,$C9,$00,$00,$00
     BYTE $00,$00
-    
+
+
+call_4F0F
+    ret
+
 
 call_4F52
     ld   hl,l_e720
@@ -5350,14 +5296,105 @@ call_4F8B
     ;call clearrow;$03FD
     ld   hl,$4000+$20;$CD06
     ;call clearrow;$03FD
+call_4FA3
     call call_0020;rst  $20
-call_4FA4
-    jr call_4FA4
-
-call_4F0F
+call_4FA4       ;collect book of death
+    call call_4F0F
+    ld   hl,l_e721
+    inc  (hl)
+    ld   a,(hl)
+    cp   $31
+    jr   z,call_4FFC
+    ld   hl,l_e722
+    bit  0,(hl)
+    jr   nz,call_4FDF
+    ld   b,$4A
+    ld   hl,l_e1cd
+call_4FBC
+    ld   a,(hl)
+    add  a,$04
+    ld   (hl),a
+    inc  hl
+    inc  hl
+    inc  hl
+    inc  hl
+    djnz call_4FBC
+    ld   a,(l_e1cd)
+    cp   $08
+    jr   nz,call_4FA3
+    ld   hl,l_e722
+    ld   (hl),$01
+    ld   c,$23
+    call call_1350
+    ;ld   a,($0002)
+    ;bit  3,a
+    ;jr   nz,$4FA3
+    jr  call_4FA3
+    ;rst  $28
+call_4FDF
+    ld   b,$4A
+    ld   hl,l_e1cd
+call_4FE4
+    ld   a,(hl)
+    sub  $04
+    ld   (hl),a
+    inc  hl
+    inc  hl
+    inc  hl
+    inc  hl
+    djnz call_4FE4
+    ld   a,(l_e1cd)
+    cp   $F8
+    jr   nz,call_4FA3
+    ld   hl,l_e722
+    ld   (hl),$00
+    jr   call_4FA3
+call_4FFC
+    ld   b,$10
+    ld   hl,l_e1cd
+call_5001
+    ld   (hl),$00
+    inc  hl
+    inc  hl
+    inc  hl
+    inc  hl
+    djnz call_5001
+    ld   hl,l_fc88
+    dec  hl
+    dec  hl
+    dec  hl
+    ld   a,(hl)
+    sub  $37
+    jr   z,call_5015
+    nop
+call_5015
+    ld   a,$03
+    call call_0010
+    ld   a,$05
+    call call_0010
+    ld   a,$04
+    call call_0010
+    ld   a,$02
+    call call_0010
+    call call_0AA4
+    ld   a,(l_ed3d)
+    or   a
+    jr   z,call_503B
+    ld   b,a
+    ld   a,(l_f460)
+    ld   (l_e5d6),a
+call_5031
+    push bc
+    ld   de,$0300
+    call call_2FB3
+    pop  bc
+    djnz call_5031
+call_503B
+    ld   hl,l_ed3d
+    ld   (hl),$00
+    ld   hl,l_e720
+    ld   (hl),$FF
     ret
-
-
 call_5046
     ld   a,(l_e723)
     cp   $29
@@ -8332,11 +8369,12 @@ sprite_noflip_x_axis
 	ld e,(hl)		;get low byte
 	inc hl
 	ld d,(hl)		;get high byte
-	ld a,e
-	or d
-    jr nz,nothiddensprite
     ld a,(ix+$03)
-    and a
+	or e
+	or d
+    ;jr nz,nothiddensprite
+    ;ld a,(ix+$03)
+    ;or a
 	jr z,hiddensprite
 
 nothiddensprite

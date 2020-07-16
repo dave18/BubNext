@@ -727,7 +727,9 @@ bank0_call_8691
 bank0_call_869D
      ld   hl,l_fc7b
      bit  0,(hl)
-     ret
+     ret  z
+     ld   (hl),$00
+     jp   call_0B43
      
 bank0_call_86A8
     call bank0_call_86BD
@@ -7159,6 +7161,32 @@ bank0_call_BF61
     ld   a,$03              ;need to find oout what sound this is
     ;ld   ($FA00),a         ;SOUND IO
 bank0_call_BF75                 ;end screen shooting star
+
+    ;break
+
+
+    ;clear required sprite patterns from
+    ;non shooting star sprite for skull pick up
+    ld a,(l_e64b)   ;check level num
+    cp $64
+    jr z,bank0_call_BF75_2 ;skip if on level 100
+
+    ld hl,l_e24d        
+	;ld iy,sprite_attr  
+	ld b,$07;4a
+bank0_call_BF75_1
+    ;ld (hl),$00
+    inc hl
+    ld (hl),$00
+    inc hl
+    ;ld (hl),$00
+    inc hl
+    ;ld (hl),$00
+    inc hl
+    djnz bank0_call_BF75_1
+
+bank0_call_BF75_2
+
     ld   hl,l_e2d5
     ld   de,$0004
     ld   b,$07
@@ -7179,6 +7207,8 @@ bank0_call_BF88                 ;set starting coords
     inc  de
     inc  hl
     djnz bank0_call_BF88
+
+
     ld   hl,bank0_data_BFF8
     ld   a,(l_f448)
     bit  0,a
@@ -7188,10 +7218,22 @@ bank0_call_BFA3
     ld   bc,$071D
     ld   e,$04
     call call_14C0
+
     ;break
     ld a,0          ;3 lines are hack to stop erroneous graphic update
     ld (l_e24e),a
     ld (l_e252),a
+
+   /* ;force sprite updates
+    ld hl,pattern_bank
+    ld b,$80
+bank0_call_BFA3_1
+    ld a,(hl)
+    or $02
+    ld (hl),a
+    inc hl
+    djnz bank0_call_BFA3_1
+*/
     ld   hl,l_f448
     set  1,(hl)
     ld   c,$13      ;add shooting star sound effect to queue

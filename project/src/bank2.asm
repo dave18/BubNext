@@ -677,52 +677,57 @@ bank2_call_876F
 ;     ld   a,r
 ;     ld   i,a
      ld   a,(l_f45e)
+
+
      ld   hl,bank2_data_8AFF
-     call call_0DA7
+     call call_0DA7      ;hl + a*2
      ex   de,hl
+
+
+
 	 jp	(hl)
 	 
-	 
+	;routines for item pick ups - pick up num in l_f45e
 bank2_data_8AFF
-	BYTE LOW bank2_call_87B1,HIGH bank2_call_87B1
-	BYTE LOW bank2_call_87BD,HIGH bank2_call_87BD
-	BYTE LOW bank2_call_87C9,HIGH bank2_call_87C9
-	BYTE LOW bank2_call_87DF,HIGH bank2_call_87DF
-	BYTE LOW bank2_call_87FF,HIGH bank2_call_87FF
-	BYTE LOW bank2_call_8819,HIGH bank2_call_8819
-	BYTE LOW bank2_call_8822,HIGH bank2_call_8822
-	BYTE LOW bank2_call_882C,HIGH bank2_call_882C
-	BYTE LOW bank2_call_8836,HIGH bank2_call_8836
-	BYTE LOW bank2_call_885C,HIGH bank2_call_885C
-	BYTE LOW bank2_call_8879,HIGH bank2_call_8879
-	BYTE LOW bank2_call_8893,HIGH bank2_call_8893
-	BYTE LOW bank2_call_88BD,HIGH bank2_call_88BD
-	BYTE LOW bank2_call_88D2,HIGH bank2_call_88D2
-	BYTE LOW bank2_call_88F8,HIGH bank2_call_88F8
-	BYTE LOW bank2_call_88F9,HIGH bank2_call_88F9
-	BYTE LOW bank2_call_8901,HIGH bank2_call_8901
-	BYTE LOW bank2_call_8909,HIGH bank2_call_8909
-	BYTE LOW bank2_call_8911,HIGH bank2_call_8911
-	BYTE LOW bank2_call_891E,HIGH bank2_call_891E
-	BYTE LOW bank2_call_892F,HIGH bank2_call_892F
-	BYTE LOW bank2_call_8938,HIGH bank2_call_8938
-	BYTE LOW bank2_call_8941,HIGH bank2_call_8941
-	BYTE LOW bank2_call_8953,HIGH bank2_call_8953
-	BYTE LOW bank2_call_898E,HIGH bank2_call_898E
-	BYTE LOW bank2_call_8997,HIGH bank2_call_8997
-	BYTE LOW bank2_call_89AA,HIGH bank2_call_89AA
-	BYTE LOW bank2_call_89BC,HIGH bank2_call_89BC
-	BYTE LOW bank2_call_89C2,HIGH bank2_call_89C2
-	BYTE LOW bank2_call_89C8,HIGH bank2_call_89C8
-	BYTE LOW bank2_call_89E5,HIGH bank2_call_89E5
-	BYTE LOW bank2_call_89F0,HIGH bank2_call_89F0
-	BYTE LOW bank2_call_89FB,HIGH bank2_call_89FB
-	BYTE LOW bank2_call_8A06,HIGH bank2_call_8A06
-	BYTE LOW bank2_call_8A11,HIGH bank2_call_8A11
-	BYTE LOW bank2_call_8A28,HIGH bank2_call_8A28
-	BYTE LOW bank2_call_8A33,HIGH bank2_call_8A33
-	BYTE LOW bank2_call_8A3E,HIGH bank2_call_8A3E
-	BYTE LOW bank2_call_8A49,HIGH bank2_call_8A49
+	BYTE LOW bank2_call_87B1,HIGH bank2_call_87B1     ;00
+	BYTE LOW bank2_call_87BD,HIGH bank2_call_87BD     ;01
+	BYTE LOW bank2_call_87C9,HIGH bank2_call_87C9     ;02
+	BYTE LOW bank2_call_87DF,HIGH bank2_call_87DF     ;03
+	BYTE LOW bank2_call_87FF,HIGH bank2_call_87FF     ;04
+	BYTE LOW bank2_call_8819,HIGH bank2_call_8819     ;05
+	BYTE LOW bank2_call_8822,HIGH bank2_call_8822     ;06
+	BYTE LOW bank2_call_882C,HIGH bank2_call_882C     ;07
+	BYTE LOW bank2_call_8836,HIGH bank2_call_8836     ;08
+	BYTE LOW bank2_call_885C,HIGH bank2_call_885C     ;09
+	BYTE LOW bank2_call_8879,HIGH bank2_call_8879     ;0A
+	BYTE LOW bank2_call_8893,HIGH bank2_call_8893     ;0B
+	BYTE LOW bank2_call_88BD,HIGH bank2_call_88BD     ;0C
+	BYTE LOW bank2_call_88D2,HIGH bank2_call_88D2     ;0D
+	BYTE LOW bank2_call_88F8,HIGH bank2_call_88F8     ;0E
+	BYTE LOW bank2_call_88F9,HIGH bank2_call_88F9     ;0F
+	BYTE LOW bank2_call_8901,HIGH bank2_call_8901     ;10
+	BYTE LOW bank2_call_8909,HIGH bank2_call_8909     ;11
+	BYTE LOW bank2_call_8911,HIGH bank2_call_8911     ;12
+	BYTE LOW bank2_call_891E,HIGH bank2_call_891E     ;13
+	BYTE LOW bank2_call_892F,HIGH bank2_call_892F     ;14
+	BYTE LOW bank2_call_8938,HIGH bank2_call_8938     ;15
+	BYTE LOW bank2_call_8941,HIGH bank2_call_8941     ;16
+	BYTE LOW bank2_call_8953,HIGH bank2_call_8953     ;17 - Purple Lantern
+	BYTE LOW bank2_call_898E,HIGH bank2_call_898E     ;18 
+	BYTE LOW bank2_call_8997,HIGH bank2_call_8997     ;00
+	BYTE LOW bank2_call_89AA,HIGH bank2_call_89AA     ;00
+	BYTE LOW bank2_call_89BC,HIGH bank2_call_89BC     ;00
+	BYTE LOW bank2_call_89C2,HIGH bank2_call_89C2     ;00
+	BYTE LOW bank2_call_89C8,HIGH bank2_call_89C8     ;00
+	BYTE LOW bank2_call_89E5,HIGH bank2_call_89E5     ;00
+	BYTE LOW bank2_call_89F0,HIGH bank2_call_89F0     ;00
+	BYTE LOW bank2_call_89FB,HIGH bank2_call_89FB     ;00
+	BYTE LOW bank2_call_8A06,HIGH bank2_call_8A06     ;00
+	BYTE LOW bank2_call_8A11,HIGH bank2_call_8A11     ;00
+	BYTE LOW bank2_call_8A28,HIGH bank2_call_8A28     ;00
+	BYTE LOW bank2_call_8A33,HIGH bank2_call_8A33     ;00
+	BYTE LOW bank2_call_8A3E,HIGH bank2_call_8A3E     ;00
+	BYTE LOW bank2_call_8A49,HIGH bank2_call_8A49     ;00
 	BYTE LOW bank2_call_8A54,HIGH bank2_call_8A54
 	BYTE LOW bank2_call_8A5F,HIGH bank2_call_8A5F
 	BYTE LOW bank2_call_8A6A,HIGH bank2_call_8A6A
@@ -961,7 +966,13 @@ bank2_call_8941
     call bank2_call_87B1
     call bank2_call_87BD
     jp   bank2_call_87C9
-bank2_call_8953
+
+    ;Problem is that all 8 explosion use same offset in
+    ;$c000 which doesn't work with our graphics system
+    ;as we reset the update flag after each time
+    ;so once the first explosion ball gets updated
+    ;none of the others do!
+bank2_call_8953          ;Purple Lantern Pick Up
     ld   b,$03
     xor  a
     ld   hl,$0000
@@ -1496,7 +1507,7 @@ bank2_call_8D95
      ld   a,(l_f47a)
      ld   hl,l_f479
      cp   (hl)
-     ret  z
+     ret  ;z
      push de
 bank2_call_8DA3
      ld   a,(l_e5d3)
@@ -1733,7 +1744,7 @@ bank2_call_8F45
      ld   a,(l_f4ca)
      ld   hl,l_f4c9
      cp   (hl)
-     ret  z
+     ret  ;z
      ex   de,hl
 jmphlstop
      jr jmphlstop
@@ -2253,16 +2264,37 @@ bank2_call_92ED
     cp   $0A
     jr   z,bank2_call_931F
     bit  0,(hl)
-    jr   nz,bank2_call_9312
-    ld   hl,$80F0
+    jr   nz,bank2_call_9312       ;flash screen for bell item
+
+
+    nextreg $43,%10110000          ;tiles
+    nextreg $40,$EF
+    nextreg $41,$E2
+    nextreg $40,$FF
+    nextreg $41,$E2
+    nextreg $40,$0F
+    nextreg $41,$E2
+    nextreg $4C,$00
+
+    ;ld   hl,$80F0
     ;ld   (l_f9de),hl           ;TODO - palette
-    ld   hl,$80F0
+    ;ld   hl,$80F0
     ;ld   (l_f9fe),hl           ;TODO - palette
     ret
 bank2_call_9312
-     ld   hl,$0000
+
+    nextreg $43,%10110000          ;tiles
+    nextreg $40,$EF
+    nextreg $41,$00
+    nextreg $40,$FF
+    nextreg $41,$00
+    nextreg $40,$0F
+    nextreg $41,$00
+    nextreg $4C,$0F
+
+    ; ld   hl,$0000
     ; ld   (l_f9de),hl          ;TODO - palette
-     ld   hl,$0000
+    ; ld   hl,$0000
     ; ld   (l_f9fe),hl          ;TODO - palette
      ret
 bank2_call_931F
@@ -2306,7 +2338,7 @@ bank2_call_935B
      ld   a,(l_f520)
      ld   hl,l_f51f
      cp   (hl)
-     ret  z
+     ret  ;z
      exx
 jphlstop3
     jr jphlstop3
@@ -2802,7 +2834,7 @@ bank2_call_96D8
      ld   a,(l_f52a)
      ld   hl,l_f529
      cp   (hl)
-     ret  z
+     ret  ;z
      push de
 bank2_call_96E6
     ld   hl,l_f52b
@@ -4077,10 +4109,10 @@ bank2_call_A082
      ld   bc,$0000
 bank2_call_A0AE
 
-     bit 6,h
-     jr nz,ok6
-     break
-ok6
+;     bit 6,h
+;     jr nz,ok6
+;     break
+;ok6
 
      ld   (hl),c
      inc  hl
@@ -4098,10 +4130,10 @@ bank2_call_A0C0
      call call_16E1      ;get tilemap coords into HL
 bank2_call_A0C3
      
-     bit 6,h
-     jr nz,ok1
-     break
-ok1
+;     bit 6,h
+;     jr nz,ok1
+;     break
+;ok1
 
 					;ix points to l_f54b (at least on first hit)
      pop  de		;points to l_f558 (at least on first hit)
@@ -4190,10 +4222,10 @@ bank2_call_A12C
      ld   d,(hl)
      ex   de,hl
 
-     bit 6,h
-     jr nz,ok5
-     break
-ok5
+;     bit 6,h
+;     jr nz,ok5
+;     break
+;ok5
 
      ld   (hl),b
      inc  hl
@@ -4208,10 +4240,10 @@ bank2_call_A13A
      ex   de,hl		;this + 4 lines above retrieve screen location into DE
 
 ;     break
-     bit 6,h
-     jr nz,ok2
-     break
-ok2
+;     bit 6,h
+;     jr nz,ok2
+;     break
+;ok2
 
      ld   (hl),b	;and write value in BC
      inc  hl
@@ -4258,10 +4290,10 @@ bank2_call_A17C
 
 ;     break
 
-     bit 6,h
-     jr nz,ok3
-     break
-ok3
+;     bit 6,h
+;     jr nz,ok3
+;     break
+;ok3
 
      ld   (hl),b
      inc  hl
@@ -4389,10 +4421,10 @@ bank2_call_A24F
      ret
 bank2_call_A25B
 
-     bit 6,h
-     jr nz,ok4
-     break
-ok4
+;     bit 6,h
+;     jr nz,ok4
+;     break
+;ok4
 
      push hl
      ld   (hl),$04
@@ -4476,7 +4508,7 @@ bank2_call_A2EE
      ld   a,(l_f58f)
      ld   hl,l_f58e
      cp   (hl)
-     ret  z
+     ret  ;z
      push de
 bank2_call_A2FC	
      ld   hl,l_f590
@@ -5452,10 +5484,24 @@ bank2_call_AA50
 bank2_call_AA5C
      dec  (hl)
      ret
+
+
+     ;called br purple lantern explosion routine
 bank2_call_AA5E
     ld   a,(l_e5d3)
     and  a
     ret  nz
+
+     ;break
+
+/*     ld hl,pattern_bank
+     ld b,$80
+bank2_call_AA5E_1
+     ld a,(hl)
+     or $02
+     ld (hl),a
+    djnz bank2_call_AA5E_1
+*/
     ld   hl,l_f5b6
     ld   bc,$0059
     call call_0D50
@@ -5466,21 +5512,25 @@ bank2_call_AA71
     add  a,a
     add  a,a
     ld   hl,bank2_data_AAA5
-    call call_0D89
+    call call_0D89  ;add a to HL
+
+     ;break
+
     ld   a,(hl)
     ld   (ix+$08),a
     inc  hl
     ld   e,(hl)
     inc  hl
-    ld   d,(hl)
+    ld   d,(hl)          ;de has address of l_e20d to l_e2e5
     ld   (ix+$03),e
     ld   (ix+$04),d
     inc  hl
-    ld   a,(de)
-    inc  hl
-    inc  de
-    ld   (de),a
-    ld   (ix+$07),a
+    ;ld   a,(de)         ;this seems like bug in code which happens to work ok
+    ld   a,(hl)          ;as if all sprites point to gfx 0 that is ok
+    inc  hl              ;as the 8 explosion sprites are all identical, however
+    inc  de              ;I'm pretty sure the final byte in the structure at AAA5
+    ld   (de),a          ;should define the gfx number so I have reinstated to work
+    ld   (ix+$07),a      ;with Next gfx code
     inc  de
     inc  de
     ld   a,$15
@@ -5534,23 +5584,54 @@ bank2_call_AAE2
     jr   nz,bank2_call_AB10
     bit  1,a
     jr   nz,bank2_call_AB03
-    ld   hl,$00F7
+    ;ld   hl,$00F7
   ;  ld   (l_f9de),hl ;TODO palette
-    ld   hl,$00F7
+    ;ld   hl,$00F7
  ;   ld   (l_f9fe),hl ;TODO palette
+
+    nextreg $43,%10110000          ;tiles
+    nextreg $40,$EF
+    nextreg $41,$EC
+    nextreg $40,$FF
+    nextreg $41,$EC
+    nextreg $40,$0F
+    nextreg $41,$EC
+    nextreg $4C,$00
+
+
     ret
 
 bank2_call_AB03
-     ld   hl,$00FF
+    ; ld   hl,$00FF
  ;    ld   (l_f9de),hl  ;TODO palette
-     ld   hl,$00FF
+     ;ld   hl,$00FF
   ;   ld   (l_f9fe),hl  ;TODO palette
+
+    nextreg $43,%10110000          ;tiles
+    nextreg $40,$EF
+    nextreg $41,$FC
+    nextreg $40,$FF
+    nextreg $41,$FC
+    nextreg $40,$0F
+    nextreg $41,$FC
+    nextreg $4C,$00
+
      ret
 bank2_call_AB10
-     ld   hl,$0000
+     ;ld   hl,$0000
     ; ld   (l_f9de),hl  ;TODO palette
-     ld   hl,$0000
+     ;ld   hl,$0000
     ; ld   (l_f9fe),hl  ;TODO palette
+
+     nextreg $43,%10110000          ;tiles
+    nextreg $40,$EF
+    nextreg $41,$00
+    nextreg $40,$FF
+    nextreg $41,$00
+    nextreg $40,$0F
+    nextreg $41,$00
+    nextreg $4C,$0F
+
 ;     ld   hl,$0002
 ;     bit  3,(hl)
 ;     ret  nz
@@ -5574,6 +5655,8 @@ bank2_call_AB34
      jp   nz,bank2_call_ABC9
      bit  4,a
      jp   nz,bank2_call_AC72
+     ;set the gfx for the purple lantern blast
+     ;set starting x/y position
      call loadhlfromspritestruct;call_1529
      ld   b,$04
      ld   (hl),$70
@@ -5589,7 +5672,7 @@ bank2_call_AB5C
      ld   a,d
      call mul32;call_0D6C
      or   e
-     ld   (hl),a
+     ld   (hl),a    ;set gfx number (byte 2)
      inc  d
      ld   a,d
      cp   $04
@@ -5599,14 +5682,16 @@ bank2_call_AB5C
 bank2_call_AB6C
      inc  hl
      inc  hl
-     ld   (hl),$15
+     ld   (hl),$15       ;set gfx bank
      inc  hl
      djnz bank2_call_AB5C
-     ld   c,$12
-     call call_1350
+     ld   c,$12          ;explosions sound
+     call call_1350      ;add to queue
      call loadhl2;call_1537
      set  1,(ix+$00)
      jp   bank2_call_AC72
+
+     ;update the explosion core (before outwards movement)
 bank2_call_AB82
      ld   de,$0507
      call frametimer;call_15CA
@@ -5645,11 +5730,13 @@ bank2_call_ABA2
 bank2_data_ABC1
     BYTE $00,$F0,$00,$00,$F0,$F0,$F0,$00
     
-bank2_call_ABC9
+bank2_call_ABC9     ;update explosion (from purple lantern)
+     ;break
      ld   iy,l_fc5b
      bit  0,(iy+$2a)
      jr   nz,bank2_call_ABD4
-     ex   (sp),hl
+     ;break          ;assume protection
+     ;ex   (sp),hl
 bank2_call_ABD4
      inc  (ix+$0a)
      ld   a,(ix+$0a)
@@ -5663,6 +5750,7 @@ bank2_call_ABD4
      ld   hl,bank2_data_AC59
      call adda2hl;$0D89
      ld   bc,$041F
+     ;break
      call call_14BD
      ld   a,(ix+$0a)
      and  $0F
@@ -5736,6 +5824,7 @@ bank2_call_AC61
      ld   (ix+$00),$00
      set  4,(ix+$00)
 bank2_call_AC72
+     ;move onto next sprite structure
      call bank2_call_8D64
      ld   de,$000B
      add  ix,de

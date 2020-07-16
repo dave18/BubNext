@@ -1535,6 +1535,8 @@ call_0B30				;set the main palette
     ld   a,bank1         ;bank switching
     call call_026C
     ld   hl,bank1_data_8000    ;load palette from rom bank
+
+    nextreg $43, %00110000        ; (R/W) 0x43 (67) => Palette Control Tilemap
 	nextreg $40,$00			   ;select palette entry 0
 ;    ld   de,l_f800
 ;    ld   bc,$0200
@@ -1543,6 +1545,17 @@ call_0B30				;set the main palette
 call_0B30_loop
 	call call_0B30_update_entry
 	djnz call_0B30_loop
+
+    ld   hl,bank1_data_8000    ;load palette from rom bank
+    nextreg $43, %00100000        ; (R/W) 0x43 (67) => Palette Control Sprites
+	nextreg $40,$00			   ;select palette entry 0
+;    ld   de,l_f800
+;    ld   bc,$0200
+;    ldir
+	ld b,0			;loop 256 times
+call_0B30_loop2
+	call call_0B30_update_entry
+	djnz call_0B30_loop2
 	
 	nextreg $4C,$0F				;change transparency to 0F
 	
@@ -3623,6 +3636,89 @@ data_3DE3
 	BYTE $0c,"            "
 
 */
+
+call_3DF0
+    call call_0020
+    call call_4C35
+    ld   a,bank2;$02
+    call call_026C
+    call bank2_call_A59B
+    call bank2_call_A2FC
+    call bank2_call_936A
+    call bank2_call_99E2
+    call bank2_call_96E6
+    call bank2_call_90DD
+    call bank2_call_83E8
+    call bank2_call_85EB
+    call bank2_call_92B6
+    call bank2_call_A820
+    call clearp1;call_3EB5
+    call clearp2;call_3F39
+    call call_5776
+    call bank2_call_9F76
+    call bank2_call_B9C4
+    call bank2_call_8BA7
+    call bank2_call_AC80
+    call call_029B
+    call call_4F52 
+   ; BYTE "CALL_4F52"
+   
+	;3E32
+    ld   hl,l_f448
+    ld   (hl),$00
+    ld   a,(l_f536)
+    cp   $01
+    jr   z,call_3E5B
+    ld   a,(l_e64b)
+    cp   $00
+    jr   z,call_3E5B
+    cp   $64
+    jr   z,call_3E5B
+    ld   a,$04
+    call call_0030
+;    ld   b,$03         ;ROM CHECK
+;    xor  a
+;    ld   hl,data_0000
+;call_3E52
+;    add  a,(hl)
+;    inc  hl
+;    djnz call_3E52
+;    sub  $3E
+;    jr   $3E5B
+;    push de
+
+    ;set of routines called by RST20 during normal gameplay
+call_3E5B					;9852 IN ASSEMBLED CODE 
+    call  call_0020;$20
+    call call_4D13
+    ld   a,bank2;$02
+    call call_026C
+    call bank2_call_8499
+    call bank2_call_8686
+    call bank2_call_A5A4
+    call bank2_call_A480
+    call bank2_call_A310        ;call flood fill
+    call bank2_call_9373
+    call bank2_call_99EB
+    call bank2_call_96EF
+    call bank2_call_AAC5
+    call bank2_call_90ED
+    call bank2_call_8DFF
+    call bank2_call_8FA6
+    call bank2_call_A829
+    call call_577F              ;call VS mode
+    call bank2_call_9F7F
+    call bank2_call_B9CD
+    call bank2_call_92CF
+    call bank2_call_8BB0
+    call bank2_call_ACBA
+    call call_029B
+    call call_4F5B
+   ; BYTE "CALL_4F5B"
+    call bank0_call_BF48
+    call call_4012
+    jp   call_3E5B
+
 
 call_539F
     ld   hl,l_e5d7
