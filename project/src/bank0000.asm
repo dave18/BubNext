@@ -3089,6 +3089,44 @@ call_22DA
    ret
 
 	
+data_3574
+    BYTE $7E,$7A,LOW data_359E,HIGH data_359E,$00
+    BYTE $12,$7B,LOW data_35AF,HIGH data_35AF,$00
+    BYTE $B2,$7B,LOW data_35B3,HIGH data_35B3,$00
+    BYTE $52,$7C,LOW data_35B7,HIGH data_35B7,$00
+    BYTE $F2,$7C,LOW data_35BB,HIGH data_35BB,$00
+    BYTE $92,$7D,LOW data_35BF,HIGH data_35BF,$00
+    BYTE $f2,$78,LOW data_3597,HIGH data_3597,$10
+    
+data_3597
+    BYTE $06,"BEST 5"
+        
+data_359E
+    BYTE $10,"SCORE ROUND NAME"
+    
+data_35AF
+    BYTE $03,"1ST"
+
+data_35B3
+    BYTE $03,"2ND"
+
+data_35B7
+    BYTE $03,"3RD"
+
+data_35BB
+    BYTE $03,"4TH"
+
+data_35BF
+    BYTE $03,"5TH"
+
+data_35C3
+    BYTE $14,"ENTER 1UP INITIALS !"
+
+data_35D8
+    BYTE $14,"ENTER 2UP INITIALS !"
+
+data_35ED
+    BYTE $11,"SCORE ROUND  NAME"
 	
 call_35FF				;Bank 2 is paged in when we reach here
 	call call_029B		;so page it out
@@ -3839,6 +3877,163 @@ data_5490
     BYTE $F8-$15,$E0,$F9-$15,$E0
 data_5494
     BYTE $EC,$E0,$ED,$E0
+
+
+call_563F
+    ld   a,0
+    ld  (intro_scroll_counter),a
+    ld   hl,l_e5c4
+    ld	 (hl),$00
+    ld   hl,intro_bank1_data_90EA     ;1 Player ending
+    ld   a,(l_e5d7)
+    cp   $03                        ;check numbers of players
+    jr   nz,call_565A
+    ld   hl,intro_bank1_data_8D42     ;2 Player ending
+    ld   a,(l_e5db)
+    and  a
+    jr   z,call_565A
+    ld   hl,intro_bank1_data_91BF     ;Real ending
+call_565A
+    ld   (l_e734),hl
+call_565D
+    call  call_0020
+    ld   hl,l_e736
+    inc  (hl)
+    ld   a,(hl)
+    cp   $04
+    jr   nz,call_565D
+    ld   (hl),$00
+    call call_56AB      ;scroll screen and raise sprites
+    ld   a,(l_e2f5)
+    ;ld   a,(l_e1cd)
+    and  $07
+    jr   nz,call_565D   ;if not scrolled 8 pixels don't write new line
+
+    ld a,introbank
+    call call_026C
+    ld   a,(intro_scroll_counter)
+    call intro_call_5701      ;clear line
+    ld   a,(intro_scroll_counter)
+    call intro_call_5719      ;write message
+    call call_029B
+
+    ld   e,$3B      ;59 - number of scrolls lines in 1 player ending in
+    ld   a,(l_e5d7)
+    cp   $03
+    jr   nz,call_568C
+    ld   e,$AC      ;172 - number of scrolls lines in 2 player ending
+    ld   a,(l_e5db)
+    and  a
+    jr   z,call_568C
+    ld   e,$AC      ;172 - number of scrolls lines in real ending
+call_568C
+    ld a,(intro_scroll_counter)
+    inc a
+    cp 24
+    jr nz,call_568C_1
+    ld a,0
+call_568C_1
+    ld   (intro_scroll_counter),a
+    ld   hl,l_e5c4
+    inc  (hl)
+    ld   a,(hl)
+    cp   e
+    jr   nz,call_565D
+    ld   hl,l_e5c4
+    ld   (hl),$00
+    ;ld   b,$10
+    ld   hl,l_e2f5
+    ld   (hl),$00
+    ;ld   hl,l_e1cd
+call_569E
+    ld a,0
+    ld   (intro_scroll_counter),a
+    ;ld   (hl),$00
+    ;inc  hl
+    ;inc  hl
+    ;inc  hl
+    ;inc  hl
+    ;djnz intro_call_569E
+    ld a,$05
+    call call_0008    
+    call call_0020
+    ret
+call_56AB
+;    ld   a,($0002) ;protection
+;    cp   $5E
+;    jr   z,$56B4
+;    push af
+;    push bc
+    ;ld   b,$10
+    ld   a,(l_e2f5)
+    ;ld   hl,l_e1cd
+call_56B9
+    inc  a
+    cp $c0;24
+    jr nz,call_56B9_1
+    ld a,0
+call_56B9_1
+    ld (l_e2f5),a
+    ;inc  hl
+    ;inc  hl
+    ;inc  hl
+    ;inc  hl
+    ;djnz call_56B9
+    ld   b,$10
+    ld   hl,l_e20d      ;raise sprites
+call_56C5
+    ld   a,(hl)
+    and  a
+    jr   z,call_56CA
+    inc  (hl)
+call_56CA
+    inc  hl
+    inc  hl
+    inc  hl
+    inc  hl
+    djnz call_56C5
+    ld   hl,l_e2c5
+    ld   a,(hl)
+    and  a
+    jr   z,call_56D8
+    inc  (hl)
+call_56D8
+    ld   hl,l_e2b5
+    ld   a,(hl)
+    and  a
+    jr   z,call_56E0
+    inc  (hl)
+call_56E0
+    ld   b,$08
+    ld   hl,l_e255
+call_56E5
+    ld   a,(hl)
+    and  a
+    jr   z,call_56EA
+    inc  (hl)
+call_56EA
+    inc  hl
+    inc  hl
+    inc  hl
+    inc  hl
+    djnz call_56E5
+    ld   b,$10
+    ld   hl,l_e275
+call_56F5
+    ld   a,(hl)
+    and  a
+    jr   z,call_56FA
+    inc  (hl)
+call_56FA
+    inc  hl
+    inc  hl
+    inc  hl
+    inc  hl
+    djnz call_56F5
+    ret
+
+intro_scroll_counter
+    BYTE $00
 	
 call_5C2B				;INTRO ERROR - THIS IS WHERE IX SHOULD GET LOADED (PROBABLY)
     call call_60F3

@@ -1,5 +1,11 @@
 
-	org $c000
+F_OPEN equ $9A
+F_CLOSE equ $9B
+F_SYNC equ $9C
+F_READ equ $9D
+F_WRITE equ $9E
+    
+    org $c000
 	
 slave_call_0190
     ld   a,(l_e338)
@@ -2875,3 +2881,51 @@ slave_layer2_clear_screen
 Slave_oldstack
     BYTE $00,$00
 
+/*
+open_file_for_output
+    ld (Slave_oldstack),sp		;avoid danger of destroying game stack
+	ld sp,$FFFE					;use space beyond interrupt
+
+    ;ld (int_spbackup),sp		;avoid danger of destroying game stack
+	;ld sp,$bfec					;use space beyond interrupt
+    ;page in ROM
+    nextreg $50,$FF
+    nextreg $51,$FF
+
+    ld a,'*'
+    ld ix,filename
+    ld b,$0A
+
+    ;break
+
+    rst $08
+    defb F_OPEN
+
+    break    
+
+    ld (filehandle),a
+    
+
+
+    ld a,(filehandle)
+
+    rst $08
+    defb F_CLOSE
+
+    break
+
+    ;restore RAM
+    nextreg $50,divmmcbank
+    nextreg $50,divmmcbank+1
+
+    ;ld 	sp,(int_spbackup)
+    ld 	sp,(Slave_oldstack)
+
+    ret
+
+filename
+    BYTE "BUBNEXT.SAV",0
+
+filehandle
+    BYTE $00
+*/

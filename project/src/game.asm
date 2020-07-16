@@ -136,6 +136,13 @@ DMA_LOAD                       equ $cf ; %11001111
     nextreg $50,divmmcbank
     nextreg $51,divmmcbank+1
 
+ ;   break
+
+;    ld a,slavebank
+ ;   call call_026C_DI
+;    call open_file_for_output
+    
+
     ld sp,l_f7fe    ;this matches arcade
 
 
@@ -1070,6 +1077,10 @@ call_1AED
 
     ld a,1              ;flag to allow the options screen to be called
     ld (options_control),a
+
+    ld a,(highscoreupdate)
+    and a
+    call nz,open_file_for_output
 	
 
     call call_1BBA
@@ -3225,11 +3236,14 @@ call_343B
     cp   (hl)
     ret  ;z    
     push de
-call_3449
+call_3449           ;copy high score data
     ld   hl,data_347C
     ld   de,l_e654
     ld   bc,$0023
     ldir
+
+    
+
     ld   b,$05
     ld   de,l_e654
 call_3459
@@ -3249,6 +3263,14 @@ call_3459
     ld   (hl),$1F
     ld   hl,l_e67d
     ld   (hl),$13
+
+    ;break
+
+
+    call open_file_for_input
+
+    ;break
+
     ret
 
 data_347C
@@ -3386,7 +3408,7 @@ call_3558
 ;    BYTE $97,$35,$04
 
 ;screen loc, text data, colour    
-data_3574
+/*data_3574
     BYTE $7E,$7A,LOW data_359E,HIGH data_359E,$00
     BYTE $12,$7B,LOW data_35AF,HIGH data_35AF,$00
     BYTE $B2,$7B,LOW data_35B3,HIGH data_35B3,$00
@@ -3424,7 +3446,7 @@ data_35D8
 
 data_35ED
     BYTE $11,"SCORE ROUND  NAME"
-
+*/
 ;moved to intro block for memory saving
 ;call_361D			;Called once all lives are lost
 ;	jr call_361D
@@ -6044,161 +6066,7 @@ data_560F
 data_5627
     BYTE $17,"                       "
 */	
-call_563F
-    ld   a,0
-    ld  (intro_scroll_counter),a
-    ld   hl,l_e5c4
-    ld	 (hl),$00
-    ld   hl,intro_bank1_data_90EA     ;1 Player ending
-    ld   a,(l_e5d7)
-    cp   $03                        ;check numbers of players
-    jr   nz,call_565A
-    ld   hl,intro_bank1_data_8D42     ;2 Player ending
-    ld   a,(l_e5db)
-    and  a
-    jr   z,call_565A
-    ld   hl,intro_bank1_data_91BF     ;Real ending
-call_565A
-    ld   (l_e734),hl
-call_565D
-    call  call_0020
-    ld   hl,l_e736
-    inc  (hl)
-    ld   a,(hl)
-    cp   $04
-    jr   nz,call_565D
-    ld   (hl),$00
-    call call_56AB      ;scroll screen and raise sprites
-    ld   a,(l_e2f5)
-    ;ld   a,(l_e1cd)
-    and  $07
-    jr   nz,call_565D   ;if not scrolled 8 pixels don't write new line
 
-    ld a,introbank
-    call call_026C
-    ld   a,(intro_scroll_counter)
-    call intro_call_5701      ;clear line
-    ld   a,(intro_scroll_counter)
-    call intro_call_5719      ;write message
-    call call_029B
-
-    ld   e,$3B      ;59 - number of scrolls lines in 1 player ending in
-    ld   a,(l_e5d7)
-    cp   $03
-    jr   nz,call_568C
-    ld   e,$AC      ;172 - number of scrolls lines in 2 player ending
-    ld   a,(l_e5db)
-    and  a
-    jr   z,call_568C
-    ld   e,$AC      ;172 - number of scrolls lines in real ending
-call_568C
-    ld a,(intro_scroll_counter)
-    inc a
-    cp 24
-    jr nz,call_568C_1
-    ld a,0
-call_568C_1
-    ld   (intro_scroll_counter),a
-    ld   hl,l_e5c4
-    inc  (hl)
-    ld   a,(hl)
-    cp   e
-    jr   nz,call_565D
-    ld   hl,l_e5c4
-    ld   (hl),$00
-    ;ld   b,$10
-    ld   hl,l_e2f5
-    ld   (hl),$00
-    ;ld   hl,l_e1cd
-call_569E
-    ld a,0
-    ld   (intro_scroll_counter),a
-    ;ld   (hl),$00
-    ;inc  hl
-    ;inc  hl
-    ;inc  hl
-    ;inc  hl
-    ;djnz intro_call_569E
-    ld a,$05
-    call call_0008    
-    call call_0020
-    ret
-call_56AB
-;    ld   a,($0002) ;protection
-;    cp   $5E
-;    jr   z,$56B4
-;    push af
-;    push bc
-    ;ld   b,$10
-    ld   a,(l_e2f5)
-    ;ld   hl,l_e1cd
-call_56B9
-    inc  a
-    cp $c0;24
-    jr nz,call_56B9_1
-    ld a,0
-call_56B9_1
-    ld (l_e2f5),a
-    ;inc  hl
-    ;inc  hl
-    ;inc  hl
-    ;inc  hl
-    ;djnz call_56B9
-    ld   b,$10
-    ld   hl,l_e20d      ;raise sprites
-call_56C5
-    ld   a,(hl)
-    and  a
-    jr   z,call_56CA
-    inc  (hl)
-call_56CA
-    inc  hl
-    inc  hl
-    inc  hl
-    inc  hl
-    djnz call_56C5
-    ld   hl,l_e2c5
-    ld   a,(hl)
-    and  a
-    jr   z,call_56D8
-    inc  (hl)
-call_56D8
-    ld   hl,l_e2b5
-    ld   a,(hl)
-    and  a
-    jr   z,call_56E0
-    inc  (hl)
-call_56E0
-    ld   b,$08
-    ld   hl,l_e255
-call_56E5
-    ld   a,(hl)
-    and  a
-    jr   z,call_56EA
-    inc  (hl)
-call_56EA
-    inc  hl
-    inc  hl
-    inc  hl
-    inc  hl
-    djnz call_56E5
-    ld   b,$10
-    ld   hl,l_e275
-call_56F5
-    ld   a,(hl)
-    and  a
-    jr   z,call_56FA
-    inc  (hl)
-call_56FA
-    inc  hl
-    inc  hl
-    inc  hl
-    inc  hl
-    djnz call_56F5
-    ret
-
-intro_scroll_counter
-    BYTE $00
 
     /*break
     ld a,introbank
@@ -8467,6 +8335,189 @@ sprite_noupdate
 	;out (PAL_WRITE),a
     
     ret
+
+open_file_for_output
+    ;di
+
+    ;nextreg $07,$00		;set turbo to 3.5hz
+
+    ld bc,$123B
+	ld a,%00000010
+	out (c),a
+
+    ld bc,$243b
+	ld a,$56
+	out (c),a
+	ld bc,$253b
+    in a,(c)
+    ld (int_membackup),a
+    ld bc,$243b
+	ld a,$57
+	out (c),a
+	ld bc,$253b
+    in a,(c)
+    ld (int_membackup+1),a
+
+
+    ;ld (Slave_oldstack),sp		;avoid danger of destroying game stack
+	;ld sp,$FFFE					;use space beyond interrupt
+
+    ld (int_spbackup),sp		;avoid danger of destroying game stack
+	ld sp,$bfbc					;use space beyond interrupt
+
+
+    ld hl,l_e654
+    ld de,hiscoremem
+    ld bc,$23
+    ldir
+
+    ;page in ROM
+    nextreg $50,$FF
+    nextreg $51,$FF
+
+    ld a,'*'
+    ld ix,filename
+    ld b,$0A
+    rst $08
+    defb F_OPEN
+    jr c,open_file_for_output_exit           ;exit if carry set
+    ld (filehandle),a
+
+    ld ix,hiscoremem
+    ld bc,$23
+    rst $08
+    defb F_WRITE
+
+    ld a,(filehandle)
+    rst $08
+    defb F_SYNC
+
+    ld a,(filehandle)
+    rst $08
+    defb F_CLOSE
+
+ ;   break
+open_file_for_output_exit
+    ;restore RAM
+    nextreg $50,divmmcbank
+    nextreg $51,divmmcbank+1
+
+    ld 	sp,(int_spbackup)
+    ;ld 	sp,(Slave_oldstack)
+
+    ld a,0
+    ld (highscoreupdate),a
+
+    ld a,(int_membackup)
+    nextreg $56,a
+    ld a,(int_membackup+1)
+    nextreg $57,a
+
+    ;nextreg $07,$03		;set turbo to 28Mhz
+
+    ret
+
+open_file_for_input
+    ;di
+    ;nextreg $07,$00		;set turbo to 3.5Mhz
+
+    ld bc,$123B         ;turn off layer 2 writes just in case)
+	ld a,%00000010
+	out (c),a
+
+    ld bc,$243b         ;back up which memory is banked into 6 & 7
+	ld a,$56
+	out (c),a
+	ld bc,$253b
+    in a,(c)
+    ld (int_membackup),a
+    ld bc,$243b
+	ld a,$57
+	out (c),a
+	ld bc,$253b
+    in a,(c)
+    ld (int_membackup+1),a
+
+    ld (int_spbackup),sp		;save old stack and move stack into safe area
+	ld sp,$bfbc					
+
+
+    
+
+    ;page in ROM
+    nextreg $50,$FF             ;page in ROM
+    nextreg $51,$FF
+
+  ;  break
+
+    ld a,'*'
+    ld ix,filename
+    ld b,$01
+    rst $08
+    defb F_OPEN             ;Open file as read only
+
+   ; break
+
+    jr c,open_file_for_input_exit           ;exit if carry set
+    ld (filehandle),a               ;save file handle
+
+    
+
+    ld ix,hiscoremem                ;read 35 bytes from file
+    ld bc,$23
+    rst $08
+    defb F_READ
+
+  ;  break
+
+    ld a,(filehandle)           ;prob not needed
+    rst $08
+    defb F_SYNC
+
+    ld a,(filehandle)           ;close gfile
+    rst $08
+    defb F_CLOSE
+
+ ;   break
+
+    ;restore RAM
+    nextreg $50,divmmcbank          ;restore RAM into banks 0 and 1
+    nextreg $51,divmmcbank+1
+
+    ld hl,hiscoremem                ;copy loaded data into RAM at bank 1
+    ld de,l_e654
+    ld bc,$23
+    ldir
+
+open_file_for_input_exit
+
+    nextreg $50,divmmcbank          ;restore RAM in case we came here from error
+    nextreg $51,divmmcbank+1
+
+    ld 	sp,(int_spbackup)           ;restore stack
+    ;ld 	sp,(Slave_oldstack)
+
+    ld a,(int_membackup)            ;retore mem banks 6 & 7
+    nextreg $56,a
+    ld a,(int_membackup+1)
+    nextreg $57,a
+
+    ;nextreg $07,$03		;set turbo to 28Mhz
+
+    ret                             ;safely exit
+
+filename
+    BYTE "bubnext.sav",0
+
+filehandle
+    BYTE $00
+
+
+hiscoremem
+    defs $23,$23
+
+highscoreupdate
+    BYTE 0
     
 attr2
 	BYTE 0,0,0

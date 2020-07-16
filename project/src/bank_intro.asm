@@ -1427,6 +1427,7 @@ intro_call_373B
     cp   $03
     jr   nz,intro_call_373B
 intro_call_3756
+    ld (highscoreupdate),a
     call call_0020
     call intro_call_3811
     ld   de,intro_data_37DF
