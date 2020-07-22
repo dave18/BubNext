@@ -8514,7 +8514,7 @@ filehandle
 
 
 hiscoremem
-    defs $23,$23
+    defs $23,$00
 
 highscoreupdate
     BYTE 0
