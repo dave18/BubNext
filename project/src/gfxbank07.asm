@@ -1,5 +1,9 @@
     ORG $c000
 gfx07    
-    //incbin "../data/gfxb07.bin"
-    defs $4000 * $00
+    IFDEF DEVBUILD
+        incbin "../data/gfxb07.bin"
+    ELSE
+        defb "GFXBANK07"
+        defs $3FF7 * $00
+    ENDIF
     

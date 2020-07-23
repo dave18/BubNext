@@ -1,5 +1,9 @@
     ORG $c000
 gfx23
-    //incbin "../data/gfxb23.bin"
-    defs $4000 * $00
+    IFDEF DEVBUILD
+        incbin "../data/gfxb23.bin"
+    ELSE
+        defb "GFXBANK23"
+        defs $3FF7 * $00
+    ENDIF
     

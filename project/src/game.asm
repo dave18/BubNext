@@ -1,3 +1,7 @@
+    DEFINE DEVBUILD 1
+
+
+    
     DEVICE ZXSPECTRUMNEXT
 
 ;    INCLUDE "nextcodes.asm"			;macros to add Next Extended Opcodes
@@ -421,7 +425,11 @@ call_0171
 	
 	;***** Once initialisation is complete everything is controlled through this interrupt driven routine ****
 call_01ED
-    ei
+    ifdef DEVBUILD
+        ei
+    else
+        nop;ei
+    endif
     halt
     call call_0AEE;call_044D
     jr call_01ED
@@ -1322,7 +1330,7 @@ call_1BCF
     ld   b,$08
     ld   hl,l_e5c8
    ; ld   de,data_1cbe
-call_1BFE
+call_1BFE       ;CHEATS!
     jr call_1BFE    
 call_1D17
     call call_0020
@@ -2603,7 +2611,7 @@ data_2E79
 data_2E94
     BYTE $1A,"ONE STAGE CLEARED WHEN ALL"
 data_2EAF
-    BYTE $1A,"ALL ENEMIES ARE DESTROYED."
+    BYTE $1A,"ENEMIES ARE DESTROYED.    "
 
 call_2ECA
     ld a,(l_e634)
@@ -8583,11 +8591,11 @@ screentable
 */
     BYTE "END OF CODE"
 
-    CSPECTMAP "game.map"
+    CSPECTMAP "BUBNEXT.map"
 
     ; write everything into NEX file
     ;SAVENEX OPEN "game.nex", mainstart, l_f7fe, 0  
-    SAVENEX OPEN "game.nex", mainstart, $FFFE, 9  ; stack will go into Layer2
+    SAVENEX OPEN "releases/BUBNEXT.nex", mainstart, $FFFE, 9  ; stack will go into Layer2
     SAVENEX CORE 2, 0, 0        ; Next core 2.0.0 required as minimum
     SAVENEX CFG 3, 1           ; green border, Close file once done
     SAVENEX BAR 1, $E0, 50,25  ; do load bar, red colour, start/load delays 50/25 frames

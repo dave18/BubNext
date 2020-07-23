@@ -34,7 +34,7 @@
             "label": "Launch CSpect",
             "type": "shell",
             //"command": "D:\\Emulators\\CSpect\\CSpect.exe -w4 -r -s28 -tv -esc -brk -basickeys -zxnext -nextrom -60 -map=${workspaceRoot}\\game.map -mmc=${workspaceRoot}\\sdcard\\cspect-next-2gb.img game.nex",
-            "command": "${workspaceRoot}\\project\\bin\\CSpect.exe -w4 -r -s28 -tv -esc -brk -basickeys -zxnext -nextrom -60 -map=${workspaceRoot}\\game.map -mmc=${workspaceRoot}\\sdcard\\cspect-next-2gb.img game.nex",
+            "command": "${workspaceRoot}\\project\\bin\\CSpect.exe -w4 -r -s28 -tv -esc -brk -basickeys -zxnext -nextrom -60 -map=${workspaceRoot}\\BUBNEXT.map -mmc=${workspaceRoot}\\sdcard\\cspect-next-2gb.img ${workspaceRoot}\\releases\\BUBNEXT.nex",
             "dependsOrder": "sequence",
             "dependsOn": [
                 "Compile Assembly",

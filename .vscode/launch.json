@@ -25,7 +25,7 @@
             },
             "rootFolder": "${workspaceFolder}",
             "topOfStack": "stack_top",
-            "load": "game.nex",
+            "load": "releases\\BUBNEXT.nex",
             "smallValuesMaximum": 513,
             "tmpDir": ".tmp"
         }
