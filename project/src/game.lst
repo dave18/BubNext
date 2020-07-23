@@ -1,5 +1,5 @@
 # file opened: c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\game.asm
-   1  0000                  DEFINE DEVBUILD 1
+   1  0000                  //DEFINE DEVBUILD 1
    2  0000
    3  0000
    4  0000
@@ -12873,375 +12873,425 @@
    1++C000                  ORG $c000
    2++C000              gfx00
    3++C000                  IFDEF DEVBUILD
-   4++C000                      incbin "../data/gfxb00.bin"
+   4++C000 ~                    incbin "../data/gfxb00.bin"
    5++C000                  ELSE
-   6++C000 ~                    defb "GFXBANK00"
-   7++C000 ~                    defs $3FF7 * $00
-   8++C000                  ENDIF
+   6++C000 47 46 58 42          defb "GFXBANK00"
+   6++C004 41 4E 4B 30
+   6++C008 30
+   7++C009                      defs $3FF7 * $00
+   8++C009                  ENDIF
 # file closed: c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\gfxbank00.asm
-   8+ 0000
-   9+ 0000                  MMU 6 7,gfxbank01
-  10+ 0000                  ORG 0xC000
+   8+ C009
+   9+ C009                  MMU 6 7,gfxbank01
+  10+ C009                  ORG 0xC000
   11+ C000                  INCLUDE "gfxbank01.asm"
 # file opened: c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\gfxbank01.asm
    1++C000                  ORG $c000
    2++C000              gfx01
    3++C000                  IFDEF DEVBUILD
-   4++C000                      incbin "../data/gfxb01.bin"
+   4++C000 ~                    incbin "../data/gfxb01.bin"
    5++C000                  ELSE
-   6++C000 ~                    defb "GFXBANK01"
-   7++C000 ~                    defs $3FF7 * $00
-   8++C000                  ENDIF
-   9++0000
+   6++C000 47 46 58 42          defb "GFXBANK01"
+   6++C004 41 4E 4B 30
+   6++C008 31
+   7++C009                      defs $3FF7 * $00
+   8++C009                  ENDIF
+   9++C009
 # file closed: c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\gfxbank01.asm
-  12+ 0000
-  13+ 0000                  MMU 6 7,gfxbank02
-  14+ 0000                  ORG 0xC000
+  12+ C009
+  13+ C009                  MMU 6 7,gfxbank02
+  14+ C009                  ORG 0xC000
   15+ C000                  INCLUDE "gfxbank02.asm"
 # file opened: c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\gfxbank02.asm
    1++C000                  ORG $c000
    2++C000              gfx02
    3++C000                  IFDEF DEVBUILD
-   4++C000                      incbin "../data/gfxb02.bin"
+   4++C000 ~                    incbin "../data/gfxb02.bin"
    5++C000                  ELSE
-   6++C000 ~                    defb "GFXBANK02"
-   7++C000 ~                    defs $3FF7 * $00
-   8++C000                  ENDIF
-   9++0000
+   6++C000 47 46 58 42          defb "GFXBANK02"
+   6++C004 41 4E 4B 30
+   6++C008 32
+   7++C009                      defs $3FF7 * $00
+   8++C009                  ENDIF
+   9++C009
 # file closed: c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\gfxbank02.asm
-  16+ 0000
-  17+ 0000                  MMU 6 7,gfxbank03
-  18+ 0000                  ORG 0xC000
+  16+ C009
+  17+ C009                  MMU 6 7,gfxbank03
+  18+ C009                  ORG 0xC000
   19+ C000                  INCLUDE "gfxbank03.asm"
 # file opened: c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\gfxbank03.asm
    1++C000                  ORG $c000
    2++C000              gfx03
    3++C000                  IFDEF DEVBUILD
-   4++C000                      incbin "../data/gfxb03.bin"
+   4++C000 ~                    incbin "../data/gfxb03.bin"
    5++C000                  ELSE
-   6++C000 ~                    defb "GFXBANK03"
-   7++C000 ~                    defs $3FF7 * $00
-   8++C000                  ENDIF
-   9++0000
+   6++C000 47 46 58 42          defb "GFXBANK03"
+   6++C004 41 4E 4B 30
+   6++C008 33
+   7++C009                      defs $3FF7 * $00
+   8++C009                  ENDIF
+   9++C009
 # file closed: c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\gfxbank03.asm
-  20+ 0000
-  21+ 0000                  MMU 6 7,gfxbank04
-  22+ 0000                  ORG 0xC000
+  20+ C009
+  21+ C009                  MMU 6 7,gfxbank04
+  22+ C009                  ORG 0xC000
   23+ C000                  INCLUDE "gfxbank04.asm"
 # file opened: c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\gfxbank04.asm
    1++C000                  ORG $c000
    2++C000              gfx04
    3++C000                  IFDEF DEVBUILD
-   4++C000                      incbin "../data/gfxb04.bin"
+   4++C000 ~                    incbin "../data/gfxb04.bin"
    5++C000                  ELSE
-   6++C000 ~                    defb "GFXBANK04"
-   7++C000 ~                    defs $3FF7 * $00
-   8++C000                  ENDIF
-   9++0000
+   6++C000 47 46 58 42          defb "GFXBANK04"
+   6++C004 41 4E 4B 30
+   6++C008 34
+   7++C009                      defs $3FF7 * $00
+   8++C009                  ENDIF
+   9++C009
 # file closed: c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\gfxbank04.asm
-  24+ 0000
-  25+ 0000                  MMU 6 7,gfxbank05
-  26+ 0000                  ORG 0xC000
+  24+ C009
+  25+ C009                  MMU 6 7,gfxbank05
+  26+ C009                  ORG 0xC000
   27+ C000                  INCLUDE "gfxbank05.asm"
 # file opened: c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\gfxbank05.asm
    1++C000                  ORG $c000
    2++C000              gfx05
    3++C000                  IFDEF DEVBUILD
-   4++C000                      incbin "../data/gfxb05.bin"
+   4++C000 ~                    incbin "../data/gfxb05.bin"
    5++C000                  ELSE
-   6++C000 ~                    defb "GFXBANK05"
-   7++C000 ~                    defs $3FF7 * $00
-   8++C000                  ENDIF
-   9++0000
+   6++C000 47 46 58 42          defb "GFXBANK05"
+   6++C004 41 4E 4B 30
+   6++C008 35
+   7++C009                      defs $3FF7 * $00
+   8++C009                  ENDIF
+   9++C009
 # file closed: c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\gfxbank05.asm
-  28+ 0000
-  29+ 0000                  MMU 6 7,gfxbank06
-  30+ 0000                  ORG 0xC000
+  28+ C009
+  29+ C009                  MMU 6 7,gfxbank06
+  30+ C009                  ORG 0xC000
   31+ C000                  INCLUDE "gfxbank06.asm"
 # file opened: c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\gfxbank06.asm
    1++C000                  ORG $c000
    2++C000              gfx06
    3++C000                  IFDEF DEVBUILD
-   4++C000                      incbin "../data/gfxb06.bin"
+   4++C000 ~                    incbin "../data/gfxb06.bin"
    5++C000                  ELSE
-   6++C000 ~                    defb "GFXBANK06"
-   7++C000 ~                    defs $3FF7 * $00
-   8++C000                  ENDIF
-   9++0000
+   6++C000 47 46 58 42          defb "GFXBANK06"
+   6++C004 41 4E 4B 30
+   6++C008 36
+   7++C009                      defs $3FF7 * $00
+   8++C009                  ENDIF
+   9++C009
 # file closed: c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\gfxbank06.asm
-  32+ 0000
-  33+ 0000                  MMU 6 7,gfxbank07
-  34+ 0000                  ORG 0xC000
+  32+ C009
+  33+ C009                  MMU 6 7,gfxbank07
+  34+ C009                  ORG 0xC000
   35+ C000                  INCLUDE "gfxbank07.asm"
 # file opened: c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\gfxbank07.asm
    1++C000                  ORG $c000
    2++C000              gfx07
    3++C000                  IFDEF DEVBUILD
-   4++C000                      incbin "../data/gfxb07.bin"
+   4++C000 ~                    incbin "../data/gfxb07.bin"
    5++C000                  ELSE
-   6++C000 ~                    defb "GFXBANK07"
-   7++C000 ~                    defs $3FF7 * $00
-   8++C000                  ENDIF
-   9++0000
+   6++C000 47 46 58 42          defb "GFXBANK07"
+   6++C004 41 4E 4B 30
+   6++C008 37
+   7++C009                      defs $3FF7 * $00
+   8++C009                  ENDIF
+   9++C009
 # file closed: c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\gfxbank07.asm
-  36+ 0000
-  37+ 0000                  MMU 6 7,gfxbank08
-  38+ 0000                  ORG 0xC000
+  36+ C009
+  37+ C009                  MMU 6 7,gfxbank08
+  38+ C009                  ORG 0xC000
   39+ C000                  INCLUDE "gfxbank08.asm"
 # file opened: c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\gfxbank08.asm
    1++C000                  ORG $c000
    2++C000              gfx08
    3++C000                  IFDEF DEVBUILD
-   4++C000                      incbin "../data/gfxb08.bin"
+   4++C000 ~                    incbin "../data/gfxb08.bin"
    5++C000                  ELSE
-   6++C000 ~                    defb "GFXBANK08"
-   7++C000 ~                    defs $3FF7 * $00
-   8++C000                  ENDIF
-   9++0000
+   6++C000 47 46 58 42          defb "GFXBANK08"
+   6++C004 41 4E 4B 30
+   6++C008 38
+   7++C009                      defs $3FF7 * $00
+   8++C009                  ENDIF
+   9++C009
 # file closed: c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\gfxbank08.asm
-  40+ 0000
-  41+ 0000                  MMU 6 7,gfxbank09
-  42+ 0000                  ORG 0xC000
+  40+ C009
+  41+ C009                  MMU 6 7,gfxbank09
+  42+ C009                  ORG 0xC000
   43+ C000                  INCLUDE "gfxbank09.asm"
 # file opened: c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\gfxbank09.asm
    1++C000                  ORG $c000
    2++C000              gfx09
    3++C000                  IFDEF DEVBUILD
-   4++C000                      incbin "../data/gfxb09.bin"
+   4++C000 ~                    incbin "../data/gfxb09.bin"
    5++C000                  ELSE
-   6++C000 ~                    defb "GFXBANK09"
-   7++C000 ~                    defs $3FF7 * $00
-   8++C000                  ENDIF
-   9++0000
+   6++C000 47 46 58 42          defb "GFXBANK09"
+   6++C004 41 4E 4B 30
+   6++C008 39
+   7++C009                      defs $3FF7 * $00
+   8++C009                  ENDIF
+   9++C009
 # file closed: c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\gfxbank09.asm
-  44+ 0000
-  45+ 0000                  MMU 6 7,gfxbank10
-  46+ 0000                  ORG 0xC000
+  44+ C009
+  45+ C009                  MMU 6 7,gfxbank10
+  46+ C009                  ORG 0xC000
   47+ C000                  INCLUDE "gfxbank10.asm"
 # file opened: c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\gfxbank10.asm
    1++C000                  ORG $c000
    2++C000              gfx10
    3++C000                  IFDEF DEVBUILD
-   4++C000                      incbin "../data/gfxb10.bin"
+   4++C000 ~                    incbin "../data/gfxb10.bin"
    5++C000                  ELSE
-   6++C000 ~                    defb "GFXBANK10"
-   7++C000 ~                    defs $3FF7 * $00
-   8++C000                  ENDIF
-   9++0000
+   6++C000 47 46 58 42          defb "GFXBANK10"
+   6++C004 41 4E 4B 31
+   6++C008 30
+   7++C009                      defs $3FF7 * $00
+   8++C009                  ENDIF
+   9++C009
 # file closed: c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\gfxbank10.asm
-  48+ 0000
-  49+ 0000                  MMU 6 7,gfxbank11
-  50+ 0000                  ORG 0xC000
+  48+ C009
+  49+ C009                  MMU 6 7,gfxbank11
+  50+ C009                  ORG 0xC000
   51+ C000                  INCLUDE "gfxbank11.asm"
 # file opened: c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\gfxbank11.asm
    1++C000                  ORG $c000
    2++C000              gfx11
    3++C000                  IFDEF DEVBUILD
-   4++C000                      incbin "../data/gfxb11.bin"
+   4++C000 ~                    incbin "../data/gfxb11.bin"
    5++C000                  ELSE
-   6++C000 ~                    defb "GFXBANK11"
-   7++C000 ~                    defs $3FF7 * $00
-   8++C000                  ENDIF
-   9++0000
+   6++C000 47 46 58 42          defb "GFXBANK11"
+   6++C004 41 4E 4B 31
+   6++C008 31
+   7++C009                      defs $3FF7 * $00
+   8++C009                  ENDIF
+   9++C009
 # file closed: c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\gfxbank11.asm
-  52+ 0000
-  53+ 0000                  MMU 6 7,gfxbank12
-  54+ 0000                  ORG 0xC000
+  52+ C009
+  53+ C009                  MMU 6 7,gfxbank12
+  54+ C009                  ORG 0xC000
   55+ C000                  INCLUDE "gfxbank12.asm"
 # file opened: c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\gfxbank12.asm
    1++C000                  ORG $c000
    2++C000              gfx12
    3++C000                  IFDEF DEVBUILD
-   4++C000                      incbin "../data/gfxb12.bin"
+   4++C000 ~                    incbin "../data/gfxb12.bin"
    5++C000                  ELSE
-   6++C000 ~                    defb "GFXBANK12"
-   7++C000 ~                    defs $3FF7 * $00
-   8++C000                  ENDIF
-   9++0000
+   6++C000 47 46 58 42          defb "GFXBANK12"
+   6++C004 41 4E 4B 31
+   6++C008 32
+   7++C009                      defs $3FF7 * $00
+   8++C009                  ENDIF
+   9++C009
 # file closed: c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\gfxbank12.asm
-  56+ 0000
-  57+ 0000                  MMU 6 7,gfxbank13
-  58+ 0000                  ORG 0xC000
+  56+ C009
+  57+ C009                  MMU 6 7,gfxbank13
+  58+ C009                  ORG 0xC000
   59+ C000                  INCLUDE "gfxbank13.asm"
 # file opened: c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\gfxbank13.asm
    1++C000                  ORG $c000
    2++C000              gfx13
    3++C000                  IFDEF DEVBUILD
-   4++C000                      incbin "../data/gfxb13.bin"
+   4++C000 ~                    incbin "../data/gfxb13.bin"
    5++C000                  ELSE
-   6++C000 ~                    defb "GFXBANK13"
-   7++C000 ~                    defs $3FF7 * $00
-   8++C000                  ENDIF
-   9++0000
+   6++C000 47 46 58 42          defb "GFXBANK13"
+   6++C004 41 4E 4B 31
+   6++C008 33
+   7++C009                      defs $3FF7 * $00
+   8++C009                  ENDIF
+   9++C009
 # file closed: c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\gfxbank13.asm
-  60+ 0000
-  61+ 0000                  MMU 6 7,gfxbank14
-  62+ 0000                  ORG 0xC000
+  60+ C009
+  61+ C009                  MMU 6 7,gfxbank14
+  62+ C009                  ORG 0xC000
   63+ C000                  INCLUDE "gfxbank14.asm"
 # file opened: c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\gfxbank14.asm
    1++C000                  ORG $c000
    2++C000              gfx14
    3++C000                  IFDEF DEVBUILD
-   4++C000                      incbin "../data/gfxb14.bin"
+   4++C000 ~                    incbin "../data/gfxb14.bin"
    5++C000                  ELSE
-   6++C000 ~                    defb "GFXBANK14"
-   7++C000 ~                    defs $3FF7 * $00
-   8++C000                  ENDIF
-   9++0000
+   6++C000 47 46 58 42          defb "GFXBANK14"
+   6++C004 41 4E 4B 31
+   6++C008 34
+   7++C009                      defs $3FF7 * $00
+   8++C009                  ENDIF
+   9++C009
 # file closed: c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\gfxbank14.asm
-  64+ 0000
-  65+ 0000                  MMU 6 7,gfxbank15
-  66+ 0000                  ORG 0xC000
+  64+ C009
+  65+ C009                  MMU 6 7,gfxbank15
+  66+ C009                  ORG 0xC000
   67+ C000                  INCLUDE "gfxbank15.asm"
 # file opened: c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\gfxbank15.asm
    1++C000                  ORG $c000
    2++C000              gfx15
    3++C000                  IFDEF DEVBUILD
-   4++C000                      incbin "../data/gfxb15.bin"
+   4++C000 ~                    incbin "../data/gfxb15.bin"
    5++C000                  ELSE
-   6++C000 ~                    defb "GFXBANK15"
-   7++C000 ~                    defs $3FF7 * $00
-   8++C000                  ENDIF
-   9++0000
+   6++C000 47 46 58 42          defb "GFXBANK15"
+   6++C004 41 4E 4B 31
+   6++C008 35
+   7++C009                      defs $3FF7 * $00
+   8++C009                  ENDIF
+   9++C009
 # file closed: c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\gfxbank15.asm
-  68+ 0000
-  69+ 0000                  MMU 6 7,gfxbank16
-  70+ 0000                  ORG 0xC000
+  68+ C009
+  69+ C009                  MMU 6 7,gfxbank16
+  70+ C009                  ORG 0xC000
   71+ C000                  INCLUDE "gfxbank16.asm"
 # file opened: c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\gfxbank16.asm
    1++C000                  ORG $c000
    2++C000              gfx16
    3++C000                  IFDEF DEVBUILD
-   4++C000                      incbin "../data/gfxb16.bin"
+   4++C000 ~                    incbin "../data/gfxb16.bin"
    5++C000                  ELSE
-   6++C000 ~                    defb "GFXBANK16"
-   7++C000 ~                    defs $3FF7 * $00
-   8++C000                  ENDIF
-   9++0000
+   6++C000 47 46 58 42          defb "GFXBANK16"
+   6++C004 41 4E 4B 31
+   6++C008 36
+   7++C009                      defs $3FF7 * $00
+   8++C009                  ENDIF
+   9++C009
 # file closed: c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\gfxbank16.asm
-  72+ 0000
-  73+ 0000                  MMU 6 7,gfxbank17
-  74+ 0000                  ORG 0xC000
+  72+ C009
+  73+ C009                  MMU 6 7,gfxbank17
+  74+ C009                  ORG 0xC000
   75+ C000                  INCLUDE "gfxbank17.asm"
 # file opened: c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\gfxbank17.asm
    1++C000                  ORG $c000
    2++C000              gfx17
    3++C000                  IFDEF DEVBUILD
-   4++C000                      incbin "../data/gfxb17.bin"
+   4++C000 ~                    incbin "../data/gfxb17.bin"
    5++C000                  ELSE
-   6++C000 ~                    defb "GFXBANK17"
-   7++C000 ~                    defs $3FF7 * $00
-   8++C000                  ENDIF
-   9++0000
+   6++C000 47 46 58 42          defb "GFXBANK17"
+   6++C004 41 4E 4B 31
+   6++C008 37
+   7++C009                      defs $3FF7 * $00
+   8++C009                  ENDIF
+   9++C009
 # file closed: c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\gfxbank17.asm
-  76+ 0000
-  77+ 0000                  MMU 6 7,gfxbank18
-  78+ 0000                  ORG 0xC000
+  76+ C009
+  77+ C009                  MMU 6 7,gfxbank18
+  78+ C009                  ORG 0xC000
   79+ C000                  INCLUDE "gfxbank18.asm"
 # file opened: c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\gfxbank18.asm
    1++C000                  ORG $c000
    2++C000              gfx18
    3++C000                  IFDEF DEVBUILD
-   4++C000                      incbin "../data/gfxb18.bin"
+   4++C000 ~                    incbin "../data/gfxb18.bin"
    5++C000                  ELSE
-   6++C000 ~                    defb "GFXBANK18"
-   7++C000 ~                    defs $3FF7 * $00
-   8++C000                  ENDIF
-   9++0000
+   6++C000 47 46 58 42          defb "GFXBANK18"
+   6++C004 41 4E 4B 31
+   6++C008 38
+   7++C009                      defs $3FF7 * $00
+   8++C009                  ENDIF
+   9++C009
 # file closed: c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\gfxbank18.asm
-  80+ 0000
-  81+ 0000                  MMU 6 7,gfxbank19
-  82+ 0000                  ORG 0xC000
+  80+ C009
+  81+ C009                  MMU 6 7,gfxbank19
+  82+ C009                  ORG 0xC000
   83+ C000                  INCLUDE "gfxbank19.asm"
 # file opened: c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\gfxbank19.asm
    1++C000                  ORG $c000
    2++C000              gfx19
    3++C000                  IFDEF DEVBUILD
-   4++C000                      incbin "../data/gfxb19.bin"
+   4++C000 ~                    incbin "../data/gfxb19.bin"
    5++C000                  ELSE
-   6++C000 ~                    defb "GFXBANK19"
-   7++C000 ~                    defs $3FF7 * $00
-   8++C000                  ENDIF
-   9++0000
+   6++C000 47 46 58 42          defb "GFXBANK19"
+   6++C004 41 4E 4B 31
+   6++C008 39
+   7++C009                      defs $3FF7 * $00
+   8++C009                  ENDIF
+   9++C009
 # file closed: c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\gfxbank19.asm
-  84+ 0000
-  85+ 0000                  MMU 6 7,gfxbank20
-  86+ 0000                  ORG 0xC000
+  84+ C009
+  85+ C009                  MMU 6 7,gfxbank20
+  86+ C009                  ORG 0xC000
   87+ C000                  INCLUDE "gfxbank20.asm"
 # file opened: c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\gfxbank20.asm
    1++C000                  ORG $c000
    2++C000              gfx20
    3++C000                  IFDEF DEVBUILD
-   4++C000                      incbin "../data/gfxb20.bin"
+   4++C000 ~                    incbin "../data/gfxb20.bin"
    5++C000                  ELSE
-   6++C000 ~                    defb "GFXBANK20"
-   7++C000 ~                    defs $3FF7 * $00
-   8++C000                  ENDIF
-   9++0000
+   6++C000 47 46 58 42          defb "GFXBANK20"
+   6++C004 41 4E 4B 32
+   6++C008 30
+   7++C009                      defs $3FF7 * $00
+   8++C009                  ENDIF
+   9++C009
 # file closed: c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\gfxbank20.asm
-  88+ 0000
-  89+ 0000                  MMU 6 7,gfxbank21
-  90+ 0000                  ORG 0xC000
+  88+ C009
+  89+ C009                  MMU 6 7,gfxbank21
+  90+ C009                  ORG 0xC000
   91+ C000                  INCLUDE "gfxbank21.asm"
 # file opened: c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\gfxbank21.asm
    1++C000                  ORG $c000
    2++C000              gfx21
    3++C000                  IFDEF DEVBUILD
-   4++C000                      incbin "../data/gfxb21.bin"
+   4++C000 ~                    incbin "../data/gfxb21.bin"
    5++C000                  ELSE
-   6++C000 ~                    defb "GFXBANK21"
-   7++C000 ~                    defs $3FF7 * $00
-   8++C000                  ENDIF
-   9++0000
+   6++C000 47 46 58 42          defb "GFXBANK21"
+   6++C004 41 4E 4B 32
+   6++C008 31
+   7++C009                      defs $3FF7 * $00
+   8++C009                  ENDIF
+   9++C009
 # file closed: c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\gfxbank21.asm
-  92+ 0000
-  93+ 0000                  MMU 6 7,gfxbank22
-  94+ 0000                  ORG 0xC000
+  92+ C009
+  93+ C009                  MMU 6 7,gfxbank22
+  94+ C009                  ORG 0xC000
   95+ C000                  INCLUDE "gfxbank22.asm"
 # file opened: c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\gfxbank22.asm
    1++C000                  ORG $c000
    2++C000              gfx22
    3++C000                  IFDEF DEVBUILD
-   4++C000                      incbin "../data/gfxb22.bin"
+   4++C000 ~                    incbin "../data/gfxb22.bin"
    5++C000                  ELSE
-   6++C000 ~                    defb "GFXBANK22"
-   7++C000 ~                    defs $3FF7 * $00
-   8++C000                  ENDIF
-   9++0000
+   6++C000 47 46 58 42          defb "GFXBANK22"
+   6++C004 41 4E 4B 32
+   6++C008 32
+   7++C009                      defs $3FF7 * $00
+   8++C009                  ENDIF
+   9++C009
 # file closed: c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\gfxbank22.asm
-  96+ 0000
-  97+ 0000                  MMU 6 7,gfxbank23
-  98+ 0000                  ORG 0xC000
+  96+ C009
+  97+ C009                  MMU 6 7,gfxbank23
+  98+ C009                  ORG 0xC000
   99+ C000                  INCLUDE "gfxbank23.asm"
 # file opened: c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\gfxbank23.asm
    1++C000                  ORG $c000
    2++C000              gfx23
    3++C000                  IFDEF DEVBUILD
-   4++C000                      incbin "../data/gfxb23.bin"
+   4++C000 ~                    incbin "../data/gfxb23.bin"
    5++C000                  ELSE
-   6++C000 ~                    defb "GFXBANK23"
-   7++C000 ~                    defs $3FF7 * $00
-   8++C000                  ENDIF
-   9++0000
+   6++C000 47 46 58 42          defb "GFXBANK23"
+   6++C004 41 4E 4B 32
+   6++C008 33
+   7++C009                      defs $3FF7 * $00
+   8++C009                  ENDIF
+   9++C009
 # file closed: c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\gfxbank23.asm
- 100+ 0000
- 101+ 0000                  MMU 6 7,gfxbank24
- 102+ 0000                  ORG 0xC000
+ 100+ C009
+ 101+ C009                  MMU 6 7,gfxbank24
+ 102+ C009                  ORG 0xC000
  103+ C000                  INCLUDE "gfxbank24.asm"
 # file opened: c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\gfxbank24.asm
    1++C000                  ORG $c000
    2++C000              gfx24
    3++C000                  IFDEF DEVBUILD
-   4++C000                      incbin "../data/gfxb24.bin"
+   4++C000 ~                    incbin "../data/gfxb24.bin"
    5++C000                  ELSE
-   6++C000 ~                    defb "GFXBANK24"
-   7++C000 ~                    defs $3FF7 * $00
-   8++C000                  ENDIF
-   9++0000
+   6++C000 47 46 58 42          defb "GFXBANK24"
+   6++C004 41 4E 4B 32
+   6++C008 34
+   7++C009                      defs $3FF7 * $00
+   8++C009                  ENDIF
+   9++C009
 # file closed: c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\gfxbank24.asm
- 104+ 0000
- 105+ 0000                  MMU 6 7,introbank
- 106+ 0000                  ORG 0xC000
+ 104+ C009
+ 105+ C009                  MMU 6 7,introbank
+ 106+ C009                  ORG 0xC000
  107+ C000                  INCLUDE "bank_intro.asm"
 # file opened: c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\bank_intro.asm
    1++C000              ;This is the intro code normally in main memory and bank 0
@@ -45193,9 +45243,9 @@
  426  82AF              	;***** Once initialisation is complete everything is controlled through this interrupt driven routine ****
  427  82AF              call_01ED
  428  82AF                  ifdef DEVBUILD
- 429  82AF FB                   ei
- 430  82B0                  else
- 431  82B0 ~                    nop;ei
+ 429  82AF ~                    ei
+ 430  82AF                  else
+ 431  82AF 00                   nop;ei
  432  82B0                  endif
  433  82B0 76               halt
  434  82B1 CD B9 08         call call_0AEE;call_044D
