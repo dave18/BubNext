@@ -1188,6 +1188,11 @@ bank3_call_BE00
 	ld de,$7E2C		;screen position for text
 	ld c,0
 	call bank3_call_BE2D
+
+    ld hl,bank3_data_version
+	ld de,$7E2C+$A0		;screen position for text
+	ld c,$10
+	call bank3_call_BE2D
 	;hl points to text
 	;de point to screen loc
 	;c = colour (palette * 16)
@@ -1221,6 +1226,9 @@ bank3_data_BEBB
 
 bank3_data_BF06
     BYTE 30,"LICENSED TO ROMSTAR FOR U.S.A."
+
+bank3_data_version
+    BYTE 4,"V1.1"
 
 
 bank3_data_BFDF

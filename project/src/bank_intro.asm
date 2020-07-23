@@ -393,6 +393,147 @@ intro_call_1ADA
       bit  1,a
       ret
 
+intro_call_1BF6         ;CHEATS!
+    ld   b,$08
+    ld   hl,l_e5c8
+    ld   de,intro_data_1CBE
+intro_call_1BFE
+    ld   a,(de)
+    cp   (hl)
+    jr   nz,intro_call_1C2D
+    inc  hl
+    inc  de
+    djnz intro_call_1BFE
+
+    ld   hl,l_e5db          ;activate Super Bubble Bobble and update logo!
+    ld   (hl),$01
+    jp call_1C0B
+;1C0B: 3E 01         ld   a,$01
+;1C0D: CD 6C 02      call $026C
+;1C10: 21 48 CE      ld   hl,$CE48
+;1C13: 11 8C 84      ld   de,$848C
+;1C16: 01 06 03      ld   bc,$0306
+;1C19: 3E 07         ld   a,$07
+;1C1B: CD C6 0E      call $0EC6
+;1C1E: 21 79 FC      ld   hl,$FC79
+;1C21: 3E 0C         ld   a,$0C
+;1C23: CD 89 0D      call $0D89
+;1C26: CB 56         bit  2,(hl)
+;1C28: C3 9B 02      jp   $029B
+;1C2B: D1            pop  de
+;1C2C: F1            pop  af
+intro_call_1C2D
+    ld   b,$08
+    ld   hl,l_e5c8
+    ld   de,intro_data_1CC6
+intro_call_1C35
+    ld   a,(de)
+    cp   (hl)
+    jr   nz,intro_call_1C9F
+    inc  hl
+    inc  de
+    djnz intro_call_1C35
+/*
+    ld   a,(l_fc85)
+    cp   $37
+    nop
+    nop
+    ld   a,($0002)
+    cp   $5E
+    nop
+    nop
+    ld   hl,$044D
+    ld   de,($0B2E)
+    or   a
+1C53: ED 52         sbc  hl,de
+1C55: 00            nop
+1C56: 00            nop
+1C57: 06 03         ld   b,$03
+1C59: AF            xor  a
+1C5A: 21 00 00      ld   hl,$0000
+intro_call_1C5D
+    add  a,(hl)
+1C5E: 23            inc  hl
+1C5F: 10 FC         djnz $1C5D
+1C61: D6 3E         sub  $3E
+1C63: 00            nop
+1C64: 00            nop
+1C65: 2A 04 00      ld   hl,($0004)
+1C68: 11 B9 00      ld   de,$00B9
+1C6B: AF            xor  a
+1C6C: ED 52         sbc  hl,de
+1C6E: 00            nop
+1C6F: 00            nop
+1C70: ED 57         ld   a,i
+1C72: 67            ld   h,a
+1C73: 3A 00 FC      ld   a,($FC00)
+1C76: 6F            ld   l,a
+1C77: 11 2E 0B      ld   de,$0B2E
+1C7A: B7            or   a
+1C7B: ED 52         sbc  hl,de
+1C7D: 00            nop
+1C7E: 00            nop
+*/
+    ld   hl,l_e5d1
+    ld   (hl),$01
+    ld   hl,intro_data_1CD6
+    ld   de,$7f18;$D57A   ;TODO - screen
+    ld   c,$50
+    jp   intro_call_1D05
+/*1C8F: 21 66 E3      ld   hl,$E366
+1C92: 36 64         ld   (hl),$64
+1C94: 21 E8 1C      ld   hl,$1CE8
+1C97: 11 7A D5      ld   de,$D57A
+1C9A: 0E 04         ld   c,$04
+1C9C: C3 05 1D      jp   $1D05*/
+intro_call_1C9F
+    ld   b,$08
+    ld   hl,l_e5c8
+    ld   de,intro_data_1CCE
+intro_call_1CA7
+    ld   a,(de)
+    cp   (hl)
+    ret  nz
+    inc  hl
+    inc  de
+    djnz intro_call_1CA7
+    ld   hl,l_e5d2
+    ld   (hl),$01
+    ld   hl,intro_data_1CFB
+    ld   de,$7F18;D57A 
+    ld   c,$10
+    jp   intro_call_1D05
+    ;CHEAT COMBOS
+    ;   7E=LEFT 6F=JUMP 3F=START 5F=FIRE 7D=RIGHT
+intro_data_1CBE
+    BYTE $3F,$6F,$5F,$7E,$7D,$6F,$3F,$7D
+intro_data_1CC6
+    BYTE $5F,$6F,$5F,$6F,$5F,$6F,$7D,$3F
+intro_data_1CCE
+    BYTE $7E,$6F,$7E,$3F,$7E,$5F,$7E,$3F
+intro_data_1CD6
+    BYTE $11,$85,$88,$7F,$7D,$7F,$84,$77,$82,$56,$7D,$77,$83,$7B,$56,$64,$64,$64    ;ORIGINAL GAME ...
+//intro_data_1CE8
+    //BYTE $12,$7A,$7B,$77,$7A,$56,$79,$85,$86,$8F,$56,$7D,$77,$83,$7B,$56,$57,$57,$57    ;DEAD COPY GAME !!!
+intro_data_1CFB
+    BYTE $09,$86,$85,$8D,$7B,$88,$56,$8B,$86,$57       ;POWER UP!
+intro_call_1D05
+    ld   b,(hl)
+    inc  hl
+intro_call_1D07
+    ld   a,(hl)
+    sub  $36
+    ld   (de),a
+    inc  hl
+    inc  de
+    ld   a,c
+    ld   (de),a
+    ;ld   a,$3F
+    ;call call_0D84
+    inc  de
+    djnz intro_call_1D07
+    ret
+
 intro_call_2578					;this code is run once start button is pressed
     /*ld a,0
     ld (options_control),a*/

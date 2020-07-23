@@ -1,4 +1,5 @@
     //DEFINE DEVBUILD 1
+    //DEFINE NEED_CODE_FOR_SUPER_BB 1
 
 
     
@@ -1327,11 +1328,35 @@ call_1BCF
     ld   a,(hl)
     cp   $08
     ret  nz
-    ld   b,$08
-    ld   hl,l_e5c8
-   ; ld   de,data_1cbe
-call_1BFE       ;CHEATS!
-    jr call_1BFE    
+
+    ld a,introbank
+    call call_026C
+    call intro_call_1BF6
+    call call_029B
+    
+    ret
+
+call_1C0B
+    call call_029B
+    ld   a,bank1
+    call call_026C
+
+    ld   hl,$7702   ;If super game, redraw correct logo
+    ld   de,bank1_data_848C
+	ld	bc,$0306
+	ex af,af'
+	ld a,1*16	;gfx atrtibute
+	ex af,af'
+	ld a,$b5
+	;call superbblogoloop
+	call call_0EC6_Adjusted
+
+    ld   hl,l_fc79
+    ld   a,$0C
+    call call_0D89
+    bit  2,(hl)
+    jp   call_029B
+    
 call_1D17
     call call_0020
     call call_2375
@@ -2285,6 +2310,15 @@ call_24ED
 
 
 call_2931               ;Game type select (BB or Super BB)
+
+    ifdef NEED_CODE_FOR_SUPER_BB
+    
+    ld a,(l_e5db)
+    and a 
+    ret z
+
+    endif
+
     call call_03CB      ;clear screen
 
     nextreg $6F,$00				;tile definition start address = 0
@@ -8589,7 +8623,7 @@ screentable
     BYTE $C0,$50
     BYTE $E0,$50
 */
-    BYTE "END OF CODE"
+  ;  BYTE "END OF CODE"
 
     CSPECTMAP "BUBNEXT.map"
 
