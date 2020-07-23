@@ -7,10 +7,13 @@ LEECF:       equ  EECFh
 LFECC:       equ  FECCh
 
 
-             org 4FFDh
+             org 4FF4h
 
 
-4FFD L4FFD:
+4FF4 L4FF4:
+4FF4 CC CC CC     CALL Z,LCCCC 
+4FF7 CC CC CC     CALL Z,LCCCC 
+4FFA CC CC CC     CALL Z,LCCCC 
 4FFD CC CC CC     CALL Z,LCCCC 
 5000 CC CC CC     CALL Z,LCCCC 
 5003 FE CC        CP   CCh    
@@ -52,11 +55,7 @@ LFECC:       equ  FECCh
 5051 EE EE        XOR  EEh    
 5053 FE FE        CP   FEh    
 5055 EE EE        XOR  EEh    
-5057 FE EE        CP   EEh    
-5059 EE EE        XOR  EEh    
-505B FE EE        CP   EEh    
-505D EE EE        XOR  EEh    
-505F FE EE        CP   EEh    
+5057 FE 00        CP   00h    
 
 
              org 8180h

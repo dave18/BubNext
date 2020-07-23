@@ -1087,9 +1087,9 @@ call_1AED
     ld a,1              ;flag to allow the options screen to be called
     ld (options_control),a
 
-    ld a,(highscoreupdate)
-    and a
-    call nz,open_file_for_output
+    ;ld a,(highscoreupdate)
+    ;and a
+    ;call nz,open_file_for_output
 	
 
     call call_1BBA
@@ -2342,6 +2342,12 @@ call_2931               ;Game type select (BB or Super BB)
 
    ; BYTE "CALL_2AF8"
 call_2AF8
+    ;break
+
+    ld a,(highscoreupdate)
+    and a
+    call nz,open_file_for_output
+
     call call_0020
     call call_063E
     ld   a,(l_e635)
@@ -2807,6 +2813,7 @@ call_2FF0
     ld   hl,$76d4;$D286
     ld   de,l_e648
 call_3002           ;draws numbers to the screen
+    ;ld de,$bd
     ld   bc,$0000
     ld   a,(de)
     call call_0D62
@@ -2980,6 +2987,9 @@ call_31E1
     ld   de,l_e64c
     ld   bc,$0003
     ldir
+
+    call open_file_for_input
+
     ret
 call_31ED
     ld   b,$03
@@ -3309,7 +3319,7 @@ call_3459
     ;break
 
 
-    call open_file_for_input
+    ;call open_file_for_input
 
     ;break
 
@@ -8419,7 +8429,7 @@ open_file_for_output
 
     ld a,'*'
     ld ix,filename
-    ld b,$0A
+    ld b,$0A;0E
     rst $08
     defb F_OPEN
     jr c,open_file_for_output_exit           ;exit if carry set
@@ -8530,6 +8540,16 @@ open_file_for_input
     ld de,l_e654
     ld bc,$23
     ldir
+
+    ld hl,hiscoremem                ;copy high score
+    ld de,l_e64c
+    ld bc,$3
+    ldir
+
+    ;for info
+    ;l_e67b = Round for todays record
+    ;l_e67c = Round for Player 1 record sprite
+    ;l_e67d = Round for Player 2 record sprite
 
 open_file_for_input_exit
 
