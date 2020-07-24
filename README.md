@@ -53,7 +53,7 @@ Thanks to everyone on the SpectrumNext Discord channel for their help
 
 
 
-BUILDNG FROM SOURCE
+BUILDING FROM SOURCE
 -------------------
 The source is designed to built using Visual Studio Code and SJASMPLUS.  It should build as is.
 Optional Defines are:
