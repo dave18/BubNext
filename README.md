@@ -25,21 +25,32 @@ The default controls are keyboard these are:
 	Jump		Q			P
 
 Other keys are
+
 4 - Coin 1
+
 5 - Coin 2
+
 1 - 1 Player Start
+
 2 - 2 Player Start
+
 
 The controls user definable, to access the controls menu press 8 while in attract mode and follow the on screen instructions to select input method or redefine keys.  Press 0 to exit the menu.
 
 There is a further options menu available by pressing 9 while in attract mode.  This contains the following options.
+
 Difficulty		Normal, Easy, Hard, Very Hard
+
 Bonus			'30K 100K 400K', '20K 80K 300K','40K 200K 500K','50K 250K 500K'
+
 Number of Lives		3, 5, 1, 2
+
 Refresh Rate		50hz (Spectrum Default), 60hz (Arcade Default)
+
 Scanlines		None, 25%, 50%, 75%
 
 Press 0 to exit the options screen.
+
 
 Note:
 After each hame the options re-enable and high score save take place when the Flashing Logo screen appears.  Sometimes the game will go straight into a demo level after the Game Over sequence so to ensure the high score saves correctly wait until the flashing logo appears again before resetting or powering off the Next.
@@ -57,7 +68,9 @@ BUILDING FROM SOURCE
 -------------------
 The source is designed to built using Visual Studio Code and SJASMPLUS.  It should build as is.
 Optional Defines are:
-DEVBUILD  -  This should be left commented out (or set to 0) as it won't compile without certain binaries which are not included
+
+DEVBUILD  -  This should be left commented out (or set to 0) as it won't compile without certain binaries which are not included.
+
 DEFINE NEED_CODE_FOR_SUPER_BB - Set to 1 to disable Super Bubble Bobble until the appropriate code is entered on the Title Screen
 
 
@@ -92,6 +105,7 @@ Move interrupt from Vblank to Scanline to increase available screen drawing time
 
 Fix various memory leaks
 
+
 Beta 5
 ===============
 Reworked the EXTEND screen to use new Layer 2 resolutions. This means the static background is now layer 2 and the large bubbles are tilemap which eliminates the slowdown.
@@ -103,6 +117,7 @@ Added all the end sequences - not that anyone is likely to see them. I am consid
 Changed to to Arkos Tracker 2 for music and sound using the AKG format. The sound framework is complete and I have put in some placeholder music and sound for testing but I need better ones/a complete set.
 
 Added a scanlines option in the menu
+
 
 Beta 4
 =================
@@ -124,23 +139,36 @@ Beta 3
 ====================
 Input selection screen added - Press 0 while in Attract Mode.
 Supported modes are:
+
 Redefinable Keybaord
+
 Joystick Port A - 1 Button (up is jump)
+
 Joystick Port A - 2 Button
+
 Joystick Port B - 1 Button (up is jump)
+
 Joystick Port B - 2 Button
+
 MD Pad Port A
+
 MD Pad Port B
 
 Changing to either joystick or MD pad will automatically change the setting under Peripheral #06 to match.
 
+
 Added music
 
-Fixez
+Fixes
+
 VS screen now works
+
 Water flood now works
+
 Scroll between levels is improved
+
 and loads of other little fixes
+
 
 Changed file format from .TAP to .NEX
 
@@ -150,13 +178,18 @@ Beta 2
 Added enemy firing routines
 
 Added EXTEND routines (this runs a bit slow as there are lots of Layer 2 writes - will look to optimise once everything else is done)
+
 Reduced memory footprint so now runs on a 1Mb Next
 
 plus lots of little fixes
 
 Known issues so far
+
 Flood routine not implemented - happens when you collect a blue cross
-Eventual crash if left running through attract mode for long enough - there will be a memory write that hasn't been remapped yet - hard to find until I am able to run under emulation.
+
+Eventual crash if left running through attract mode for long enough - there will be a memory write that hasn't been 
+remapped yet - hard to find until I am able to run under emulation.
+
 
 Beta 1
 =====================
