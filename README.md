@@ -18,7 +18,7 @@ Game Keys
 -------------------
 The default controls are keyboard these are:
 
-				P1			P2
+			P1			P2
 	Left		Z			N
 	Right		X			M
 	Fire		A			L
@@ -53,7 +53,7 @@ Thanks to everyone on the SpectrumNext Discord channel for their help
 
 
 
-BUILDNG FOMR SOURCE
+BUILDNG FROM SOURCE
 -------------------
 The source is designed to built using Visual Studio Code and SJASMPLUS.  It should build as is.
 Optional Defines are:
