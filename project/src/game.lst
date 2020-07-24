@@ -53747,7 +53747,7 @@
 8429  BCCC
 8430  BCCC 3E 2A            ld a,'*'
 8431  BCCE DD 21 99 BD      ld ix,filename
-8432  BCD2 06 0A            ld b,$0A;0E
+8432  BCD2 06 0E            ld b,$0E
 8433  BCD4 CF               rst $08
 8434  BCD5 9A               defb F_OPEN
 8435  BCD6 38 16            jr c,open_file_for_output_exit           ;exit if carry set
@@ -53905,81 +53905,90 @@
 8585  BDCA 00 00 00     	BYTE 0,0,0
 8586  BDCD
 8587  BDCD              music_playing
-8588  BDCD 00               BYTE 0
-8589  BDCE
-8590  BDCE              music_module
-8591  BDCE 00               BYTE 0;,0
-8592  BDCF
-8593  BDCF              options_control         ;controls whether the options screen can be displayed
-8594  BDCF 00               BYTE 0
-8595  BDD0
-8596  BDD0
-8597  BDD0              ;     BYTE "END OF INTERRUPT"
-8598  BDD0              ;framecounter BYTE m0
-8599  BDD0
-8600  BDD0               ;   org $8000
-8601  BDD0
-8602  BDD0              mapstart
-8603  BDD0              ;    incbin "map.asm"  ;level data
-8604  BDD0              ;    include "screens.asm"
-8605  BDD0              ;    include "tiles.asm"
-8606  BDD0
-8607  BDD0
-8608  BDD0               ;   include "sprites.asm"
-8609  BDD0                ;  include "scores.asm"
-8610  BDD0              Sprite1
-8611  BDD0
-8612  BDD0              scoreline1
-8613  BDD0
-8614  BDD0
-8615  BDD0              ;slave_0068
-8616  BDD0              ;     ld   hl,l_f66e
-8617  BDD0              ;     inc  (hl)
-8618  BDD0              ;     ret
-8619  BDD0 ~            /*
-8620  BDD0 ~            screentable
-8621  BDD0 ~                BYTE $00,$40
-8622  BDD0 ~                BYTE $20,$40
-8623  BDD0 ~                BYTE $40,$40
-8624  BDD0 ~                BYTE $60,$40
-8625  BDD0 ~                BYTE $80,$40
-8626  BDD0 ~                BYTE $A0,$40
-8627  BDD0 ~                BYTE $C0,$40
-8628  BDD0 ~                BYTE $E0,$40
-8629  BDD0 ~                BYTE $00,$48
-8630  BDD0 ~                BYTE $20,$48
-8631  BDD0 ~                BYTE $40,$48
-8632  BDD0 ~                BYTE $60,$48
-8633  BDD0 ~                BYTE $80,$48
-8634  BDD0 ~                BYTE $A0,$48
-8635  BDD0 ~                BYTE $C0,$48
-8636  BDD0 ~                BYTE $E0,$48
-8637  BDD0 ~                BYTE $00,$50
-8638  BDD0 ~                BYTE $20,$50
-8639  BDD0 ~                BYTE $40,$50
-8640  BDD0 ~                BYTE $60,$50
-8641  BDD0 ~                BYTE $80,$50
-8642  BDD0 ~                BYTE $A0,$50
-8643  BDD0 ~                BYTE $C0,$50
-8644  BDD0 ~                BYTE $E0,$50
-8645  BDD0 ~            */
-8646  BDD0                ;  BYTE "END OF CODE"
-8647  BDD0
-8648  BDD0                  CSPECTMAP "BUBNEXT.map"
-8649  BDD0
-8650  BDD0                  ; write everything into NEX file
-8651  BDD0                  ;SAVENEX OPEN "game.nex", mainstart, l_f7fe, 0
-8652  BDD0                  SAVENEX OPEN "releases/BUBNEXT.nex", mainstart, $FFFE, 9  ; stack will go into Layer2
-8653  BDD0                  SAVENEX CORE 2, 0, 0        ; Next core 2.0.0 required as minimum
-8654  BDD0                  SAVENEX CFG 3, 1           ; green border, Close file once done
-8655  BDD0                  SAVENEX BAR 1, $E0, 50,25  ; do load bar, red colour, start/load delays 50/25 frames
-8656  BDD0                  ;SAVENEX SCREEN L2 0, 0      ; store the data from C000 (page 0, offset 0), no palette
-8657  BDD0                  SAVENEX AUTO                ; store all appropriate banks
-8658  BDD0                  SAVENEX CLOSE               ; (banks 100 and 101 are added just as example)
-8659  BDD0
-8660  BDD0
-8661  BDD0                  ;END codestart
-8662  BDD0
-8663  BDD0                  ORG $FFFE
-8664  FFFE              stack_top
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\game.asm(8588): error: Expression expected
+8588  BDCD                  BYTE
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\game.asm(8589): error: Unrecognized instruction: 0
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\game.asm(8589): error: Unexpected: 0
+8589  BDCD               0
+8590  BDCD
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\game.asm(8591): warning: Label has different value in pass 3: previous value 48590 not equal 48589
+8591  BDCD              music_module
+8592  BDCD 00               BYTE 0;,0
+8593  BDCE
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\game.asm(8594): warning: Label has different value in pass 3: previous value 48591 not equal 48590
+8594  BDCE              options_control         ;controls whether the options screen can be displayed
+8595  BDCE 00               BYTE 0
+8596  BDCF
+8597  BDCF
+8598  BDCF              ;     BYTE "END OF INTERRUPT"
+8599  BDCF              ;framecounter BYTE m0
+8600  BDCF
+8601  BDCF               ;   org $8000
+8602  BDCF
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\game.asm(8603): warning: Label has different value in pass 3: previous value 48592 not equal 48591
+8603  BDCF              mapstart
+8604  BDCF              ;    incbin "map.asm"  ;level data
+8605  BDCF              ;    include "screens.asm"
+8606  BDCF              ;    include "tiles.asm"
+8607  BDCF
+8608  BDCF
+8609  BDCF               ;   include "sprites.asm"
+8610  BDCF                ;  include "scores.asm"
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\game.asm(8611): warning: Label has different value in pass 3: previous value 48592 not equal 48591
+8611  BDCF              Sprite1
+8612  BDCF
+c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\game.asm(8613): warning: Label has different value in pass 3: previous value 48592 not equal 48591
+8613  BDCF              scoreline1
+8614  BDCF
+8615  BDCF
+8616  BDCF              ;slave_0068
+8617  BDCF              ;     ld   hl,l_f66e
+8618  BDCF              ;     inc  (hl)
+8619  BDCF              ;     ret
+8620  BDCF ~            /*
+8621  BDCF ~            screentable
+8622  BDCF ~                BYTE $00,$40
+8623  BDCF ~                BYTE $20,$40
+8624  BDCF ~                BYTE $40,$40
+8625  BDCF ~                BYTE $60,$40
+8626  BDCF ~                BYTE $80,$40
+8627  BDCF ~                BYTE $A0,$40
+8628  BDCF ~                BYTE $C0,$40
+8629  BDCF ~                BYTE $E0,$40
+8630  BDCF ~                BYTE $00,$48
+8631  BDCF ~                BYTE $20,$48
+8632  BDCF ~                BYTE $40,$48
+8633  BDCF ~                BYTE $60,$48
+8634  BDCF ~                BYTE $80,$48
+8635  BDCF ~                BYTE $A0,$48
+8636  BDCF ~                BYTE $C0,$48
+8637  BDCF ~                BYTE $E0,$48
+8638  BDCF ~                BYTE $00,$50
+8639  BDCF ~                BYTE $20,$50
+8640  BDCF ~                BYTE $40,$50
+8641  BDCF ~                BYTE $60,$50
+8642  BDCF ~                BYTE $80,$50
+8643  BDCF ~                BYTE $A0,$50
+8644  BDCF ~                BYTE $C0,$50
+8645  BDCF ~                BYTE $E0,$50
+8646  BDCF ~            */
+8647  BDCF                ;  BYTE "END OF CODE"
+8648  BDCF
+8649  BDCF                  CSPECTMAP "BUBNEXT.map"
+8650  BDCF
+8651  BDCF                  ; write everything into NEX file
+8652  BDCF                  ;SAVENEX OPEN "game.nex", mainstart, l_f7fe, 0
+8653  BDCF                  SAVENEX OPEN "releases/BUBNEXT.nex", mainstart, $FFFE, 9  ; stack will go into Layer2
+8654  BDCF                  SAVENEX CORE 2, 0, 0        ; Next core 2.0.0 required as minimum
+8655  BDCF                  SAVENEX CFG 3, 1           ; green border, Close file once done
+8656  BDCF                  SAVENEX BAR 1, $E0, 50,25  ; do load bar, red colour, start/load delays 50/25 frames
+8657  BDCF                  ;SAVENEX SCREEN L2 0, 0      ; store the data from C000 (page 0, offset 0), no palette
+8658  BDCF                  SAVENEX AUTO                ; store all appropriate banks
+8659  BDCF                  SAVENEX CLOSE               ; (banks 100 and 101 are added just as example)
+8660  BDCF
+8661  BDCF
+8662  BDCF                  ;END codestart
+8663  BDCF
+8664  BDCF                  ORG $FFFE
+8665  FFFE              stack_top
 # file closed: c:\Users\dave_\OneDrive\Documents\Source\SpecNext\bbobble-tilemap-sjasmplus\project\src\game.asm

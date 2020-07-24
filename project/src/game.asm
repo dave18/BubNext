@@ -8429,7 +8429,7 @@ open_file_for_output
 
     ld a,'*'
     ld ix,filename
-    ld b,$0A;0E
+    ld b,$0E
     rst $08
     defb F_OPEN
     jr c,open_file_for_output_exit           ;exit if carry set

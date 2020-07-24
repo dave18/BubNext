@@ -18,11 +18,11 @@ Game Keys
 -------------------
 The default controls are keyboard these are:
 
-		  P1			P2
-Left		Z			N
-Right		X			M
-Fire		A			L
-Jump		Q			P
+				P1			P2
+	Left		Z			N
+	Right		X			M
+	Fire		A			L
+	Jump		Q			P
 
 Other keys are
 4 - Coin 1
