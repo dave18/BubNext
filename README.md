@@ -9,6 +9,7 @@ The game requires patching to run. To do this you must take the following steps.
 
 Place the unzipped ROM files in the same directory as the BUBNEXT.nex and BBNextPatch.exe
 Files needed are
+
 "a78-09.12"
 "a78-15.30"
 "a78-10.13"
