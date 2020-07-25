@@ -11,16 +11,27 @@ Place the unzipped ROM files in the same directory as the BUBNEXT.nex and BBNext
 Files needed are
 
 "a78-09.12"
+
 "a78-15.30"
+
 "a78-10.13"
+
 "a78-16.31"
+
 "a78-11.14"
+
 "a78-17.32"
+
 "a78-12.15"
+
 "a78-18.33"
+
 "a78-13.16"
+
 "a78-19.34"
+
 "a78-14.17"
+
 "a78-20.35"
 
 Run BBNextPatch by entering bbnextpatch <filename to patch> at the command line.  eg, to patch the default .nex in this archive type 'bbnextpatch bubnext.nex'
