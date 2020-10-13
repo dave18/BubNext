@@ -1228,7 +1228,7 @@ bank3_data_BF06
     BYTE 30,"LICENSED TO ROMSTAR FOR U.S.A."
 
 bank3_data_version
-    BYTE 4,"V1.2"
+    BYTE 4,"V1.3"
 
 
 bank3_data_BFDF

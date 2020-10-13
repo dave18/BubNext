@@ -3126,8 +3126,8 @@ bank2_call_98E8
      xor  a
      ld   (iy-$50),a;$02),a
      ld   (iy-$4f),a;$01),a
-     ld   (iy+$4e),a;$3e),a
-     ld   (iy+$4f),a;$3f),a
+     ld   (iy-$4e),a;$3e),a
+     ld   (iy-$4d),a;$3f),a
      ld   (iy+$02),a;$40),a
      ld   (iy+$03),a;$41),a
      scf

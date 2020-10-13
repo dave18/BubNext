@@ -1342,8 +1342,10 @@ call_0A42
     ld   hl,l_e351
     ld   (hl),$FF
 	
-	nextreg $1B,0
-	nextreg $1B,159	;(this will be internally doubled as we have set sprites over border mode)
+	;nextreg $1B,0
+	;nextreg $1B,159	;(this will be internally doubled as we have set sprites over border mode)
+    nextreg $1B,16
+	nextreg $1B,143	;(this will be internally doubled)
 	nextreg $1B,24+8;+8+8		;this cuts off a lot of the screen while scrolling but stop level flicker!
 	nextreg $1B,255-24
 	
@@ -1386,8 +1388,10 @@ call_0A5F
 	call call_3395			;redisplay score lines
 	call call_2FF0			;show actual scores
  
- 	nextreg $1B,0
-	nextreg $1B,159	;(this will be internally doubled as we have set sprites over border mode)
+ 	;nextreg $1B,0
+	;nextreg $1B,159	;(this will be internally doubled as we have set sprites over border mode)
+    nextreg $1B,16
+	nextreg $1B,143	;(this will be internally doubled)
 	nextreg $1B,0
 	nextreg $1B,255-16
  

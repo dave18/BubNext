@@ -243,8 +243,10 @@ DMA_LOAD                       equ $cf ; %11001111
 	nextreg $18,0
 	nextreg $18,183 ;hide bottom line for scrolling text purposes
 
-    nextreg $1B,0
-	nextreg $1B,159	;(this will be internally doubled as we have set sprites over border mode)
+    ;nextreg $1B,0
+	;nextreg $1B,159	;(this will be internally doubled)
+    nextreg $1B,16
+	nextreg $1B,143	;(this will be internally doubled)
 	nextreg $1B,0
 	nextreg $1B,255-16
 	
@@ -381,6 +383,7 @@ call_0171
     call call_31E1
     call call_031C
     call call_0372
+
 
 
 
