@@ -102,6 +102,11 @@ DEFINE NEED_CODE_FOR_SUPER_BB - Set to 1 to disable Super Bubble Bobble until th
 CHANGELOG
 ----------
 
+v1.3
+========
+-Fix issue where sometime the blue notes in the bonus round were not cleared properly
+-Fix issue when some people reported gfx corruption on screen outside main play area
+
 v1.2
 =========
 Highscore at top of screen now updates to reflect loaded high score
