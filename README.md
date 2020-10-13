@@ -105,6 +105,7 @@ CHANGELOG
 v1.3
 ========
 -Fix issue where sometime the blue notes in the bonus round were not cleared properly
+
 -Fix issue when some people reported gfx corruption on screen outside main play area
 
 v1.2
