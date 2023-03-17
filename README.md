@@ -83,7 +83,7 @@ After each hame the options re-enable and high score save take place when the Fl
 The project includes joaoljr's PS4 Z80 implementation - see here https://forum.arcadeotaku.com/viewtopic.php?f=26&t=5154  
 I did try to find his contact details to check if this is ok but I couldn't find any. Am hoping that as this is free software he won't mind.
 
-The music and SFX are made using Arkos Tracker II which is an excellent piece of software and allowed a non-musician such as me to make some usable tunes (expecially appreciated the import MIDI option!).  The music and SFX could be improved and if anyone wishes to do so they are welcome.
+The music and SFX are made using Arkos Tracker II which is an excellent piece of software and allowed a non-musician such as me to make some usable tunes (especially appreciated the import MIDI option!).  The music and SFX could be improved and if anyone wishes to do so they are welcome.
 
 Thanks to everyone on the SpectrumNext Discord channel for their help
 
